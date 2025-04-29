@@ -287,6 +287,41 @@
         max-width: 540px;
     }
     
+    #header {
+        padding: 15px 0;
+    }
+    
+    #header .container {
+        position: relative;
+    }
+    
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        width: auto;
+    }
+    
+    .hamburger {
+        display: block;
+        position: relative;
+        z-index: 2000;
+        margin-left: 20px;
+    }
+    
+    .bar {
+        background-color: var(--dark);
+    }
+    
+    .cta-button {
+        display: none;
+    }
+    
+    .nav-menu {
+        z-index: 1999;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -308,10 +343,6 @@
         margin: 15px 0;
     }
     
-    .hamburger {
-        display: block;
-    }
-    
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
@@ -322,10 +353,6 @@
     
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
-    }
-    
-    .cta-button {
-        display: none;
     }
     
     .services-grid,
@@ -762,5 +789,74 @@
     
     .thumbnail-item {
         width: 60px;
+    }
+}
+
+/* Update the products-grid for mobile devices */
+@media (max-width: 767px) {
+    .products-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Change to a single column on mobile */
+        gap: 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns on tablet */
+        gap: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Three columns on desktop */
+        gap: 30px;
+    }
+}
+
+/* Fix testimonials grid on mobile */
+@media (max-width: 767px) {
+    /* For products.html testimonials */
+    #product-testimonials .testimonials-grid,
+    /* For services.html testimonials */
+    #service-testimonials .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Change to single column on mobile */
+        gap: 25px;
+    }
+    
+    .testimonial-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .testimonial-content {
+        padding: 0;
+    }
+    
+    .testimonial-author {
+        flex-direction: row; /* Keep author image and info side by side */
+        align-items: center;
+    }
+}
+
+/* For tablet view */
+@media (min-width: 768px) and (max-width: 991px) {
+    #product-testimonials .testimonials-grid,
+    #service-testimonials .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on tablet */
+        gap: 20px;
+    }
+}
+
+/* For desktop and larger screens */
+@media (min-width: 992px) {
+    #product-testimonials .testimonials-grid,
+    #service-testimonials .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr); /* Three columns on desktop */
+        gap: 30px;
     }
 }
