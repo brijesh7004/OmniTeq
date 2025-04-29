@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - OmniTeq</title>
+    <meta name="description" content="Explore OmniTeq's portfolio of successful IoT, automation, and embedded systems projects">
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <a href="lets-talk.html" class="cta-button">Let's Talk</a>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section id="page-banner">
+        <div class="container">
+            <h1>Our Portfolio</h1>
+            <p>Showcasing Our Successful Projects</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Filter -->
+    <section id="portfolio-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn cta-button active" data-filter="all">All Projects</button>
+                <button class="filter-btn cta-button" data-filter="iot">IoT Solutions</button>
+                <button class="filter-btn cta-button" data-filter="plc">PLC Automation</button>
+                <button class="filter-btn cta-button" data-filter="embedded">Embedded Systems</button>
+                <button class="filter-btn cta-button" data-filter="ai-ml">AI & ML</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section id="portfolio-grid">
+        <div class="container">
+            <div class="portfolio-items">
+                <!-- Project 1 -->
+                <div class="portfolio-item" data-category="iot">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://www.placehold.co/600x400?text=Smart+Factory+Monitoring" alt="Smart Factory Monitoring System">
+                        </div>
+                        <div class="project-content">
+                            <h3>Smart Factory Monitoring System</h3>
+                            <p>IoT-based real-time monitoring solution that provides comprehensive dashboard for factory operations.</p>
+                            <div class="project-details">
+                                <div class="project-info-item">
+                                    <span class="info-label">Client:</span>
+                                    <span class="info-value">Manufacturing Corp.</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Technologies:</span>
+                                    <span class="info-value">IoT, MQTT, Node.js, React</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Industry:</span>
+                                    <span class="info-value">Manufacturing</span>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#project1" class="btn-secondary portfolio-details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item" data-category="plc">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://www.placehold.co/600x400?text=Automated+Assembly+Line" alt="Automated Assembly Line">
+                        </div>
+                        <div class="project-content">
+                            <h3>Automated Assembly Line</h3>
+                            <p>PLC-controlled manufacturing system that increased production efficiency by 35%.</p>
+                            <div class="project-details">
+                                <div class="project-info-item">
+                                    <span class="info-label">Client:</span>
+                                    <span class="info-value">AutoParts Inc.</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Technologies:</span>
+                                    <span class="info-value">Siemens PLC, HMI, SCADA</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Industry:</span>
+                                    <span class="info-value">Automotive</span>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#project2" class="btn-secondary portfolio-details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item" data-category="embedded">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://www.placehold.co/600x400?text=Medical+Monitoring+Device" alt="Medical Monitoring Device">
+                        </div>
+                        <div class="project-content">
+                            <h3>Medical Monitoring Device</h3>
+                            <p>Custom embedded system for healthcare that monitors patient vitals in real-time.</p>
+                            <div class="project-details">
+                                <div class="project-info-item">
+                                    <span class="info-label">Client:</span>
+                                    <span class="info-value">HealthTech Solutions</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Technologies:</span>
+                                    <span class="info-value">ARM Cortex, BLE, Custom PCB</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Industry:</span>
+                                    <span class="info-value">Healthcare</span>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#project3" class="btn-secondary portfolio-details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-item" data-category="ai-ml">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://www.placehold.co/600x400?text=Predictive+Maintenance+System" alt="Predictive Maintenance System">
+                        </div>
+                        <div class="project-content">
+                            <h3>Predictive Maintenance System</h3>
+                            <p>AI-powered equipment failure prediction that reduced downtime by 40%.</p>
+                            <div class="project-details">
+                                <div class="project-info-item">
+                                    <span class="info-label">Client:</span>
+                                    <span class="info-value">Industrial Solutions Ltd.</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Technologies:</span>
+                                    <span class="info-value">TensorFlow, Python, IoT Sensors</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Industry:</span>
+                                    <span class="info-value">Manufacturing</span>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#project4" class="btn-secondary portfolio-details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-item" data-category="iot">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://www.placehold.co/600x400?text=Smart+Agriculture+System" alt="Smart Agriculture System">
+                        </div>
+                        <div class="project-content">
+                            <h3>Smart Agriculture System</h3>
+                            <p>IoT solution for precision farming that optimized water usage by 30%.</p>
+                            <div class="project-details">
+                                <div class="project-info-item">
+                                    <span class="info-label">Client:</span>
+                                    <span class="info-value">AgriTech Farms</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Technologies:</span>
+                                    <span class="info-value">IoT, LoRaWAN, Cloud Analytics</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Industry:</span>
+                                    <span class="info-value">Agriculture</span>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#project5" class="btn-secondary portfolio-details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-item" data-category="plc">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://www.placehold.co/600x400?text=Water+Treatment+Automation" alt="Water Treatment Automation">
+                        </div>
+                        <div class="project-content">
+                            <h3>Water Treatment Automation</h3>
+                            <p>PLC-based water purification system that increased efficiency and reduced manual monitoring.</p>
+                            <div class="project-details">
+                                <div class="project-info-item">
+                                    <span class="info-label">Client:</span>
+                                    <span class="info-value">Municipal Water Authority</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Technologies:</span>
+                                    <span class="info-value">Allen Bradley PLC, SCADA, HMI</span>
+                                </div>
+                                <div class="project-info-item">
+                                    <span class="info-label">Industry:</span>
+                                    <span class="info-value">Utilities</span>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#project6" class="btn-secondary portfolio-details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional project modals would be added here -->
+
+    <!-- CTA Section -->
+    <section id="cta">
+        <div class="container">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Let's discuss how we can help you achieve your goals with our expertise in IoT, automation, and embedded systems.</p>
+            <a href="lets-talk.html" class="btn-primary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="https://www.placehold.co/150x50?text=OmniTeq+Logo+Footer" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
+                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage cutting-edge technology to improve efficiency, productivity, and innovation.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html#iot">IoT Solutions</a></li>
+                        <li><a href="services.html#plc">PLC Programming</a></li>
+                        <li><a href="services.html#embedded">Embedded Systems</a></li>
+                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
+                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Park, Innovation Street, City</p>
+                    <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@omni-teq.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+</body>
+</html>

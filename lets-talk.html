@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Talk - OmniTeq</title>
+    <meta name="description" content="Schedule a consultation with OmniTeq's experts to discuss your IoT, automation, and embedded systems projects">
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <a href="lets-talk.html" class="cta-button active">Let's Talk</a>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section id="page-banner">
+        <div class="container">
+            <h1>Let's Talk</h1>
+            <p>Schedule a Consultation with Our Experts</p>
+        </div>
+    </section>
+
+    <!-- Consultation Options -->
+    <section id="consultation-options">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Can We Help You?</h2>
+                <p>Choose the option that best suits your needs</p>
+            </div>
+            <div class="service-cards">
+                <!-- Option 1: Discovery Call -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Discovery Call</h3>
+                    <p>A 30-minute call to discuss your project ideas and explore potential solutions. Our experts will listen to your needs and provide initial guidance.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> 30-minute consultation</li>
+                        <li><i class="fas fa-check-circle"></i> Needs assessment</li>
+                        <li><i class="fas fa-check-circle"></i> Initial recommendations</li>
+                        <li><i class="fas fa-check-circle"></i> No obligation</li>
+                    </ul>
+                    <a href="#booking-form" class="service-link scroll-to">Schedule a Call <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Option 2: Project Consultation -->
+                <div class="service-card featured">
+                    <div class="service-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Project Consultation</h3>
+                    <p>A comprehensive 60-minute session to deep dive into your project requirements, discuss technical details, and outline potential approaches.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> 60-minute detailed consultation</li>
+                        <li><i class="fas fa-check-circle"></i> Technical feasibility assessment</li>
+                        <li><i class="fas fa-check-circle"></i> Solution architecture discussion</li>
+                        <li><i class="fas fa-check-circle"></i> Preliminary timeline and budget</li>
+                    </ul>
+                    <a href="#booking-form" class="service-link scroll-to">Request Consultation <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Option 3: Custom Quote -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Custom Quote</h3>
+                    <p>Submit your project details to receive a customized quote. Our team will review your requirements and provide a detailed proposal.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Detailed project proposal</li>
+                        <li><i class="fas fa-check-circle"></i> Accurate cost estimation</li>
+                        <li><i class="fas fa-check-circle"></i> Implementation timeline</li>
+                        <li><i class="fas fa-check-circle"></i> Resource allocation plan</li>
+                    </ul>
+                    <a href="#quote-form" class="service-link scroll-to">Request Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="booking-form" class="alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>Schedule Your Consultation</h2>
+                <p>Fill out the form below to book a call with our experts</p>
+            </div>
+            <div class="form-container">
+                <form id="consultationForm" action="#" method="post" class="styled-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" placeholder="Your company name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="consultation-type">Consultation Type</label>
+                            <select id="consultation-type" name="consultation-type" required>
+                                <option value="">Select an option</option>
+                                <option value="discovery">Discovery Call (30 min)</option>
+                                <option value="project">Project Consultation (60 min)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferred-date">Preferred Date</label>
+                            <input type="date" id="preferred-date" name="preferred-date" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferred-time">Preferred Time</label>
+                            <select id="preferred-time" name="preferred-time" required>
+                                <option value="">Select a time slot</option>
+                                <option value="9-11">9:00 AM - 11:00 AM</option>
+                                <option value="11-1">11:00 AM - 1:00 PM</option>
+                                <option value="1-3">1:00 PM - 3:00 PM</option>
+                                <option value="3-5">3:00 PM - 5:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timezone">Your Timezone</label>
+                            <select id="timezone" name="timezone" required>
+                                <option value="">Select your timezone</option>
+                                <option value="EST">Eastern Time (ET)</option>
+                                <option value="CST">Central Time (CT)</option>
+                                <option value="MST">Mountain Time (MT)</option>
+                                <option value="PST">Pacific Time (PT)</option>
+                                <option value="other">Other (Please specify in notes)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="project-brief">Brief Project Description</label>
+                        <textarea id="project-brief" name="project-brief" rows="4" placeholder="Please provide a brief overview of your project or needs..." required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="questions">Specific Questions or Topics to Discuss</label>
+                        <textarea id="questions" name="questions" rows="3" placeholder="Any specific questions or topics you'd like to cover during our call?"></textarea>
+                    </div>
+                    <div class="form-group form-controls">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calendar-check"></i> Schedule Consultation
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Request Form -->
+    <section id="quote-form">
+        <div class="container">
+            <div class="section-header">
+                <h2>Request a Custom Quote</h2>
+                <p>Provide details about your project for a tailored proposal</p>
+            </div>
+            <div class="form-container">
+                <form id="quoteForm" action="#" method="post" class="styled-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quote-name">Full Name</label>
+                            <input type="text" id="quote-name" name="quote-name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-email">Email Address</label>
+                            <input type="email" id="quote-email" name="quote-email" placeholder="your.email@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quote-phone">Phone Number</label>
+                            <input type="tel" id="quote-phone" name="quote-phone" placeholder="(123) 456-7890" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-company">Company Name</label>
+                            <input type="text" id="quote-company" name="quote-company" placeholder="Your company name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-type">Project Type</label>
+                            <select id="project-type" name="project-type" required>
+                                <option value="">Select project type</option>
+                                <option value="iot">IoT Solution</option>
+                                <option value="plc">PLC Automation</option>
+                                <option value="embedded">Embedded System</option>
+                                <option value="ai-ml">AI/ML Integration</option>
+                                <option value="outsourcing">Resource Outsourcing</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget-range">Budget Range</label>
+                            <select id="budget-range" name="budget-range">
+                                <option value="">Select budget range</option>
+                                <option value="under-5k">Under $5,000</option>
+                                <option value="5k-10k">$5,000 - $10,000</option>
+                                <option value="10k-25k">$10,000 - $25,000</option>
+                                <option value="25k-50k">$25,000 - $50,000</option>
+                                <option value="50k-plus">$50,000+</option>
+                                <option value="not-sure">Not sure yet</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="timeline">Expected Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select timeline</option>
+                                <option value="urgent">Urgent (ASAP)</option>
+                                <option value="1-month">Within 1 month</option>
+                                <option value="1-3-months">1-3 months</option>
+                                <option value="3-6-months">3-6 months</option>
+                                <option value="6-plus-months">6+ months</option>
+                                <option value="not-sure">Not sure yet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="hear-about">How did you hear about us?</label>
+                            <select id="hear-about" name="hear-about">
+                                <option value="">Select an option</option>
+                                <option value="search">Search Engine</option>
+                                <option value="social">Social Media</option>
+                                <option value="referral">Referral</option>
+                                <option value="event">Event/Conference</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="project-details">Project Details</label>
+                        <textarea id="project-details" name="project-details" rows="6" placeholder="Please include as much detail as possible about your project requirements, goals, and any specific technologies or features you're interested in." required></textarea>
+                    </div>
+                    <div class="form-group full-width file-upload-container">
+                        <label for="file-upload">Attach Relevant Documents (optional)</label>
+                        <div class="custom-file-upload">
+                            <input type="file" id="file-upload" name="file-upload" multiple>
+                            <label for="file-upload" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i> Choose Files
+                            </label>
+                            <span class="selected-files">No files selected</span>
+                        </div>
+                        <small>Max file size: 10MB. Accepted formats: PDF, DOC, DOCX, PPT, PPTX, JPG, PNG</small>
+                    </div>
+                    <div class="form-group form-controls">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-file-invoice-dollar"></i> Request Quote
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Success stories from businesses we've helped transform</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The consultation process with OmniTeq was incredibly valuable. Their team took the time to understand our unique challenges and proposed a solution that perfectly addressed our needs."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="images/testimonials/client1.jpg" alt="Client 1">
+                        <div class="author-info">
+                            <h4>John Smith</h4>
+                            <p>Operations Manager, TechManufacturing Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"From our initial consultation to project completion, OmniTeq demonstrated exceptional expertise and professionalism. They delivered exactly what they promised, on time and within budget."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="images/testimonials/client2.jpg" alt="Client 2">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Principal, Westside High School</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The team at OmniTeq provided invaluable guidance during our consultation. Their insights helped us refine our project scope and choose the most effective technologies for our needs."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="images/testimonials/client3.jpg" alt="Client 3">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>CTO, AgriTech Solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="consultation-faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions about our consultation process</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What should I prepare for the consultation?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To make the most of your consultation, we recommend preparing a brief overview of your project goals, any specific challenges you're facing, and questions you'd like to discuss. If you have any existing documentation or specifications, having those on hand can be helpful, but it's not required.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is there any obligation after the consultation?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, there is absolutely no obligation to proceed with a project after the consultation. Our goal is to provide valuable insights and help you understand your options. You're free to take that information and make the best decision for your business.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How soon can I expect to receive a quote?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For standard projects, we typically provide quotes within 2-3 business days after receiving all necessary information. For more complex projects that require detailed scoping, it may take 5-7 business days. We'll always keep you informed about the timeline for receiving your quote.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I change my consultation time after booking?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can reschedule your consultation if needed. We ask that you provide at least 24 hours' notice when possible. You'll receive a confirmation email after booking that includes a link to reschedule if necessary.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
+                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage cutting-edge technology to improve efficiency, productivity, and innovation.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html#iot">IoT Solutions</a></li>
+                        <li><a href="services.html#plc">PLC Programming</a></li>
+                        <li><a href="services.html#embedded">Embedded Systems</a></li>
+                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
+                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Park, Innovation Street, City</p>
+                    <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@omni-teq.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+</body>
+</html>
