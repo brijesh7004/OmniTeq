@@ -10,6 +10,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/notifications.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -117,7 +118,92 @@
                 <p>Fill out the form below to book a call with our experts</p>
             </div>
             <div class="form-container">
-                <form id="consultationForm" action="#" method="post" class="styled-form">
+                <form id="consultationForm" class="styled-form" onsubmit="submitConsultationForm(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Your email address" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" placeholder="Your company name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="consultation_type">Consultation Type</label>
+                            <select id="consultation_type" name="consultation_type" required>
+                                <option value="">Select consultation type</option>
+                                <option value="discovery">Discovery Call (30 min)</option>
+                                <option value="project">Project Consultation (60 min)</option>
+                                <option value="technical">Technical Deep Dive (90 min)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferred_date">Preferred Date</label>
+                            <input type="date" id="preferred_date" name="preferred_date" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferred_time">Preferred Time</label>
+                            <select id="preferred_time" name="preferred_time" required>
+                                <option value="">Select preferred time</option>
+                                <option value="morning">Morning (9 AM - 12 PM)</option>
+                                <option value="afternoon">Afternoon (12 PM - 3 PM)</option>
+                                <option value="evening">Evening (3 PM - 6 PM)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timezone">Your Timezone</label>
+                            <select id="timezone" name="timezone">
+                                <option value="IST">India Standard Time (IST)</option>
+                                <option value="GMT">Greenwich Mean Time (GMT)</option>
+                                <option value="EST">Eastern Time (ET)</option>
+                                <option value="CST">Central Time (CT)</option>
+                                <option value="MST">Mountain Time (MT)</option>
+                                <option value="PST">Pacific Time (PT)</option>
+                                <option value="other">Other (Please specify in notes)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="project_brief">Project Brief</label>
+                        <textarea id="project_brief" name="project_brief" rows="6" placeholder="Please include as much detail as possible about your project requirements." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions">Additional Questions</label>
+                        <textarea id="questions" name="questions" rows="4" placeholder="Any specific questions or topics you'd like to discuss?"></textarea>
+                    </div>
+                    <div class="form-group form-controls">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calendar-check"></i> Schedule Consultation
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Request Form -->
+    <section id="quote-form">
+        <div class="container">
+            <div class="section-header">
+                <h2>Request a Custom Quote</h2>
+                <p>Provide details about your project for a tailored proposal</p>
+            </div>
+            <div class="form-container">
+                <form id="quoteForm" class="styled-form" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -140,92 +226,8 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="consultation-type">Consultation Type</label>
-                            <select id="consultation-type" name="consultation-type" required>
-                                <option value="">Select an option</option>
-                                <option value="discovery">Discovery Call (30 min)</option>
-                                <option value="project">Project Consultation (60 min)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="preferred-date">Preferred Date</label>
-                            <input type="date" id="preferred-date" name="preferred-date" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="preferred-time">Preferred Time</label>
-                            <select id="preferred-time" name="preferred-time" required>
-                                <option value="">Select a time slot</option>
-                                <option value="9-11">9:00 AM - 11:00 AM</option>
-                                <option value="11-1">11:00 AM - 1:00 PM</option>
-                                <option value="1-3">1:00 PM - 3:00 PM</option>
-                                <option value="3-5">3:00 PM - 5:00 PM</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="timezone">Your Timezone</label>
-                            <select id="timezone" name="timezone" required>
-                                <option value="">Select your timezone</option>
-                                <option value="EST">Eastern Time (ET)</option>
-                                <option value="CST">Central Time (CT)</option>
-                                <option value="MST">Mountain Time (MT)</option>
-                                <option value="PST">Pacific Time (PT)</option>
-                                <option value="other">Other (Please specify in notes)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="project-brief">Brief Project Description</label>
-                        <textarea id="project-brief" name="project-brief" rows="4" placeholder="Please provide a brief overview of your project or needs..." required></textarea>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="questions">Specific Questions or Topics to Discuss</label>
-                        <textarea id="questions" name="questions" rows="3" placeholder="Any specific questions or topics you'd like to cover during our call?"></textarea>
-                    </div>
-                    <div class="form-group form-controls">
-                        <button type="submit" class="btn-primary">
-                            <i class="fas fa-calendar-check"></i> Schedule Consultation
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quote Request Form -->
-    <section id="quote-form">
-        <div class="container">
-            <div class="section-header">
-                <h2>Request a Custom Quote</h2>
-                <p>Provide details about your project for a tailored proposal</p>
-            </div>
-            <div class="form-container">
-                <form id="quoteForm" action="#" method="post" class="styled-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="quote-name">Full Name</label>
-                            <input type="text" id="quote-name" name="quote-name" placeholder="Your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="quote-email">Email Address</label>
-                            <input type="email" id="quote-email" name="quote-email" placeholder="your.email@example.com" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="quote-phone">Phone Number</label>
-                            <input type="tel" id="quote-phone" name="quote-phone" placeholder="(091) 12345 12345" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="quote-company">Company Name</label>
-                            <input type="text" id="quote-company" name="quote-company" placeholder="Your company name">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="project-type">Project Type</label>
-                            <select id="project-type" name="project-type" required>
+                            <label for="project_type">Project Type</label>
+                            <select id="project_type" name="project_type" required>
                                 <option value="">Select project type</option>
                                 <option value="iot">IoT Solution</option>
                                 <option value="plc">PLC Automation</option>
@@ -236,8 +238,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="budget-range">Budget Range</label>
-                            <select id="budget-range" name="budget-range">
+                            <label for="budget_range">Budget Range</label>
+                            <select id="budget_range" name="budget_range">
                                 <option value="">Select budget range</option>
                                 <option value="under-1L">Under ₹1,00,000</option>
                                 <option value="1L-5L">₹1,00,000 - ₹5,00,000</option>
@@ -261,8 +263,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="hear-about">How did you hear about us?</label>
-                            <select id="hear-about" name="hear-about">
+                            <label for="hear_about">How did you hear about us?</label>
+                            <select id="hear_about" name="hear_about">
                                 <option value="">Select an option</option>
                                 <option value="search">Search Engine</option>
                                 <option value="social">Social Media</option>
@@ -273,13 +275,13 @@
                         </div>
                     </div>
                     <div class="form-group full-width">
-                        <label for="project-details">Project Details</label>
-                        <textarea id="project-details" name="project-details" rows="6" placeholder="Please include as much detail as possible about your project requirements, goals, and any specific technologies or features you're interested in." required></textarea>
+                        <label for="project_details">Project Details</label>
+                        <textarea id="project_details" name="project_details" rows="6" placeholder="Please include as much detail as possible about your project requirements, goals, and any specific technologies or features you're interested in." required></textarea>
                     </div>
                     <div class="form-group full-width file-upload-container">
                         <label for="file-upload">Attach Relevant Documents (optional)</label>
                         <div class="custom-file-upload">
-                            <input type="file" id="file-upload" name="file-upload" multiple>
+                            <input type="file" id="file-upload" name="files[]" multiple>
                             <label for="file-upload" class="file-upload-label">
                                 <i class="fas fa-cloud-upload-alt"></i> Choose Files
                             </label>
@@ -310,7 +312,7 @@
                         <p>"The consultation process with OmniTeq was incredibly valuable. Their team took the time to understand our unique challenges and proposed a solution that perfectly addressed our needs."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/testimonials/client1.jpg" alt="Client 1">
+                        <img src="https://www.placehold.co/100x100?text=JS" alt="Client 1">
                         <div class="author-info">
                             <h4>John Smith</h4>
                             <p>Operations Manager, TechManufacturing Inc.</p>
@@ -322,7 +324,7 @@
                         <p>"From our initial consultation to project completion, OmniTeq demonstrated exceptional expertise and professionalism. They delivered exactly what they promised, on time and within budget."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/testimonials/client2.jpg" alt="Client 2">
+                        <img src="https://www.placehold.co/100x100?text=SJ" alt="Client 2">
                         <div class="author-info">
                             <h4>Sarah Johnson</h4>
                             <p>Principal, Westside High School</p>
@@ -334,7 +336,7 @@
                         <p>"The team at OmniTeq provided invaluable guidance during our consultation. Their insights helped us refine our project scope and choose the most effective technologies for our needs."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/testimonials/client3.jpg" alt="Client 3">
+                        <img src="https://www.placehold.co/100x100?text=MC" alt="Client 3">
                         <div class="author-info">
                             <h4>Michael Chen</h4>
                             <p>CTO, AgriTech Solutions</p>
@@ -401,7 +403,7 @@
                     <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
                     <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage cutting-edge technology to improve efficiency, productivity, and innovation.</p>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/sangita-sarvaiya-646a5b362" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i class="fab fa-linkedin"></i></a>
                         <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>                        
                         <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -432,8 +434,8 @@
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-envelope"></i> info@omniteq.in</p>
-                    <p><i class="fas fa-phone"></i> +91 74057 63463</p>
-                    <!-- <p><i class="fab fa-whatsapp"></i> +91 74057 63463</p> -->
+                    <p><i class="fas fa-phone"></i> +91 98252 46857</p>
+                    <!-- <p><i class="fab fa-whatsapp"></i> +91 98252 46857</p> -->
                     <p><i class="fas fa-map-marker-alt"></i> Aditya House, Iscon Mega City, Bhavnagar</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: <br>9:00 AM - 6:00 PM</p>
                 </div>

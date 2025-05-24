@@ -1,57 +1,267 @@
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (hamburger) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+// Initialize notification system
+const notificationSystem = {
+    container: null,
+    timeout: null,
+
+    init() {
+        // Create container for notifications if it doesn't exist
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.id = 'notification-container';
+            this.container.style.cssText = 'position: fixed; top: 0; right: 0; z-index: 9999;';
+            document.body.appendChild(this.container);
+        }
+    },
+
+    show(message, type = 'success') {
+        this.init();
+        console.log('Showing notification:', message, type);
+
+        // Clear existing timeout
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
+
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notification => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 400);
         });
+
+        // Create new notification
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.setAttribute('role', 'alert');
+
+        // Add icon and message
+        const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+        notification.innerHTML = `
+            <i class="fas fa-${icon}"></i>
+            <span>${message}</span>
+        `;
+
+        // Add to container
+        this.container.appendChild(notification);
+
+        // Force reflow and show notification
+        notification.offsetHeight;
+        requestAnimationFrame(() => {
+            notification.classList.add('show');
+        });
+
+        // Set timeout to remove
+        this.timeout = setTimeout(() => {
+            if (notification && notification.parentNode) {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 400);
+            }
+        }, 5000);
     }
-    
-    // Close mobile menu when clicking on a nav link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+};
+
+// Make utils globally available
+window.utils = {
+    showNotification(message, type = 'success') {
+        notificationSystem.show(message, type);
+    }
+};
+
+// Handle animations on scroll
+function handleScrollAnimation(elements, callback) {
+        const windowHeight = window.innerHeight;
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 50) {
+                callback(element);
+            }
         });
-    });
     
-    // Smooth scrolling for anchor links with header offset
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId !== '#') {
+};
+
+// Form Handlers
+const forms = {
+    // Generic form submission handler
+    async submitForm(event, endpoint, requiredFields = [], hasFiles = false) {
+        event.preventDefault();
+        const form = event.target;
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonHtml = submitButton.innerHTML;
+        
+        try {
+            // Validate required fields
+            const missingFields = requiredFields.filter(field => {
+                const input = form.querySelector(`[name="${field}"]`);
+                return !input || !input.value.trim();
+            });
+
+            if (missingFields.length > 0) {
+                throw new Error(`Please fill in all required fields: ${missingFields.join(', ')}`);
+            }
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // Always use FormData for consistency
+            const formData = new FormData(form);
+
+            // Log form data for debugging
+            console.log('Form data being sent:', Object.fromEntries(formData));
+
+            const response = await fetch(`api/${endpoint}.php`, {
+                method: 'POST',
+                body: formData // Send as FormData for both files and regular data
+            });
+
+            console.log('Response status:', response.status); // Debug log
+            const responseText = await response.text();
+            console.log('Raw response:', responseText); // Debug log
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+                console.log('Parsed response:', result);
+            } catch (e) {
+                console.error('JSON parse error:', e);
+                throw new Error('Server returned invalid response');
+            }
+
+            if (response.ok) {
+                window.utils.showNotification('Your request has been submitted successfully!', 'success');
+                form.reset();
+                
+                // Reset file input if present
+                const fileInput = form.querySelector('input[type="file"]');
+                if (fileInput) {
+                    fileInput.value = '';
+                    const selectedFilesText = form.querySelector('.selected-files');
+                    if (selectedFilesText) {
+                        selectedFilesText.textContent = 'No files selected';
+                    }
+                }
+            } else {
+                throw new Error(result.message || 'Failed to submit form');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            window.utils.showNotification(error.message || 'An error occurred while submitting the form.', 'error');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonHtml;
+        }
+    },
+
+    // Contact form handler
+    async submitContactForm(event) {
+        return forms.submitForm(event, 'contact', ['name', 'email', 'phone', 'subject', 'message']);
+    },
+
+    // Consultation form handler
+    async submitConsultationForm(event) {
+        return forms.submitForm(event, 'consultation', [
+            'name', 'email', 'phone', 'consultation_type',
+            'preferred_date', 'preferred_time', 'project_brief'
+        ]);
+    },
+
+    // Quote form handler
+    async submitQuoteForm(event) {
+        event.preventDefault();
+        return this.submitForm(event, 'quote', [
+            'name', 'email', 'phone', 'project_type', 'project_details'
+        ], true);
+    }
+};
+
+// UI Components
+const ui = {
+    initMobileNav() {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+    },
+
+    initStickyHeader() {
+        const header = document.querySelector('header');
+        const scrollThreshold = 100;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > scrollThreshold) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+        });
+    },
+
+    initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    const headerHeight = document.querySelector('#header').offsetHeight;
+                    const headerHeight = document.querySelector('#header')?.offsetHeight || 0;
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = targetPosition - headerHeight;
-                    
                     window.scrollTo({
-                        top: offsetPosition,
+                        top: targetPosition - headerHeight,
                         behavior: 'smooth'
                     });
                 }
-            }
+            });
         });
-    });
-    
-    // Sticky header on scroll
-    const header = document.querySelector('header');
-    const scrollThreshold = 100;
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > scrollThreshold) {
-            header.classList.add('sticky');
-        } else {
-            header.classList.remove('sticky');
-        }
-    });
-    
+    },
+
+    initFAQs() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        if (!faqQuestions.length) return;
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const answer = this.nextElementSibling;
+                
+                if (this.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = 0;
+                }
+                
+                // Close other FAQs
+                faqQuestions.forEach(item => {
+                    if (item !== this) {
+                        item.classList.remove('active');
+                        item.nextElementSibling.style.maxHeight = 0;
+                    }
+                });
+            });
+        });
+    }
+};
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize UI components
+    ui.initMobileNav();
+    ui.initStickyHeader();
+    ui.initSmoothScroll();
+    ui.initFAQs();
+
     // Portfolio filter functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
@@ -145,52 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Form validation
-    const contactForm = document.querySelector('#contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic validation
-            let isValid = true;
-            const requiredFields = contactForm.querySelectorAll('[required]');
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.classList.add('error');
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            // Email validation
-            const emailField = contactForm.querySelector('input[type="email"]');
-            if (emailField && emailField.value) {
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(emailField.value)) {
-                    isValid = false;
-                    emailField.classList.add('error');
-                }
-            }
-            
-            if (isValid) {
-                // Here you would typically send the form data to a server
-                // For now, we'll just show a success message
-                const formMessage = document.createElement('div');
-                formMessage.className = 'form-message success';
-                formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-                
-                contactForm.appendChild(formMessage);
-                contactForm.reset();
-                
-                // Remove the message after 5 seconds
-                setTimeout(() => {
-                    formMessage.remove();
-                }, 5000);
-            }
-        });
-    }
+
     
     // Animation on scroll
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
@@ -410,5 +575,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         });
+    }
+
+    // Attach form handlers
+    const contactForm = document.getElementById('contactForm');
+    const consultationForm = document.getElementById('consultationForm');
+    const quoteForm = document.getElementById('quoteForm');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', forms.submitContactForm.bind(forms));
+    }
+
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', forms.submitConsultationForm.bind(forms));
+    }
+
+    if (quoteForm) {
+        quoteForm.addEventListener('submit', forms.submitQuoteForm.bind(forms));
     }
 });
