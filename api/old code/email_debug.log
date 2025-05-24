@@ -1,0 +1,58 @@
+[2025-05-23 07:33:20] Starting email send process
+[2025-05-23 07:33:20] SMTP Settings - Host: smtp.omniteq.in, Port: 465, Username: noreply@omniteq.in
+[2025-05-23 07:33:20] Configuring SMTP settings
+[2025-05-23 07:33:20] Setting email content
+[2025-05-23 07:33:20] Attempting to send email to user: brijesh7004@gmail.com
+[2025-05-23 07:33:20] Email sent successfully to user: brijesh7004@gmail.com
+[2025-05-23 07:33:20] Setting up admin email to: contact@omniteq.in
+[2025-05-23 07:33:20] Configuring admin SMTP settings
+[2025-05-23 07:33:20] Setting admin email content
+[2025-05-23 07:33:20] Attempting to send email to admin: contact@omniteq.in
+[2025-05-23 07:33:20] Admin email sent successfully
+[2025-05-23 07:33:20] Email process completed successfully
+[2025-05-23 07:38:05] Starting email send process
+[2025-05-23 07:38:05] SMTP Settings - Host: smtp.omniteq.in, Port: 465, Username: noreply@omniteq.in
+[2025-05-23 07:38:05] PHP Version: 8.3.19
+[2025-05-23 07:38:05] OpenSSL Version: OpenSSL 1.1.1w  11 Sep 2023
+[2025-05-23 07:38:05] SMTP Connection Test Failed: php_network_getaddresses: getaddrinfo for smtp.omniteq.in failed: Name or service not known (0)
+[2025-05-23 07:38:05] Configuring SMTP settings
+[2025-05-23 07:38:05] SSL failed, trying TLS: SSL connection failed
+[2025-05-23 07:38:05] Setting email content
+[2025-05-23 07:38:05] Attempting to send email to user: brijesh7004@gmail.com
+[2025-05-23 07:38:05] Email sent successfully to user: brijesh7004@gmail.com
+[2025-05-23 07:38:05] Setting up admin email to: contact@omniteq.in
+[2025-05-23 07:38:05] Configuring admin SMTP settings
+[2025-05-23 07:38:05] Setting admin email content
+[2025-05-23 07:38:05] Attempting to send email to admin: contact@omniteq.in
+[2025-05-23 07:38:05] Admin email sent successfully
+[2025-05-23 07:38:05] Email process completed successfully
+[2025-05-23 07:43:03] Starting email send process
+[2025-05-23 07:43:03] SMTP Settings - Host: smtp.gmail.com, Port: 587, Username: noreply@omniteq.in
+[2025-05-23 07:43:03] PHP Version: 8.3.19
+[2025-05-23 07:43:03] OpenSSL Version: OpenSSL 1.1.1w  11 Sep 2023
+[2025-05-23 07:43:34] SMTP Connection Test Failed: Connection timed out (110)
+[2025-05-23 07:43:34] Configuring SMTP settings
+[2025-05-23 07:43:39] SMTP connection test failed: SMTP connection failed
+[2025-05-23 07:43:39] Setting email content
+[2025-05-23 07:43:39] Attempting to send email to user: brijesh7004@gmail.com
+[2025-05-23 07:44:09] Email sent successfully to user: brijesh7004@gmail.com
+[2025-05-23 07:44:09] Setting up admin email to: contact@omniteq.in
+[2025-05-23 07:44:09] Configuring admin SMTP settings
+[2025-05-23 07:44:09] Setting admin email content
+[2025-05-23 07:44:09] Attempting to send email to admin: contact@omniteq.in
+[2025-05-23 07:44:39] Admin email sent successfully
+[2025-05-23 07:44:39] Email process completed successfully
+[2025-05-23 07:49:33] Starting email send process
+[2025-05-23 07:49:33] SMTP Settings - Host: localhost, Port: 25, Username: 
+[2025-05-23 07:49:33] PHP Version: 8.3.19
+[2025-05-23 07:49:33] OpenSSL Version: OpenSSL 1.1.1w  11 Sep 2023
+[2025-05-23 07:49:33] SMTP Connection Test Successful
+[2025-05-23 07:49:33] Configuring SMTP settings
+[2025-05-23 08:02:17] Starting email send process
+[2025-05-23 08:02:17] Using PHP mail() function
+[2025-05-23 08:02:17] PHP Version: 8.3.19
+[2025-05-23 08:02:17] Sending email to user: brijesh7004@gmail.com
+[2025-05-23 08:02:22] Email sent successfully to user: brijesh7004@gmail.com
+[2025-05-23 08:02:22] Sending email to admin: contact@omniteq.in
+[2025-05-23 08:02:27] Email sent successfully to admin
+[2025-05-23 08:02:27] Email process completed successfully

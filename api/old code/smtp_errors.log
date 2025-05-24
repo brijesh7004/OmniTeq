@@ -1,0 +1,8 @@
+[23-May-2025 07:38:05 UTC] PHP Warning:  fsockopen(): php_network_getaddresses: getaddrinfo for smtp.omniteq.in failed: Name or service not known in /home/gpgzqevvi4rf/public_html/api/email_helper.php on line 56
+[23-May-2025 07:38:05 UTC] PHP Warning:  fsockopen(): Unable to connect to ssl://smtp.omniteq.in:465 (php_network_getaddresses: getaddrinfo for smtp.omniteq.in failed: Name or service not known) in /home/gpgzqevvi4rf/public_html/api/email_helper.php on line 56
+[23-May-2025 07:43:39 UTC] PHP Warning:  fsockopen(): Unable to connect to smtp.gmail.com:587 (Connection timed out) in /home/gpgzqevvi4rf/public_html/api/email_helper.php on line 58
+[23-May-2025 07:49:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PHPMailer\PHPMailer\PHPMailer::isMail() in /home/gpgzqevvi4rf/public_html/api/email_helper.php:48
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/contact.php(60): sendEmail()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/email_helper.php on line 48
