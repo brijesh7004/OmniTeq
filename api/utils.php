@@ -21,7 +21,7 @@ function validateRequired($data, $fields) {
 
 function getPaginationParams() {
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $size = isset($_GET['size']) ? (int)$_GET['size'] : 10;
+    $size = isset($_GET['size']) ? (int)$_GET['size'] : 20;
     
     if ($page < 1) $page = 1;
     if ($size < 1) $size = 10;

@@ -8,64 +8,65 @@ $conn = getConnection();
 switch ($method) {
     case 'GET':
         if (isset($_GET['id'])) {
-            // Get specific entry
-            $id = $conn->real_escape_string($_GET['id']);
-            $sql = "SELECT * FROM consultation_bookings WHERE id = '$id'";
-            $result = $conn->query($sql);
-            
+            $id = (int)$_GET['id'];
+            $stmt = $conn->prepare("SELECT * FROM consultation_bookings WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
             if ($result->num_rows > 0) {
                 sendResponse(200, "Success", $result->fetch_assoc());
             } else {
                 sendResponse(404, "Consultation booking not found");
             }
+
+            $stmt->close();
         } else {
-            // Get all entries with pagination
+			if(isset($_GET['status'])){ $status=" where status='{$_GET['status']}' "; } else { $status=""; }
+			
             $pagination = getPaginationParams();
-            $sql = "SELECT * FROM consultation_bookings ORDER BY created_at DESC LIMIT {$pagination['offset']}, {$pagination['size']}";
-            $result = $conn->query($sql);
-            
+            $stmt = $conn->prepare("SELECT * FROM consultation_bookings {$status} ORDER BY created_at DESC LIMIT ?, ?");
+            $stmt->bind_param("ii", $pagination['offset'], $pagination['size']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
             $data = [];
             while ($row = $result->fetch_assoc()) {
                 $data[] = $row;
             }
-            
-            // Get total count
+
             $countResult = $conn->query("SELECT COUNT(*) as total FROM consultation_bookings");
             $totalCount = $countResult->fetch_assoc()['total'];
-            
+
             sendResponse(200, "Success", [
                 'items' => $data,
                 'total' => (int)$totalCount
             ]);
+
+            $stmt->close();
         }
         break;
 
     case 'POST':
         $data = getRequestData();
-        
-        // Validate required fields
         validateRequired($data, ['name', 'email', 'phone', 'consultation_type', 'preferred_date', 'preferred_time', 'project_brief']);
-        
-        // Sanitize input
         $data = sanitizeInput($data);
-        
-        // Insert data
-        $sql = "INSERT INTO consultation_bookings (
-                    name, email, phone, company, consultation_type, 
-                    preferred_date, preferred_time, timezone, 
-                    project_brief, questions, status
-        ) VALUES (
-            '{$data['name']}', '{$data['email']}', '{$data['phone']}',
-                    '{$data['company']}', '{$data['consultation_type']}',
-                    '{$data['preferred_date']}', '{$data['preferred_time']}', '{$data['timezone']}',
-                    '{$data['project_brief']}', '{$data['questions']}', 'pending'
-        )";
-        
-        if ($conn->query($sql)) {
-            // Generate and send email
+
+        $stmt = $conn->prepare("INSERT INTO consultation_bookings (
+            name, email, phone, company, consultation_type, 
+            preferred_date, preferred_time, timezone, 
+            project_brief, questions, status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+
+        $stmt->bind_param("ssssssssss",
+            $data['name'], $data['email'], $data['phone'], $data['company'],
+            $data['consultation_type'], $data['preferred_date'], $data['preferred_time'],
+            $data['timezone'], $data['project_brief'], $data['questions']
+        );
+
+        if ($stmt->execute()) {
             try {
-                $formData = ['name' => $data['name'], 'email' => $data['email'], 
-                            'company_email' => SUPPORT_EMAIL, 'type' => 'consultation'];
+                $formData = ['name' => $data['name'], 'email' => $data['email'], 'company_email' => SUPPORT_EMAIL, 'type' => 'consultation'];
                 $ackTitle = 'Thank you for your consultation request';
                 $ackEmailBody = generateEmailBody($data, 'consultation', FALSE);
                 $notTitle = 'New Consultation Form Submission';
@@ -80,39 +81,49 @@ switch ($method) {
         } else {
             sendResponse(500, "Error creating consultation booking: " . $conn->error);
         }
+
+        $stmt->close();
         break;
 
     case 'PUT':
         if (!isset($_GET['id'])) {
             sendResponse(400, "Missing ID parameter");
         }
-        
-        $id = $conn->real_escape_string($_GET['id']);
-        $data = getRequestData();
-        $data = sanitizeInput($data);
-        
-        // Build update query
-        $updates = [];
+
+        $id = (int)$_GET['id'];
+        $data = sanitizeInput(getRequestData());
+
         $allowedFields = [
             'name', 'email', 'phone', 'company', 'consultation_type',
             'preferred_date', 'preferred_time', 'timezone',
             'project_brief', 'questions', 'status'
         ];
-        
-        foreach ($data as $key => $value) {
-            if (in_array($key, $allowedFields)) {
-                $updates[] = "$key = '$value'";
+
+        $updates = [];
+        $params = [];
+        $types = '';
+
+        foreach ($allowedFields as $field) {
+            if (isset($data[$field])) {
+                $updates[] = "$field = ?";
+                $params[] = $data[$field];
+                $types .= 's';
             }
         }
-        
+
         if (empty($updates)) {
             sendResponse(400, "No valid fields to update");
         }
-        
-        $sql = "UPDATE consultation_bookings SET " . implode(', ', $updates) . " WHERE id = '$id'";
-        
-        if ($conn->query($sql)) {
-            if ($conn->affected_rows > 0) {
+
+        $types .= 'i';
+        $params[] = $id;
+        $sql = "UPDATE consultation_bookings SET " . implode(', ', $updates) . " WHERE id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param($types, ...$params);
+
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
                 sendResponse(200, "Consultation booking updated successfully");
             } else {
                 sendResponse(404, "Consultation booking not found");
@@ -120,25 +131,27 @@ switch ($method) {
         } else {
             sendResponse(500, "Error updating consultation booking: " . $conn->error);
         }
+
+        $stmt->close();
         break;
 
     case 'DELETE':
         if (!isset($_GET['id'])) {
             sendResponse(400, "Missing ID parameter");
         }
-        
-        $id = $conn->real_escape_string($_GET['id']);
-        $sql = "DELETE FROM consultation_bookings WHERE id = '$id'";
-        
-        if ($conn->query($sql)) {
-            if ($conn->affected_rows > 0) {
-                sendResponse(200, "Consultation booking deleted successfully");
-            } else {
-                sendResponse(404, "Consultation booking not found");
-            }
+
+        $id = (int)$_GET['id'];
+        $stmt = $conn->prepare("DELETE FROM consultation_bookings WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            sendResponse(200, "Consultation booking deleted successfully");
         } else {
-            sendResponse(500, "Error deleting consultation booking: " . $conn->error);
+            sendResponse(404, "Consultation booking not found");
         }
+
+        $stmt->close();
         break;
 
     default:

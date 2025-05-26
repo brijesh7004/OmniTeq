@@ -1491,6 +1491,7 @@ section[id] {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #f0f0f0;
+    font-weight: 900;
 }
 
 .comparison-table th {

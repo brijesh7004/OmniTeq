@@ -1,6 +1,5 @@
 <?php
 require_once 'utils.php';
-// require_once 'email_helper.php';
 require_once 'send_mail.php'; 
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -9,28 +8,31 @@ $conn = getConnection();
 switch ($method) {
     case 'GET':
         if (isset($_GET['id'])) {
-            // Get specific entry
-            $id = $conn->real_escape_string($_GET['id']);
-            $sql = "SELECT * FROM contact_submissions WHERE id = '$id'";
-            $result = $conn->query($sql);
+            $id = (int)$_GET['id'];
+            $stmt = $conn->prepare("SELECT * FROM contact_submissions WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
             
             if ($result->num_rows > 0) {
                 sendResponse(200, "Success", $result->fetch_assoc());
             } else {
                 sendResponse(404, "Contact submission not found");
             }
+            $stmt->close();
         } else {
-            // Get all entries with pagination
+            // Pagination
             $pagination = getPaginationParams();
-            $sql = "SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT {$pagination['offset']}, {$pagination['size']}";
-            $result = $conn->query($sql);
+            $stmt = $conn->prepare("SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT ?, ?");
+            $stmt->bind_param("ii", $pagination['offset'], $pagination['size']);
+            $stmt->execute();
+            $result = $stmt->get_result();
             
             $data = [];
             while ($row = $result->fetch_assoc()) {
                 $data[] = $row;
             }
-            
-            // Get total count
+
             $countResult = $conn->query("SELECT COUNT(*) as total FROM contact_submissions");
             $totalCount = $countResult->fetch_assoc()['total'];
             
@@ -38,24 +40,19 @@ switch ($method) {
                 'items' => $data,
                 'total' => (int)$totalCount
             ]);
+            $stmt->close();
         }
         break;
 
     case 'POST':
         $data = getRequestData();
-        
-        // Validate required fields
         validateRequired($data, ['name', 'email', 'phone', 'subject', 'message']);
-        
-        // Sanitize input
         $data = sanitizeInput($data);
+
+        $stmt = $conn->prepare("INSERT INTO contact_submissions (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $data['name'], $data['email'], $data['phone'], $data['subject'], $data['message']);
         
-        // Insert data
-        $sql = "INSERT INTO contact_submissions (name, email, phone, subject, message) 
-                VALUES ('{$data['name']}', '{$data['email']}', '{$data['phone']}', '{$data['subject']}', '{$data['message']}')";
-        
-        if ($conn->query($sql)) {
-            // Generate and send email
+        if ($stmt->execute()) {
             try {
                 $formData = ['name' => $data['name'], 'email' => $data['email'], 
                             'company_email' => CONTACT_EMAIL, 'type' => 'contact'];
@@ -71,61 +68,70 @@ switch ($method) {
                 sendResponse(500, "Contact request saved but email failed: " . $e->getMessage());
             }
         } else {
-            sendResponse(500, "Error creating contact submission: " . $conn->error);
+            sendResponse(500, "Error creating contact submission: " . $stmt->error);
         }
+        $stmt->close();
         break;
 
     case 'PUT':
         if (!isset($_GET['id'])) {
             sendResponse(400, "Missing ID parameter");
         }
-        
-        $id = $conn->real_escape_string($_GET['id']);
-        $data = getRequestData();
-        $data = sanitizeInput($data);
-        
-        // Build update query
+        $id = (int)$_GET['id'];
+        $data = sanitizeInput(getRequestData());
+
+        // Valid keys
+        $allowed = ['name', 'email', 'phone', 'subject', 'message'];
         $updates = [];
-        foreach ($data as $key => $value) {
-            if (in_array($key, ['name', 'email', 'phone', 'subject', 'message'])) {
-                $updates[] = "$key = '$value'";
+        $values = [];
+
+        foreach ($allowed as $key) {
+            if (isset($data[$key])) {
+                $updates[] = "$key = ?";
+                $values[] = $data[$key];
             }
         }
-        
+
         if (empty($updates)) {
             sendResponse(400, "No valid fields to update");
         }
-        
-        $sql = "UPDATE contact_submissions SET " . implode(', ', $updates) . " WHERE id = '$id'";
-        
-        if ($conn->query($sql)) {
-            if ($conn->affected_rows > 0) {
+
+        $types = str_repeat("s", count($values)) . "i"; // Add "i" for id
+        $values[] = $id;
+
+        $stmt = $conn->prepare("UPDATE contact_submissions SET " . implode(', ', $updates) . " WHERE id = ?");
+        $stmt->bind_param($types, ...$values);
+
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
                 sendResponse(200, "Contact submission updated successfully");
             } else {
                 sendResponse(404, "Contact submission not found");
             }
         } else {
-            sendResponse(500, "Error updating contact submission: " . $conn->error);
+            sendResponse(500, "Error updating contact submission: " . $stmt->error);
         }
+        $stmt->close();
         break;
 
     case 'DELETE':
         if (!isset($_GET['id'])) {
             sendResponse(400, "Missing ID parameter");
         }
-        
-        $id = $conn->real_escape_string($_GET['id']);
-        $sql = "DELETE FROM contact_submissions WHERE id = '$id'";
-        
-        if ($conn->query($sql)) {
-            if ($conn->affected_rows > 0) {
+        $id = (int)$_GET['id'];
+        $stmt = $conn->prepare("DELETE FROM contact_submissions WHERE id = ?");
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
                 sendResponse(200, "Contact submission deleted successfully");
             } else {
                 sendResponse(404, "Contact submission not found");
             }
         } else {
-            sendResponse(500, "Error deleting contact submission: " . $conn->error);
+            sendResponse(500, "Error deleting contact submission: " . $stmt->error);
         }
+        $stmt->close();
         break;
 
     default:

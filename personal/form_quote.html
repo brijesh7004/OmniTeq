@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quote Requests</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .filters label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    input, select, textarea, button {
+      padding: 6px 10px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead {
+      background-color: #f4f4f4;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .scrollable-table {
+      max-height: calc(100vh - 125px);
+      overflow-y: auto;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .action-btn {
+      cursor: pointer;
+      margin: 0 5px;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    /* Edit Modal Styles */
+    #editModal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.6);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #editModalContent {
+      background-color: #fff;
+      padding: 25px;
+      width: 420px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+	
+	.form-grid {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  gap: 12px 16px;
+	  margin-top: 10px;
+	}
+
+	.form-grid input,
+	.form-grid select,
+	.form-grid textarea {
+	  padding: 8px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  width: 100%;
+	  box-sizing: border-box;
+	  font-size: 14px;
+	}
+
+	.full-span {
+	  grid-column: 1 / -1;
+	}
+	
+	.attachments-preview {
+	  display: flex;
+	  flex-wrap: wrap;
+	  gap: 10px;
+	  margin-top: 6px;
+	}
+
+	.attachments-preview a {
+	  display: flex;
+	  align-items: center;
+	  gap: 6px;
+	  text-decoration: none;
+	  color: #007BFF;
+	  font-size: 14px;
+	  border: 1px solid #ddd;
+	  padding: 6px 10px;
+	  border-radius: 4px;
+	  background-color: #f9f9f9;
+	}
+
+	.attachments-preview a:hover {
+	  background-color: #eef;
+	}
+
+	.attachments-preview a i {
+	  font-size: 16px;
+	}
+
+
+    #editModalContent h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    #editModalContent input,
+    #editModalContent select,
+    #editModalContent textarea {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+      color: #c00;
+      user-select: none;
+    }
+
+    #editModalContent button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #editModalContent button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Quote Requests</h2>
+
+<div class="filters">
+  <label>ID: <input type="number" id="filterId" placeholder="Optional" min="1" /></label>
+  <label>Page: <input type="number" id="page" value="1" min="1" /></label>
+  <label>Size: <input type="number" id="size" value="20" min="1" /></label>
+  <label>Status: <select id="status">
+		<option value="all" selected>All</option>
+		<option value="pending">Pending</option>
+		<option value="contacted">Contacted</option>
+		<option value="in_review">In Review</option>
+		<option value="quoted">Quoted</option>
+		<option value="accepted">Accepted</option>
+		<option value="rejected">Rejected</option>
+		<option value="completed">Completed</option>
+	</select></label>
+  <button onclick="fetchQuoteRequests()">Search</button>
+</div>
+
+<div class="scrollable-table">
+  <table id="quoteTable">
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Project Type</th><th>Budget Range</th><th>Timeline</th><th>Hear About</th><th>Project Details</th><th>File Attachments</th><th>Status</th><th>Created At</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal">
+  <div id="editModalContent">
+    <span id="closeModal" onclick="closeModal()">×</span>
+    <h3>Edit Quote Request</h3>
+
+    <input type="hidden" id="editId" />
+
+    <div class="form-grid">
+      <input type="text" id="editName" placeholder="Name" />
+      <input type="email" id="editEmail" placeholder="Email" />
+
+      <input type="text" id="editPhone" placeholder="Phone" />
+      <input type="text" id="editCompany" placeholder="Company" />
+
+      <input type="text" id="editProjectType" placeholder="Project Type" />
+      <input type="text" id="editBudgetRange" placeholder="Budget Range" />
+
+      <input type="text" id="editTimeline" placeholder="Timeline" />
+      <input type="text" id="editHearAbout" placeholder="Hear About" />
+
+      <textarea id="editProjectDetails" rows="3" placeholder="Project Details" class="full-span" ></textarea>
+      <input id="editFileAttachments" rows="3" placeholder='File Attachments (JSON array string)' class="full-span" type="hidden"></input>
+	  <div id="editAttachmentsPreview" class="full-span attachments-preview"></div>
+
+
+      <select id="editStatus" class="full-span">
+        <option value="pending">Pending</option>
+        <option value="contacted">Contacted</option>
+		<option value="in_review">In Review</option>
+		<option value="quoted">Quoted</option>
+        <option value="accepted">Accepted</option>
+		<option value="rejected">Rejected</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+
+    <button onclick="updateQuoteRequest()">Update</button>
+  </div>
+</div>
+
+
+<script>
+const API_URL = '../api/quote.php';
+
+async function fetchQuoteRequests() {
+  const id = document.getElementById('filterId').value.trim();
+  const page = parseInt(document.getElementById('page').value);
+  const size = parseInt(document.getElementById('size').value);
+  const status = document.getElementById('status').value;
+
+  let url = API_URL;
+  if (id) {
+    url += `?id=${id}`;
+  } else {
+    url += `?page=${page}&size=${size}`;
+	url += status!="all"?`&status=${status}`:'';
+  }
+
+  try {
+    const response = await fetch(url);
+    const res = await response.json();
+    if (res.status === 200) {
+      // If single item response
+      const data = id ? [res.data] : res.data.items || [];
+      renderTable(data);
+    } else {
+      alert(res.message || 'Failed to fetch data');
+    }
+  } catch (err) {
+    alert('Error fetching data');
+    console.error(err);
+  }
+}
+
+function renderTable(data) {
+  const tbody = document.querySelector('#quoteTable tbody');
+  tbody.innerHTML = '';
+
+  data.forEach(item => {
+    // Convert file_attachments JSON string to readable format
+    let filesDisplay = '';
+    try {
+      const files = JSON.parse(item.file_attachments || '[]');
+      if (Array.isArray(files)) {
+        filesDisplay = files.join(', ');
+      }
+    } catch {
+      filesDisplay = item.file_attachments || '';
+    }
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${item.id}</td>
+      <td>${escapeHtml(item.name)}</td>
+      <td>${escapeHtml(item.email)}</td>
+      <td>${escapeHtml(item.phone)}</td>
+      <td>${escapeHtml(item.company)}</td>
+      <td>${escapeHtml(item.project_type)}</td>
+      <td>${escapeHtml(item.budget_range)}</td>
+      <td>${escapeHtml(item.timeline)}</td>
+      <td>${escapeHtml(item.hear_about)}</td>
+      <td>${escapeHtml(item.project_details)}</td>
+      <td>${generateFileLinks(item.file_attachments)}</td>
+      <td>${escapeHtml(item.status)}</td>
+	  <td>${escapeHtml(item.created_at)}</td>
+      <td>
+        <span class="action-btn" data-item='${encodeURIComponent(JSON.stringify(item))}' onclick="openEditModal(this)">✏️</span>
+        <span class="action-btn" onclick="deleteQuoteRequest(${item.id})">🗑️</span>
+      </td>
+    `;
+	
+	const status = item.status.toLowerCase();
+	switch (status) {
+	  case "contacted":
+		row.style.backgroundColor = "#f0f0f0";
+		break;
+	  case "in_review":
+		row.style.backgroundColor = "#d9d9d9";
+		break;
+	  case "quoted":
+		row.style.backgroundColor = "#fffac8";
+		break;
+	  case "accepted":
+		row.style.backgroundColor = "#b6fcb6";
+		break;
+	  case "rejected":
+		row.style.backgroundColor = "#fca5a5";
+		break;
+	  case "completed":
+		row.style.backgroundColor = "#70e070";
+		break;
+	  case "pending":
+	  default:
+		row.style.backgroundColor = "white";
+	}
+	
+	
+    tbody.appendChild(row);
+  });
+}
+
+function openEditModal(element) {
+  const encodedData = element.getAttribute('data-item');
+  const data = JSON.parse(decodeURIComponent(encodedData));
+
+  document.getElementById('editId').value = data.id || '';
+  document.getElementById('editName').value = data.name || '';
+  document.getElementById('editEmail').value = data.email || '';
+  document.getElementById('editPhone').value = data.phone || '';
+  document.getElementById('editCompany').value = data.company || '';
+  document.getElementById('editProjectType').value = data.project_type || '';
+  document.getElementById('editBudgetRange').value = data.budget_range || '';
+  document.getElementById('editTimeline').value = data.timeline || '';
+  document.getElementById('editHearAbout').value = data.hear_about || '';
+  document.getElementById('editProjectDetails').value = data.project_details || '';
+  //document.getElementById('editFileAttachments').value = data.file_attachments || '';
+  
+  document.getElementById("editFileAttachments").value = JSON.stringify(data.file_attachments || []);
+  updateAttachmentsPreview();
+  document.getElementById("editFileAttachments").addEventListener("input", updateAttachmentsPreview);
+  
+  document.getElementById('editStatus').value = data.status || 'pending';
+
+  document.getElementById('editModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('editModal').style.display = 'none';
+}
+
+function updateAttachmentsPreview() {
+  const attachmentsField = document.getElementById("editFileAttachments");
+  const previewContainer = document.getElementById("editAttachmentsPreview");
+  previewContainer.innerHTML = "";
+
+  let raw = attachmentsField.value;
+  let files;
+
+  try {
+    files = JSON.parse(raw); // Converts stringified JSON array to real array
+	files = JSON.parse(files);
+  } catch (e) {
+    previewContainer.innerHTML = "<small style='color:red;'>No Attachment</small>";
+    return;
+  }
+  
+
+  if (!Array.isArray(files)) {
+    previewContainer.innerHTML = "<small style='color:red;'>Expected a JSON array like [\"file1.pdf\"]</small>";
+    return;
+  }
+
+  files.forEach(file => {
+    const cleanedPath = file.replace(/^(\.\.\/)+/, ""); // Strip leading ../
+    const fullUrl = `https://omniteq.in/${cleanedPath}`;
+
+    const link = document.createElement("a");
+    link.href = fullUrl;
+    link.target = "_blank";
+    link.innerHTML = `📎 ${cleanedPath.split('.').pop()}`;
+    link.style.display = "block";
+    previewContainer.appendChild(link);
+  });
+}
+
+function generateFileLinks(fileString) {
+  try {
+    const files = JSON.parse(fileString);
+    if (!Array.isArray(files)) return "";
+
+    return files.map(file => {
+      const filename = file.split(".").pop();
+      const cleanUrl = file.replace("../", "https://omniteq.in/");
+      return `<a href="${cleanUrl}" target="_blank" style="display:block;">📎 ${filename}</a>`;
+    }).join("");
+  } catch (e) {
+    return "";
+  }
+}
+
+
+async function updateQuoteRequest() {
+  const id = document.getElementById('editId').value;
+  const payload = {
+    name: document.getElementById('editName').value.trim(),
+    email: document.getElementById('editEmail').value.trim(),
+    phone: document.getElementById('editPhone').value.trim(),
+    company: document.getElementById('editCompany').value.trim(),
+    project_type: document.getElementById('editProjectType').value.trim(),
+    budget_range: document.getElementById('editBudgetRange').value.trim(),
+    timeline: document.getElementById('editTimeline').value.trim(),
+    hear_about: document.getElementById('editHearAbout').value.trim(),
+    project_details: document.getElementById('editProjectDetails').value.trim(),
+    file_attachments: document.getElementById('editFileAttachments').value.trim(),
+    status: document.getElementById('editStatus').value
+  };
+
+  if (!id) {
+    alert('Invalid ID');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}?id=${id}`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.status === 200) {
+      alert('Quote request updated successfully.');
+      closeModal();
+      fetchQuoteRequests();
+    } else {
+      alert(result.message || 'Failed to update');
+    }
+  } catch (err) {
+    alert('Error updating quote request');
+    console.error(err);
+  }
+}
+
+async function deleteQuoteRequest(id) {
+  if (!confirm('Are you sure you want to delete this quote request?')) return;
+  try {
+    const res = await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
+    const result = await res.json();
+    if (result.status === 200) {
+      alert('Quote request deleted successfully.');
+      fetchQuoteRequests();
+    } else {
+      alert(result.message || 'Failed to delete');
+    }
+  } catch (err) {
+    alert('Error deleting quote request');
+    console.error(err);
+  }
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  return text.replace(/[&<>"']/g, function(m) {
+    return ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[m];
+  });
+}
+
+// Initial fetch on page load
+fetchQuoteRequests();
+</script>
+
+</body>
+</html>
