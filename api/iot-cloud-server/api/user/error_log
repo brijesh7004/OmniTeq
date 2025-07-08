@@ -1,0 +1,871 @@
+[08-Jun-2025 08:29:51 UTC] PHP Warning:  Undefined variable $db in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/renew-token.php on line 20
+[08-Jun-2025 08:29:51 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/renew-token.php:20
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/renew-token.php on line 20
+[09-Jun-2025 07:36:52 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "device_secret", expecting "]" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/login.php on line 45
+[22-Jun-2025 17:02:26 UTC] PHP Warning:  Undefined array key "input_count" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/login.php on line 53
+[22-Jun-2025 17:02:26 UTC] PHP Warning:  Undefined array key "output_count" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/login.php on line 54
+[22-Jun-2025 17:02:26 UTC] PHP Warning:  Undefined array key "input_count" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/login.php on line 53
+[22-Jun-2025 17:02:26 UTC] PHP Warning:  Undefined array key "output_count" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/login.php on line 54
+[26-Jun-2025 06:33:01 UTC] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'omniteq_db.users' doesn't exist
+[26-Jun-2025 06:34:43 UTC] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'omniteq_db.users' doesn't exist
+[26-Jun-2025 06:52:26 UTC] PHP Warning:  Undefined variable $conn in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/change-password.php on line 29
+[26-Jun-2025 06:52:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/change-password.php:29
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/change-password.php on line 29
+[26-Jun-2025 07:12:08 UTC] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE id = '2'' at line 1
+[26-Jun-2025 07:49:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::get_result() in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/profile-picture.php:80
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/profile-picture.php on line 80
+[26-Jun-2025 07:51:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::get_result() in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/profile-picture.php:80
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/profile-picture.php on line 80
+[26-Jun-2025 09:09:51 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:10:23 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:12:24 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:13:46 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:14:49 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:14:49 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:15:53 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:15:53 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:16:12 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:16:12 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:16:50 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:16:50 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:17:28 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:17:28 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:18:43 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:18:43 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:18:43 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:18:52 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:18:52 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:18:52 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:18:57 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 09:18:57 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:18:57 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 32
+[26-Jun-2025 09:24:18 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 10:08:40 UTC] PHP Warning:  require_once(../../../utils/send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:08:40 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../utils/send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:09:45 UTC] PHP Warning:  require_once(../../../utils/send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:09:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../utils/send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:09:54 UTC] PHP Warning:  require_once(../../../utils/send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:09:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../utils/send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:10:23 UTC] PHP Warning:  require_once(../../../utils/send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:10:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../utils/send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:11:03 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 32
+[26-Jun-2025 10:11:08 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 32
+[26-Jun-2025 10:11:28 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 32
+[26-Jun-2025 10:12:42 UTC] PHP Warning:  require_once(../../../send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:12:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:13:13 UTC] PHP Warning:  require_once(../../send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:13:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:14:03 UTC] PHP Warning:  require_once(../../../send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 10:14:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:26:35 UTC] PHP Warning:  require_once(../../../../send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:26:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../../send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:27:39 UTC] PHP Warning:  require_once(../../send_mail2.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:27:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../send_mail2.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:32:52 UTC] PHP Warning:  require_once(../../utils/send_mail.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:32:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../utils/send_mail.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php on line 3
+[26-Jun-2025 12:37:52 UTC] PHP Parse error:  syntax error, unexpected token "return" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/utils/send_mail.php on line 132
+[26-Jun-2025 12:41:16 UTC] PHP Warning:  require_once(../../config.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/send_mail.php on line 3
+[26-Jun-2025 12:41:16 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../config.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/send_mail.php:3
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php(3): require_once()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/send_mail.php on line 3
+[26-Jun-2025 12:42:02 UTC] PHP Warning:  Constant DB_HOST already defined in /home/gpgzqevvi4rf/public_html/api/config.php on line 8
+[26-Jun-2025 12:42:02 UTC] PHP Warning:  Constant DB_NAME already defined in /home/gpgzqevvi4rf/public_html/api/config.php on line 11
+[26-Jun-2025 12:46:19 UTC] PHP Warning:  require_once(../../config.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/utils/db.php on line 3
+[26-Jun-2025 12:46:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../config.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/utils/db.php:3
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-forgot.php(2): require_once()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/utils/db.php on line 3
+[26-Jun-2025 12:55:41 UTC] PHP Warning:  Undefined variable $token in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/utils/send_mail.php on line 93
+[26-Jun-2025 12:55:41 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 05:55:42 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 12:55:41 +0000
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <nW9xTlYB6HYfzrGEf0T2FRoR3xRxzMqk9wf6VSxeNo@omniteq.in>
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_nW9xTlYB6HYfzrGEf0T2FRoR3xRxzMqk9wf6VSxeNo"
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_nW9xTlYB6HYfzrGEf0T2FRoR3xRxzMqk9wf6VSxeNo
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_nW9xTlYB6HYfzrGEf0T2FRoR3xRxzMqk9wf6VSxeNo
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_nW9xTlYB6HYfzrGEf0T2FRoR3xRxzMqk9wf6VSxeNo--
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:55:42 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 12:55:50 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUm8k-00000001LvS-23X1
+
+[26-Jun-2025 12:55:50 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 12:55:50 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 12:55:50 UTC] PHP Warning:  Undefined variable $success in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/utils/send_mail.php on line 121
+[26-Jun-2025 12:57:50 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 05:57:50 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 12:57:50 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 12:57:50 +0000
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <JPNknhDjh3sNE9skHcg6yVJywNWG9KJcEp5WMgQO5I@omniteq.in>
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_JPNknhDjh3sNE9skHcg6yVJywNWG9KJcEp5WMgQO5I"
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_JPNknhDjh3sNE9skHcg6yVJywNWG9KJcEp5WMgQO5I
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_JPNknhDjh3sNE9skHcg6yVJywNWG9KJcEp5WMgQO5I
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>3446ce940a1bb031c37217e4958cc6cb84b8b2bfa9e0a7c370515ba334cdff26</p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_JPNknhDjh3sNE9skHcg6yVJywNWG9KJcEp5WMgQO5I--
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmAp-00000001N9o-005i
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 12:57:51 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:10:53 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 06:10:53 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 13:10:53 +0000
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <fliQFItNP8VI3m4WNB5ABQhuu3J5SCCLt4f8qzy6o@omniteq.in>
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_fliQFItNP8VI3m4WNB5ABQhuu3J5SCCLt4f8qzy6o"
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_fliQFItNP8VI3m4WNB5ABQhuu3J5SCCLt4f8qzy6o
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_fliQFItNP8VI3m4WNB5ABQhuu3J5SCCLt4f8qzy6o
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>299e9d155422612877ceb57b5576c8d6d979876284f4336768df1bcde9fcf5fb</p><p>Click the link below to reset your password:</p><p>https://omniteq.in/reset-password.php?token=299e9d155422612877ceb57b5576c8d6d979876284f4336768df1bcde9fcf5fb</p><p>Above Token valid for next 1 hour.</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_fliQFItNP8VI3m4WNB5ABQhuu3J5SCCLt4f8qzy6o--
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:10:53 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 13:11:01 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmNR-00000001VWO-2KSQ
+
+[26-Jun-2025 13:11:01 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 13:11:01 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 06:18:01 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 13:18:01 +0000
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <cAKvm4Pd12y35VMwc5OCoSgpirkGs0TzGoAubzjQLk@omniteq.in>
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_cAKvm4Pd12y35VMwc5OCoSgpirkGs0TzGoAubzjQLk"
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_cAKvm4Pd12y35VMwc5OCoSgpirkGs0TzGoAubzjQLk
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_cAKvm4Pd12y35VMwc5OCoSgpirkGs0TzGoAubzjQLk
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>e8026bbddb9fda823b25b99c9faee63eaab8de00818414c673b28c98d6cb8c2b</p><p>Click the link below to reset your password:</p><p>https://omniteq.in/reset-password.php?token=e8026bbddb9fda823b25b99c9faee63eaab8de00818414c673b28c98d6cb8c2b</p><p>Above Token valid for next 1 hour.</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_cAKvm4Pd12y35VMwc5OCoSgpirkGs0TzGoAubzjQLk--
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:18:01 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 13:18:08 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmUL-00000001ZXv-27p4
+
+[26-Jun-2025 13:18:08 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 13:18:08 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:24:21 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/password-reset.php on line 30
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 06:25:03 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 13:25:03 +0000
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <qqxURcQ0zH1vI54HGawUmFdlreyVsRO4g3opqpPBAgg@omniteq.in>
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_qqxURcQ0zH1vI54HGawUmFdlreyVsRO4g3opqpPBAgg"
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_qqxURcQ0zH1vI54HGawUmFdlreyVsRO4g3opqpPBAgg
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_qqxURcQ0zH1vI54HGawUmFdlreyVsRO4g3opqpPBAgg
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>6800412062b20148cc6ecc5ea1e320ff69f283fe6597b31e38e410c78b0e5385</p><p>Click the link below to reset your password:</p><p>https://omniteq.in/reset-password.php?token=6800412062b20148cc6ecc5ea1e320ff69f283fe6597b31e38e410c78b0e5385</p><p>Above Token valid for next 1 hour.</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_qqxURcQ0zH1vI54HGawUmFdlreyVsRO4g3opqpPBAgg--
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:25:03 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 13:25:10 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmb9-00000001dS5-2n44
+
+[26-Jun-2025 13:25:10 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 13:25:10 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 06:30:00 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 13:30:00 +0000
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <nYasf3eQnC9I9Zxof3KluhiUHWVPjFapsPE5ut8y2Hk@omniteq.in>
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_nYasf3eQnC9I9Zxof3KluhiUHWVPjFapsPE5ut8y2Hk"
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_nYasf3eQnC9I9Zxof3KluhiUHWVPjFapsPE5ut8y2Hk
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_nYasf3eQnC9I9Zxof3KluhiUHWVPjFapsPE5ut8y2Hk
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>9bcd1fc997c570cef881f3c855a4f1bdc2ca9552bb8cc3c3f58a2351b721b03b</p><p>Click the link below to reset your password:</p><p>https://omniteq.in/reset-password.php?token=9bcd1fc997c570cef881f3c855a4f1bdc2ca9552bb8cc3c3f58a2351b721b03b</p><p>Above Token valid for next 1 hour.</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_nYasf3eQnC9I9Zxof3KluhiUHWVPjFapsPE5ut8y2Hk--
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:30:00 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 13:30:07 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmfw-00000001g6X-2DAZ
+
+[26-Jun-2025 13:30:07 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 13:30:07 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 06:37:19 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 13:37:19 +0000
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <fRYStc4LiGK8hIfVPoloCr5LAQRh7TCrh2Ld4pKE8@omniteq.in>
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_fRYStc4LiGK8hIfVPoloCr5LAQRh7TCrh2Ld4pKE8"
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_fRYStc4LiGK8hIfVPoloCr5LAQRh7TCrh2Ld4pKE8
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_fRYStc4LiGK8hIfVPoloCr5LAQRh7TCrh2Ld4pKE8
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>7c0c4d8ddf55d6c5f12dcc4edb51c0d3cc645eaa7906d4231af1ae4df297c453</p><p>Click the link below to reset your password:</p><p>https://omniteq.in/reset-password.php?token=7c0c4d8ddf55d6c5f12dcc4edb51c0d3cc645eaa7906d4231af1ae4df297c453</p><p>Above Token valid for next 1 hour.</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_fRYStc4LiGK8hIfVPoloCr5LAQRh7TCrh2Ld4pKE8--
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:37:19 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 13:37:26 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmn1-00000001mXm-3C39
+
+[26-Jun-2025 13:37:26 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 13:37:26 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.98.2 #2 Thu, 26 Jun 2025 06:41:18 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:41:18 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-Jun-2025 13:41:18 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-Jun-2025 13:41:18 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Thu, 26 Jun 2025 13:41:18 +0000
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh7004 <brijesh7004@gmail.com>
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Omniteq - Password Reset
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <LiTtWEh9ESLlqDHHfWRLacQyqkAKcdfEe92V8jAqg@omniteq.in>
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_LiTtWEh9ESLlqDHHfWRLacQyqkAKcdfEe92V8jAqg"
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_LiTtWEh9ESLlqDHHfWRLacQyqkAKcdfEe92V8jAqg
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: You have recieved a password reset token. Please use it to reset your password.
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_LiTtWEh9ESLlqDHHfWRLacQyqkAKcdfEe92V8jAqg
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: <h2 style='color: #333;'>Password Reset</h2><p>Dear Brijesh7004,</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><p>Following is your password reset token:</p><p>109439d317a576739f81b7d4b123120a45299fc695fda22d94bae7ddf430ca48</p><p>Click the link below to reset your password:</p><p>https://omniteq.in/reset-password.php?token=109439d317a576739f81b7d4b123120a45299fc695fda22d94bae7ddf430ca48</p><p>Above Token valid for next 1 hour.</p><p></p><p>Thank you for using Omniteq.</p>
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_LiTtWEh9ESLlqDHHfWRLacQyqkAKcdfEe92V8jAqg--
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-Jun-2025 13:41:19 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-Jun-2025 13:41:25 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uUmqt-00000001oge-028v
+
+[26-Jun-2025 13:41:25 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-Jun-2025 13:41:25 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-Jun-2025 13:41:50 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/reset-password.php on line 44
+[26-Jun-2025 14:02:30 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/reset-password.php on line 44
+[26-Jun-2025 14:03:09 UTC] PHP Warning:  Trying to access array offset on false in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/user/reset-password.php on line 48

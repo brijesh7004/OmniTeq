@@ -1,0 +1,21 @@
+iot-cloud-server/
+├── api/
+│   ├── user/
+│   │   ├── login.php
+│   │   ├── signup.php
+│   │   └── validate_token.php
+│   ├── device/
+│   │   ├── register.php
+│   │   ├── list.php
+│   │   └── status.php
+│   └── control/
+│       ├── update_output.php
+│       └── fetch_input.php
+├── mqtt/
+│   └── mqtt_listener.py
+├── utils/
+│   ├── config.php
+│   ├── db.php
+│   ├── auth.php
+└── admin_panel/
+    └── index.php

@@ -1,0 +1,139 @@
+[06-Jun-2025 11:21:45 UTC] PHP Warning:  require(../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 11:21:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 11:23:09 UTC] PHP Warning:  require(../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 11:23:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 11:23:33 UTC] PHP Warning:  require(../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 11:23:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 11:29:39 UTC] PHP Warning:  Undefined variable $message in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 91
+[06-Jun-2025 16:47:26 UTC] PHP Warning:  require_once(../../utils/mqtt_publish.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_status.php on line 4
+[06-Jun-2025 16:47:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../utils/mqtt_publish.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_status.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_status.php on line 4
+[06-Jun-2025 17:20:04 UTC] PHP Warning:  require(../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 17:20:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 14
+[06-Jun-2025 17:24:56 UTC] PHP Warning:  require(../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 15
+[06-Jun-2025 17:24:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 15
+[06-Jun-2025 17:25:53 UTC] PHP Fatal error:  Uncaught Error: Class "PhpMqtt\Client\MqttClient" not found in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:52
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 52
+[06-Jun-2025 17:26:17 UTC] PHP Fatal error:  Uncaught Error: Class "PhpMqtt\Client\MqttClient" not found in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:52
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 52
+[06-Jun-2025 17:36:01 UTC] PHP Fatal error:  Uncaught Error: Class "PhpMqtt\Client\MqttClient" not found in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:52
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 52
+[06-Jun-2025 17:40:26 UTC] PHP Warning:  require(../../../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 15
+[06-Jun-2025 17:40:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 15
+[06-Jun-2025 18:41:13 UTC] PHP Warning:  require_once(../../utils/mqtt_publish.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 4
+[06-Jun-2025 18:41:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../utils/mqtt_publish.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 4
+[06-Jun-2025 18:42:50 UTC] PHP Warning:  require_once(../../utils/mqtt_publish.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 4
+[06-Jun-2025 18:42:50 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../utils/mqtt_publish.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 4
+[06-Jun-2025 18:43:22 UTC] PHP Warning:  require_once(../../utils/mqtt_publish.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 4
+[06-Jun-2025 18:43:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../utils/mqtt_publish.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 4
+[06-Jun-2025 18:44:09 UTC] PHP Warning:  require(../../../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 8
+[06-Jun-2025 18:44:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php:8
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(4): require_once()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 8
+[06-Jun-2025 18:47:19 UTC] PHP Warning:  require_once(/home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/../../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 3
+[06-Jun-2025 18:47:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/../../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php:3
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(4): require_once()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 3
+[06-Jun-2025 18:47:34 UTC] PHP Warning:  require_once(/home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/../../../vendor/autoload.php): Failed to open stream: No such file or directory in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 3
+[06-Jun-2025 18:47:34 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/../../../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php:3
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(4): require_once()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 3
+[06-Jun-2025 18:49:49 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 18:53:37 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 18:56:28 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 19:00:28 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 19:04:15 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 19:07:21 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 19:08:54 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 19:12:34 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[06-Jun-2025 19:15:38 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 04:54:15 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 05:14:00 UTC] PHP Fatal error:  Uncaught TypeError: PhpMqtt\Client\MqttClient::connect(): Argument #1 ($settings) must be of type ?PhpMqtt\Client\ConnectionSettings, array given, called in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 24 and defined in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php:100
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php(24): PhpMqtt\Client\MqttClient->connect()
+#1 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(87): mqtt_publish()
+#2 {main}
+  thrown in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php on line 100
+[07-Jun-2025 05:28:58 UTC] PHP Fatal error:  Uncaught TypeError: PhpMqtt\Client\MqttClient::connect(): Argument #1 ($settings) must be of type ?PhpMqtt\Client\ConnectionSettings, array given, called in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 24 and defined in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php:100
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php(24): PhpMqtt\Client\MqttClient->connect()
+#1 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(87): mqtt_publish()
+#2 {main}
+  thrown in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php on line 100
+[07-Jun-2025 05:33:00 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [0]: php_network_getaddresses: getaddrinfo for ssl failed: Name or service not known
+[07-Jun-2025 05:34:19 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 05:35:33 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 05:41:30 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 05:42:06 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 05:49:44 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 05:50:44 UTC] PHP Parse error:  syntax error, unexpected variable "$mqtt" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 30
+[07-Jun-2025 05:51:40 UTC] PHP Parse error:  syntax error, unexpected variable "$mqtt" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 30
+[07-Jun-2025 05:52:50 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:15:42 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:17:58 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:21:34 UTC] PHP Warning:  Undefined variable $server in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 30
+[07-Jun-2025 07:21:34 UTC] PHP Warning:  Undefined variable $port in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 30
+[07-Jun-2025 07:21:34 UTC] PHP Warning:  Undefined variable $clientId in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 30
+[07-Jun-2025 07:21:34 UTC] PHP Fatal error:  Uncaught TypeError: PhpMqtt\Client\MqttClient::__construct(): Argument #1 ($host) must be of type string, null given, called in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 30 and defined in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php:73
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php(30): PhpMqtt\Client\MqttClient->__construct()
+#1 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(87): mqtt_publish()
+#2 {main}
+  thrown in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php on line 73
+[07-Jun-2025 07:23:42 UTC] PHP Warning:  Undefined variable $server in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 31
+[07-Jun-2025 07:23:42 UTC] PHP Warning:  Undefined variable $port in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 31
+[07-Jun-2025 07:23:42 UTC] PHP Warning:  Undefined variable $clientId in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 31
+[07-Jun-2025 07:23:42 UTC] PHP Fatal error:  Uncaught TypeError: PhpMqtt\Client\MqttClient::__construct(): Argument #1 ($host) must be of type string, null given, called in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 31 and defined in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php:73
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php(31): PhpMqtt\Client\MqttClient->__construct()
+#1 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(87): mqtt_publish()
+#2 {main}
+  thrown in /home/gpgzqevvi4rf/vendor/php-mqtt/client/src/MqttClient.php on line 73
+[07-Jun-2025 07:25:55 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:28:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant PhpMqtt\Client\MqttClient::MQTT_5_0 in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php:29
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php(87): mqtt_publish()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 29
+[07-Jun-2025 07:29:23 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
