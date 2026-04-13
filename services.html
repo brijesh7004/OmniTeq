@@ -1,44 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - OmniTeq</title>
-    <meta name="description" content="Explore OmniTeq's comprehensive services including PLC Programming, Embedded Systems, IoT Solutions, AI/ML Integration, and Resource Outsourcing">
+    <meta name="description"
+        content="Explore OmniTeq's comprehensive services including PLC Programming, Embedded Systems, IoT Solutions, AI/ML Integration, and Resource Outsourcing">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <link rel="stylesheet" href="css/responsive.css?v=2.0">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check (Prevents FLT) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
 </head>
+
 <body>
     <!-- Header Section -->
     <header id="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
                 </a>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="services.html" class="active">Services</a></li>
-                    <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="nav-auth-link">Login</a>
+                <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
-                <div class="hamburger">
+                <div class="hamburger" id="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
 
@@ -58,10 +81,12 @@
                 <p>End-to-end solutions tailored to your business needs</p>
             </div>
             <div class="services-intro">
-                <p class="lead-text">At OmniTeq, we provide a comprehensive range of services designed to help businesses leverage the power of IoT, automation, and artificial intelligence.</p>
-                <p>Our team of experts works closely with you to understand your unique challenges and develop customized solutions that drive efficiency, productivity, and innovation.</p>
+                <p class="lead-text">At OmniTeq, we provide a comprehensive range of services designed to help
+                    businesses leverage the power of IoT, automation, and artificial intelligence.</p>
+                <p>Our team of experts works closely with you to understand your unique challenges and develop
+                    customized solutions that drive efficiency, productivity, and innovation.</p>
             </div>
-            
+
             <!-- Services Navigation -->
             <div class="services-nav">
                 <a href="#iot" class="service-nav-item">
@@ -102,21 +127,28 @@
                 <h2>IoT Solutions</h2>
             </div>
             <div class="service-content">
+                <div class="service-image">
+                    <img src="images/Service_IOT_01.jpg" alt="IoT Solutions">
+                    <div class="image-overlay">
+                        <span>Transform your business with connected devices</span>
+                    </div>
+                </div>
                 <div class="service-text">
-                    <p class="service-description">Our Internet of Things (IoT) solutions connect your physical assets to the digital world, enabling real-time monitoring, control, and data analytics.</p>
-                    
+                    <p class="service-description">Our Internet of Things (IoT) solutions connect your physical assets
+                        to the digital world, enabling real-time monitoring, control, and data analytics.</p>
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-star"></i> Key Features</h3>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check-circle"></i> Custom IoT device development</li>
-                        <li><i class="fas fa-check-circle"></i> Sensor integration and deployment</li>
-                        <li><i class="fas fa-check-circle"></i> Cloud-based IoT platforms</li>
-                        <li><i class="fas fa-check-circle"></i> Remote monitoring and control systems</li>
-                        <li><i class="fas fa-check-circle"></i> IoT data analytics and visualization</li>
-                        <li><i class="fas fa-check-circle"></i> Custom IoT Dashboard Development</li>
-                    </ul>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Custom IoT device development</li>
+                            <li><i class="fas fa-check-circle"></i> Sensor integration and deployment</li>
+                            <li><i class="fas fa-check-circle"></i> Cloud-based IoT platforms</li>
+                            <li><i class="fas fa-check-circle"></i> Remote monitoring and control systems</li>
+                            <li><i class="fas fa-check-circle"></i> IoT data analytics and visualization</li>
+                            <li><i class="fas fa-check-circle"></i> Custom IoT Dashboard Development</li>
+                        </ul>
                     </div>
-                    
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-industry"></i> Industries We Serve</h3>
                         <div class="industry-tags">
@@ -127,16 +159,10 @@
                             <span class="industry-tag">Retail</span>
                         </div>
                     </div>
-                    
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your IoT Project</a>
-                        <!-- <a href="portfolio.html#iot-cases" class="btn-secondary"><i class="fas fa-briefcase"></i> View Case Studies</a> -->
-                    </div>
-                </div>
-                <div class="service-image">
-                    <img src="https://placehold.co/600x400/0066cc/FFFFFF?text=IoT+Solutions" alt="IoT Solutions">
-                    <div class="image-overlay">
-                        <span>Transform your business with connected devices</span>
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your IoT
+                            Project</a>
                     </div>
                 </div>
             </div>
@@ -154,25 +180,26 @@
             </div>
             <div class="service-content reverse">
                 <div class="service-image">
-                    <img src="https://placehold.co/600x400/00cc99/FFFFFF?text=PLC+Programming" alt="PLC Programming">
+                    <img src="images/Service_PLC_02.jpg" alt="PLC Programming">
                     <div class="image-overlay">
                         <span>Automate processes for enhanced efficiency</span>
                     </div>
                 </div>
                 <div class="service-text">
-                    <p class="service-description">Our expert PLC programming services help automate your industrial processes, improving efficiency, reliability, and safety.</p>
-                    
+                    <p class="service-description">Our expert PLC programming services help automate your industrial
+                        processes, improving efficiency, reliability, and safety.</p>
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-star"></i> Key Features</h3>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check-circle"></i> PLC system design and implementation</li>
-                        <li><i class="fas fa-check-circle"></i> HMI development and integration</li>
-                        <li><i class="fas fa-check-circle"></i> SCADA system programming</li>
-                        <li><i class="fas fa-check-circle"></i> Industrial automation solutions</li>
-                        <li><i class="fas fa-check-circle"></i> PLC troubleshooting and maintenance</li>
-                    </ul>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> PLC system design and implementation</li>
+                            <li><i class="fas fa-check-circle"></i> HMI development and integration</li>
+                            <li><i class="fas fa-check-circle"></i> SCADA system programming</li>
+                            <li><i class="fas fa-check-circle"></i> Industrial automation solutions</li>
+                            <li><i class="fas fa-check-circle"></i> PLC troubleshooting and maintenance</li>
+                        </ul>
                     </div>
-                    
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-industry"></i> Industries We Serve</h3>
                         <div class="industry-tags">
@@ -183,10 +210,10 @@
                             <span class="industry-tag">Utilities</span>
                         </div>
                     </div>
-                    
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Automation Needs</a>
-                        <!-- <a href="portfolio.html#plc-cases" class="btn-secondary"><i class="fas fa-briefcase"></i> View Case Studies</a> -->
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your
+                            Automation Needs</a>
                     </div>
                 </div>
             </div>
@@ -203,18 +230,25 @@
                 <h2>Embedded Systems</h2>
             </div>
             <div class="service-content">
+                <div class="service-image">
+                    <img src="images/Service_ES_01.jpg" alt="Embedded Systems">
+                    <div class="image-overlay">
+                        <span>Custom hardware & software solutions</span>
+                    </div>
+                </div>
                 <div class="service-text">
-                    <p class="service-description">We design and develop custom embedded systems that combine hardware and software to perform specific tasks with optimal efficiency.</p>
-                    
+                    <p class="service-description">We design and develop custom embedded systems that combine hardware
+                        and software to perform specific tasks with optimal efficiency.</p>
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-star"></i> Key Features</h3>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check-circle"></i> Custom embedded hardware design</li>
-                        <li><i class="fas fa-check-circle"></i> Firmware development</li>
-                        <li><i class="fas fa-check-circle"></i> Microcontroller programming</li>
-                    </ul>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Custom embedded hardware design</li>
+                            <li><i class="fas fa-check-circle"></i> Firmware development</li>
+                            <li><i class="fas fa-check-circle"></i> Microcontroller programming</li>
+                        </ul>
                     </div>
-                    
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-industry"></i> Industries We Serve</h3>
                         <div class="industry-tags">
@@ -224,16 +258,10 @@
                             <span class="industry-tag">Industrial Equipment</span>
                         </div>
                     </div>
-                    
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Embedded Project</a>
-                        <!-- <a href="portfolio.html#embedded-cases" class="btn-secondary"><i class="fas fa-briefcase"></i> View Case Studies</a> -->
-                    </div>
-                </div>
-                <div class="service-image">
-                    <img src="https://placehold.co/600x400/0066cc/FFFFFF?text=Embedded+Systems" alt="Embedded Systems">
-                    <div class="image-overlay">
-                        <span>Custom hardware & software solutions</span>
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Embedded
+                            Project</a>
                     </div>
                 </div>
             </div>
@@ -251,25 +279,26 @@
             </div>
             <div class="service-content reverse">
                 <div class="service-image">
-                    <img src="https://placehold.co/600x400/00cc99/FFFFFF?text=AI+%26+ML+Integration" alt="AI & ML Integration">
+                    <img src="images/Service_ML_01.jpg" alt="AI & ML Integration">
                     <div class="image-overlay">
                         <span>Intelligent systems that learn & adapt</span>
                     </div>
                 </div>
                 <div class="service-text">
-                    <p class="service-description">Leverage the power of artificial intelligence and machine learning to extract insights from your data and automate complex decision-making processes.</p>
-                    
+                    <p class="service-description">Leverage the power of artificial intelligence and machine learning to
+                        extract insights from your data and automate complex decision-making processes.</p>
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-star"></i> Key Features</h3>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check-circle"></i> Predictive maintenance systems</li>
-                        <li><i class="fas fa-check-circle"></i> Computer vision applications</li>
-                        <li><i class="fas fa-check-circle"></i> Natural language processing</li>
-                        <li><i class="fas fa-check-circle"></i> Anomaly detection systems</li>
-                        <li><i class="fas fa-check-circle"></i> Custom AI/ML model development</li>
-                    </ul>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Predictive maintenance systems</li>
+                            <li><i class="fas fa-check-circle"></i> Computer vision applications</li>
+                            <li><i class="fas fa-check-circle"></i> Natural language processing</li>
+                            <li><i class="fas fa-check-circle"></i> Anomaly detection systems</li>
+                            <li><i class="fas fa-check-circle"></i> Custom AI/ML model development</li>
+                        </ul>
                     </div>
-                    
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-industry"></i> Industries We Serve</h3>
                         <div class="industry-tags">
@@ -281,10 +310,10 @@
                             <span class="industry-tag">Automotive</span>
                         </div>
                     </div>
-                    
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your AI/ML Project</a>
-                        <!-- <a href="portfolio.html#ai-ml-cases" class="btn-secondary"><i class="fas fa-briefcase"></i> View Case Studies</a> -->
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your AI/ML
+                            Project</a>
                     </div>
                 </div>
             </div>
@@ -301,21 +330,28 @@
                 <h2>Resource Outsourcing</h2>
             </div>
             <div class="service-content">
+                <div class="service-image">
+                    <img src="images/Service_OS_01.jpg" alt="Resource Outsourcing">
+                    <div class="image-overlay">
+                        <span>Expert talent without the overhead</span>
+                    </div>
+                </div>
                 <div class="service-text">
-                    <p class="service-description">Access our pool of skilled professionals to augment your team and accelerate your projects without the overhead of full-time hiring.</p>
-                    
+                    <p class="service-description">Access our pool of skilled professionals to augment your team and
+                        accelerate your projects without the overhead of full-time hiring.</p>
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-star"></i> Available Expertise</h3>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check-circle"></i> IoT developers and engineers</li>
-                        <li><i class="fas fa-check-circle"></i> PLC programmers</li>
-                        <li><i class="fas fa-check-circle"></i> Embedded systems specialists</li>
-                        <li><i class="fas fa-check-circle"></i> AI/ML engineers</li>
-                        <li><i class="fas fa-check-circle"></i> Project managers and consultants</li>
-                        <li><i class="fas fa-check-circle"></i> Web and Android App Development</li>
-                    </ul>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> IoT developers and engineers</li>
+                            <li><i class="fas fa-check-circle"></i> PLC programmers</li>
+                            <li><i class="fas fa-check-circle"></i> Embedded systems specialists</li>
+                            <li><i class="fas fa-check-circle"></i> AI/ML engineers</li>
+                            <li><i class="fas fa-check-circle"></i> Project managers and consultants</li>
+                            <li><i class="fas fa-check-circle"></i> Web and Android App Development</li>
+                        </ul>
                     </div>
-                    
+
                     <div class="service-feature-group">
                         <h3><i class="fas fa-award"></i> Benefits</h3>
                         <ul class="benefit-list">
@@ -325,16 +361,12 @@
                             <li><i class="fas fa-angle-right"></i> Faster project implementation</li>
                         </ul>
                     </div>
-                    
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Staffing Needs</a>
-                        <a href="resources.html#talent-profiles" class="btn-secondary"><i class="fas fa-user-tie"></i> View Talent Profiles</a>
-                    </div>
-                </div>
-                <div class="service-image">
-                    <img src="https://placehold.co/600x400/0066cc/FFFFFF?text=Resource+Outsourcing" alt="Resource Outsourcing">
-                    <div class="image-overlay">
-                        <span>Expert talent without the overhead</span>
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Staffing
+                            Needs</a>
+                        <a href="resources.html#talent-profiles" class="btn-secondary"><i class="fas fa-user-tie"></i>
+                            View Talent Profiles</a>
                     </div>
                 </div>
             </div>
@@ -384,7 +416,6 @@
                     
                     <div class="service-actions">
                         <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Blockchain Project</a>
-                        <a href="portfolio.html#blockchain-cases" class="btn-secondary"><i class="fas fa-briefcase"></i> View Case Studies</a>
                     </div>
                 </div>
             </div>
@@ -402,7 +433,8 @@
                 <div class="testimonial-card">
                     <div class="testimonial-content">
                         <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"OmniTeq's IoT solution reduced our manufacturing downtime by 35% and provided invaluable insights that helped us optimize our processes."</p>
+                        <p>"OmniTeq's IoT solution reduced our manufacturing downtime by 35% and provided invaluable
+                            insights that helped us optimize our processes."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://placehold.co/60x60/0066cc/FFFFFF?text=SA" alt="Sanjeev Agrawal">
@@ -415,7 +447,8 @@
                 <div class="testimonial-card">
                     <div class="testimonial-content">
                         <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"The PLC programming expertise at OmniTeq is exceptional. They modernized our factory automation system, increasing productivity by 28%."</p>
+                        <p>"The PLC programming expertise at OmniTeq is exceptional. They modernized our factory
+                            automation system, increasing productivity by 28%."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://placehold.co/60x60/0066cc/FFFFFF?text=JP" alt="Jignesh Patel">
@@ -428,7 +461,8 @@
                 <div class="testimonial-card">
                     <div class="testimonial-content">
                         <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"Their embedded systems team developed a custom solution that exceeded our expectations. Reliable, energy-efficient, and perfectly tailored to our needs."</p>
+                        <p>"Their embedded systems team developed a custom solution that exceeded our expectations.
+                            Reliable, energy-efficient, and perfectly tailored to our needs."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://placehold.co/60x60/0066cc/FFFFFF?text=MS" alt="Mihir Sheth">
@@ -454,42 +488,48 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h3>Discovery & Consultation</h3>
-                        <p>We begin by understanding your business challenges, goals, and technical requirements through detailed consultation sessions.</p>
+                        <p>We begin by understanding your business challenges, goals, and technical requirements through
+                            detailed consultation sessions.</p>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h3>Solution Design</h3>
-                        <p>Our experts develop a tailored solution blueprint that outlines architecture, technologies, and implementation strategy.</p>
+                        <p>Our experts develop a tailored solution blueprint that outlines architecture, technologies,
+                            and implementation strategy.</p>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>Development & Implementation</h3>
-                        <p>We build and implement the solution, ensuring regular updates and alignment with your vision.</p>
+                        <p>We build and implement the solution, ensuring regular updates and alignment with your vision.
+                        </p>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">4</div>
                     <div class="step-content">
                         <h3>Testing & Quality Assurance</h3>
-                        <p>Rigorous testing ensures reliability, performance, and security across all developed components.</p>
+                        <p>Rigorous testing ensures reliability, performance, and security across all developed
+                            components.</p>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <h3>Deployment & Integration</h3>
-                        <p>Seamless deployment into your existing infrastructure with minimal disruption to operations.</p>
+                        <p>Seamless deployment into your existing infrastructure with minimal disruption to operations.
+                        </p>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">6</div>
                     <div class="step-content">
                         <h3>Ongoing Support & Optimization</h3>
-                        <p>Continued maintenance, support, and optimization to ensure long-term success and adaptation to evolving needs.</p>
+                        <p>Continued maintenance, support, and optimization to ensure long-term success and adaptation
+                            to evolving needs.</p>
                     </div>
                 </div>
             </div>
@@ -502,8 +542,10 @@
             <h2>Ready to Transform Your Business?</h2>
             <p>Let's discuss how our services can help you achieve your goals and stay ahead of the competition.</p>
             <div class="cta-buttons">
-                <a href="lets-talk.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Schedule a Consultation</a>
-                <a href="resources.html#service-brochures" class="btn-primary"><i class="fas fa-download"></i> Download Service Brochures</a>
+                <a href="lets-talk.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Schedule a
+                    Consultation</a>
+                <a href="resources.html#service-brochures" class="btn-primary"><i class="fas fa-download"></i> Download
+                    Service Brochures</a>
             </div>
         </div>
     </section>
@@ -513,13 +555,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
-                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage cutting-edge technology to improve efficiency, productivity, and innovation.</p>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage
+                        cutting-edge technology to improve efficiency, productivity, and innovation.</p>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>                        
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                         <!-- <a href="#"><i class="fab fa-github"></i></a> -->
                     </div>
                 </div>
@@ -530,7 +577,6 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -567,4 +613,5 @@
     <!-- JavaScript Files -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

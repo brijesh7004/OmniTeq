@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal - OmniTeq</title>
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- Global CSS Files -->
+    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <!-- Dashboard Specific CSS -->
+    <link rel="stylesheet" href="css/dashboard.css?v=1.2">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Staff" id="sidebar-logo">
+                    <script>if(localStorage.getItem('theme') === 'dark') document.getElementById('sidebar-logo').src='images/logo/logo-white.svg';</script>
+                </a>
+                <button class="mobile-close-btn" id="mobile-close"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div style="padding: 15px 25px 5px 25px; font-size: 0.75rem; text-transform: uppercase; color: var(--db-text-muted); font-weight: bold; letter-spacing: 1px;">Staff Portal</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#emp-overview" class="nav-link active" data-tab="emp-overview">
+                            <i class="fas fa-home"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#emp-tasks" class="nav-link" data-tab="emp-tasks">
+                            <i class="fas fa-tasks"></i> <span>My Work Orders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#emp-support" class="nav-link" data-tab="emp-support">
+                            <i class="fas fa-headset"></i> <span>Assigned Tickets</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#emp-schedule" class="nav-link" data-tab="emp-schedule">
+                            <i class="fas fa-calendar-alt"></i> <span>Field Schedule</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#emp-docs" class="nav-link" data-tab="emp-docs">
+                            <i class="fas fa-file-code"></i> <span>Technical Docs</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-link logout-link">
+                    <i class="fas fa-sign-out-alt"></i> <span>Clock Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="current-page-title">Dashboard</h2>
+                </div>
+                
+                <div class="header-right">
+                    <button class="theme-toggle" aria-label="Toggle dark mode" id="dashboard-theme-toggle">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">4</span>
+                    </div>
+                    <div class="user-profile-menu">
+                        <img src="https://placehold.co/40x40/2dd4bf/FFFFFF?text=MA" alt="Employee Avatar" class="avatar">
+                        <span class="user-name">Mike Anderson <span style="font-size:0.75rem; color: var(--db-text-muted); display:block; margin-top:-3px;">Field Technician</span></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Page Content -->
+            <section class="dashboard-content">
+                <!-- 1. DASHBOARD OVERVIEW TAB -->
+                <div class="dashboard-tab active" id="tab-emp-overview">
+                    <div class="stats-grid-db">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info-light text-info"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="stat-details">
+                                <h3>Pending Work Orders</h3>
+                                <div class="stat-value-db">5</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning-light text-warning"><i class="fas fa-headset"></i></div>
+                            <div class="stat-details">
+                                <h3>Open Support Tickets</h3>
+                                <div class="stat-value-db">12</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success-light text-success"><i class="fas fa-check-double"></i></div>
+                            <div class="stat-details">
+                                <h3>Tasks Completed (Week)</h3>
+                                <div class="stat-value-db">18</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-row">
+                        <!-- Upcoming Schedule -->
+                        <div class="dashboard-card flex-1">
+                            <div class="card-header">
+                                <h3>Today's Installations</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="alert-list">
+                                    <li class="alert-item warning">
+                                        <div class="alert-icon"><i class="fas fa-clock"></i></div>
+                                        <div class="alert-info">
+                                            <h4>BPSC Hospital</h4>
+                                            <p>Deploy Smart Alarm Main Gateway</p>
+                                        </div>
+                                        <div class="alert-time">10:00 AM</div>
+                                    </li>
+                                    <li class="alert-item info">
+                                        <div class="alert-icon"><i class="fas fa-car"></i></div>
+                                        <div class="alert-info">
+                                            <h4>TechCorp HQ</h4>
+                                            <p>Routine EV Charger Maintenance</p>
+                                        </div>
+                                        <div class="alert-time">14:00 PM</div>
+                                    </li>
+                                </ul>
+                                <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="document.querySelector('[data-tab=\'emp-schedule\']').click()">View Full Calendar</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Internal Announcements -->
+                        <div class="dashboard-card flex-2">
+                            <div class="card-header">
+                                <h3>Company Announcements</h3>
+                            </div>
+                            <div class="card-body">
+                                <div style="display:flex; flex-direction:column; gap:15px;">
+                                    <div style="background: var(--db-hover); padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                                        <h4 style="margin:0 0 5px 0;">Firmware v2.4 Rollout Notice</h4>
+                                        <p style="margin:0; font-size:0.9rem; color:var(--db-text-muted);">Please advise clients that v2.4 pushes automatically tonight. Expect potential brief gateway offline events.</p>
+                                        <span style="font-size:0.75rem; color:var(--db-text-muted); display:block; margin-top:8px;">Posted by Super Admin • 3 hours ago</span>
+                                    </div>
+                                    <div style="background: var(--db-hover); padding: 15px; border-radius: 8px; border-left: 4px solid #2ecc71;">
+                                        <h4 style="margin:0 0 5px 0;">New EV Charger Documentation Available</h4>
+                                        <p style="margin:0; font-size:0.9rem; color:var(--db-text-muted);">The updated troubleshooting guide for the Phase 3 chargers is now located in the Technical Docs folder.</p>
+                                        <span style="font-size:0.75rem; color:var(--db-text-muted); display:block; margin-top:8px;">Posted by HR Team • Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. MY WORK ORDERS TAB -->
+                <div class="dashboard-tab" id="tab-emp-tasks">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Active Work Orders</h3>
+                            <button class="btn-outline btn-sm"><i class="fas fa-filter"></i> Filter</button>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <!-- Kanban Style or simple list representation -->
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>WO ID</th>
+                                        <th>Project / Client</th>
+                                        <th>Job Description</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#WO-1045</td>
+                                        <td><strong>Flame Engineering</strong></td>
+                                        <td>Calibrate PLC sorting line sensors</td>
+                                        <td>West Industrial Park</td>
+                                        <td><span class="badge badge-warning">In Progress</span></td>
+                                        <td>
+                                            <button class="btn-sm btn-outline"><i class="fas fa-check"></i> Complete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#WO-1048</td>
+                                        <td><strong>BPSC Hospital</strong></td>
+                                        <td>Deploy Smart Alarm Gateway</td>
+                                        <td>Downtown</td>
+                                        <td><span class="badge" style="background:#e74c3c;">Pending</span></td>
+                                        <td>
+                                            <button class="btn-sm btn-primary">Start Job</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. ASSIGNED TICKETS TAB -->
+                <div class="dashboard-tab" id="tab-emp-support">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>My Support Queue</h3>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket ID</th>
+                                        <th>Customer</th>
+                                        <th>Issue / Subject</th>
+                                        <th>Time Waiting</th>
+                                        <th>Severity</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#TK-8021</td>
+                                        <td>John Doe</td>
+                                        <td>Device offline constantly setup issue</td>
+                                        <td>3 hours</td>
+                                        <td><span class="badge" style="background-color: var(--primary);">Medium</span></td>
+                                        <td><button class="btn-sm btn-outline data-modal-btn" data-modal="replyTicketModal">Answer</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#TK-8044</td>
+                                        <td>Alex Carter</td>
+                                        <td>Need manual bypass for timer switch</td>
+                                        <td>1 hour</td>
+                                        <td><span class="badge badge-success">Low</span></td>
+                                        <td><button class="btn-sm btn-outline data-modal-btn" data-modal="replyTicketModal">Answer</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. SCHEDULE TAB -->
+                <div class="dashboard-tab" id="tab-emp-schedule">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Weekly Field Schedule</h3>
+                        </div>
+                        <div class="card-body">
+                            <p style="color: var(--db-text-muted); margin-bottom: 20px;">Your assignments for the week of October 20 - October 24.</p>
+                            <div class="quick-action-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div style="border:1px solid var(--db-border); border-radius:10px; padding:15px; border-top: 4px solid var(--primary);">
+                                    <h4 style="margin:0 0 10px 0;">Monday</h4>
+                                    <p style="margin:0; font-size:0.85rem; padding-bottom:5px; border-bottom: 1px solid var(--db-border);">10:00 AM - Install @ BPSC</p>
+                                    <p style="margin:5px 0 0 0; font-size:0.85rem;">2:00 PM - Maint @ TechCorp</p>
+                                </div>
+                                <div style="border:1px solid var(--db-border); border-radius:10px; padding:15px; border-top: 4px solid #2ecc71;">
+                                    <h4 style="margin:0 0 10px 0;">Tuesday</h4>
+                                    <p style="margin:0; font-size:0.85rem;">Office Day - Ticket resolutions and hardware bench testing.</p>
+                                </div>
+                                <div style="border:1px solid var(--db-border); border-radius:10px; padding:15px; border-top: 4px solid var(--db-border);">
+                                    <h4 style="margin:0 0 10px 0; color:var(--db-text-muted);">Wednesday</h4>
+                                    <p style="margin:0; font-size:0.85rem; color:var(--db-text-muted);">No field tasks scheduled.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. TECHNICAL DOCS TAB -->
+                <div class="dashboard-tab" id="tab-emp-docs">
+                     <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Technical Resource Library</h3>
+                            <div style="position:relative;">
+                                <input type="text" class="form-control" placeholder="Search manuals..." style="width:200px; padding:8px 30px 8px 10px; border-radius:6px; background:var(--db-hover); border:none; color:var(--db-text);">
+                                <i class="fas fa-search" style="position:absolute; right:10px; top:10px; color:var(--db-text-muted);"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>Document Type</th>
+                                        <th>File Name</th>
+                                        <th>Last Updated</th>
+                                        <th>Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fas fa-file-pdf text-danger" style="font-size:1.5rem;"></i></td>
+                                        <td><strong>EV_Charger_Wiring_Diagram_v3.pdf</strong></td>
+                                        <td>2 days ago</td>
+                                        <td><button class="btn-icon"><i class="fas fa-download"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-file-alt text-primary" style="font-size:1.5rem;"></i></td>
+                                        <td><strong>IoT_Gateway_Troubleshooting.docx</strong></td>
+                                        <td>Last Month</td>
+                                        <td><button class="btn-icon"><i class="fas fa-download"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                     </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Reply Ticket Modal (Reused) -->
+    <div class="modal-overlay" id="replyTicketModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-headset"></i> Reply to Ticket</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="ticket-chat">
+                    <div class="chat-message received">
+                        <img src="https://placehold.co/40x40/007bff/FFFFFF?text=UD" alt="User Avatar">
+                        <div class="chat-bubble">
+                            <p class="chat-text">Device offline constantly. How do I fix this?</p>
+                            <span class="chat-time">Today, 14:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 25px;">
+                    <label>Your Response (Support Script)</label>
+                    <textarea class="form-control" rows="4" placeholder="Type response..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-cancel">Close</button>
+                <button class="btn-primary"><i class="fas fa-paper-plane"></i> Send Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

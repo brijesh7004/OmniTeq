@@ -1,19 +1,36 @@
 <?php
 require_once 'utils.php';
-require_once 'send_mail.php'; 
+require_once 'send_mail.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $conn = getConnection();
 
 switch ($method) {
     case 'GET':
+    case 'POST':
+    case 'PUT':
+    case 'DELETE':
+        checkAuth();
+        break;
+}
+
+$userId = (int) $_SESSION['user_id'];
+$isAdmin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin');
+
+switch ($method) {
+    case 'GET':
         if (isset($_GET['id'])) {
-            $id = (int)$_GET['id'];
-            $stmt = $conn->prepare("SELECT * FROM contact_submissions WHERE id = ?");
-            $stmt->bind_param("i", $id);
+            $id = (int) $_GET['id'];
+            $sql = $isAdmin ? "SELECT * FROM contact_submissions WHERE id = ?" : "SELECT * FROM contact_submissions WHERE id = ? AND user_id = ?";
+            $stmt = $conn->prepare($sql);
+            if ($isAdmin)
+                $stmt->bind_param("i", $id);
+            else
+                $stmt->bind_param("ii", $id, $userId);
+
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows > 0) {
                 sendResponse(200, "Success", $result->fetch_assoc());
             } else {
@@ -23,22 +40,25 @@ switch ($method) {
         } else {
             // Pagination
             $pagination = getPaginationParams();
-            $stmt = $conn->prepare("SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT ?, ?");
+            $whereClause = $isAdmin ? "" : " WHERE user_id = $userId ";
+            $sql = "SELECT * FROM contact_submissions $whereClause ORDER BY created_at DESC LIMIT ?, ?";
+
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param("ii", $pagination['offset'], $pagination['size']);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             $data = [];
             while ($row = $result->fetch_assoc()) {
                 $data[] = $row;
             }
 
-            $countResult = $conn->query("SELECT COUNT(*) as total FROM contact_submissions");
+            $countResult = $conn->query("SELECT COUNT(*) as total FROM contact_submissions $whereClause");
             $totalCount = $countResult->fetch_assoc()['total'];
-            
+
             sendResponse(200, "Success", [
                 'items' => $data,
-                'total' => (int)$totalCount
+                'total' => (int) $totalCount
             ]);
             $stmt->close();
         }
@@ -46,20 +66,25 @@ switch ($method) {
 
     case 'POST':
         $data = getRequestData();
-        validateRequired($data, ['name', 'email', 'phone', 'subject', 'message']);
+        validateRequired($data, ['name', 'email', 'mobile', 'subject', 'message']);
         $data = sanitizeInput($data);
 
-        $stmt = $conn->prepare("INSERT INTO contact_submissions (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $data['name'], $data['email'], $data['phone'], $data['subject'], $data['message']);
-        
+        $userId = $_SESSION['user_id'] ?? null;
+        $stmt = $conn->prepare("INSERT INTO contact_submissions (user_id, name, email, mobile, subject, message) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssss", $userId, $data['name'], $data['email'], $data['mobile'], $data['subject'], $data['message']);
+
         if ($stmt->execute()) {
             try {
-                $formData = ['name' => $data['name'], 'email' => $data['email'], 
-                            'company_email' => CONTACT_EMAIL, 'type' => 'contact'];
+                $formData = [
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'company_email' => CONTACT_EMAIL,
+                    'type' => 'contact'
+                ];
                 $ackTitle = 'Thank you for contacting OmniTeq';
                 $ackEmailBody = generateEmailBody($data, 'contact', FALSE);
                 $notTitle = 'New Contact Form Submission';
-                $notEmailBody = generateEmailBody($data, 'contact', TRUE);                
+                $notEmailBody = generateEmailBody($data, 'contact', TRUE);
                 sendEmails($formData, $ackTitle, $ackEmailBody, $notTitle, $notEmailBody);
 
                 sendResponse(201, "Contact request sent successfully", ['id' => $conn->insert_id]);
@@ -77,11 +102,11 @@ switch ($method) {
         if (!isset($_GET['id'])) {
             sendResponse(400, "Missing ID parameter");
         }
-        $id = (int)$_GET['id'];
+        $id = (int) $_GET['id'];
         $data = sanitizeInput(getRequestData());
 
         // Valid keys
-        $allowed = ['name', 'email', 'phone', 'subject', 'message'];
+        $allowed = ['name', 'email', 'mobile', 'subject', 'message'];
         $updates = [];
         $values = [];
 
@@ -118,7 +143,7 @@ switch ($method) {
         if (!isset($_GET['id'])) {
             sendResponse(400, "Missing ID parameter");
         }
-        $id = (int)$_GET['id'];
+        $id = (int) $_GET['id'];
         $stmt = $conn->prepare("DELETE FROM contact_submissions WHERE id = ?");
         $stmt->bind_param("i", $id);
 

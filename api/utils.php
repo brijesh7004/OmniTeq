@@ -11,6 +11,19 @@ function sendResponse($status, $message, $data = null) {
     exit();
 }
 
+/**
+ * Check if the user is authenticated. 
+ * Stops execution and returns 401 if not.
+ */
+function checkAuth() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['user_id'])) {
+        sendResponse(401, 'Authentication required. Please login to continue.');
+    }
+}
+
 function validateRequired($data, $fields) {
     foreach ($fields as $field) {
         if (!isset($data[$field]) || empty(trim($data[$field]))) {

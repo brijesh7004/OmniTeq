@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - OmniTeq</title>
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- Global CSS Files -->
+    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <!-- Dashboard Specific CSS (Reused for Admin Panel) -->
+    <link rel="stylesheet" href="css/dashboard.css?v=1.1">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Admin" id="sidebar-logo">
+                    <script>if(localStorage.getItem('theme') === 'dark') document.getElementById('sidebar-logo').src='images/logo/logo-white.svg';</script>
+                </a>
+                <button class="mobile-close-btn" id="mobile-close"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#admin-overview" class="nav-link active" data-tab="admin-overview">
+                            <i class="fas fa-chart-line"></i> <span>System Overview</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#admin-users" class="nav-link" data-tab="admin-users">
+                            <i class="fas fa-users"></i> <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#admin-inventory" class="nav-link" data-tab="admin-inventory">
+                            <i class="fas fa-boxes"></i> <span>Device Inventory</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#admin-orders" class="nav-link" data-tab="admin-orders">
+                            <i class="fas fa-shopping-cart"></i> <span>Global Orders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#admin-support" class="nav-link" data-tab="admin-support">
+                            <i class="fas fa-headset"></i> <span>Support Queue</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-link logout-link">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="current-page-title">System Overview</h2>
+                </div>
+                
+                <div class="header-right">
+                    <button class="theme-toggle" aria-label="Toggle dark mode" id="dashboard-theme-toggle">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" style="background:var(--primary);">12</span>
+                    </div>
+                    <div class="user-profile-menu">
+                        <img src="https://placehold.co/40x40/38bdf8/FFFFFF?text=AD" alt="Admin Avatar" class="avatar">
+                        <span class="user-name">Super Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Page Content -->
+            <section class="dashboard-content">
+                <!-- 1. SYSTEM OVERVIEW TAB -->
+                <div class="dashboard-tab active" id="tab-admin-overview">
+                    <div class="stats-grid-db">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success-light text-success"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-details">
+                                <h3>Total Revenue</h3>
+                                <div class="stat-value-db">$142,500</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary-light text-primary"><i class="fas fa-users"></i></div>
+                            <div class="stat-details">
+                                <h3>Active Users</h3>
+                                <div class="stat-value-db">1,204</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info-light text-info"><i class="fas fa-microchip"></i></div>
+                            <div class="stat-details">
+                                <h3>Connected Devices</h3>
+                                <div class="stat-value-db">3,842</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning-light text-warning"><i class="fas fa-ticket-alt"></i></div>
+                            <div class="stat-details">
+                                <h3>Open Tickets</h3>
+                                <div class="stat-value-db">28</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-row">
+                        <!-- System Alerts -->
+                        <div class="dashboard-card flex-1">
+                            <div class="card-header">
+                                <h3>System Operations</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="alert-list">
+                                    <li class="alert-item info">
+                                        <div class="alert-icon"><i class="fas fa-server"></i></div>
+                                        <div class="alert-info">
+                                            <h4>Server Maintenance Scheduled</h4>
+                                            <p>Database optimization in 2 days.</p>
+                                        </div>
+                                        <div class="alert-time">2h ago</div>
+                                    </li>
+                                    <li class="alert-item warning">
+                                        <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                        <div class="alert-info">
+                                            <h4>High API Latency</h4>
+                                            <p>IoT Gateway US-East reporting spike.</p>
+                                        </div>
+                                        <div class="alert-time">5h ago</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="dashboard-card flex-2">
+                            <div class="card-header">
+                                <h3>Recent Administrator Activity</h3>
+                                <button class="btn-text">View Log</button>
+                            </div>
+                            <div class="card-body" style="overflow-x: auto;">
+                                <table class="db-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Admin ID</th>
+                                            <th>Action Performed</th>
+                                            <th>Target Instance</th>
+                                            <th>Timestamp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="badge badge-success">S. Admin</span></td>
+                                            <td>Firmware Push (v2.1)</td>
+                                            <td>Smart EV Chargers [All]</td>
+                                            <td>Oct 20, 10:45 AM</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge badge-warning">Mod_02</span></td>
+                                            <td>Account Suspension</td>
+                                            <td>User ID: 10452</td>
+                                            <td>Oct 20, 09:12 AM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. USER MANAGEMENT TAB -->
+                <div class="dashboard-tab" id="tab-admin-users">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Global User Management</h3>
+                            <button class="btn-primary btn-sm"><i class="fas fa-plus"></i> Add User</button>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name & Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Devices</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#U-10452</td>
+                                        <td><strong>John Doe</strong><br><span style="font-size: 0.8rem; color: var(--db-text-muted);">john.doe@example.com</span></td>
+                                        <td>Customer</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>3</td>
+                                        <td>
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon text-danger" title="Suspend"><i class="fas fa-ban"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#U-10453</td>
+                                        <td><strong>Sarah Smith</strong><br><span style="font-size: 0.8rem; color: var(--db-text-muted);">sarah.s@techcorp.com</span></td>
+                                        <td>B2B Client</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>142</td>
+                                        <td>
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon text-danger" title="Suspend"><i class="fas fa-ban"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#U-10454</td>
+                                        <td><strong>Malik R.</strong><br><span style="font-size: 0.8rem; color: var(--db-text-muted);">malik@gmail.com</span></td>
+                                        <td>Customer</td>
+                                        <td><span class="badge badge-warning">Suspended</span></td>
+                                        <td>0</td>
+                                        <td>
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Restore"><i class="fas fa-undo"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. DEVICE INVENTORY TAB -->
+                <div class="dashboard-tab" id="tab-admin-inventory">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Device & Inventory Control</h3>
+                            <button class="btn-primary btn-sm"><i class="fas fa-upload"></i> OTA Update</button>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model ID</th>
+                                        <th>Product Name</th>
+                                        <th>Active Installs</th>
+                                        <th>Firmware Ver.</th>
+                                        <th>Warehouse Stock</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#PRD-EV01</td>
+                                        <td>Smart EV Charger Unit</td>
+                                        <td>1,420</td>
+                                        <td>v2.1.0</td>
+                                        <td>450 units</td>
+                                        <td><span class="badge badge-success">Healthy</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#PRD-WF00</td>
+                                        <td>Smart WiFi Timer Switch</td>
+                                        <td>2,100</td>
+                                        <td>v1.8.4</td>
+                                        <td><span style="color: #e74c3c; font-weight: bold;">12 units</span></td>
+                                        <td><span class="badge badge-warning">Low Stock</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. GLOBAL ORDERS TAB -->
+                <div class="dashboard-tab" id="tab-admin-orders">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Global Order Ledger</h3>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#ORD-2023-0899</td>
+                                        <td>Oct 15, 2023</td>
+                                        <td>TechCorp Industries</td>
+                                        <td>$4,500.00</td>
+                                        <td><span class="badge badge-success">Delivered</span></td>
+                                        <td><button class="btn-sm btn-outline" data-modal="invoiceModal">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-2023-0900</td>
+                                        <td>Oct 19, 2023</td>
+                                        <td>Sarah Smith</td>
+                                        <td>$249.99</td>
+                                        <td><span class="badge badge-warning">Processing</span></td>
+                                        <td><button class="btn-sm btn-outline" data-modal="invoiceModal">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. SUPPORT QUEUE TAB -->
+                <div class="dashboard-tab" id="tab-admin-support">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Support Ticket Queue</h3>
+                            <button class="btn-primary btn-sm"><i class="fas fa-check-double"></i> Mark All Read</button>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <table class="db-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket ID</th>
+                                        <th>User</th>
+                                        <th>Subject</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#TK-8021</td>
+                                        <td>John Doe</td>
+                                        <td>Device goes offline constantly</td>
+                                        <td><span class="badge badge-success">High</span></td>
+                                        <td><span class="badge badge-warning">Open</span></td>
+                                        <td><button class="btn-sm btn-outline" data-modal="replyTicketModal">Reply</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#TK-8022</td>
+                                        <td>Malik R.</td>
+                                        <td>Billing dispute for October</td>
+                                        <td><span class="badge" style="background-color: var(--primary);">Medium</span></td>
+                                        <td><span class="badge badge-warning">Open</span></td>
+                                        <td><button class="btn-sm btn-outline" data-modal="replyTicketModal">Reply</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#TK-8015</td>
+                                        <td>Sarah Smith</td>
+                                        <td>Bulk order discount inquiry</td>
+                                        <td><span class="badge">Low</span></td>
+                                        <td><span class="badge badge-success">Resolved</span></td>
+                                        <td><button class="btn-sm btn-outline" data-modal="replyTicketModal">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Invoice Modal (Reused layout from user dashboard) -->
+    <div class="modal-overlay" id="invoiceModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-invoice-dollar"></i> Order Invoice #ORD-2023-0899</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="invoice-header-info">
+                    <div class="invoice-from">
+                        <h4>From</h4>
+                        <p><strong>OmniTeq Solutions</strong><br>Aditya House, Bhavnagar<br>info@omniteq.in</p>
+                    </div>
+                    <div class="invoice-to">
+                        <h4>Bill To</h4>
+                        <p><strong>TechCorp Industries</strong><br>124 Tech Blvd, NY<br>sarah.s@techcorp.com</p>
+                    </div>
+                </div>
+                <!-- Simplified for Admin View demo -->
+                <p><strong>Total Amount:</strong> $4,500.00</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-cancel">Close</button>
+                <button class="btn-primary"><i class="fas fa-file-pdf"></i> Download PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Reply Ticket Modal -->
+    <div class="modal-overlay" id="replyTicketModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-headset"></i> Reply to Ticket #TK-8021</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="ticket-chat">
+                    <div class="chat-message received">
+                        <img src="https://placehold.co/40x40/007bff/FFFFFF?text=JD" alt="User Avatar">
+                        <div class="chat-bubble">
+                            <p class="chat-text">My Smart EV Charger keeps disconnecting from the WiFi every 2 hours. I have to manually reset it. Please help!</p>
+                            <span class="chat-time">Oct 20, 14:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group" style="margin-top: 25px;">
+                    <label>Admin Response</label>
+                    <textarea class="form-input" rows="4" placeholder="Type your response to the customer..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-cancel">Close</button>
+                <button class="btn-primary"><i class="fas fa-paper-plane"></i> Send Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

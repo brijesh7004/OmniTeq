@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - OmniTeq</title>
+    <meta name="description"
+        content="Explore OmniTeq's innovative IoT products including School Alarm Systems, Smart WiFi Plugs, and Touch Switches">
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <link rel="stylesheet" href="css/responsive.css?v=2.0">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check (Prevents FLT) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="nav-auth-link">Login</a>
+                <a href="register.html" class="nav-auth-btn">Register</a>
+                <a href="lets-talk.html" class="cta-button">Let's Talk</a>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section id="page-banner" class="products-banner">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>Innovative IoT Solutions for Modern Needs</p>
+        </div>
+    </section>
+
+    <!-- Products Overview -->
+    <section id="products-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Smart Solutions for Every Environment</h2>
+                <p>Our product lineup combines cutting-edge technology with practical applications</p>
+            </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 00.png"
+                            alt="Smart Wifi Alarm System">
+                        <div class="product-badge">Featured</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Smart Wifi Alarm System</h3>
+                        <p class="product-description">A comprehensive security and notification system designed
+                            specifically for educational institutions.</p>
+                        <div class="product-meta">
+                            <span class="product-category"><i class="fas fa-tag"></i> Security</span>
+                            <span class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </span>
+                        </div>
+                        <a href="#wifi-alarm" class="product-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 01.jpg"
+                            alt="Smart WIFI EV Charging Station Box">
+                        <div class="product-badge">Best Seller</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Smart WIFI EV Charging Station Box</h3>
+                        <p class="product-description">Brings intelligence, convenience, and control to your electric
+                            vehicle charging experience.</p>
+                        <div class="product-meta">
+                            <span class="product-category"><i class="fas fa-tag"></i> Home</span>
+                            <span class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </span>
+                        </div>
+                        <a href="#smart-ev-charger" class="product-link">Learn More <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 00.jpg"
+                            alt="Smart WiFi Modular Touch Switch">
+                        <div class="product-badge">New</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Smart WIFI Timer Switch</h3>
+                        <p class="product-description">Elegant, responsive touch switches that bring modern control to
+                            your lighting and electrical systems.</p>
+                        <div class="product-meta">
+                            <span class="product-category"><i class="fas fa-tag"></i> Lighting</span>
+                            <span class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        </div>
+                        <a href="#touch-switch" class="product-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details Sections -->
+    <!-- School Alarm System -->
+    <section id="wifi-alarm" class="product-detail-section">
+        <div class="container">
+            <div class="product-detail-grid">
+                <div class="product-detail-content">
+                    <div class="product-header">
+                        <h2>Smart Wifi Alarm System</h2>
+                        <p class="product-tagline">Enhancing Safety and Communication in Educational Environments</p>
+                    </div>
+                    <div class="product-features">
+                        <h3><i class="fas fa-list-check"></i> Key Features</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Automated bell scheduling with mutilple profile
+                                support</li>
+                            <li><i class="fas fa-check-circle"></i> Upcoming bell indication and realtime updates</li>
+                            <li><i class="fas fa-check-circle"></i> Mobile Controlled easy HTML Webpage</li>
+                            <li><i class="fas fa-check-circle"></i> Daily, Weekly custom programmable bell schedule</li>
+                            <li><i class="fas fa-check-circle"></i> Gong bell and industrial siren support (Loadspeaker
+                                not supported) and Digital Display</li>
+                            <li><i class="fas fa-check-circle"></i> No internet required for operation and setup </li>
+                            <li><i class="fas fa-check-circle"></i> Easy to configure and DIY Installation </li>
+                            <li><i class="fas fa-check-circle"></i> SOS Manually trigger bell option using mobile </li>
+                            <li><i class="fas fa-check-circle"></i> Works on 220V Power Supply (No Battery Required)
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> IP 67 rated Waterproof, Impact and UV resistant,
+                                Dust proof, ABS material, Heavy duty 3mm thick wall Enclosure/Box </li>
+                        </ul>
+                    </div>
+                    <div class="product-use-cases">
+                        <h3><i class="fas fa-lightbulb"></i> Use Cases</h3>
+                        <ul class="use-cases-list">
+                            <li><i class="fas fa-university"></i> <strong>Schools & Colleges:</strong> Automated class
+                                period bells and emergency alarms</li>
+                            <li><i class="fas fa-graduation-cap"></i> <strong>Training Centers:</strong> Flexible
+                                scheduling for varying class times</li>
+                            <li><i class="fas fa-building"></i> <strong>Industries:</strong> Automated alarms for shift
+                                timing, safety and security</li>
+                        </ul>
+                    </div>
+                    <div class="product-actions">
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Request a
+                            Demo</a>
+                        <a href="resources.html#documentation" class="btn-secondary"><i class="fas fa-file-alt"></i>
+                            View Documentation</a>
+                    </div>
+                </div>
+                <div class="product-detail-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-thumbnails-side">
+                            <div class="thumbnail-item active">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 00.png"
+                                    alt="School Alarm Interface 00"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 00.png">
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 01.jpg"
+                                    alt="School Alarm Interface 01"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 01.jpg">
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 02.jpg"
+                                    alt="School Alarm Interface 02"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 02.jpg">
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 03.jpg"
+                                    alt="School Alarm Interface 03"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 03.jpg">
+                            </div>
+                            <!-- <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 04.png" alt="School Alarm Interface 04" data-full="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 04.png">
+                            </div> -->
+                        </div>
+                        <div class="main-image">
+                            <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 00.png"
+                                alt="Smart Wifi Alarm System">
+                        </div>
+                        <!-- <div class="product-video"> 
+                            <iframe width="100%" height="200" src="https://www.youtube.com/embed/PoTWaC5YsL4?controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Comparison -->
+    <section id="product-comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2>Product Comparison (Smart Wifi Alarm System)</h2>
+                <p>Find the right solution for your specific needs</p>
+            </div>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Basic Model (OmniSWAS101)</th>
+                            <th>Standard Model (OmniSWAS201)</th>
+                            <th>Standard Model (OmniSWAS202)</th>
+                            <th>Pro Model (OmniSWAS302)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Price (Including GST)</td>
+                            <td>&#8377; 9,999</td>
+                            <td>&#8377; 12,999</td>
+                            <td>&#8377; 13,499</td>
+                            <td>&#8377; 15,499</td>
+                        </tr>
+                        <tr>
+                            <td>Alarm Control using Mobile (Wifi)</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Multiple Profile Support</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>No. of Profiles</td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>No. of Alarm in Each Profile</td>
+                            <td>20</td>
+                            <td>20</td>
+                            <td>20</td>
+                            <td>32</td>
+                        </tr>
+                        <tr>
+                            <td>Total No. of Alarm Supported</td>
+                            <td>20</td>
+                            <td>60</td>
+                            <td>60</td>
+                            <td>192</td>
+                        </tr>
+                        <tr>
+                            <td>OLED Display</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>IP 67 Waterproof, Dust Proof Box</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Best For</td>
+                            <td>Schools</td>
+                            <td>Colleges and Training Institutes</td>
+                            <td>Colleges and Training Institutes</td>
+                            <td>Schools, Colleges and Factories</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a href="https://wa.me/919825246857?text=Hello%20OmniTeq%2C%20I%20want%20to%20order%20Smart%20Wifi%20Alarm%20System%20OmniSWAS101."
+                                    class="btn-primary" target="_blank"
+                                    style="background-color: #009973; border-color: #009973;"><i
+                                        class="fas fa-shopping-cart"></i> Order Now</a></td>
+                            <td><a href="https://wa.me/919825246857?text=Hello%20OmniTeq%2C%20I%20want%20to%20order%20Smart%20Wifi%20Alarm%20System%20OmniSWAS201."
+                                    class="btn-primary" target="_blank"
+                                    style="background-color: #009973; border-color: #009973;"><i
+                                        class="fas fa-shopping-cart"></i> Order Now</a></td>
+                            <td><a href="https://wa.me/919825246857?text=Hello%20OmniTeq%2C%20I%20want%20to%20order%20Smart%20Wifi%20Alarm%20System%20OmniSWAS202."
+                                    class="btn-primary" target="_blank"
+                                    style="background-color: #009973; border-color: #009973;"><i
+                                        class="fas fa-shopping-cart"></i> Order Now</a></td>
+                            <td><a href="https://wa.me/919825246857?text=Hello%20OmniTeq%2C%20I%20want%20to%20order%20Smart%20Wifi%20Alarm%20System%20OmniSWAS302."
+                                    class="btn-primary" target="_blank"
+                                    style="background-color: #009973; border-color: #009973;"><i
+                                        class="fas fa-shopping-cart"></i> Order Now</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart WiFi Plug -->
+    <section id="smart-ev-charger" class="product-detail-section alt-bg">
+        <div class="container">
+            <div class="product-detail-grid reverse">
+                <div class="product-detail-content">
+                    <div class="product-header">
+                        <h2>Smart WIFI EV Charging Station Box</h2>
+                        <p class="product-tagline">Charge Smarter. Drive Farther. Go Greener.</p>
+                        <!-- Charge Smarter. Anywhere. Anytime. -->
+                    </div>
+                    <div class="product-features">
+                        <h3><i class="fas fa-list-check"></i> Key Features</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Smart WiFi Connectivity</li>
+                            <li><i class="fas fa-check-circle"></i> Simple interface with app controlâ€”ideal for both
+                                tech-savvy and first-time EV users.</li>
+                            <li><i class="fas fa-check-circle"></i> Start, stop, or schedule charging sessions directly
+                                from your mobile device.</li>
+                            <li><i class="fas fa-check-circle"></i> Built-in overvoltage, overcurrent, short circuit,
+                                and earth fault protection.</li>
+                            <li><i class="fas fa-check-circle"></i> Suitable for indoor garages or outdoor walls, built
+                                to withstand dust, rain, and sun.</li>
+                            <li><i class="fas fa-check-circle"></i> Compatible with most electric vehicles (Type 1 or
+                                Type 2 connectors, configurable).</li>
+                        </ul>
+                    </div>
+                    <div class="product-use-cases">
+                        <h3><i class="fas fa-lightbulb"></i> Use Cases</h3>
+                        <ul class="use-cases-list">
+                            <li><i class="fas fa-home"></i> <strong>Home Charging:</strong>Easily install the Smart EV
+                                Charging Station Box in your garage or driveway and charge your EV at your convenience.
+                            </li>
+                            <li><i class="fas fa-industry"></i> <strong>Commercial Charging:</strong>Perfect for
+                                offices, apartment complexes, and commercial buildingsâ€”enable EV access for employees
+                                and residents.</li>
+                            <li><i class="fas fa-shield-alt"></i> <strong>Public Charging:</strong>Deploy at malls, fuel
+                                stations, or community parking areas to offer smart EV charging to the public with
+                                remote access.</li>
+                        </ul>
+                    </div>
+                    <div class="product-actions">
+                        <!-- <a href="contact.html" class="btn-primary"><i class="fas fa-shopping-cart"></i> Order Now</a> -->
+                        <a href="https://wa.me/919825246857?text=Hello%20OmniTeq%2C%20I%20want%20to%20order%20Smart%20EV%20Charging%20Station%20Box."
+                            class="btn-primary"><i class="fas fa-shopping-cart"></i> Order Now</a>
+                        <a href="resources.html#documentation" class="btn-secondary"><i class="fas fa-file-alt"></i>
+                            View Documentation</a>
+                    </div>
+                </div>
+                <div class="product-detail-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-thumbnails-side">
+                            <div class="thumbnail-item active">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 00.jpg"
+                                    alt="Smart Plug in Use"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 00.jpg">
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 01.jpg"
+                                    alt="Smart Plug App Interface"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 01.jpg">
+                            </div>
+                        </div>
+                        <div class="main-image">
+                            <img src="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 00.jpg"
+                                alt="Smart EV Charging Station Box">
+                        </div>
+                        <!-- <div class="product-video">
+                            <iframe width="100%" height="200" src="https://www.youtube.com/embed/PoTWaC5YsL4?controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart WiFi Touch Switch -->
+    <section id="touch-switch" class="product-detail-section">
+        <div class="container">
+            <div class="product-detail-grid">
+                <div class="product-detail-content">
+                    <div class="product-header">
+                        <h2>Smart WIFI Timer Switch</h2>
+                        <p class="product-tagline">Elegant Control for Modern Spaces</p>
+                    </div>
+                    <div class="product-features">
+                        <h3><i class="fas fa-list-check"></i> Key Features</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Sleek glass panel with responsive touch interface
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> WiFi connectivity for remote control via app</li>
+                            <li><i class="fas fa-check-circle"></i> Voice assistant compatibility</li>
+                            <li><i class="fas fa-check-circle"></i> Scene setting and automation capabilities</li>
+                            <li><i class="fas fa-check-circle"></i> LED status indicators with adjustable brightness
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> Available in single, double, and triple gang
+                                configurations</li>
+                        </ul>
+                    </div>
+                    <div class="product-use-cases">
+                        <h3><i class="fas fa-lightbulb"></i> Use Cases</h3>
+                        <ul class="use-cases-list">
+                            <li><i class="fas fa-home"></i> <strong>Residential:</strong> Upgrade home lighting with
+                                elegant controls</li>
+                            <li><i class="fas fa-hotel"></i> <strong>Hospitality:</strong> Enhance guest experience with
+                                intuitive room controls</li>
+                            <li><i class="fas fa-building"></i> <strong>Commercial:</strong> Streamline lighting
+                                management in offices and retail spaces</li>
+                        </ul>
+                    </div>
+                    <div class="product-actions">
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-file-invoice-dollar"></i> Request a
+                            Quote</a>
+                        <a href="resources.html#documentation" class="btn-secondary"><i class="fas fa-file-alt"></i>
+                            View Documentation</a>
+                    </div>
+                </div>
+                <div class="product-detail-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-thumbnails-side">
+                            <div class="thumbnail-item active">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 00.jpg"
+                                    alt="Timer Switch Interface 00"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 00.jpg">
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 01.png"
+                                    alt="Timer Switch Interface 01"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 01.png">
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 02.jpg"
+                                    alt="Timer Switch Interface 02"
+                                    data-full="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 02.jpg">
+                            </div>
+                        </div>
+                        <div class="main-image">
+                            <img src="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 00.jpg"
+                                alt="Smart Wifi Alarm System">
+                        </div>
+                        <!-- <div class="product-video"> 
+                            <iframe width="100%" height="200" src="https://www.youtube.com/embed/PoTWaC5YsL4?controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Testimonials Section -->
+    <section id="product-testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Real experiences from users of our smart products</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"The Smart Wifi Alarm System has revolutionized our emergency protocols. Setup was
+                            straightforward and the system has been flawless in operation."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://placehold.co/60x60/0066cc/FFFFFF?text=JT" alt="Jigo Thomas">
+                        <div class="author-info">
+                            <h4>Jigo Thomas</h4>
+                            <p>Principal, Xavier School</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"The Smart WiFi EV Charger has made charging my vehicle incredibly convenient. The setup is
+                            so simple that anyone can use it. It saves me time every day and fits perfectly into my
+                            routine."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://placehold.co/60x60/0066cc/FFFFFF?text=RP" alt="Rohan Patel">
+                        <div class="author-info">
+                            <h4>Rohan Patel</h4>
+                            <p>Homeowner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"The Touch Switches were the perfect addition to our boutique hotel. Guests love the sleek
+                            design and the staff appreciates the remote management capabilities."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://placehold.co/60x60/0066cc/FFFFFF?text=AR" alt="Amit Rathod">
+                        <div class="author-info">
+                            <h4>Dr. Amit Rathod</h4>
+                            <p>BPSC Hospital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta">
+        <div class="container">
+            <h2>Ready to Upgrade Your Space with Smart Technology?</h2>
+            <p>Contact our product specialists to find the perfect solution for your needs.</p>
+            <div class="cta-buttons">
+                <a href="lets-talk.html" class="btn-primary"><i class="fas fa-comments"></i> Get Product
+                    Consultation</a>
+                <a href="resources.html#catalog" class="btn-primary"><i class="fas fa-download"></i> Download
+                    Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and
+                        growth.</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
+                        <!-- <a href="#"><i class="fab fa-github"></i></a> -->
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html#iot">IoT Solutions</a></li>
+                        <li><a href="services.html#plc">PLC Programming</a></li>
+                        <li><a href="services.html#embedded">Embedded Systems</a></li>
+                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
+                        <!-- <li><a href="services.html#blockchain">Blockchain</a></li> -->
+                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@omniteq.in</p>
+                    <p><i class="fas fa-phone"></i> +91 98252 46857</p>
+                    <!-- <p><i class="fab fa-whatsapp"></i> +91 98252 46857</p> -->
+                    <p><i class="fas fa-map-marker-alt"></i> Aditya House, Iscon Mega City, Bhavnagar</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: <br>9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

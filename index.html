@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +9,58 @@
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=3.6">
+    <link rel="stylesheet" href="css/responsive.css?v=2.0">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check (Prevents FLT) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
 </head>
+
 <body>
     <!-- Header Section -->
     <header id="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
                 </a>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="nav-auth-link" style="display: none;">Login</a>
+                <a href="register.html" class="nav-auth-btn" style="display: none;">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
-                <div class="hamburger">
+                <div class="hamburger" id="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
 
@@ -47,14 +69,15 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Next-Gen Tech, Infinite Possibilities</h1>
-                <p>Where Innovation Meets Implementation: End-to-End IoT & Automation Solutions for businesses of all sizes.</p>
+                <p>Where Innovation Meets Implementation: End-to-End IoT & Automation Solutions for businesses of all
+                    sizes.</p>
                 <div class="hero-buttons">
                     <a href="services.html" class="btn-primary">Explore Our Solutions</a>
                     <a href="contact.html" class="btn-secondary">Get in Touch</a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://omniteq.in/images/home/home_main.jpg" alt="IoT and Automation Solutions">
+                <img src="images/home/home_main.jpg" alt="IoT and Automation Solutions">
             </div>
         </div>
     </section>
@@ -89,7 +112,8 @@
                     </div>
                     <h3>Embedded Systems</h3>
                     <p>Custom hardware and software solutions for specialized applications.</p>
-                    <a href="services.html#embedded" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#embedded" class="service-link">Learn More <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -110,36 +134,10 @@
                 <h2>Featured Products</h2>
                 <p>Innovative solutions designed for real-world applications</p>
             </div>
-            <div class="products-slider">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://omniteq.in/images/products/Product -Smart Wifi Alarm System 00.png" alt="Smart Wifi Alarm System">
-                    </div>
-                    <div class="product-content">
-                        <h3>Smart Wifi Alarm System</h3>
-                        <p>Smart, connected alarm system with remote monitoring and emergency protocols.</p>
-                        <a href="products.html#wifi-alarm" class="btn-secondary">View Details</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://omniteq.in/images/products/Product -Smart Wifi EV Charger 01.jpg" alt="Smart EV Charging Station Box">
-                    </div>
-                    <div class="product-content">
-                        <h3>Smart EV Charging Station Box</h3>
-                        <p>A compact, WiFi-enabled EV charging solution for homes, workplaces, and public spaces. Built for simplicity, safety, and smart control.</p>
-                        <a href="products.html#wifi-ev-charger" class="btn-secondary">View Details</a>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://omniteq.in/images/products/Product -Smart Wifi Timer Switch 00.jpg" alt="Smart WiFi Touch Switch">
-                    </div>
-                    <div class="product-content">
-                        <h3>Smart WiFi Touch Switch</h3>
-                        <p>Modern touch-sensitive switches with smart home integration.</p>
-                        <a href="products.html#touch-switch" class="btn-secondary">View Details</a>
-                    </div>
+            <div class="products-slider" id="featured-products-container">
+                <div class="p-5 text-center w-100">
+                    <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
+                    <p class="mt-2 text-muted">Loading featured products...</p>
                 </div>
             </div>
         </div>
@@ -179,7 +177,8 @@
             <div class="testimonials-slider">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"OmniTeq's IoT solution revolutionized our manufacturing process, reducing downtime by 35% and increasing productivity."</p>
+                        <p>"OmniTeq's IoT solution revolutionized our manufacturing process, reducing downtime by 35%
+                            and increasing productivity."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://www.placehold.co/100x100?text=SA" alt="Sanjeev Agrawal">
@@ -191,7 +190,8 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"The smart alarm system has significantly improved our school's emergency response capabilities. Highly recommended!"</p>
+                        <p>"The smart alarm system has significantly improved our school's emergency response
+                            capabilities. Highly recommended!"</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://www.placehold.co/100x100?text=AR" alt="Dr. Amit Rathod">
@@ -203,7 +203,8 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"Their PLC programming expertise helped us automate our entire production line, resulting in a 40% cost reduction."</p>
+                        <p>"Their PLC programming expertise helped us automate our entire production line, resulting in
+                            a 40% cost reduction."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://www.placehold.co/100x100?text=JP" alt="Jignesh Patel">
@@ -231,13 +232,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
-                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and
+                        growth.</p>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>                        
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                         <!-- <a href="#"><i class="fab fa-github"></i></a> -->
                     </div>
                 </div>
@@ -248,7 +254,6 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
                         <li><a href="resources.html">Resources</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -287,4 +292,5 @@
     <!-- JavaScript Files -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

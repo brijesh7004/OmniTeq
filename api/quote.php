@@ -7,23 +7,48 @@ $conn = getConnection();
 
 switch ($method) {
     case 'GET':
+    case 'POST':
+    case 'PUT':
+    case 'DELETE':
+        checkAuth();
+        break;
+}
+
+$userId = (int) $_SESSION['user_id'];
+$isAdmin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin');
+
+switch ($method) {
+    case 'GET':
         if (isset($_GET['id'])) {
-            $id = (int)$_GET['id'];
-            $stmt = $conn->prepare("SELECT * FROM quote_requests WHERE id = ?");
-            $stmt->bind_param("i", $id);
+            $id = (int) $_GET['id'];
+            $sql = $isAdmin ? "SELECT * FROM quote_requests WHERE id = ?" : "SELECT * FROM quote_requests WHERE id = ? AND user_id = ?";
+            $stmt = $conn->prepare($sql);
+            if ($isAdmin)
+                $stmt->bind_param("i", $id);
+            else
+                $stmt->bind_param("ii", $id, $userId);
+
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows > 0) {
                 sendResponse(200, "Success", $result->fetch_assoc());
             } else {
                 sendResponse(404, "Quote request not found");
             }
+            $stmt->close();
         } else {
-			if(isset($_GET['status'])){ $status=" where status='{$_GET['status']}' "; } else { $status=""; }
-			
+            $status = "";
+            if (isset($_GET['status'])) {
+                $statusVal = $conn->real_escape_string($_GET['status']);
+                $status = " AND status='$statusVal' ";
+            }
+
             $pagination = getPaginationParams();
-            $stmt = $conn->prepare("SELECT * FROM quote_requests {$status} ORDER BY created_at DESC LIMIT ?, ?");
+            $whereClause = $isAdmin ? " WHERE 1=1 " : " WHERE user_id = $userId ";
+            $sql = "SELECT * FROM quote_requests $whereClause $status ORDER BY created_at DESC LIMIT ?, ?";
+
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param("ii", $pagination['offset'], $pagination['size']);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -33,38 +58,43 @@ switch ($method) {
                 $data[] = $row;
             }
 
-            $totalResult = $conn->query("SELECT COUNT(*) as total FROM quote_requests");
+            $totalResult = $conn->query("SELECT COUNT(*) as total FROM quote_requests $whereClause $status");
             $totalCount = $totalResult->fetch_assoc()['total'];
 
             sendResponse(200, "Success", [
                 'items' => $data,
-                'total' => (int)$totalCount
+                'total' => (int) $totalCount
             ]);
+            $stmt->close();
         }
         break;
 
     case 'POST':
         $data = getRequestData();
-        validateRequired($data, ['name', 'email', 'phone', 'project_type', 'project_details']);
+        validateRequired($data, ['name', 'email', 'mobile', 'project_type', 'project_details']);
 
         $fileAttachments = [];
         if (isset($_FILES['files'])) {
             $uploadDir = '../uploads/quotes/';
-            if (!file_exists($uploadDir)) mkdir($uploadDir, 0777, true);
-            
+            if (!file_exists($uploadDir))
+                mkdir($uploadDir, 0777, true);
+
             foreach ($_FILES['files']['tmp_name'] as $key => $tmp_name) {
                 $fileName = $_FILES['files']['name'][$key];
                 $fileSize = $_FILES['files']['size'][$key];
                 $fileType = $_FILES['files']['type'][$key];
 
-                if (empty($fileName) || $fileSize == 0) continue;
+                if (empty($fileName) || $fileSize == 0)
+                    continue;
 
                 $allowedTypes = [
-                    'application/pdf', 'application/msword', 
+                    'application/pdf',
+                    'application/msword',
                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                     'application/vnd.ms-powerpoint',
                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                    'image/jpeg', 'image/png'
+                    'image/jpeg',
+                    'image/png'
                 ];
 
                 if (!in_array($fileType, $allowedTypes)) {
@@ -87,29 +117,42 @@ switch ($method) {
         $data = sanitizeInput($data);
         $attachments = !empty($fileAttachments) ? json_encode($fileAttachments) : null;
 
+        $userId = $_SESSION['user_id'] ?? null;
         $stmt = $conn->prepare("
             INSERT INTO quote_requests (
-                name, email, phone, company, project_type,
+                user_id, name, email, mobile, company, project_type,
                 budget_range, timeline, hear_about,
                 project_details, file_attachments, status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')
         ");
 
         $stmt->bind_param(
-            "ssssssssss",
-            $data['name'], $data['email'], $data['phone'], $data['company'],
-            $data['project_type'], $data['budget_range'], $data['timeline'],
-            $data['hear_about'], $data['project_details'], $attachments
+            "issssssssss",
+            $userId,
+            $data['name'],
+            $data['email'],
+            $data['mobile'],
+            $data['company'],
+            $data['project_type'],
+            $data['budget_range'],
+            $data['timeline'],
+            $data['hear_about'],
+            $data['project_details'],
+            $attachments
         );
 
         if ($stmt->execute()) {
             try {
-                $formData = ['name' => $data['name'], 'email' => $data['email'], 
-                             'company_email' => QUOTES_EMAIL, 'type' => 'quote'];
+                $formData = [
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'company_email' => QUOTES_EMAIL,
+                    'type' => 'quote'
+                ];
                 $ackTitle = 'Thank you for your quote request';
                 $ackEmailBody = generateEmailBody($data, 'quote', FALSE);
                 $notTitle = 'New Quote Form Submission';
-                $notEmailBody = generateEmailBody($data, 'quote', TRUE);                
+                $notEmailBody = generateEmailBody($data, 'quote', TRUE);
 
                 if (!empty($fileAttachments)) {
                     $ackEmailBody .= "<h3>Attached Files:</h3><ul>";
@@ -139,13 +182,20 @@ switch ($method) {
             sendResponse(400, "Missing ID parameter");
         }
 
-        $id = (int)$_GET['id'];
+        $id = (int) $_GET['id'];
         $data = sanitizeInput(getRequestData());
 
         $allowedFields = [
-            'name', 'email', 'phone', 'company', 'project_type',
-            'budget_range', 'timeline', 'hear_about',
-            'project_details', 'status'
+            'name',
+            'email',
+            'mobile',
+            'company',
+            'project_type',
+            'budget_range',
+            'timeline',
+            'hear_about',
+            'project_details',
+            'status'
         ];
 
         $updates = [];
@@ -186,13 +236,13 @@ switch ($method) {
             sendResponse(400, "Missing ID parameter");
         }
 
-        $id = (int)$_GET['id'];
+        $id = (int) $_GET['id'];
 
         $stmt = $conn->prepare("SELECT file_attachments FROM quote_requests WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result->num_rows > 0) {
             $files = json_decode($result->fetch_assoc()['file_attachments'], true);
             if ($files) {

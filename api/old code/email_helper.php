@@ -19,46 +19,23 @@ function sendEmail($to, $subject, $body, $adminEmail = null) {
         ini_set('log_errors', 1);
         ini_set('error_log', __DIR__ . '/smtp_errors.log');
 
-        // Get mail server configuration
-        $sendmail_path = ini_get('sendmail_path');
-        $smtp_host = ini_get('SMTP');
-        $smtp_port = ini_get('smtp_port');
-        debug_to_file("Mail Server Config - Sendmail: $sendmail_path, SMTP: $smtp_host:$smtp_port");
-
         // Headers for HTML email
-        $headers = [];
-        $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=UTF-8';
-        $headers[] = 'From: ' . SMTP_FROM_NAME . ' <' . SMTP_FROM_EMAIL . '>';
-        $headers[] = 'Reply-To: ' . SMTP_FROM_EMAIL;
-        $headers[] = 'Return-Path: ' . SMTP_FROM_EMAIL;
-        $headers[] = 'X-Mailer: PHP/' . phpversion();
-        $headers[] = 'X-Priority: 1';
-        
-        // Convert headers array to string
-        $headers_str = implode("\r\n", $headers) . "\r\n";
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+        $headers .= 'From: ' . SMTP_FROM_EMAIL . "\r\n";
+        $headers .= 'Reply-To: ' . SMTP_FROM_EMAIL . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
 
         debug_to_file("Sending email to user: $to");
 
 
-        // Add additional parameters for better delivery
-        $additional_params = '-f' . SMTP_FROM_EMAIL;
-        
-        // Send email to user with debug info
-        debug_to_file("Attempting to send email with headers:\n" . $headers_str);
-        $userSuccess = mail($to, $subject, $body, $headers_str, $additional_params);
+        // Send email to user
+        $userSuccess = mail($to, $subject, $body, $headers);
         
         if ($userSuccess) {
             debug_to_file("Email sent successfully to user: $to");
-            // Check mail log for actual delivery status
-            $mail_log = '/var/log/mail.log';
-            if (file_exists($mail_log) && is_readable($mail_log)) {
-                $log_content = shell_exec("tail -n 20 $mail_log");
-                debug_to_file("Mail server log:\n$log_content");
-            }
         } else {
-            $error = error_get_last();
-            throw new Exception("Failed to send email to user: " . ($error ? $error['message'] : 'Unknown error'));
+            throw new Exception("Failed to send email to user");
         }
 
         // Send to admin if specified
@@ -67,20 +44,12 @@ function sendEmail($to, $subject, $body, $adminEmail = null) {
             $adminSubject = "New " . $subject;
             $adminBody = "<h3>New submission received</h3>" . $body;
             
-            debug_to_file("Attempting to send admin email with headers:\n" . $headers_str);
-            $adminSuccess = mail($adminEmail, $adminSubject, $adminBody, $headers_str, $additional_params);
+            $adminSuccess = mail($adminEmail, $adminSubject, $adminBody, $headers);
             
             if ($adminSuccess) {
                 debug_to_file("Email sent successfully to admin");
-                // Check mail log for actual delivery status
-                $mail_log = '/var/log/mail.log';
-                if (file_exists($mail_log) && is_readable($mail_log)) {
-                    $log_content = shell_exec("tail -n 20 $mail_log");
-                    debug_to_file("Admin mail server log:\n$log_content");
-                }
             } else {
-                $error = error_get_last();
-                throw new Exception("Failed to send email to admin: " . ($error ? $error['message'] : 'Unknown error'));
+                throw new Exception("Failed to send email to admin");
             }
         }
 

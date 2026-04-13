@@ -1,0 +1,1389 @@
+[25-May-2025 11:20:08 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:21:04 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:21:53 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:22:03 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:23:01 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:23:05 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:23:39 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:23:51 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:24:14 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:25:57 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:26:02 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:26:46 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:35:45 UTC] PHP Fatal error:  Cannot redeclare getPaginationParams() (previously declared in /home/gpgzqevvi4rf/public_html/api/utils.php:22) in /home/gpgzqevvi4rf/public_html/api/config.php on line 59
+[25-May-2025 11:39:07 UTC] Starting email send process for user: brijesh7004@gmail.com
+[25-May-2025 11:39:07 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.96.2 #2 Sun, 25 May 2025 04:39:07 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[25-May-2025 11:39:07 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Sun, 25 May 2025 11:39:07 +0000
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh Solanki <brijesh7004@gmail.com>
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Thank you for your consultation request
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <Xzvtjcze1We9vbkJHsqX5vBCePNwEe8H7IznGD8O0@omniteq.in>
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_Xzvtjcze1We9vbkJHsqX5vBCePNwEe8H7IznGD8O0"
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_Xzvtjcze1We9vbkJHsqX5vBCePNwEe8H7IznGD8O0
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Thank you for contacting Omniteq, Brijesh Solanki. We have received your message and will get back to you shortly.
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_Xzvtjcze1We9vbkJHsqX5vBCePNwEe8H7IznGD8O0
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>Thank you for contacting OmniTeq</h2><p>We=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER:  have received your consultation request. Here are the details:</p><table s=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: tyle=3D'width: 100%; border-collapse: collapse; margin: 20px 0;'><tr style=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'background-color: #f8f8f8;'><th style=3D'padding: 12px; text-align: lef=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: t; border: 1px solid #ddd;'>Field</th><th style=3D'padding: 12px; text-alig=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: n: left; border: 1px solid #ddd;'>Value</th></tr><tr><td style=3D'padding: =
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 12px; border: 1px solid #ddd;'><strong>Name</strong></td><td style=3D'paddi=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: ng: 12px; border: 1px solid #ddd;'>Brijesh Solanki</td></tr><tr><td style=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'><strong>Email</strong></td><td =
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: style=3D'padding: 12px; border: 1px solid #ddd;'>brijesh7004@gmail.com</td>=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: </tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Phone=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: </strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>97251449=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 33</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><stron=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: g>Company</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: >Omniteq Solutions</td></tr><tr><td style=3D'padding: 12px; border: 1px sol=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: id #ddd;'><strong>Consultation Type</strong></td><td style=3D'padding: 12px=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: ; border: 1px solid #ddd;'>project</td></tr><tr><td style=3D'padding: 12px;=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'><strong>Preferred Date</strong></td><td style=3D'=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: padding: 12px; border: 1px solid #ddd;'>2025-05-16</td></tr><tr><td style=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'><strong>Preferred Time</strong>=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: </td><td style=3D'padding: 12px; border: 1px solid #ddd;'>morning</td></tr>=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: <tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Timezone</=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>IST</td></=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Project=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER:  Brief</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>te=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: st</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><stron=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: g>Questions</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: ;'>test</td></tr></table><p style=3D'margin: 20px 0;'>We will get back to y=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: ou soon.</p><hr style=3D'border: 1px solid #eee; margin: 30px 0;'><p style=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'color: #666; font-size: 12px;'>This is an automated email. Please do no=
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: t reply.</p></div>
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_Xzvtjcze1We9vbkJHsqX5vBCePNwEe8H7IznGD8O0--
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:07 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uJ9h5-00E6aI-2M
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[25-May-2025 11:39:12 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.96.2 #2 Sun, 25 May 2025 04:39:12 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<support@omniteq.in>
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[25-May-2025 11:39:12 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Sun, 25 May 2025 11:39:12 +0000
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: To: support@omniteq.in
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: New Consultation Form Submission
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <fkmjyjPdilicmnOQutzW6Q0aXlvcqvmnVNkH9Vww@omniteq.in>
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>We got new consultation submission</h2><p>=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: Here are the details:</p><table style=3D'width: 100%; border-collapse: coll=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: apse; margin: 20px 0;'><tr style=3D'background-color: #f8f8f8;'><th style=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Field</th><th=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER:  style=3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Value</=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: th></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Na=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: me</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>Brijes=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: h Solanki</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: ><strong>Email</strong></td><td style=3D'padding: 12px; border: 1px solid #=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: ddd;'>brijesh7004@gmail.com</td></tr><tr><td style=3D'padding: 12px; border=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: : 1px solid #ddd;'><strong>Phone</strong></td><td style=3D'padding: 12px; b=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: order: 1px solid #ddd;'>9725144933</td></tr><tr><td style=3D'padding: 12px;=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'><strong>Company</strong></td><td style=3D'padding=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: : 12px; border: 1px solid #ddd;'>Omniteq Solutions</td></tr><tr><td style=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'><strong>Consultation Type</stro=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: ng></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>project</td></=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Preferr=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: ed Date</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>2=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: 025-05-16</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: ><strong>Preferred Time</strong></td><td style=3D'padding: 12px; border: 1p=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: x solid #ddd;'>morning</td></tr><tr><td style=3D'padding: 12px; border: 1px=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER:  solid #ddd;'><strong>Timezone</strong></td><td style=3D'padding: 12px; bor=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: der: 1px solid #ddd;'>IST</td></tr><tr><td style=3D'padding: 12px; border: =
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: 1px solid #ddd;'><strong>Project Brief</strong></td><td style=3D'padding: 1=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: 2px; border: 1px solid #ddd;'>test</td></tr><tr><td style=3D'padding: 12px;=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'><strong>Questions</strong></td><td style=3D'paddi=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: ng: 12px; border: 1px solid #ddd;'>test</td></tr></table><p style=3D'margin=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: : 20px 0;'>We will get back to you soon.</p><hr style=3D'border: 1px solid =
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: #eee; margin: 30px 0;'><p style=3D'color: #666; font-size: 12px;'>This is a=
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: n automated email. Please do not reply.</p></div>
+
+[25-May-2025 11:39:12 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[25-May-2025 11:39:16 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uJ9hA-00E6al-0S
+
+[25-May-2025 11:39:16 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[25-May-2025 11:39:16 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-May-2025 14:46:19 UTC] PHP Deprecated:  Using ${expr} (variable variables) in strings is deprecated, use {${expr}} instead in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 25
+[26-May-2025 14:46:19 UTC] PHP Deprecated:  Using ${expr} (variable variables) in strings is deprecated, use {${expr}} instead in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 28
+[26-May-2025 14:46:19 UTC] PHP Warning:  Undefined variable $confirmed in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 25
+[26-May-2025 14:46:19 UTC] PHP Warning:  Undefined variable $ where status=''  in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 28
+[26-May-2025 14:46:34 UTC] PHP Warning:  Undefined variable $ in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 28
+[26-May-2025 15:04:18 UTC] Starting email send process for user: brijesh7004@gmail.com
+[26-May-2025 15:04:18 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.96.2 #2 Mon, 26 May 2025 08:04:18 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<brijesh7004@gmail.com>
+
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-May-2025 15:04:18 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Mon, 26 May 2025 15:04:18 +0000
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh Solanki <brijesh7004@gmail.com>
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Thank you for your consultation request
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <AhXP4I8k74AGWeSXCEfbi6sOtHucX149fsYpjEiFHE@omniteq.in>
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_AhXP4I8k74AGWeSXCEfbi6sOtHucX149fsYpjEiFHE"
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_AhXP4I8k74AGWeSXCEfbi6sOtHucX149fsYpjEiFHE
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Thank you for contacting Omniteq, Brijesh Solanki. We have received your message and will get back to you shortly.
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_AhXP4I8k74AGWeSXCEfbi6sOtHucX149fsYpjEiFHE
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>Thank you for contacting OmniTeq</h2><p>We=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER:  have received your consultation request. Here are the details:</p><table s=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: tyle=3D'width: 100%; border-collapse: collapse; margin: 20px 0;'><tr style=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'background-color: #f8f8f8;'><th style=3D'padding: 12px; text-align: lef=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: t; border: 1px solid #ddd;'>Field</th><th style=3D'padding: 12px; text-alig=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: n: left; border: 1px solid #ddd;'>Value</th></tr><tr><td style=3D'padding: =
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 12px; border: 1px solid #ddd;'><strong>Name</strong></td><td style=3D'paddi=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: ng: 12px; border: 1px solid #ddd;'>Brijesh Solanki</td></tr><tr><td style=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'><strong>Email</strong></td><td =
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: style=3D'padding: 12px; border: 1px solid #ddd;'>brijesh7004@gmail.com</td>=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: </tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Phone=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: </strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>97251449=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 33</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><stron=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: g>Company</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: >test</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><st=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: rong>Consultation Type</strong></td><td style=3D'padding: 12px; border: 1px=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER:  solid #ddd;'>project</td></tr><tr><td style=3D'padding: 12px; border: 1px =
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: solid #ddd;'><strong>Preferred Date</strong></td><td style=3D'padding: 12px=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: ; border: 1px solid #ddd;'>2025-05-29</td></tr><tr><td style=3D'padding: 12=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: px; border: 1px solid #ddd;'><strong>Preferred Time</strong></td><td style=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'>evening</td></tr><tr><td style=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'><strong>Timezone</strong></td><=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: td style=3D'padding: 12px; border: 1px solid #ddd;'>IST</td></tr><tr><td st=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: yle=3D'padding: 12px; border: 1px solid #ddd;'><strong>Project Brief</stron=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: g></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>test</td></tr><=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Questions</=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>test</td><=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: /tr></table><p style=3D'margin: 20px 0;'>We will get back to you soon.</p><=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: hr style=3D'border: 1px solid #eee; margin: 30px 0;'><p style=3D'color: #66=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 6; font-size: 12px;'>This is an automated email. Please do not reply.</p></=
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: div>
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_AhXP4I8k74AGWeSXCEfbi6sOtHucX149fsYpjEiFHE--
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:18 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uJZNC-00Bu8I-1C
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[26-May-2025 15:04:23 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.96.2 #2 Mon, 26 May 2025 08:04:23 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<support@omniteq.in>
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[26-May-2025 15:04:23 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Mon, 26 May 2025 15:04:23 +0000
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: To: support@omniteq.in
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: New Consultation Form Submission
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <3qJTyV328GLCz3QNh5rbrpzRQukas8xBA42kqhZHU@omniteq.in>
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>We got new consultation submission</h2><p>=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: Here are the details:</p><table style=3D'width: 100%; border-collapse: coll=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: apse; margin: 20px 0;'><tr style=3D'background-color: #f8f8f8;'><th style=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Field</th><th=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER:  style=3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Value</=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: th></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Na=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: me</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>Brijes=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: h Solanki</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: ><strong>Email</strong></td><td style=3D'padding: 12px; border: 1px solid #=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: ddd;'>brijesh7004@gmail.com</td></tr><tr><td style=3D'padding: 12px; border=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: : 1px solid #ddd;'><strong>Phone</strong></td><td style=3D'padding: 12px; b=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: order: 1px solid #ddd;'>9725144933</td></tr><tr><td style=3D'padding: 12px;=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'><strong>Company</strong></td><td style=3D'padding=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: : 12px; border: 1px solid #ddd;'>test</td></tr><tr><td style=3D'padding: 12=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: px; border: 1px solid #ddd;'><strong>Consultation Type</strong></td><td sty=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: le=3D'padding: 12px; border: 1px solid #ddd;'>project</td></tr><tr><td styl=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: e=3D'padding: 12px; border: 1px solid #ddd;'><strong>Preferred Date</strong=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: ></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>2025-05-29</td><=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: /tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Prefer=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: red Time</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: evening</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: strong>Timezone</strong></td><td style=3D'padding: 12px; border: 1px solid =
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: #ddd;'>IST</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: '><strong>Project Brief</strong></td><td style=3D'padding: 12px; border: 1p=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: x solid #ddd;'>test</td></tr><tr><td style=3D'padding: 12px; border: 1px so=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: lid #ddd;'><strong>Questions</strong></td><td style=3D'padding: 12px; borde=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: r: 1px solid #ddd;'>test</td></tr></table><p style=3D'margin: 20px 0;'>We w=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: ill get back to you soon.</p><hr style=3D'border: 1px solid #eee; margin: 3=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: 0px 0;'><p style=3D'color: #666; font-size: 12px;'>This is an automated ema=
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: il. Please do not reply.</p></div>
+
+[26-May-2025 15:04:23 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[26-May-2025 15:04:28 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1uJZNH-00Bu9F-0s
+
+[26-May-2025 15:04:28 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[26-May-2025 15:04:28 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[28-Jan-2026 10:17:35 UTC] Starting email send process for user: kanudo3101@gmail.com
+[28-Jan-2026 10:17:35 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.99 #2 Wed, 28 Jan 2026 03:17:35 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<kanudo3101@gmail.com>
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Wed, 28 Jan 2026 10:17:35 +0000
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh Rajubhai Solanki <kanudo3101@gmail.com>
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Thank you for your quote request
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <hoYOOCV8zBtCkHK2QXHm07xR0cdE5b11x7D8YF1xU@omniteq.in>
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_hoYOOCV8zBtCkHK2QXHm07xR0cdE5b11x7D8YF1xU"
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_hoYOOCV8zBtCkHK2QXHm07xR0cdE5b11x7D8YF1xU
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Thank you for contacting Omniteq, Brijesh Rajubhai Solanki. We have received your message and will get back to you shortly.
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_hoYOOCV8zBtCkHK2QXHm07xR0cdE5b11x7D8YF1xU
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>Thank you for contacting OmniTeq</h2><p>We=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  have received your quote request. Here are the details:</p><table style=3D=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 'width: 100%; border-collapse: collapse; margin: 20px 0;'><tr style=3D'back=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: ground-color: #f8f8f8;'><th style=3D'padding: 12px; text-align: left; borde=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: r: 1px solid #ddd;'>Field</th><th style=3D'padding: 12px; text-align: left;=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'>Value</th></tr><tr><td style=3D'padding: 12px; bo=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: rder: 1px solid #ddd;'><strong>Name</strong></td><td style=3D'padding: 12px=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: ; border: 1px solid #ddd;'>Brijesh Rajubhai Solanki</td></tr><tr><td style=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'><strong>Email</strong></td><td =
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: style=3D'padding: 12px; border: 1px solid #ddd;'>kanudo3101@gmail.com</td><=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: /tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Phone<=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: /strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>789</td><=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: /tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Compan=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: y</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>self</t=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: d></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Pro=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: ject Type</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: >iot</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><str=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: ong>Budget Range</strong></td><td style=3D'padding: 12px; border: 1px solid=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  #ddd;'>under-1L</td></tr><tr><td style=3D'padding: 12px; border: 1px solid=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  #ddd;'><strong>Timeline</strong></td><td style=3D'padding: 12px; border: 1=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: px solid #ddd;'>3-6-months</td></tr><tr><td style=3D'padding: 12px; border:=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  1px solid #ddd;'><strong>Hear About</strong></td><td style=3D'padding: 12p=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: x; border: 1px solid #ddd;'>search</td></tr><tr><td style=3D'padding: 12px;=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'><strong>Project Details</strong></td><td style=3D=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 'padding: 12px; border: 1px solid #ddd;'>testing</td></tr></table><p style=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'margin: 20px 0;'>We will get back to you soon.</p><hr style=3D'border: =
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 1px solid #eee; margin: 30px 0;'><p style=3D'color: #666; font-size: 12px;'=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: >This is an automated email. Please do not reply.</p></div><h3>Attached Fil=
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: es:</h3><ul><li>6979e23f5d46c_df-player-pinout.jpg</li></ul>
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_hoYOOCV8zBtCkHK2QXHm07xR0cdE5b11x7D8YF1xU--
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:35 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1vl2cB-0000000C2GH-2CDg
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[28-Jan-2026 10:17:36 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.99 #2 Wed, 28 Jan 2026 03:17:36 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<quotes@omniteq.in>
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Wed, 28 Jan 2026 10:17:36 +0000
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: To: quotes@omniteq.in
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: New Quote Form Submission
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <FKeLEsqeEepCMKwL9GaRftsRFedBLrCh4SvoUp4G0@omniteq.in>
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>We got new quote submission</h2><p>Here ar=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: e the details:</p><table style=3D'width: 100%; border-collapse: collapse; m=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: argin: 20px 0;'><tr style=3D'background-color: #f8f8f8;'><th style=3D'paddi=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: ng: 12px; text-align: left; border: 1px solid #ddd;'>Field</th><th style=3D=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: 'padding: 12px; text-align: left; border: 1px solid #ddd;'>Value</th></tr><=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Name</stron=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: g></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>Brijesh Rajubha=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: i Solanki</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: ><strong>Email</strong></td><td style=3D'padding: 12px; border: 1px solid #=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: ddd;'>kanudo3101@gmail.com</td></tr><tr><td style=3D'padding: 12px; border:=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER:  1px solid #ddd;'><strong>Phone</strong></td><td style=3D'padding: 12px; bo=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: rder: 1px solid #ddd;'>789</td></tr><tr><td style=3D'padding: 12px; border:=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER:  1px solid #ddd;'><strong>Company</strong></td><td style=3D'padding: 12px; =
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: border: 1px solid #ddd;'>self</td></tr><tr><td style=3D'padding: 12px; bord=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: er: 1px solid #ddd;'><strong>Project Type</strong></td><td style=3D'padding=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: : 12px; border: 1px solid #ddd;'>iot</td></tr><tr><td style=3D'padding: 12p=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: x; border: 1px solid #ddd;'><strong>Budget Range</strong></td><td style=3D'=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: padding: 12px; border: 1px solid #ddd;'>under-1L</td></tr><tr><td style=3D'=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: padding: 12px; border: 1px solid #ddd;'><strong>Timeline</strong></td><td s=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: tyle=3D'padding: 12px; border: 1px solid #ddd;'>3-6-months</td></tr><tr><td=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER:  style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Hear About</stron=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: g></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>search</td></tr=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: ><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Project D=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: etails</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>te=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: sting</td></tr></table><p style=3D'margin: 20px 0;'>We will get back to you=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER:  soon.</p><hr style=3D'border: 1px solid #eee; margin: 30px 0;'><p style=3D=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: 'color: #666; font-size: 12px;'>This is an automated email. Please do not r=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: eply.</p></div><h3>Attached Files:</h3><ul><li>6979e23f5d46c_df-player-pino=
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: ut.jpg</li></ul>
+
+[28-Jan-2026 10:17:36 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[28-Jan-2026 10:17:37 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1vl2cC-0000000C2HQ-2TM2
+
+[28-Jan-2026 10:17:37 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[28-Jan-2026 10:17:37 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[28-Jan-2026 10:19:03 UTC] Starting email send process for user: kanudo3101@gmail.com
+[28-Jan-2026 10:19:03 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.99 #2 Wed, 28 Jan 2026 03:19:03 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<kanudo3101@gmail.com>
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Wed, 28 Jan 2026 10:19:03 +0000
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh Rajubhai Solanki <kanudo3101@gmail.com>
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Thank you for your consultation request
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <xRgR9jWd6zgarn7p8mm4GpajujDF3hPRTLTmNjRgA@omniteq.in>
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_xRgR9jWd6zgarn7p8mm4GpajujDF3hPRTLTmNjRgA"
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_xRgR9jWd6zgarn7p8mm4GpajujDF3hPRTLTmNjRgA
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Thank you for contacting Omniteq, Brijesh Rajubhai Solanki. We have received your message and will get back to you shortly.
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_xRgR9jWd6zgarn7p8mm4GpajujDF3hPRTLTmNjRgA
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>Thank you for contacting OmniTeq</h2><p>We=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER:  have received your consultation request. Here are the details:</p><table s=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: tyle=3D'width: 100%; border-collapse: collapse; margin: 20px 0;'><tr style=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'background-color: #f8f8f8;'><th style=3D'padding: 12px; text-align: lef=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: t; border: 1px solid #ddd;'>Field</th><th style=3D'padding: 12px; text-alig=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: n: left; border: 1px solid #ddd;'>Value</th></tr><tr><td style=3D'padding: =
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 12px; border: 1px solid #ddd;'><strong>Name</strong></td><td style=3D'paddi=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: ng: 12px; border: 1px solid #ddd;'>Brijesh Rajubhai Solanki</td></tr><tr><t=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: d style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Email</strong></=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: td><td style=3D'padding: 12px; border: 1px solid #ddd;'>kanudo3101@gmail.co=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: m</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: >Phone</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>78=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 9</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: >Company</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: self</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><str=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: ong>Consultation Type</strong></td><td style=3D'padding: 12px; border: 1px =
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: solid #ddd;'>discovery</td></tr><tr><td style=3D'padding: 12px; border: 1px=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER:  solid #ddd;'><strong>Preferred Date</strong></td><td style=3D'padding: 12p=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: x; border: 1px solid #ddd;'>2026-01-29</td></tr><tr><td style=3D'padding: 1=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 2px; border: 1px solid #ddd;'><strong>Preferred Time</strong></td><td style=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; border: 1px solid #ddd;'>afternoon</td></tr><tr><td styl=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: e=3D'padding: 12px; border: 1px solid #ddd;'><strong>Timezone</strong></td>=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: <td style=3D'padding: 12px; border: 1px solid #ddd;'>IST</td></tr><tr><td s=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: tyle=3D'padding: 12px; border: 1px solid #ddd;'><strong>Project Brief</stro=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: ng></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>test</td></tr>=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: <tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Questions<=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: /strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>test</td>=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: </tr></table><p style=3D'margin: 20px 0;'>We will get back to you soon.</p>=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: <hr style=3D'border: 1px solid #eee; margin: 30px 0;'><p style=3D'color: #6=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 66; font-size: 12px;'>This is an automated email. Please do not reply.</p><=
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: /div>
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_xRgR9jWd6zgarn7p8mm4GpajujDF3hPRTLTmNjRgA--
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:03 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1vl2db-0000000C2fA-1xzZ
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[28-Jan-2026 10:19:04 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.99 #2 Wed, 28 Jan 2026 03:19:04 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<support@omniteq.in>
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Wed, 28 Jan 2026 10:19:04 +0000
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: To: support@omniteq.in
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: New Consultation Form Submission
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <cO9kmhNj860zXf8NZqgnborHygNznBCFoyQ7eDy4@omniteq.in>
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>We got new consultation submission</h2><p>=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: Here are the details:</p><table style=3D'width: 100%; border-collapse: coll=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: apse; margin: 20px 0;'><tr style=3D'background-color: #f8f8f8;'><th style=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Field</th><th=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER:  style=3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Value</=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: th></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Na=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: me</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>Brijes=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: h Rajubhai Solanki</td></tr><tr><td style=3D'padding: 12px; border: 1px sol=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: id #ddd;'><strong>Email</strong></td><td style=3D'padding: 12px; border: 1p=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: x solid #ddd;'>kanudo3101@gmail.com</td></tr><tr><td style=3D'padding: 12px=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: ; border: 1px solid #ddd;'><strong>Phone</strong></td><td style=3D'padding:=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER:  12px; border: 1px solid #ddd;'>789</td></tr><tr><td style=3D'padding: 12px=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: ; border: 1px solid #ddd;'><strong>Company</strong></td><td style=3D'paddin=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: g: 12px; border: 1px solid #ddd;'>self</td></tr><tr><td style=3D'padding: 1=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: 2px; border: 1px solid #ddd;'><strong>Consultation Type</strong></td><td st=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: yle=3D'padding: 12px; border: 1px solid #ddd;'>discovery</td></tr><tr><td s=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: tyle=3D'padding: 12px; border: 1px solid #ddd;'><strong>Preferred Date</str=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: ong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>2026-01-29</t=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: d></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Pre=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: ferred Time</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: ;'>afternoon</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #dd=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: d;'><strong>Timezone</strong></td><td style=3D'padding: 12px; border: 1px s=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: olid #ddd;'>IST</td></tr><tr><td style=3D'padding: 12px; border: 1px solid =
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: #ddd;'><strong>Project Brief</strong></td><td style=3D'padding: 12px; borde=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: r: 1px solid #ddd;'>test</td></tr><tr><td style=3D'padding: 12px; border: 1=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: px solid #ddd;'><strong>Questions</strong></td><td style=3D'padding: 12px; =
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: border: 1px solid #ddd;'>test</td></tr></table><p style=3D'margin: 20px 0;'=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: >We will get back to you soon.</p><hr style=3D'border: 1px solid #eee; marg=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: in: 30px 0;'><p style=3D'color: #666; font-size: 12px;'>This is an automate=
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: d email. Please do not reply.</p></div>
+
+[28-Jan-2026 10:19:04 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[28-Jan-2026 10:19:05 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1vl2dc-0000000C2gK-2kuQ
+
+[28-Jan-2026 10:19:05 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[28-Jan-2026 10:19:05 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[28-Jan-2026 10:19:53 UTC] Starting email send process for user: kanudo3101@gmail.com
+[28-Jan-2026 10:19:53 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.99 #2 Wed, 28 Jan 2026 03:19:53 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<kanudo3101@gmail.com>
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Wed, 28 Jan 2026 10:19:53 +0000
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: To: Brijesh Rajubhai Solanki <kanudo3101@gmail.com>
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: Thank you for contacting OmniTeq
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <DvyjaAjw5BpSTPFPZkF5hKXbsokoY8wSexeDUXEa0yI@omniteq.in>
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER:  boundary="b1=_DvyjaAjw5BpSTPFPZkF5hKXbsokoY8wSexeDUXEa0yI"
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_DvyjaAjw5BpSTPFPZkF5hKXbsokoY8wSexeDUXEa0yI
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/plain; charset=us-ascii
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Thank you for contacting Omniteq, Brijesh Rajubhai Solanki. We have received your message and will get back to you shortly.
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_DvyjaAjw5BpSTPFPZkF5hKXbsokoY8wSexeDUXEa0yI
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=us-ascii
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>Thank you for contacting OmniTeq</h2><p>We=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER:  have received your contact request. Here are the details:</p><table style=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'width: 100%; border-collapse: collapse; margin: 20px 0;'><tr style=3D'b=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: ackground-color: #f8f8f8;'><th style=3D'padding: 12px; text-align: left; bo=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: rder: 1px solid #ddd;'>Field</th><th style=3D'padding: 12px; text-align: le=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: ft; border: 1px solid #ddd;'>Value</th></tr><tr><td style=3D'padding: 12px;=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'><strong>Name</strong></td><td style=3D'padding: 1=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 2px; border: 1px solid #ddd;'>Brijesh Rajubhai Solanki</td></tr><tr><td sty=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: le=3D'padding: 12px; border: 1px solid #ddd;'><strong>Email</strong></td><t=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: d style=3D'padding: 12px; border: 1px solid #ddd;'>kanudo3101@gmail.com</td=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: ></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Phon=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: e</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>789</td=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: ></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Subj=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: ect</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>teset=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: </td></tr><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: Message</strong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>t=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: est</td></tr></table><p style=3D'margin: 20px 0;'>We will get back to you s=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: oon.</p><hr style=3D'border: 1px solid #eee; margin: 30px 0;'><p style=3D'c=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: olor: #666; font-size: 12px;'>This is an automated email. Please do not rep=
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: ly.</p></div>
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: --b1=_DvyjaAjw5BpSTPFPZkF5hKXbsokoY8wSexeDUXEa0yI--
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:53 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1vl2eP-0000000C2tU-42JF
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+
+[28-Jan-2026 10:19:55 UTC] Mail Configuration - Host: omniteq.in, Port: 465, Username: noreply@omniteq.in
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 220-p3plzcpnl509293.prod.phx3.secureserver.net ESMTP Exim 4.99 #2 Wed, 28 Jan 2026 03:19:55 -0700 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: EHLO omniteq.in
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 250-p3plzcpnl509293.prod.phx3.secureserver.net Hello omniteq.in [148.72.59.210]
+250-SIZE 52428800
+250-LIMITS MAILMAX=10 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: AUTH LOGIN
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: [credentials hidden]
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 235 Authentication succeeded
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: MAIL FROM:<noreply@omniteq.in>
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: RCPT TO:<contact@omniteq.in>
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 250 Accepted
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: DATA
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [2]: SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: Date: Wed, 28 Jan 2026 10:19:55 +0000
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: To: contact@omniteq.in
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: From: OmniTeq Support <noreply@omniteq.in>
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: Subject: New Contact Form Submission
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: Message-ID: <yB0cyvugHwD3ElqMmpWtXdxnTFsALIxFWfbe8d1K8@omniteq.in>
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: X-Mailer: PHPMailer 6.8.0 (https://github.com/PHPMailer/PHPMailer)
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: MIME-Version: 1.0
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: Content-Transfer-Encoding: quoted-printable
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: 
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: <div style=3D'font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: uto;'><h2 style=3D'color: #333;'>We got new contact submission</h2><p>Here =
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: are the details:</p><table style=3D'width: 100%; border-collapse: collapse;=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER:  margin: 20px 0;'><tr style=3D'background-color: #f8f8f8;'><th style=3D'pad=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: ding: 12px; text-align: left; border: 1px solid #ddd;'>Field</th><th style=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: =3D'padding: 12px; text-align: left; border: 1px solid #ddd;'>Value</th></t=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: r><tr><td style=3D'padding: 12px; border: 1px solid #ddd;'><strong>Name</st=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: rong></td><td style=3D'padding: 12px; border: 1px solid #ddd;'>Brijesh Raju=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: bhai Solanki</td></tr><tr><td style=3D'padding: 12px; border: 1px solid #dd=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: d;'><strong>Email</strong></td><td style=3D'padding: 12px; border: 1px soli=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: d #ddd;'>kanudo3101@gmail.com</td></tr><tr><td style=3D'padding: 12px; bord=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: er: 1px solid #ddd;'><strong>Phone</strong></td><td style=3D'padding: 12px;=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER:  border: 1px solid #ddd;'>789</td></tr><tr><td style=3D'padding: 12px; bord=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: er: 1px solid #ddd;'><strong>Subject</strong></td><td style=3D'padding: 12p=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: x; border: 1px solid #ddd;'>teset</td></tr><tr><td style=3D'padding: 12px; =
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: border: 1px solid #ddd;'><strong>Message</strong></td><td style=3D'padding:=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER:  12px; border: 1px solid #ddd;'>test</td></tr></table><p style=3D'margin: 2=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: 0px 0;'>We will get back to you soon.</p><hr style=3D'border: 1px solid #ee=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: e; margin: 30px 0;'><p style=3D'color: #666; font-size: 12px;'>This is an a=
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: utomated email. Please do not reply.</p></div>
+
+[28-Jan-2026 10:19:55 UTC] DEBUG [1]: CLIENT -> SERVER: .
+
+[28-Jan-2026 10:19:56 UTC] DEBUG [2]: SERVER -> CLIENT: 250 OK id=1vl2eR-0000000C2ty-0vQh
+
+[28-Jan-2026 10:19:56 UTC] DEBUG [1]: CLIENT -> SERVER: QUIT
+
+[28-Jan-2026 10:19:56 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
+

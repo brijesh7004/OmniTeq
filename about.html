@@ -1,44 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - OmniTeq</title>
-    <meta name="description" content="Learn about OmniTeq's mission, vision, and the team behind our innovative IoT & Automation Solutions">
+    <meta name="description"
+        content="Learn about OmniTeq's mission, vision, and the team behind our innovative IoT & Automation Solutions">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <link rel="stylesheet" href="css/responsive.css?v=2.0">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check (Prevents FLT) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
 </head>
+
 <body>
     <!-- Header Section -->
     <header id="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
                 </a>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About Us</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="nav-auth-link">Login</a>
+                <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
-                <div class="hamburger">
+                <div class="hamburger" id="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
 
@@ -62,9 +85,14 @@
                     <img src="https://placehold.co/600x400/0066cc/FFFFFF?text=Our+Journey" alt="OmniTeq Story">
                 </div>
                 <div class="story-text">
-                    <p class="lead-text">Founded in 2023, OmniTeq emerged from a vision to bridge the gap between cutting-edge technology and practical industrial applications.</p>
-                    <p>OmniTeq is a newly launched startup on a mission to simplify IoT, automation, and data-driven solutions—bringing smart technology to everyday life and business.</p>
-                    <p>OmniTeq began as a shared vision between passionate innovators aiming to make cutting-edge technology accessible and impactful. As a newly launched startup, we're focused on building smart, reliable solutions in IoT, automation, and data intelligence—empowering individuals and businesses to embrace the future, one step at a time.</p>
+                    <p class="lead-text">Founded in 2023, OmniTeq emerged from a vision to bridge the gap between
+                        cutting-edge technology and practical industrial applications.</p>
+                    <p>OmniTeq is a newly launched startup on a mission to simplify IoT, automation, and data-driven
+                        solutionsâ€”bringing smart technology to everyday life and business.</p>
+                    <p>OmniTeq began as a shared vision between passionate innovators aiming to make cutting-edge
+                        technology accessible and impactful. As a newly launched startup, we're focused on building
+                        smart, reliable solutions in IoT, automation, and data intelligenceâ€”empowering individuals and
+                        businesses to embrace the future, one step at a time.</p>
                     <div class="story-stats">
                         <div class="stat-item">
                             <span class="stat-number">2023</span>
@@ -93,14 +121,16 @@
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <h3>Our Mission</h3>
-                    <p>To empower businesses through accessible, scalable, and innovative IoT and automation solutions that drive efficiency, sustainability, and growth.</p>
+                    <p>To empower businesses through accessible, scalable, and innovative IoT and automation solutions
+                        that drive efficiency, sustainability, and growth.</p>
                 </div>
                 <div class="vision-box">
                     <div class="icon">
                         <i class="fas fa-eye"></i>
                     </div>
                     <h3>Our Vision</h3>
-                    <p>To be the global leader in creating seamless connections between physical operations and digital intelligence, transforming how industries work in the connected era.</p>
+                    <p>To be the global leader in creating seamless connections between physical operations and digital
+                        intelligence, transforming how industries work in the connected era.</p>
                 </div>
                 <div class="values-box">
                     <div class="icon">
@@ -108,11 +138,16 @@
                     </div>
                     <h3>Our Values</h3>
                     <ul class="values-list">
-                        <li><i class="fas fa-check-circle"></i> <strong>Innovation:</strong> Constantly pushing boundaries</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Excellence:</strong> Delivering quality without compromise</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Integrity:</strong> Building trust through transparency</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Collaboration:</strong> Working together for better outcomes</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>Adaptability:</strong> Embracing change and evolution</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Innovation:</strong> Constantly pushing
+                            boundaries</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Excellence:</strong> Delivering quality without
+                            compromise</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Integrity:</strong> Building trust through
+                            transparency</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Collaboration:</strong> Working together for
+                            better outcomes</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Adaptability:</strong> Embracing change and
+                            evolution</li>
                     </ul>
                 </div>
             </div>
@@ -243,13 +278,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
-                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and
+                        growth.</p>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>                        
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                         <!-- <a href="#"><i class="fab fa-github"></i></a> -->
                     </div>
                 </div>
@@ -260,7 +300,6 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
                         <li><a href="resources.html">Resources</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -299,4 +338,5 @@
     <!-- JavaScript Files -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -137,3 +137,37 @@ Stack trace:
 #1 {main}
   thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/mqtt/mqtt_publish.php on line 29
 [07-Jun-2025 07:29:23 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:30:51 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:55:39 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:56:07 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 07:56:30 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:02:40 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:04:29 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:05:24 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:07:33 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:12:39 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:13:39 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:20:55 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:22:07 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:23:02 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:27:20 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 08:27:59 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 15:48:19 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 15:52:31 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 15:52:56 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 15:54:54 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 15:57:32 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 16:06:21 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 16:07:05 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 16:08:22 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 16:10:54 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 17:31:53 UTC] MQTT publish error: [1000] Establishing a connection to the MQTT broker failed: Socket error [110]: Connection timed out
+[07-Jun-2025 17:45:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function replace() in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:87
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 87
+[07-Jun-2025 17:46:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function replace() in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php:87
+Stack trace:
+#0 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 87
+[07-Jun-2025 17:48:11 UTC] PHP Parse error:  syntax error, unexpected variable "$payload" in /home/gpgzqevvi4rf/public_html/api/iot-cloud-server/api/control/update_output.php on line 88

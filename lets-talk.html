@@ -1,45 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let's Talk - OmniTeq</title>
-    <meta name="description" content="Schedule a consultation with OmniTeq's experts to discuss your IoT, automation, and embedded systems projects">
-    <!-- Favicon -->
-    <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/notifications.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="en" class="dark-theme">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Let's Talk - OmniTeq</title>
+        <meta name="description"
+            content="Schedule a consultation with OmniTeq's experts to discuss your IoT, automation, and embedded systems projects">
+        <!-- Favicon -->
+        <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="css/style.css?v=3.6">
+        <link rel="stylesheet" href="css/responsive.css?v=2.1">
+        <link rel="stylesheet" href="css/notifications.css">
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Theme Check (Prevents FLT) -->
+        <script>
+            (function () {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark-theme');
+                } else {
+                    document.documentElement.classList.remove('dark-theme');
+                }
+            })();
+        </script>
+    </head>
+
 <body>
     <!-- Header Section -->
     <header id="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
                 </a>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <a href="lets-talk.html" class="cta-button active">Let's Talk</a>
-                <div class="hamburger">
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="nav-auth-link">Login</a>
+                <a href="register.html" class="nav-auth-btn">Register</a>
+                <a href="lets-talk.html" class="cta-button">Let's Talk</a>
+                <div class="hamburger" id="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
 
@@ -65,14 +93,16 @@
                         <i class="fas fa-phone-alt"></i>
                     </div>
                     <h3>Discovery Call</h3>
-                    <p>A 30-minute call to discuss your project ideas and explore potential solutions. Our experts will listen to your needs and provide initial guidance.</p>
+                    <p>A 30-minute call to discuss your project ideas and explore potential solutions. Our experts will
+                        listen to your needs and provide initial guidance.</p>
                     <ul class="feature-list">
                         <li><i class="fas fa-check-circle"></i> 30-minute consultation</li>
                         <li><i class="fas fa-check-circle"></i> Needs assessment</li>
                         <li><i class="fas fa-check-circle"></i> Initial recommendations</li>
                         <li><i class="fas fa-check-circle"></i> No obligation</li>
                     </ul>
-                    <a href="#booking-form" class="service-link scroll-to">Schedule a Call <i class="fas fa-arrow-right"></i></a>
+                    <a href="#booking-form" class="service-link scroll-to">Schedule a Call <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- Option 2: Project Consultation -->
@@ -81,14 +111,16 @@
                         <i class="fas fa-project-diagram"></i>
                     </div>
                     <h3>Project Consultation</h3>
-                    <p>A comprehensive 60-minute session to deep dive into your project requirements, discuss technical details, and outline potential approaches.</p>
+                    <p>A comprehensive 60-minute session to deep dive into your project requirements, discuss technical
+                        details, and outline potential approaches.</p>
                     <ul class="feature-list">
                         <li><i class="fas fa-check-circle"></i> 60-minute detailed consultation</li>
                         <li><i class="fas fa-check-circle"></i> Technical feasibility assessment</li>
                         <li><i class="fas fa-check-circle"></i> Solution architecture discussion</li>
                         <li><i class="fas fa-check-circle"></i> Preliminary timeline and budget</li>
                     </ul>
-                    <a href="#booking-form" class="service-link scroll-to">Request Consultation <i class="fas fa-arrow-right"></i></a>
+                    <a href="#booking-form" class="service-link scroll-to">Request Consultation <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- Option 3: Custom Quote -->
@@ -97,14 +129,16 @@
                         <i class="fas fa-file-invoice-dollar"></i>
                     </div>
                     <h3>Custom Quote</h3>
-                    <p>Submit your project details to receive a customized quote. Our team will review your requirements and provide a detailed proposal.</p>
+                    <p>Submit your project details to receive a customized quote. Our team will review your requirements
+                        and provide a detailed proposal.</p>
                     <ul class="feature-list">
                         <li><i class="fas fa-check-circle"></i> Detailed project proposal</li>
                         <li><i class="fas fa-check-circle"></i> Accurate cost estimation</li>
                         <li><i class="fas fa-check-circle"></i> Implementation timeline</li>
                         <li><i class="fas fa-check-circle"></i> Resource allocation plan</li>
                     </ul>
-                    <a href="#quote-form" class="service-link scroll-to">Request Quote <i class="fas fa-arrow-right"></i></a>
+                    <a href="#quote-form" class="service-link scroll-to">Request Quote <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -131,8 +165,8 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
+                            <label for="mobile">Mobile Number</label>
+                            <input type="tel" id="mobile" name="mobile" placeholder="Your mobile number" required>
                         </div>
                         <div class="form-group">
                             <label for="company">Company Name</label>
@@ -179,11 +213,14 @@
                     </div>
                     <div class="form-group">
                         <label for="project_brief">Project Brief</label>
-                        <textarea id="project_brief" name="project_brief" rows="6" placeholder="Please include as much detail as possible about your project requirements." required></textarea>
+                        <textarea id="project_brief" name="project_brief" rows="6"
+                            placeholder="Please include as much detail as possible about your project requirements."
+                            required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="questions">Additional Questions</label>
-                        <textarea id="questions" name="questions" rows="4" placeholder="Any specific questions or topics you'd like to discuss?"></textarea>
+                        <textarea id="questions" name="questions" rows="4"
+                            placeholder="Any specific questions or topics you'd like to discuss?"></textarea>
                     </div>
                     <div class="form-group form-controls">
                         <button type="submit" class="btn-primary">
@@ -216,8 +253,8 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="(091) 12345 12345" required>
+                            <label for="mobile">Mobile Number</label>
+                            <input type="tel" id="mobile" name="mobile" placeholder="Your mobile number" required>
                         </div>
                         <div class="form-group">
                             <label for="company">Company Name</label>
@@ -241,10 +278,10 @@
                             <label for="budget_range">Budget Range</label>
                             <select id="budget_range" name="budget_range">
                                 <option value="">Select budget range</option>
-                                <option value="under-1L">Under ₹1,00,000</option>
-                                <option value="1L-5L">₹1,00,000 - ₹5,00,000</option>
-                                <option value="5L-10L">₹5,00,000 - ₹10,00,000</option>
-                                <option value="10L-plus">₹10,00,000+</option>
+                                <option value="under-1L">Under &#8377;1,00,000</option>
+                                <option value="1L-5L">&#8377;1,00,000 - &#8377;5,00,000</option>
+                                <option value="5L-10L">&#8377;5,00,000 - &#8377;10,00,000</option>
+                                <option value="10L-plus">&#8377;10,00,000+</option>
                                 <option value="not-sure">Not sure yet</option>
                             </select>
                         </div>
@@ -276,7 +313,9 @@
                     </div>
                     <div class="form-group full-width">
                         <label for="project_details">Project Details</label>
-                        <textarea id="project_details" name="project_details" rows="6" placeholder="Please include as much detail as possible about your project requirements, goals, and any specific technologies or features you're interested in." required></textarea>
+                        <textarea id="project_details" name="project_details" rows="6"
+                            placeholder="Please include as much detail as possible about your project requirements, goals, and any specific technologies or features you're interested in."
+                            required></textarea>
                     </div>
                     <div class="form-group full-width file-upload-container">
                         <label for="file-upload">Attach Relevant Documents (optional)</label>
@@ -309,7 +348,9 @@
             <div class="testimonials-slider">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"The consultation process with OmniTeq was incredibly valuable. Their team took the time to understand our unique challenges and proposed a solution that perfectly addressed our needs."</p>
+                        <p>"The consultation process with OmniTeq was incredibly valuable. Their team took the time to
+                            understand our unique challenges and proposed a solution that perfectly addressed our
+                            needs."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://www.placehold.co/100x100?text=JS" alt="Client 1">
@@ -321,7 +362,9 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"From our initial consultation to project completion, OmniTeq demonstrated exceptional expertise and professionalism. They delivered exactly what they promised, on time and within budget."</p>
+                        <p>"From our initial consultation to project completion, OmniTeq demonstrated exceptional
+                            expertise and professionalism. They delivered exactly what they promised, on time and within
+                            budget."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://www.placehold.co/100x100?text=SJ" alt="Client 2">
@@ -333,7 +376,9 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"The team at OmniTeq provided invaluable guidance during our consultation. Their insights helped us refine our project scope and choose the most effective technologies for our needs."</p>
+                        <p>"The team at OmniTeq provided invaluable guidance during our consultation. Their insights
+                            helped us refine our project scope and choose the most effective technologies for our
+                            needs."</p>
                     </div>
                     <div class="testimonial-author">
                         <img src="https://www.placehold.co/100x100?text=MC" alt="Client 3">
@@ -361,7 +406,10 @@
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>To make the most of your consultation, we recommend preparing a brief overview of your project goals, any specific challenges you're facing, and questions you'd like to discuss. If you have any existing documentation or specifications, having those on hand can be helpful, but it's not required.</p>
+                        <p>To make the most of your consultation, we recommend preparing a brief overview of your
+                            project goals, any specific challenges you're facing, and questions you'd like to discuss.
+                            If you have any existing documentation or specifications, having those on hand can be
+                            helpful, but it's not required.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -370,7 +418,9 @@
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>No, there is absolutely no obligation to proceed with a project after the consultation. Our goal is to provide valuable insights and help you understand your options. You're free to take that information and make the best decision for your business.</p>
+                        <p>No, there is absolutely no obligation to proceed with a project after the consultation. Our
+                            goal is to provide valuable insights and help you understand your options. You're free to
+                            take that information and make the best decision for your business.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -379,7 +429,10 @@
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>For standard projects, we typically provide quotes within 2-3 business days after receiving all necessary information. For more complex projects that require detailed scoping, it may take 5-7 business days. We'll always keep you informed about the timeline for receiving your quote.</p>
+                        <p>For standard projects, we typically provide quotes within 2-3 business days after receiving
+                            all necessary information. For more complex projects that require detailed scoping, it may
+                            take 5-7 business days. We'll always keep you informed about the timeline for receiving your
+                            quote.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -388,7 +441,9 @@
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes, you can reschedule your consultation if needed. We ask that you provide at least 24 hours' notice when possible. You'll receive a confirmation email after booking that includes a link to reschedule if necessary.</p>
+                        <p>Yes, you can reschedule your consultation if needed. We ask that you provide at least 24
+                            hours' notice when possible. You'll receive a confirmation email after booking that includes
+                            a link to reschedule if necessary.</p>
                     </div>
                 </div>
             </div>
@@ -400,13 +455,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
-                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage cutting-edge technology to improve efficiency, productivity, and innovation.</p>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage
+                        cutting-edge technology to improve efficiency, productivity, and innovation.</p>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>                        
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                         <!-- <a href="#"><i class="fab fa-github"></i></a> -->
                     </div>
                 </div>
@@ -417,7 +477,6 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -454,4 +513,5 @@
     <!-- JavaScript Files -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

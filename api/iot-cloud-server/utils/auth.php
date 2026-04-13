@@ -2,12 +2,12 @@
 require_once 'config.php';
 
 function generateToken($user_id) {
-    $accessPayload  = [
+    $payload = [
         'uid' => $user_id,
         'iat' => time(),
         'exp' => time() + (3600 * 24)
     ];
-    return base64_encode(json_encode($accessPayload )) . '.' . hash_hmac('sha256', json_encode($payload), JWT_SECRET);
+    return base64_encode(json_encode($payload)) . '.' . hash_hmac('sha256', json_encode($payload), JWT_SECRET);
 }
 
 function validateToken($token) {

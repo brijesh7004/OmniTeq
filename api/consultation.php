@@ -7,10 +7,25 @@ $conn = getConnection();
 
 switch ($method) {
     case 'GET':
+    case 'POST':
+    case 'PUT':
+    case 'DELETE':
+        checkAuth();
+        break;
+}
+
+$userId = (int)$_SESSION['user_id'];
+$isAdmin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin');
+
+switch ($method) {
+    case 'GET':
         if (isset($_GET['id'])) {
             $id = (int)$_GET['id'];
-            $stmt = $conn->prepare("SELECT * FROM consultation_bookings WHERE id = ?");
-            $stmt->bind_param("i", $id);
+            $sql = $isAdmin ? "SELECT * FROM consultation_bookings WHERE id = ?" : "SELECT * FROM consultation_bookings WHERE id = ? AND user_id = ?";
+            $stmt = $conn->prepare($sql);
+            if ($isAdmin) $stmt->bind_param("i", $id);
+            else $stmt->bind_param("ii", $id, $userId);
+            
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -22,10 +37,17 @@ switch ($method) {
 
             $stmt->close();
         } else {
-			if(isset($_GET['status'])){ $status=" where status='{$_GET['status']}' "; } else { $status=""; }
+            $status = "";
+            if (isset($_GET['status'])) {
+                $statusVal = $conn->real_escape_string($_GET['status']);
+                $status = " AND status='$statusVal' ";
+            }
 			
             $pagination = getPaginationParams();
-            $stmt = $conn->prepare("SELECT * FROM consultation_bookings {$status} ORDER BY created_at DESC LIMIT ?, ?");
+            $whereClause = $isAdmin ? " WHERE 1=1 " : " WHERE user_id = $userId ";
+            $sql = "SELECT * FROM consultation_bookings $whereClause $status ORDER BY created_at DESC LIMIT ?, ?";
+            
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param("ii", $pagination['offset'], $pagination['size']);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -35,7 +57,7 @@ switch ($method) {
                 $data[] = $row;
             }
 
-            $countResult = $conn->query("SELECT COUNT(*) as total FROM consultation_bookings");
+            $countResult = $conn->query("SELECT COUNT(*) as total FROM consultation_bookings $whereClause $status");
             $totalCount = $countResult->fetch_assoc()['total'];
 
             sendResponse(200, "Success", [
@@ -49,17 +71,18 @@ switch ($method) {
 
     case 'POST':
         $data = getRequestData();
-        validateRequired($data, ['name', 'email', 'phone', 'consultation_type', 'preferred_date', 'preferred_time', 'project_brief']);
+        validateRequired($data, ['name', 'email', 'mobile', 'consultation_type', 'preferred_date', 'preferred_time', 'project_brief']);
         $data = sanitizeInput($data);
 
+        $userId = $_SESSION['user_id'] ?? null;
         $stmt = $conn->prepare("INSERT INTO consultation_bookings (
-            name, email, phone, company, consultation_type, 
+            user_id, name, email, mobile, company, consultation_type, 
             preferred_date, preferred_time, timezone, 
             project_brief, questions, status
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
 
-        $stmt->bind_param("ssssssssss",
-            $data['name'], $data['email'], $data['phone'], $data['company'],
+        $stmt->bind_param("issssssssss",
+            $userId, $data['name'], $data['email'], $data['mobile'], $data['company'],
             $data['consultation_type'], $data['preferred_date'], $data['preferred_time'],
             $data['timezone'], $data['project_brief'], $data['questions']
         );
@@ -94,7 +117,7 @@ switch ($method) {
         $data = sanitizeInput(getRequestData());
 
         $allowedFields = [
-            'name', 'email', 'phone', 'company', 'consultation_type',
+            'name', 'email', 'mobile', 'company', 'consultation_type',
             'preferred_date', 'preferred_time', 'timezone',
             'project_brief', 'questions', 'status'
         ];

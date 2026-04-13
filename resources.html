@@ -1,44 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources - OmniTeq</title>
-    <meta name="description" content="Access OmniTeq's brochures, pitch decks, and other resources about our IoT and automation solutions">
+    <meta name="description"
+        content="Access OmniTeq's brochures, pitch decks, and other resources about our IoT and automation solutions">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <link rel="stylesheet" href="css/responsive.css?v=2.0">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Check (Prevents FLT) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+            }
+        })();
+    </script>
 </head>
+
 <body>
     <!-- Header Section -->
     <header id="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
                 </a>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
-                    <li><a href="resources.html" class="active">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="nav-auth-link">Login</a>
+                <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
-                <div class="hamburger">
+                <div class="hamburger" id="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
 
@@ -58,7 +81,10 @@
                 <p>Access our collection of resources to learn more about our solutions and expertise</p>
             </div>
             <div class="resources-intro-text">
-                <p>At OmniTeq, we believe in sharing knowledge and providing valuable resources to help you understand our solutions and their potential impact on your business. Browse through our curated collection of materials to gain insights into the latest technologies and how they can transform your operations.</p>
+                <p>At OmniTeq, we believe in sharing knowledge and providing valuable resources to help you understand
+                    our solutions and their potential impact on your business. Browse through our curated collection of
+                    materials to gain insights into the latest technologies and how they can transform your operations.
+                </p>
             </div>
         </div>
     </section>
@@ -89,12 +115,14 @@
                         </div>
                         <div class="resource-content">
                             <h3>OmniTeq Company Profile</h3>
-                            <p>A comprehensive overview of our company, mission, vision, and core offerings to help you understand our approach to technology solutions.</p>
+                            <p>A comprehensive overview of our company, mission, vision, and core offerings to help you
+                                understand our approach to technology solutions.</p>
                             <div class="resource-meta">
                                 <span><i class="fas fa-calendar-alt"></i> Updated: January 2023</span>
                                 <span><i class="fas fa-file-alt"></i> PDF (530 KB)</span>
                             </div>
-                            <a href="https://www.omniteq.in/documents/Brochure -OmniTeq Company.pdf" class="resource-download-btn" download>
+                            <a href="https://www.omniteq.in/documents/Brochure -OmniTeq Company.pdf"
+                                class="resource-download-btn" download>
                                 <i class="fas fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -109,12 +137,14 @@
                         </div>
                         <div class="resource-content">
                             <h3>IoT Solutions Brochure</h3>
-                            <p>Detailed information about our IoT offerings, technologies, and implementation approach for creating connected environments.</p>
+                            <p>Detailed information about our IoT offerings, technologies, and implementation approach
+                                for creating connected environments.</p>
                             <div class="resource-meta">
                                 <span><i class="fas fa-calendar-alt"></i> Updated: March 2023</span>
                                 <span><i class="fas fa-file-alt"></i> PDF (530 KB)</span>
                             </div>
-                            <a href="https://www.omniteq.in/documents/Brochure -IOT solutions.pdf" class="resource-download-btn" download>
+                            <a href="https://www.omniteq.in/documents/Brochure -IOT solutions.pdf"
+                                class="resource-download-btn" download>
                                 <i class="fas fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -150,12 +180,14 @@
                         </div>
                         <div class="resource-content">
                             <h3>Smart Wifi Alarm System</h3>
-                            <p>A comprehensive security and notification system designed specifically for educational institutions.</p>
+                            <p>A comprehensive security and notification system designed specifically for educational
+                                institutions.</p>
                             <div class="resource-meta">
                                 <span><i class="fas fa-calendar-alt"></i> Updated: April 2023</span>
                                 <span><i class="fas fa-file-alt"></i> PDF (150 KB)</span>
                             </div>
-                            <a href="https://www.omniteq.in/documents/Product -Smart Wifi Alarm System.pdf" class="resource-download-btn" download>
+                            <a href="https://www.omniteq.in/documents/Product -Smart Wifi Alarm System.pdf"
+                                class="resource-download-btn" download>
                                 <i class="fas fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -230,12 +262,14 @@
                         </div>
                         <div class="resource-content">
                             <h3>The Future of Industrial Automation</h3>
-                            <p>In-depth analysis of trends and technologies shaping the future of industrial automation and what businesses should prepare for.</p>
+                            <p>In-depth analysis of trends and technologies shaping the future of industrial automation
+                                and what businesses should prepare for.</p>
                             <div class="resource-meta">
                                 <span><i class="fas fa-calendar-alt"></i> Published: June 2023</span>
                                 <span><i class="fas fa-file-alt"></i> PDF (420 KB)</span>
                             </div>
-                            <a href="https://www.omniteq.in/documents/Whitepaper -The Future of Industrial Automation.pdf" class="resource-download-btn" download>
+                            <a href="https://www.omniteq.in/documents/Whitepaper -The Future of Industrial Automation.pdf"
+                                class="resource-download-btn" download>
                                 <i class="fas fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -250,19 +284,21 @@
                         </div>
                         <div class="resource-content">
                             <h3>IoT Security Best Practices</h3>
-                            <p>Comprehensive guide to implementing secure IoT solutions in industrial environments, including risk assessment and mitigation strategies.</p>
+                            <p>Comprehensive guide to implementing secure IoT solutions in industrial environments,
+                                including risk assessment and mitigation strategies.</p>
                             <div class="resource-meta">
                                 <span><i class="fas fa-calendar-alt"></i> Published: May 2023</span>
                                 <span><i class="fas fa-file-alt"></i> PDF (450 KB)</span>
                             </div>
-                            <a href="https://www.omniteq.in/documents/Whitepaper -IoT Security Best Practices.pdf" class="resource-download-btn" download>
+                            <a href="https://www.omniteq.in/documents/Whitepaper -IoT Security Best Practices.pdf"
+                                class="resource-download-btn" download>
                                 <i class="fas fa-download"></i> Download PDF
                             </a>
                         </div>
                     </div>
                 </div>
 
-                
+
                 <!-- Whitepaper 3 -->
                 <div class="resource-item" data-category="whitepaper">
                     <div class="resource-card">
@@ -271,12 +307,14 @@
                         </div>
                         <div class="resource-content">
                             <h3>Industry 4.0 Solutions</h3>
-                            <p>Overview of our Industry 4.0 offerings and their impact on manufacturing efficiency, productivity, and digital transformation.</p>
+                            <p>Overview of our Industry 4.0 offerings and their impact on manufacturing efficiency,
+                                productivity, and digital transformation.</p>
                             <div class="resource-meta">
                                 <span><i class="fas fa-calendar-alt"></i> Updated: April 2023</span>
                                 <span><i class="fas fa-file-alt"></i> PDF (480 KB)</span>
                             </div>
-                            <a href="https://www.omniteq.in/documents/Brochure -IoT INDUSTRY 4.O.pdf" class="resource-download-btn" download>
+                            <a href="https://www.omniteq.in/documents/Brochure -IoT INDUSTRY 4.O.pdf"
+                                class="resource-download-btn" download>
                                 <i class="fas fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -292,10 +330,13 @@
             <div class="request-content">
                 <div class="request-text">
                     <h2>Need Specific Information?</h2>
-                    <p>If you're looking for specific resources or have questions about our solutions, our team is ready to help. Contact us to request custom materials tailored to your needs or schedule a personalized consultation.</p>
+                    <p>If you're looking for specific resources or have questions about our solutions, our team is ready
+                        to help. Contact us to request custom materials tailored to your needs or schedule a
+                        personalized consultation.</p>
                     <div class="request-buttons">
                         <a href="contact.html" class="btn-primary"><i class="fas fa-envelope"></i> Contact Us</a>
-                        <a href="lets-talk.html" class="btn-secondary"><i class="fas fa-phone-alt"></i> Schedule a Call</a>
+                        <a href="lets-talk.html" class="btn-secondary"><i class="fas fa-phone-alt"></i> Schedule a
+                            Call</a>
                     </div>
                 </div>
                 <!-- <div class="request-image">
@@ -338,13 +379,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World" class="footer-logo">
-                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage cutting-edge technology to improve efficiency, productivity, and innovation.</p>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage
+                        cutting-edge technology to improve efficiency, productivity, and innovation.</p>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>                        
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                         <!-- <a href="#"><i class="fab fa-github"></i></a> -->
                     </div>
                 </div>
@@ -355,7 +401,6 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <!-- <li><a href="portfolio.html">Portfolio</a></li> -->
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -392,4 +437,5 @@
     <!-- JavaScript Files -->
     <script src="js/main.js"></script>
 </body>
+
 </html>
