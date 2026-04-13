@@ -1,0 +1,17 @@
+{
+    "product":  "smart-wifi-alarm",
+    "board":  "esp32-wroom-32",
+    "channel":  "prod",
+    "version":  "1.0.0",
+    "build_id":  "2026-03-13.1-prod",
+    "min_required_version":  "1.0.0",
+    "force_update":  false,
+    "url":  "https://omniteq.in/ota/IoT_Timer_Alarm_v1.ino.bin",
+    "storage_path":  "/ota/prod/smart-wifi-alarm/esp32-wroom-32/1.0.0/IoT_Timer_Alarm_v1.ino.bin",
+    "sha256":  "67cf0cb4c6b00333845bb067e27c2a24a5c16bab3d992130d5cc5ceb73d78af1",
+    "signature":  "jtiE83iwcqfe3Jo/YF+8/OesvaA2+L/PJRakvDiyAomWmZHSaUlMHO5bqo4Qwo2r3gKn1k9DWzoimebQHMxhaRCgmpb0sUMyi5aI/9jjGFHaXnir3Ft0w3t5X+IJJq99Pl696AwJQu5CXvHwQ/UDRSgBl6K9sCm/nm0wb8p1pWebRm1FGDnghnKkl9GGmX6PFGsGDhPqzGmIb+B0ki3ucVCiPjm6jPypDcDY8UuRBB26mXGJFFYtoZrg0sY5btQ6AjOOcg2WqUyrJh5VC4mU/rTi7eL5MxcFTe3VbLPNU3CCjerK7tqNcuO0CrsIw4XejwFz5u+qtk2uGnkGd+vg9g==",
+    "signing_algorithm":  "RSA-SHA256",
+    "public_key_id":  "iot-alarm-prod-2026-key1",
+    "size":  1340288,
+    "release_notes":  "First stable production release"
+}

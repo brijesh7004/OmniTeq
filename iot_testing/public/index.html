@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Device Tester</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Panel: API Testing -->
+        <div class="panel left-panel">
+            <h2>API Testing</h2>
+            
+            <!-- Global Config -->
+            <div class="api-section" style="background: #e0e7ff; border-color: #c7d2fe;">
+                <h3>Configuration</h3>
+                <div class="form-group">
+                    <label>Device Key (x-device-key):</label>
+                    <input type="text" id="device-key" value="dS1">
+                </div>
+            </div>
+
+            <!-- 1. Report State -->
+            <div class="api-section">
+                <h3>1. POST /report</h3>
+                <div class="form-group">
+                    <label>Device ID:</label>
+                    <input type="text" id="report-id" value="dS1">
+                </div>
+                <div class="form-group">
+                    <label>Payload (JSON):</label>
+                    <textarea id="report-state" rows="8">{
+    "state": {
+        "relay": 1
+    },
+    "mode": "repeat",
+    "manual_override": false,
+    "emergency_stop": false,
+    "is_running": true,
+    "clock_str": "2026-01-12 10:15:30"
+}</textarea>
+                </div>
+                <button class="btn-primary" onclick="testReport()">Send Report</button>
+                <div class="response-area" id="report-response"></div>
+            </div>
+
+            <!-- 2. Poll Commands -->
+            <div class="api-section">
+                <h3>2. GET /poll</h3>
+                <div class="form-group">
+                    <label>Device ID:</label>
+                    <input type="text" id="poll-id" value="dS1">
+                </div>
+                <button class="btn-primary" onclick="testPoll()">Poll Commands</button>
+                <div class="response-area" id="poll-response"></div>
+            </div>
+
+            <!-- 3. Ack Command -->
+            <div class="api-section">
+                <h3>3. POST /ack</h3>
+                <div class="form-group">
+                    <label>Device ID:</label>
+                    <input type="text" id="ack-id" value="dS1">
+                </div>
+                <div class="form-group">
+                    <label>Command ID:</label>
+                    <input type="text" id="ack-cmd-id" placeholder="123">
+                </div>
+                <div class="form-group">
+                    <label>Status:</label>
+                    <select id="ack-status">
+                        <option value="ack">ack</option>
+                        <option value="error">error</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="testAck()">Send Ack</button>
+                <div class="response-area" id="ack-response"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel: WebSocket Testing -->
+        <div class="panel right-panel">
+            <h2>WebSocket Tester</h2>
+            
+            <div class="ws-controls">
+                <div class="form-group">
+                    <label>WS URL:</label>
+                    <input type="text" id="ws-url" value="ws://100.93.48.124:3000/ws/device?device_id=dS1&device_key=dS1">
+                </div>
+                <div class="button-group">
+                    <button class="btn-success" id="ws-start">Start</button>
+                    <button class="btn-warning" id="ws-reload">Reload</button>
+                    <button class="btn-danger" id="ws-stop">Stop</button>
+                </div>
+                <div class="form-group">
+                    <label>Status: <span id="ws-status" class="status-disconnected">Disconnected</span></label>
+                </div>
+            </div>
+
+            <div class="ws-logs-container">
+                <label>Live Logs:</label>
+                <div id="ws-logs" class="ws-logs"></div>
+                <button class="btn-small" onclick="document.getElementById('ws-logs').innerHTML = ''">Clear Logs</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
