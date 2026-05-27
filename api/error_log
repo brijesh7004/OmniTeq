@@ -1387,3 +1387,48 @@
 
 [28-Jan-2026 10:19:56 UTC] DEBUG [2]: SERVER -> CLIENT: 221 p3plzcpnl509293.prod.phx3.secureserver.net closing connection
 
+[30-Mar-2026 08:30:22 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/consultation.php:50
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/consultation.php(50): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 50
+[30-Mar-2026 08:30:22 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/quote.php:51
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/quote.php(51): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/quote.php on line 51
+[30-Mar-2026 08:30:22 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/contact.php:46
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/contact.php(46): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/contact.php on line 46
+[30-Mar-2026 08:30:26 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/contact.php:46
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/contact.php(46): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/contact.php on line 46
+[30-Mar-2026 08:30:26 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/quote.php:51
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/quote.php(51): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/quote.php on line 51
+[30-Mar-2026 08:30:26 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/consultation.php:50
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/consultation.php(50): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 50
+[30-Mar-2026 08:30:28 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/contact.php:46
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/contact.php(46): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/contact.php on line 46
+[30-Mar-2026 08:30:28 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/quote.php:51
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/quote.php(51): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/quote.php on line 51
+[30-Mar-2026 08:30:28 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'WHERE' in /home/gpgzqevvi4rf/public_html/api/consultation.php:50
+Stack trace:
+#0 /home/gpgzqevvi4rf/public_html/api/consultation.php(50): mysqli->prepare()
+#1 {main}
+  thrown in /home/gpgzqevvi4rf/public_html/api/consultation.php on line 50

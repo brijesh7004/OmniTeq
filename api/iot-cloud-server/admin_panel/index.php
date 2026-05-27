@@ -7,7 +7,6 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
 ?>
 <!DOCTYPE html>
 <html lang="en" class="dark-theme">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +20,7 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Theme Check -->
     <script>
-        (function () {
+        (function() {
             const savedTheme = localStorage.getItem('theme') || 'dark';
             if (savedTheme === 'dark') {
                 document.documentElement.classList.add('dark-theme');
@@ -39,7 +38,7 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
             color: var(--dark);
             transition: var(--theme-transition);
         }
-
+        
         .styled-table {
             width: 100%;
             border-collapse: collapse;
@@ -52,7 +51,7 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
             background-color: var(--light-gray);
             transition: var(--theme-transition);
         }
-
+        
         .dark-theme .styled-table {
             background-color: var(--light);
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), var(--card-shadow);
@@ -68,12 +67,12 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
         .styled-table td {
             padding: 12px 15px;
         }
-
+        
         .styled-table tbody tr {
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             transition: var(--theme-transition);
         }
-
+        
         .dark-theme .styled-table tbody tr {
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--gray);
@@ -82,7 +81,7 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
         .styled-table tbody tr:nth-of-type(even) {
             background-color: rgba(0, 0, 0, 0.02);
         }
-
+        
         .dark-theme .styled-table tbody tr:nth-of-type(even) {
             background-color: rgba(255, 255, 255, 0.02);
         }
@@ -96,7 +95,6 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
         }
     </style>
 </head>
-
 <body>
     <!-- Simple Admin Header -->
     <header id="header">
@@ -104,13 +102,12 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
             <div class="logo">
                 <a href="../../../index.html">
                     <img src="../../../images/logo/logo.svg" alt="OmniTeq Logo" id="navbar-logo">
-                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = '../../../images/logo/logo-white.svg';</script>
+                    <script>if(localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src='../../../images/logo/logo-white.svg';</script>
                 </a>
             </div>
-
+            
             <ul class="nav-menu">
-                <li><a href="../../../index.html">Main Site <i class="fas fa-external-link-alt"
-                            style="font-size:0.8rem;margin-left:4px;"></i></a></li>
+                <li><a href="../../../index.html">Main Site <i class="fas fa-external-link-alt" style="font-size:0.8rem;margin-left:4px;"></i></a></li>
             </ul>
 
             <div class="nav-actions">
@@ -130,22 +127,18 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
             </div>
             <div style="overflow-x:auto;">
                 <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($iot_users as $user): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($user['id']) ?></td>
-                                <td><?= htmlspecialchars($user['username']) ?></td>
-                                <td><?= htmlspecialchars($user['email']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                <thead>
+                    <tr><th>ID</th><th>Username</th><th>Email</th></tr>
+                </thead>
+                <tbody>
+                <?php foreach ($iot_users as $user): ?>
+                <tr>
+                <td><?= htmlspecialchars($user['id']) ?></td>
+                <td><?= htmlspecialchars($user['username']) ?></td>
+                <td><?= htmlspecialchars($user['email']) ?></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
                 </table>
             </div>
 
@@ -155,31 +148,25 @@ $iot_devices = $db->query("SELECT * FROM iot_devices")->fetchAll(PDO::FETCH_ASSO
             </div>
             <div style="overflow-x:auto;">
                 <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>User ID</th>
-                            <th>Name</th>
-                            <th>Secret</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($iot_devices as $dev): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($dev['id']) ?></td>
-                                <td><?= htmlspecialchars($dev['user_id']) ?></td>
-                                <td><?= htmlspecialchars($dev['device_name']) ?></td>
-                                <td><?= htmlspecialchars($dev['device_secret']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                <thead>
+                    <tr><th>ID</th><th>User ID</th><th>Name</th><th>Secret</th></tr>
+                </thead>
+                <tbody>
+                <?php foreach ($iot_devices as $dev): ?>
+                <tr>
+                <td><?= htmlspecialchars($dev['id']) ?></td>
+                <td><?= htmlspecialchars($dev['user_id']) ?></td>
+                <td><?= htmlspecialchars($dev['device_name']) ?></td>
+                <td><?= htmlspecialchars($dev['device_secret']) ?></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <!-- JavaScript Files for Theme Toggle -->
-    <script src="../../../js/main.js"></script>
+    <script src="../../../js/main.js?v=1.1"></script>
 </body>
-
 </html>

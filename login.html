@@ -8,15 +8,16 @@
     <meta name="description" content="Login to your OmniTeq account to access IoT smart solutions dashboard">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/style.css?v=3.6">
     <link rel="stylesheet" href="css/responsive.css?v=2.0">
-    <link rel="stylesheet" href="css/auth.css"> <!-- New Auth Stylesheet -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/auth.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Bootstrap for Auth Pages Form Layout -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!-- Theme Check (Prevents FLT) -->
+    <!-- Theme Check -->
     <script>
         (function () {
             const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -29,18 +30,26 @@
     </script>
 </head>
 
-<body>
-    <!-- Header Section -->
-    <header id="header">
-        <div class="container">
+<body class="landing-page">
+    <!-- Background Elements -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+
+    <!-- Floating Decorative Elements -->
+    <i class="fas fa-microchip floating-icon fi-1"></i>
+    <i class="fas fa-wifi floating-icon fi-2"></i>
+    <i class="fas fa-server floating-icon fi-3"></i>
+    <i class="fas fa-database floating-icon fi-4"></i>
+
+    <!-- Navigation -->
+    <nav class="landing-nav glass-panel">
+        <div class="nav-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
-                        id="navbar-logo">
-                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" id="navbar-logo">
                 </a>
             </div>
-
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
@@ -49,12 +58,7 @@
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-
             <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                </button>
                 <a href="login.html" class="nav-auth-link active">Login</a>
                 <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
@@ -65,105 +69,92 @@
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Authentication Section -->
-    <div class="login-container">
-        <div class="login-left">
-            <img src="images/logo/logo-white.svg" alt="OmniTeq Watermark" class="login-watermark">
-            <i class="fas fa-microchip"></i>
-            <div class="login-welcome">
-                <h1>Welcome to OmniTeq</h1>
-                <p>Smart Automation & IoT Solutions for Modern Businesses</p>
+    <!-- Main Content -->
+    <main class="auth-page">
+        <div class="auth-container animate-on-scroll">
+            <div class="auth-box glass-panel">
+                <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" class="auth-logo">
+                <h1 class="auth-title text-gradient">Welcome Back</h1>
+                <p class="auth-subtitle">Login to access your IoT control panel</p>
+
+                <form class="auth-form" action="#" method="POST" autocomplete="off">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="password" class="form-label mb-0">Password</label>
+                            <a href="forgot-password.html" class="nav-auth-link" style="font-size: 0.85rem; padding: 0;">Forgot Password?</a>
+                        </div>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Sign In to Dashboard</button>
+
+                    <div class="auth-footer">
+                        Don't have an account? <a href="register.html">Create one for free</a>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="login-right">
-            <form class="login-box" action="#" method="POST" autocomplete="off">
-                <img src="images/logo/logo.svg" alt="OmniTeq Logo" id="auth-logo" class="mobile-only-logo">
-                <script>if (localStorage.getItem('theme') !== 'light') document.getElementById('auth-logo').src = 'images/logo/logo-white.svg';</script>
+    </main>
 
-                <div class="login-title">Login to OmniTeq</div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
-                        required>
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo">
+                    </a>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Enter password" required>
+                <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 25px;">
+                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" class="nav-auth-link"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://x.com/omniteq_info" target="_blank" class="nav-auth-link"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-youtube'></i></a>
                 </div>
-                <div class="d-flex justify-content-end mb-2">
-                    <a href="forgot-password.html" style="font-size:0.95em;">Forgot password?</a>
+            </div>
+            <div class="footer-links-container">
+                <div class="footer-links-col">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="products.html">Products</a>
+                    <a href="services.html">Services</a>
+                    <a href="resources.html">Resources</a>
+                    <a href="contact.html">Contact</a>
                 </div>
-                <button type="submit" class="login-btn">Login</button>
-                <div class="login-footer">
-                    Not registered? <a href="register.html">Sign Up</a>
+                <div class="footer-links-col">
+                    <h4>Our Services</h4>
+                    <a href="services.html#iot">IoT Solutions</a>
+                    <a href="services.html#plc">PLC Programming</a>
+                    <a href="services.html#embedded">Embedded Systems</a>
+                    <a href="services.html#ai-ml">AI & ML Integration</a>
+                    <a href="services.html#outsourcing">Resource Outsourcing</a>
                 </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer Section -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
-                        class="footer-logo">
-                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and
-                        growth.</p>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
-                                class="fab fa-youtube"></i></a>
+                <div class="footer-links-col">
+                    <h4>Contact Us</h4>
+                    <a href="mailto:info@omniteq.in"><i class='bx bx-envelope'></i> info@omniteq.in</a>
+                    <a href="tel:+919825246857"><i class='bx bx-phone'></i> +91 98252 46857</a>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px;">
+                        <i class='bx bx-map' style="font-size: 18px; color: var(--primary);"></i>
+                        <span>Aditya House, Iscon Mega City, Bhavnagar</span>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-services">
-                    <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="services.html#iot">IoT Solutions</a></li>
-                        <li><a href="services.html#plc">PLC Programming</a></li>
-                        <li><a href="services.html#embedded">Embedded Systems</a></li>
-                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
-                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> info@omniteq.in</p>
-                    <p><i class="fas fa-phone"></i> +91 98252 46857</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Aditya House, Iscon Mega City, Bhavnagar</p>
-                    <p><i class="fas fa-clock"></i> Mon-Fri: <br>9:00 AM - 6:00 PM</p>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Sitemap</a>
-                </div>
-            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 OmniTeq Solutions. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- JavaScript Files -->
+    <script src="js/cloud.js"></script>
     <script src="js/main.js"></script>
 </body>
 

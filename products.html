@@ -9,9 +9,12 @@
         content="Explore OmniTeq's innovative IoT products including School Alarm Systems, Smart WiFi Plugs, and Touch Switches">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css?v=2.2">
+    <link rel="stylesheet" href="css/style.css?v=3.6">
     <link rel="stylesheet" href="css/responsive.css?v=2.0">
+    <link rel="stylesheet" href="css/cloud.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Theme Check (Prevents FLT) -->
@@ -27,18 +30,19 @@
     </script>
 </head>
 
-<body>
-    <!-- Header Section -->
-    <header id="header">
-        <div class="container">
+<body class="landing-page">
+    <!-- Background Elements -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+    <!-- Navigation -->
+    <nav class="landing-nav glass-panel">
+        <div class="nav-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
-                        id="navbar-logo">
-                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" id="navbar-logo">
                 </a>
             </div>
-
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
@@ -47,12 +51,7 @@
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-
             <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                </button>
                 <a href="login.html" class="nav-auth-link">Login</a>
                 <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
@@ -63,49 +62,92 @@
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Page Banner -->
     <section id="page-banner" class="products-banner">
-        <div class="container">
-            <h1>Our Products</h1>
-            <p>Innovative IoT Solutions for Modern Needs</p>
+        <div class="container animate-on-scroll">
+            <h1 class="section-title">Our <span class="text-gradient">Products</span></h1>
+            <p class="section-subtitle">Innovative IoT Solutions for Modern Needs</p>
         </div>
     </section>
 
     <!-- Products Overview -->
     <section id="products-overview">
         <div class="container">
-            <div class="section-header">
-                <h2>Smart Solutions for Every Environment</h2>
-                <p>Our product lineup combines cutting-edge technology with practical applications</p>
+            <div class="section-header text-center animate-on-scroll">
+                <h2 class="section-title">Smart Solutions for <span class="text-gradient">Every Environment</span></h2>
+                <p class="section-subtitle">Our product lineup combines cutting-edge technology with practical applications</p>
             </div>
             <div class="products-grid">
-                <div class="text-center p-5 w-100"><i class="fas fa-spinner fa-spin mb-3 d-block text-muted"
-                        style="font-size: 2rem;"></i> Loading Products...</div>
+                <!-- Products will be loaded dynamically here -->
+                <div class="loading-spinner" style="grid-column: 1/-1; text-align: center; padding: 50px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
+                    <p style="margin-top: 15px; color: var(--text-muted-dark);">Loading products...</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Dynamic Product Details Sections -->
     <div id="product-details-container">
-        <div class="text-center p-5"><i class="fas fa-spinner fa-spin mb-3 d-block text-muted"
-                style="font-size: 2rem;"></i> Loading Details...</div>
+        <!-- Product detail sections will be injected here dynamically -->
+    </div>
+
+    <!-- Product Model Comparison Table Template (Cloned dynamically by products.js) -->
+    <div style="display: none;">
+        <section id="product-comparison">
+            <div class="container">
+                <div class="section-header text-center animate-on-scroll">
+                    <h2 class="section-title">Model <span class="text-gradient">Comparison</span></h2>
+                    <p class="section-subtitle">Find the right solution for your specific needs</p>
+                </div>
+                <div class="comparison-table-wrapper glass-panel animate-on-scroll" style="margin-top: 30px;">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Basic Model (OmniSWAS101)</th>
+                                <th>Standard Model (OmniSWAS201)</th>
+                                <th>Standard Model (OmniSWAS202)</th>
+                                <th>Pro Model (OmniSWAS302)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Price (Including GST)</td><td>&#8377; 9,999</td><td>&#8377; 12,999</td><td>&#8377; 13,499</td><td>&#8377; 15,499</td></tr>
+                            <tr><td>Alarm Control WiFi</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+                            <tr><td>Multiple Profiles</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+                            <tr><td>No. of Profiles</td><td>1</td><td>3</td><td>3</td><td>6</td></tr>
+                            <tr><td>Total Alarms Supported</td><td>20</td><td>60</td><td>60</td><td>192</td></tr>
+                            <tr><td>OLED Display</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+                            <tr><td>IP 67 Waterproof</td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td><td><i class="fas fa-check"></i></td></tr>
+                            <tr><td>Best For</td><td>Schools</td><td>Colleges</td><td>Training Centers</td><td>Large Factories</td></tr>
+                            <tr><td></td>
+                                <td><a href="https://wa.me/919825246857?text=Order%20SWAS101" class="btn-primary" style="background:#009973;border-color:#009973;font-size:0.8rem;padding:8px 15px;display:inline-block">Order Now</a></td>
+                                <td><a href="https://wa.me/919825246857?text=Order%20SWAS201" class="btn-primary" style="background:#009973;border-color:#009973;font-size:0.8rem;padding:8px 15px;display:inline-block">Order Now</a></td>
+                                <td><a href="https://wa.me/919825246857?text=Order%20SWAS202" class="btn-primary" style="background:#009973;border-color:#009973;font-size:0.8rem;padding:8px 15px;display:inline-block">Order Now</a></td>
+                                <td><a href="https://wa.me/919825246857?text=Order%20SWAS302" class="btn-primary" style="background:#009973;border-color:#009973;font-size:0.8rem;padding:8px 15px;display:inline-block">Order Now</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
     </div>
 
 
 
     <!-- Testimonials Section -->
-    <section id="product-testimonials">
+    <section id="product-testimonials" class="features-section">
         <div class="container">
-            <div class="section-header">
-                <h2>What Our Customers Say</h2>
-                <p>Real experiences from users of our smart products</p>
+            <div class="section-header text-center animate-on-scroll">
+                <h2 class="section-title">What Our <span class="text-gradient">Customers Say</span></h2>
+                <p class="section-subtitle">Real experiences from users of our smart products</p>
             </div>
             <div class="testimonials-grid">
-                <div class="testimonial-card">
+                <div class="testimonial-card glass-panel animate-on-scroll">
                     <div class="testimonial-content">
-                        <i class="fas fa-quote-left quote-icon"></i>
+                        <i class="fas fa-quote-left quote-icon text-primary"></i>
                         <p>"The Smart Wifi Alarm System has revolutionized our emergency protocols. Setup was
                             straightforward and the system has been flawless in operation."</p>
                     </div>
@@ -117,9 +159,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
+                <div class="testimonial-card glass-panel animate-on-scroll delay-1">
                     <div class="testimonial-content">
-                        <i class="fas fa-quote-left quote-icon"></i>
+                        <i class="fas fa-quote-left quote-icon text-primary"></i>
                         <p>"The Smart WiFi EV Charger has made charging my vehicle incredibly convenient. The setup is
                             so simple that anyone can use it. It saves me time every day and fits perfectly into my
                             routine."</p>
@@ -132,9 +174,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
+                <div class="testimonial-card glass-panel animate-on-scroll delay-2">
                     <div class="testimonial-content">
-                        <i class="fas fa-quote-left quote-icon"></i>
+                        <i class="fas fa-quote-left quote-icon text-primary"></i>
                         <p>"The Touch Switches were the perfect addition to our boutique hotel. Guests love the sleek
                             design and the staff appreciates the remote management capabilities."</p>
                     </div>
@@ -151,82 +193,72 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="cta">
-        <div class="container">
-            <h2>Ready to Upgrade Your Space with Smart Technology?</h2>
-            <p>Contact our product specialists to find the perfect solution for your needs.</p>
-            <div class="cta-buttons">
-                <a href="lets-talk.html" class="btn-primary"><i class="fas fa-comments"></i> Get Product
+    <section id="cta" class="cta-section text-center">
+        <div class="container cta-box glass-panel animate-on-scroll">
+            <h2 class="section-title">Ready to Upgrade Your Space with <span class="text-gradient">Smart Technology?</span></h2>
+            <p class="section-subtitle">Contact our product specialists to find the perfect solution for your needs.</p>
+            <div class="hero-cta" style="justify-content: center;">
+                <a href="lets-talk.html" class="btn-primary btn-lg"><i class="fas fa-comments"></i> Get Product
                     Consultation</a>
-                <a href="resources.html#catalog" class="btn-primary"><i class="fas fa-download"></i> Download
+                <a href="resources.html#catalog" class="btn-ghost btn-lg"><i class="fas fa-download"></i> Download
                     Catalog</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
-                        class="footer-logo">
-                    <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and
-                        growth.</p>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
-                                class="fab fa-youtube"></i></a>
-                        <!-- <a href="#"><i class="fab fa-github"></i></a> -->
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo">
+                    </a>
+                </div>
+                <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 25px;">
+                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" class="nav-auth-link"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://x.com/omniteq_info" target="_blank" class="nav-auth-link"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+            <div class="footer-links-container">
+                <div class="footer-links-col">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="products.html">Products</a>
+                    <a href="services.html">Services</a>
+                    <a href="resources.html">Resources</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Our Services</h4>
+                    <a href="services.html#iot">IoT Solutions</a>
+                    <a href="services.html#plc">PLC Programming</a>
+                    <a href="services.html#embedded">Embedded Systems</a>
+                    <a href="services.html#ai-ml">AI & ML Integration</a>
+                    <a href="services.html#outsourcing">Resource Outsourcing</a>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Contact Us</h4>
+                    <a href="mailto:info@omniteq.in"><i class='bx bx-envelope'></i> info@omniteq.in</a>
+                    <a href="tel:+919825246857"><i class='bx bx-phone'></i> +91 98252 46857</a>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px;">
+                        <i class='bx bx-map' style="font-size: 18px; color: var(--primary);"></i>
+                        <span>Aditya House, Iscon Mega City, Bhavnagar</span>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-services">
-                    <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="services.html#iot">IoT Solutions</a></li>
-                        <li><a href="services.html#plc">PLC Programming</a></li>
-                        <li><a href="services.html#embedded">Embedded Systems</a></li>
-                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
-                        <!-- <li><a href="services.html#blockchain">Blockchain</a></li> -->
-                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> info@omniteq.in</p>
-                    <p><i class="fas fa-phone"></i> +91 98252 46857</p>
-                    <!-- <p><i class="fab fa-whatsapp"></i> +91 98252 46857</p> -->
-                    <p><i class="fas fa-map-marker-alt"></i> Aditya House, Iscon Mega City, Bhavnagar</p>
-                    <p><i class="fas fa-clock"></i> Mon-Fri: <br>9:00 AM - 6:00 PM</p>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Sitemap</a>
-                </div>
-            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 OmniTeq Solutions. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- JavaScript Files -->
+    <script src="js/cloud.js"></script>
     <script src="js/main.js"></script>
     <script src="js/products.js"></script>
 </body>

@@ -9,9 +9,12 @@
         content="Get in touch with OmniTeq for IoT, automation, and embedded systems solutions. Contact us for inquiries, support, or partnership opportunities.">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/style.css?v=3.6">
     <link rel="stylesheet" href="css/responsive.css?v=2.1">
+    <link rel="stylesheet" href="css/cloud.css">
     <link rel="stylesheet" href="css/notifications.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,18 +31,19 @@
     </script>
 </head>
 
-<body>
-    <!-- Header Section -->
-    <header id="header">
-        <div class="container">
+<body class="landing-page">
+    <!-- Background Elements -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+    <!-- Navigation -->
+    <nav class="landing-nav glass-panel">
+        <div class="nav-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
-                        id="navbar-logo">
-                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" id="navbar-logo">
                 </a>
             </div>
-
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
@@ -48,12 +52,7 @@
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
-
             <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                </button>
                 <a href="login.html" class="nav-auth-link">Login</a>
                 <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
@@ -64,13 +63,13 @@
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Page Banner -->
     <section id="page-banner">
-        <div class="container">
-            <h1>Contact Us</h1>
-            <p>Get in Touch with Our Team</p>
+        <div class="container animate-on-scroll">
+            <h1 class="section-title">Contact <span class="text-gradient">Us</span></h1>
+            <p class="section-subtitle">Get in Touch with Our Team</p>
         </div>
     </section>
 
@@ -78,29 +77,29 @@
     <section id="contact-info">
         <div class="container">
             <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">
+                <div class="contact-card glass-panel animate-on-scroll">
+                    <div class="contact-icon b-blue">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <h3>Our Location</h3>
                     <p>Aditya House, Iscon Mega City, Bhavnagar,<br>Gujarat, India</p>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">
+                <div class="contact-card glass-panel animate-on-scroll delay-1">
+                    <div class="contact-icon b-purple">
                         <i class="fas fa-phone"></i>
                     </div>
                     <h3>Phone Number</h3>
                     <p>Main: +91 98252 46857<br>Support: +91 98256 44933</p>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">
+                <div class="contact-card glass-panel animate-on-scroll delay-2">
+                    <div class="contact-icon b-green">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h3>Email Address</h3>
                     <p>info@omniteq.in<br>support@omniteq.in</p>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">
+                <div class="contact-card glass-panel animate-on-scroll delay-3">
+                    <div class="contact-icon b-red">
                         <i class="fas fa-clock"></i>
                     </div>
                     <h3>Working Hours</h3>
@@ -111,16 +110,16 @@
     </section>
 
     <!-- WhatsApp Contact -->
-    <section id="whatsapp-contact" class="alt-bg">
+    <section id="whatsapp-contact" class="features-section">
         <div class="container">
-            <div class="whatsapp-content">
-                <div class="whatsapp-icon">
+            <div class="whatsapp-content glass-panel animate-on-scroll">
+                <div class="whatsapp-icon b-green">
                     <i class="fab fa-whatsapp"></i>
                 </div>
                 <div class="whatsapp-text">
-                    <h2>Connect on WhatsApp</h2>
-                    <p>For quick inquiries and support, reach out to us on WhatsApp.</p>
-                    <a href="https://wa.me/919825246857" class="btn-primary" target="_blank">Chat with Us</a>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 10px;">Connect on <span class="text-gradient">WhatsApp</span></h2>
+                    <p class="section-subtitle" style="text-align: left;">For quick inquiries and support, reach out to us on WhatsApp.</p>
+                    <a href="https://wa.me/919825246857" class="btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Chat with Us</a>
                 </div>
             </div>
         </div>
@@ -129,12 +128,12 @@
     <!-- FAQ Section -->
     <section id="contact-faq">
         <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Find answers to common questions about our services and processes</p>
+            <div class="section-header text-center animate-on-scroll">
+                <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+                <p class="section-subtitle">Find answers to common questions about our services and processes</p>
             </div>
-            <div class="faq-container">
-                <div class="faq-item">
+            <div class="faq-container animate-on-scroll delay-1">
+                <div class="faq-item glass-panel">
                     <div class="faq-question">
                         <h3>What industries do you serve?</h3>
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
@@ -145,7 +144,7 @@
                             can benefit from IoT, automation, and embedded systems.</p>
                     </div>
                 </div>
-                <div class="faq-item">
+                <div class="faq-item glass-panel">
                     <div class="faq-question">
                         <h3>How long does a typical project take to complete?</h3>
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
@@ -157,7 +156,7 @@
                             requirements.</p>
                     </div>
                 </div>
-                <div class="faq-item">
+                <div class="faq-item glass-panel">
                     <div class="faq-question">
                         <h3>Do you offer maintenance and support after implementation?</h3>
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
@@ -168,7 +167,7 @@
                             ensure your systems continue to operate optimally.</p>
                     </div>
                 </div>
-                <div class="faq-item">
+                <div class="faq-item glass-panel">
                     <div class="faq-question">
                         <h3>Can you customize solutions for specific business needs?</h3>
                         <span class="faq-toggle"><i class="fas fa-plus"></i></span>
@@ -184,12 +183,12 @@
     </section>
 
     <!-- Contact Form and Map -->
-    <section id="contact-form-map">
+    <section id="contact-form-map" class="features-section">
         <div class="container">
             <div class="contact-wrapper">
-                <div class="contact-form-container">
-                    <h2>Send Us a Message</h2>
-                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                <div class="contact-form-container glass-panel animate-on-scroll" style="padding: 40px;">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 10px;">Send Us a <span class="text-gradient">Message</span></h2>
+                    <p class="section-subtitle" style="text-align: left; margin-bottom: 30px;">Fill out the form below and we'll get back to you as soon as possible.</p>
                     <form id="contactForm" class="styled-form" onsubmit="submitContactForm(event)">
                         <div class="form-row">
                             <div class="form-group">
@@ -219,15 +218,15 @@
                                 placeholder="Please describe how we can help you..." required></textarea>
                         </div>
                         <div class="form-group form-controls">
-                            <button type="submit" class="btn-primary">
+                            <button type="submit" class="btn-primary btn-lg">
                                 <i class="fas fa-paper-plane"></i> Send Message
                             </button>
                         </div>
                     </form>
                 </div>
-                <div class="contact-map-container">
-                    <h2>Our Location</h2>
-                    <div class="map-wrapper">
+                <div class="contact-map-container glass-panel animate-on-scroll delay-1" style="padding: 40px;">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 10px;">Our <span class="text-gradient">Location</span></h2>
+                    <div class="map-wrapper" style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--glass-border);">
                         <!-- Replace with actual Google Maps embed code -->
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d72.1364298!3d21.7508799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f509edaa95f99%3A0x4af136c325cdd1f2!2sISCON%20Mega%20City%2C%20Vidhyanagar%2C%20Bhavnagar%2C%20Gujarat%20364002!5e0!3m2!1sen!2s!4v2s"
@@ -239,76 +238,69 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="cta">
-        <div class="container">
-            <h2>Ready to Transform Your Business?</h2>
-            <p>Let's discuss how our solutions can help you achieve your goals and stay ahead of the competition.</p>
-            <a href="lets-talk.html" class="btn-primary">Schedule a Consultation</a>
+    <section id="cta" class="cta-section text-center">
+        <div class="container cta-box glass-panel animate-on-scroll">
+            <h2 class="section-title">Ready to Transform Your <span class="text-gradient">Business?</span></h2>
+            <p class="section-subtitle">Let's discuss how our solutions can help you achieve your goals and stay ahead of the competition.</p>
+            <div class="hero-cta" style="justify-content: center;">
+                <a href="lets-talk.html" class="btn-primary btn-lg">Schedule a Consultation</a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
-                        class="footer-logo">
-                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage
-                        cutting-edge technology to improve efficiency, productivity, and innovation.</p>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
-                                class="fab fa-youtube"></i></a>
-                        <!-- <a href="#"><i class="fab fa-github"></i></a> -->
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo">
+                    </a>
+                </div>
+                <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 25px;">
+                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" class="nav-auth-link"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://x.com/omniteq_info" target="_blank" class="nav-auth-link"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+            <div class="footer-links-container">
+                <div class="footer-links-col">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="products.html">Products</a>
+                    <a href="services.html">Services</a>
+                    <a href="resources.html">Resources</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Our Services</h4>
+                    <a href="services.html#iot">IoT Solutions</a>
+                    <a href="services.html#plc">PLC Programming</a>
+                    <a href="services.html#embedded">Embedded Systems</a>
+                    <a href="services.html#ai-ml">AI & ML Integration</a>
+                    <a href="services.html#outsourcing">Resource Outsourcing</a>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Contact Us</h4>
+                    <a href="mailto:info@omniteq.in"><i class='bx bx-envelope'></i> info@omniteq.in</a>
+                    <a href="tel:+919825246857"><i class='bx bx-phone'></i> +91 98252 46857</a>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px;">
+                        <i class='bx bx-map' style="font-size: 18px; color: var(--primary);"></i>
+                        <span>Aditya House, Iscon Mega City, Bhavnagar</span>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-services">
-                    <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="services.html#iot">IoT Solutions</a></li>
-                        <li><a href="services.html#plc">PLC Programming</a></li>
-                        <li><a href="services.html#embedded">Embedded Systems</a></li>
-                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
-                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> info@omniteq.in</p>
-                    <p><i class="fas fa-phone"></i> +91 98252 46857</p>
-                    <!-- <p><i class="fab fa-whatsapp"></i> +91 98252 46857</p> -->
-                    <p><i class="fas fa-map-marker-alt"></i> Aditya House, Iscon Mega City, Bhavnagar</p>
-                    <p><i class="fas fa-clock"></i> Mon-Fri: <br>9:00 AM - 6:00 PM</p>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Sitemap</a>
-                </div>
-            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 OmniTeq Solutions. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- JavaScript Files -->
+    <script src="js/cloud.js"></script>
     <script src="js/main.js"></script>
 </body>
 
