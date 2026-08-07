@@ -9,12 +9,9 @@
         content="Explore OmniTeq's comprehensive services including PLC Programming, Embedded Systems, IoT Solutions, AI/ML Integration, and Resource Outsourcing">
     <!-- Favicon -->
     <link rel="icon" href="images/logo/favicon.svg" type="image/svg+xml">
-    <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css?v=3.6">
+    <link rel="stylesheet" href="css/style.css?v=2.2">
     <link rel="stylesheet" href="css/responsive.css?v=2.0">
-    <link rel="stylesheet" href="css/cloud.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Theme Check (Prevents FLT) -->
@@ -30,19 +27,18 @@
     </script>
 </head>
 
-<body class="landing-page">
-    <!-- Background Elements -->
-    <div class="glow-bg glow-1"></div>
-    <div class="glow-bg glow-2"></div>
-    <div class="glow-bg glow-3"></div>
-    <!-- Navigation -->
-    <nav class="landing-nav glass-panel">
-        <div class="nav-container">
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" id="navbar-logo">
+                    <img src="images/logo/logo.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        id="navbar-logo">
+                    <script>if (localStorage.getItem('theme') === 'light') document.getElementById('navbar-logo').src = 'images/logo/logo-white.svg';</script>
                 </a>
             </div>
+
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
@@ -51,7 +47,12 @@
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+
             <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode" id="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
                 <a href="login.html" class="nav-auth-link">Login</a>
                 <a href="register.html" class="nav-auth-btn">Register</a>
                 <a href="lets-talk.html" class="cta-button">Let's Talk</a>
@@ -62,13 +63,13 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Page Banner -->
     <section id="page-banner" class="services-banner">
-        <div class="container animate-on-scroll">
-            <h1 class="section-title">Our <span class="text-gradient">Services</span></h1>
-            <p class="section-subtitle">Comprehensive Solutions for Industry 4.0</p>
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive Solutions for Industry 4.0</p>
         </div>
     </section>
 
@@ -119,37 +120,49 @@
     <!-- IoT Solutions Section -->
     <section id="iot" class="service-detail">
         <div class="container">
-            <div class="service-content glass-panel animate-on-scroll" style="padding: 40px; margin-bottom: 40px;">
-                <div class="service-image glass-panel" style="padding: 10px; overflow: hidden;">
-                    <img src="images/Service_IOT_01.jpg" alt="IoT Solutions" style="border-radius: var(--radius-md);">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h2>IoT Solutions</h2>
+            </div>
+            <div class="service-content">
+                <div class="service-image">
+                    <img src="images/Service_IOT_01.jpg" alt="IoT Solutions">
                     <div class="image-overlay">
-                        <span class="text-gradient" style="font-weight: 700;">Transform your business with connected devices</span>
+                        <span>Transform your business with connected devices</span>
                     </div>
                 </div>
                 <div class="service-text">
-                    <div class="service-header" style="text-align: left; margin-bottom: 20px;">
-                        <div class="icon b-blue" style="width: 50px; height: 50px; margin-bottom: 15px;">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                        <h2 class="section-title" style="text-align: left;">IoT <span class="text-gradient">Solutions</span></h2>
-                    </div>
                     <p class="service-description">Our Internet of Things (IoT) solutions connect your physical assets
                         to the digital world, enabling real-time monitoring, control, and data analytics.</p>
 
                     <div class="service-feature-group">
-                        <h3 style="color: var(--primary);"><i class="fas fa-star"></i> Key Features</h3>
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
                         <ul class="service-features">
-                            <li><i class="fas fa-check-circle text-primary"></i> Custom IoT device development</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> Sensor integration and deployment</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> Cloud-based IoT platforms</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> Remote monitoring and control systems</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> IoT data analytics and visualization</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> Custom IoT Dashboard Development</li>
+                            <li><i class="fas fa-check-circle"></i> Custom IoT device development</li>
+                            <li><i class="fas fa-check-circle"></i> Sensor integration and deployment</li>
+                            <li><i class="fas fa-check-circle"></i> Cloud-based IoT platforms</li>
+                            <li><i class="fas fa-check-circle"></i> Remote monitoring and control systems</li>
+                            <li><i class="fas fa-check-circle"></i> IoT data analytics and visualization</li>
+                            <li><i class="fas fa-check-circle"></i> Custom IoT Dashboard Development</li>
                         </ul>
                     </div>
 
+                    <div class="service-feature-group">
+                        <h3><i class="fas fa-industry"></i> Industries We Serve</h3>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Manufacturing</span>
+                            <span class="industry-tag">Agriculture</span>
+                            <span class="industry-tag">Healthcare</span>
+                            <span class="industry-tag">Smart Buildings</span>
+                            <span class="industry-tag">Retail</span>
+                        </div>
+                    </div>
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your IoT Project</a>
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your IoT
+                            Project</a>
                     </div>
                 </div>
             </div>
@@ -157,38 +170,50 @@
     </section>
 
     <!-- PLC Programming Section -->
-    <section id="plc" class="service-detail features-section">
+    <section id="plc" class="service-detail alt-bg">
         <div class="container">
-            <div class="service-content glass-panel animate-on-scroll reverse" style="padding: 40px; margin-bottom: 40px;">
-                <div class="service-image glass-panel" style="padding: 10px; overflow: hidden;">
-                    <img src="images/Service_PLC_02.jpg" alt="PLC Programming" style="border-radius: var(--radius-md);">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h2>PLC Programming</h2>
+            </div>
+            <div class="service-content reverse">
+                <div class="service-image">
+                    <img src="images/Service_PLC_02.jpg" alt="PLC Programming">
                     <div class="image-overlay">
-                        <span class="text-gradient" style="font-weight: 700;">Automate processes for enhanced efficiency</span>
+                        <span>Automate processes for enhanced efficiency</span>
                     </div>
                 </div>
                 <div class="service-text">
-                    <div class="service-header" style="text-align: left; margin-bottom: 20px;">
-                        <div class="icon b-purple" style="width: 50px; height: 50px; margin-bottom: 15px;">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h2 class="section-title" style="text-align: left;">PLC <span class="text-gradient">Programming</span></h2>
-                    </div>
                     <p class="service-description">Our expert PLC programming services help automate your industrial
                         processes, improving efficiency, reliability, and safety.</p>
 
                     <div class="service-feature-group">
-                        <h3 style="color: var(--primary);"><i class="fas fa-star"></i> Key Features</h3>
+                        <h3><i class="fas fa-star"></i> Key Features</h3>
                         <ul class="service-features">
-                            <li><i class="fas fa-check-circle text-primary"></i> PLC system design and implementation</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> HMI development and integration</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> SCADA system programming</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> Industrial automation solutions</li>
-                            <li><i class="fas fa-check-circle text-primary"></i> PLC troubleshooting and maintenance</li>
+                            <li><i class="fas fa-check-circle"></i> PLC system design and implementation</li>
+                            <li><i class="fas fa-check-circle"></i> HMI development and integration</li>
+                            <li><i class="fas fa-check-circle"></i> SCADA system programming</li>
+                            <li><i class="fas fa-check-circle"></i> Industrial automation solutions</li>
+                            <li><i class="fas fa-check-circle"></i> PLC troubleshooting and maintenance</li>
                         </ul>
                     </div>
 
+                    <div class="service-feature-group">
+                        <h3><i class="fas fa-industry"></i> Industries We Serve</h3>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Manufacturing</span>
+                            <span class="industry-tag">Food Processing</span>
+                            <span class="industry-tag">Pharmaceuticals</span>
+                            <span class="industry-tag">Automotive</span>
+                            <span class="industry-tag">Utilities</span>
+                        </div>
+                    </div>
+
                     <div class="service-actions">
-                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your Automation Needs</a>
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-comments"></i> Discuss Your
+                            Automation Needs</a>
                     </div>
                 </div>
             </div>
@@ -525,59 +550,67 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="landing-footer">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo">
-                    </a>
-                </div>
-                <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
-                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 25px;">
-                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" class="nav-auth-link"><i class='bx bxl-linkedin'></i></a>
-                    <a href="https://x.com/omniteq_info" target="_blank" class="nav-auth-link"><i class='bx bxl-twitter'></i></a>
-                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-instagram'></i></a>
-                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" class="nav-auth-link"><i class='bx bxl-youtube'></i></a>
-                </div>
-            </div>
-            <div class="footer-links-container">
-                <div class="footer-links-col">
-                    <h4>Quick Links</h4>
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="products.html">Products</a>
-                    <a href="services.html">Services</a>
-                    <a href="resources.html">Resources</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                <div class="footer-links-col">
-                    <h4>Our Services</h4>
-                    <a href="services.html#iot">IoT Solutions</a>
-                    <a href="services.html#plc">PLC Programming</a>
-                    <a href="services.html#embedded">Embedded Systems</a>
-                    <a href="services.html#ai-ml">AI & ML Integration</a>
-                    <a href="services.html#outsourcing">Resource Outsourcing</a>
-                </div>
-                <div class="footer-links-col">
-                    <h4>Contact Us</h4>
-                    <a href="mailto:info@omniteq.in"><i class='bx bx-envelope'></i> info@omniteq.in</a>
-                    <a href="tel:+919825246857"><i class='bx bx-phone'></i> +91 98252 46857</a>
-                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px;">
-                        <i class='bx bx-map' style="font-size: 18px; color: var(--primary);"></i>
-                        <span>Aditya House, Iscon Mega City, Bhavnagar</span>
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo - Smart Solutions for a Connected World"
+                        class="footer-logo">
+                    <p>Transforming Industries Through Smart Automation & IoT Solutions. We help businesses leverage
+                        cutting-edge technology to improve efficiency, productivity, and innovation.</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/omniteq_info" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/omniteq_solutions" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
+                        <!-- <a href="#"><i class="fab fa-github"></i></a> -->
                     </div>
                 </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html#iot">IoT Solutions</a></li>
+                        <li><a href="services.html#plc">PLC Programming</a></li>
+                        <li><a href="services.html#embedded">Embedded Systems</a></li>
+                        <li><a href="services.html#ai-ml">AI & ML Integration</a></li>
+                        <li><a href="services.html#outsourcing">Resource Outsourcing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@omniteq.in</p>
+                    <p><i class="fas fa-phone"></i> +91 98252 46857</p>
+                    <!-- <p><i class="fab fa-whatsapp"></i> +91 98252 46857</p> -->
+                    <p><i class="fas fa-map-marker-alt"></i> Aditya House, Iscon Mega City, Bhavnagar</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: <br>9:00 AM - 6:00 PM</p>
+                </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 OmniTeq Solutions. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2023 OmniTeq. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- JavaScript Files -->
-    <script src="js/cloud.js"></script>
     <script src="js/main.js"></script>
 </body>
 

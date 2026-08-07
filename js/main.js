@@ -297,17 +297,15 @@ const ui = {
     },
 
     initStickyHeader() {
-        const header = document.querySelector('#header, .landing-nav');
+        const header = document.querySelector('#header');
         const scrollThreshold = 50;
 
         const handleScroll = () => {
             if (!header) return;
             if (window.scrollY > scrollThreshold) {
                 header.classList.add('sticky');
-                header.classList.add('scrolled');
             } else {
                 header.classList.remove('sticky');
-                header.classList.remove('scrolled');
             }
         };
 
@@ -410,22 +408,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ui.initFAQs();
     ui.initTheme();
     initDynamicNavbar();
-
-    // Global Navigation Active State
-    function setActiveNavLink() {
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        const navLinks = document.querySelectorAll('.nav-menu a, .nav-actions a');
-        
-        navLinks.forEach(link => {
-            const linkPath = link.getAttribute('href');
-            if (linkPath === currentPath) {
-                link.classList.add('active');
-            } else if (currentPath === 'index.html' && (linkPath === 'index.html' || linkPath === './')) {
-                link.classList.add('active');
-            }
-        });
-    }
-    setActiveNavLink();
 
     // Portfolio filter functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -853,7 +835,7 @@ async function loadFeaturedProducts() {
         const resp = await fetch(prefix + 'api/products/get_products.php');
         const data = await resp.json();
 
-        if (data.status === 'success' && data.products && data.products.length > 0) {
+        if (data.status === 'success' && data.products.length > 0) {
             container.innerHTML = data.products.map(p => `
                 <div class="product-card">
                     <div class="product-image">
@@ -867,9 +849,11 @@ async function loadFeaturedProducts() {
                     </div>
                 </div>
             `).join('');
+        } else {
+            container.innerHTML = '<p class="text-center w-100 p-5 text-muted">No featured products available at the moment.</p>';
         }
     } catch (err) {
-        console.error('[OmniTeq] Error loading featured products (using static fallback):', err);
-        // Do not overwrite container with error message to keep static products visible
+        console.error('[OmniTeq] Error loading featured products:', err);
+        container.innerHTML = '<p class="text-center w-100 p-5 text-danger">Failed to load featured products. Please try again later.</p>';
     }
 }

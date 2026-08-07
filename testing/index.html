@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IoT Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <main class="card">
+        <div class="header">
+            <div>
+                <h1>IoT Dashboard</h1>
+                <p class="subtitle">
+                    Real-time Device (Jatka Machine ) Monitoring
+                </p>
+            </div>
+			<div class="live-status" id="liveStatus">
+				<span class="live-dot" id="liveDot"></span>
+				<span id="liveText">---</span>
+			</div>
+        </div><hr>
+
+        <!-- ================= LOCATION ================= -->
+        <div class="section-title">
+            📍 Device Location
+        </div>
+		
+		<div class="location-grid">
+			<div class="info-box">
+				<div class="info-title">Latitude</div>
+				<div class="info-value" id="lat">--</div>
+			</div>
+
+			<div class="info-box">
+				<div class="info-title">Longitude</div>
+				<div class="info-value" id="lon">--</div>
+			</div>
+
+			<div class="info-box full-width">
+				<div class="info-title">Location Source</div>
+				<div class="info-value" id="locSource">--</div>
+			</div>
+		</div>
+
+
+        <a id="mapLink"
+           class="map-link"
+           href="#"
+           target="_blank"
+           rel="noopener">
+            📍 Open Google Maps
+        </a>
+        <hr>
+
+        <!-- ================= OUTPUTS ================= -->
+        <div class="section-title">
+            ⚡ Switches
+        </div>
+
+        <table class="outputs-table">
+            <thead>
+                <tr>
+                    <th>Device</th>
+                    <th>Status</th>
+                    <th>Control</th>
+                </tr>
+            </thead>
+            <tbody id="outputsBody">
+            </tbody>
+        </table>
+
+        <p id="statusMsg" class="status">
+        </p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

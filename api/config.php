@@ -5,19 +5,14 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Database configuration
-if (php_sapi_name() === 'cli' || (isset($_SERVER['HTTP_HOST']) && ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1'))) {
-    // Local XAMPP Environment
-    define('DB_HOST', 'localhost:3306'); // Standard MySQL port
-    define('DB_USERNAME', 'root'); // Standard XAMPP user
-    define('DB_PASSWORD', ''); // Standard XAMPP password (empty)
-    define('DB_NAME', 'omniteq_db');
-} else {
-    // Live Server Environment
-    define('DB_HOST', 'localhost'); // Usually 'localhost' for cPanel
-    define('DB_USERNAME', 'omniteq_user'); // cPanel username_mysql-username
-    define('DB_PASSWORD', 'omniteq@123'); // Your MySQL user password
-    define('DB_NAME', 'omniteq_db'); // cPanel username_database-name
-}
+// define('DB_HOST', 'localhost'); // Usually 'localhost' for cPanel
+// define('DB_USERNAME', 'omniteq_user'); // cPanel username_mysql-username
+// define('DB_PASSWORD', 'omniteq@123'); // Your MySQL user password
+// define('DB_NAME', 'omniteq_db'); // cPanel username_database-name
+define('DB_HOST', 'localhost:3306'); // Standard MySQL port
+define('DB_USERNAME', 'root'); // Standard XAMPP user
+define('DB_PASSWORD', ''); // Standard XAMPP password (empty)
+define('DB_NAME', 'omniteq_db');
 
 // Mail server configuration
 define('MAIL_HOST_TLS', 'mail.omniteq.in');
@@ -70,6 +65,7 @@ function getConnection()
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Content-Type: application/json");
 
 // Handle preflight requests
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

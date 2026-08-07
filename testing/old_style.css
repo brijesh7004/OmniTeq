@@ -1,0 +1,26 @@
+.outputs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.outputs-table th,
+.outputs-table td {
+  text-align: left;
+  padding: 8px 4px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.outputs-table th {
+  color: #666666;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.outputs-table button {
+  width: auto;
+  padding: 4px 10px;
+  margin: 0;
+  font-size: 12px;
+}

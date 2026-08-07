@@ -20,7 +20,7 @@ $fullName = $_SESSION['full_name'] ?? '';
 $email = $_SESSION['email'] ?? '';
 $mobile = $_SESSION['mobile'] ?? '';
 
-$redirect = 'dashboard.html';
+$redirect = 'customer/dashboard.php';
 if ($role === 'admin') $redirect = 'admin.html';
 if ($role === 'employee') $redirect = 'employee.html';
 

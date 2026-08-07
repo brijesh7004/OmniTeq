@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device Status</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="card">
+    <h1>Device Status</h1>
+
+    <section class="row">
+      <span class="label">Latitude</span>
+      <span class="value" id="lat">--</span>
+    </section>
+
+    <section class="row">
+      <span class="label">Longitude</span>
+      <span class="value" id="lon">--</span>
+    </section>
+
+    <section class="row">
+      <span class="label">Location</span>
+      <span class="value" id="locSource">--</span>
+    </section>
+
+    <a id="mapLink" class="map-link" href="#" target="_blank" rel="noopener">Open location in Google Maps</a>
+
+    <hr>
+
+    <table class="outputs-table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="outputsBody"></tbody>
+    </table>
+
+    <p id="statusMsg" class="status"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

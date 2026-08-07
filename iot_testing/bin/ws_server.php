@@ -2,12 +2,12 @@
 // bin/ws_server.php
 // A simple raw PHP WebSocket Server for testing
 
-$host = '100.93.48.124';
-$port = 3000;
+$host = '127.0.0.1';
+$port = 3001;
 
 echo "Starting WebSocket Server on ws://$host:$port\n";
 
-$socket = stream_socket_server("ws://$host:$port/ws/device?device_id=dS1&device_key=123", $errno, $errstr);
+$socket = stream_socket_server("tcp://$host:$port", $errno, $errstr);
 
 if (!$socket) {
     die("$errstr ($errno)\n");
