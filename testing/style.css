@@ -1,7 +1,7 @@
 /* --------------------------
    Google Font
 ---------------------------*/
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap');
 
 *{
     margin:0;
@@ -10,7 +10,7 @@
 }
 
 body{
-    font-family:'Inter',sans-serif;
+    font-family:'Noto Sans Gujarati','Inter',sans-serif;
     background:#08111f;
     background-image:
         radial-gradient(circle at top right,#2563eb30,transparent 35%),
@@ -228,8 +228,9 @@ hr{
 		display:flex;
 		align-items:center;
 		gap:8px;
-		padding:10px 18px;
-		border-radius:30px;
+		padding:10px 20px;
+		border-radius: 50%;
+		border: 2px solid #10b981;
 		background:#10b98122;
 		color:#10b981;
 		font-weight:600;
@@ -295,6 +296,11 @@ hr{
     word-break:break-word;
 }
 
+.location-time{
+    font-size:18px;
+    color:#60a5fa;
+}
+
 @media(max-width:700px){
 	.location-grid{
 		grid-template-columns:1fr;
@@ -305,12 +311,219 @@ hr{
 	}
 }
 
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.notify-btn{
+    border:1px solid rgba(255,255,255,.12);
+    outline:none;
+    cursor:pointer;
+    color:#fff;
+    font-family:inherit;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 18px;
+    border-radius:30px;
+    background:rgba(255,255,255,.05);
+    transition:.25s;
+}
+
+.notify-btn:hover:not(:disabled){
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.1);
+}
+
+.notify-btn:disabled{
+    cursor:default;
+    opacity:.7;
+    color:#10b981;
+    background:#10b98122;
+    border-color:transparent;
+}
+
 .live-status.offline{
+	border: 2px solid #ef4444;
     background:#ef444422;
     color:#ef4444;
+}
+
+.live-status.online{
+	border: 2px solid #10b981;
+    background:#10b98122;
+    color:#10b981;
 }
 
 .live-status.offline .live-dot{
     background:#ef4444;
     animation:none;
+}
+
+.live-status.online .live-dot{
+    background:#10b981;
+    animation:none;
+}
+
+
+/* ================= LIVE STATUS ================= */
+
+.live-status2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* GPIO22 = 1 */
+.live-status2.online {
+    background: #10b98122;
+    color: #10b981;
+    border-color: #10b981;
+}
+
+/* GPIO22 = 0 */
+.live-status2.offline {
+    background: #ef444422;
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+.live-status2.pending {
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.device-status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.device-status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+}
+
+.device-status-item span {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.gps-data-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.gps-data-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gps-data-item span {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.gps-data-updated {
+    grid-column: 1 / -1;
+}
+
+.gps-coordinate {
+    color: #f8fafc;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.nmea-panel {
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #050b14;
+}
+
+.nmea-panel-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 14px;
+    color: #94a3b8;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nmea-panel pre {
+    min-height: 92px;
+    max-height: 180px;
+    margin: 0;
+    padding: 14px;
+    overflow: auto;
+    color: #67e8f9;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.status-value {
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.status-value.healthy {
+    color: #10b981;
+}
+
+.status-value.unhealthy {
+    color: #ef4444;
+}
+
+.status-value.neutral {
+    color: #60a5fa;
+}
+
+.status-value.unknown {
+    color: #94a3b8;
+}
+
+@media(max-width:700px) {
+    .device-status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gps-data-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .gps-data-updated {
+        grid-column: auto;
+    }
+
+    .gps-data-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
 }

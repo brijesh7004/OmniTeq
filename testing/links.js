@@ -36,6 +36,10 @@ const links = [
         url: "https://www.linkedin.com/in/sibi-s-2850b418b/"
     },
     {
+        title: "Electrical - Minhajul Abrar Fahim",
+        url: "https://www.linkedin.com/in/minhajul-abrar-fahim/"
+    },
+    {
         title: "Electrical and Automation",
         url: "https://www.linkedin.com/company/electrical-and-automation/"
     },
