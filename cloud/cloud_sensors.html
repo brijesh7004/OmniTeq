@@ -1,0 +1,877 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTeq Cloud - Sensors</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/ui.css">
+</head>
+<body class="dark-theme dashboard-page">
+    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <!-- Ambient Glow Backgrounds -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass-panel-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    </a>
+                </div>
+                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="cloud_dashboard.html">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_projects.html">
+                        <i class='bx bx-folder'></i>
+                        <span class="link-name">Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_devices.html">
+                        <i class='bx bx-devices'></i>
+                        <span class="link-name">Devices</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="cloud_sensors.html">
+                        <i class='bx bx-chip'></i>
+                        <span class="link-name">Sensors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_commands.html">
+                        <i class='bx bx-terminal'></i>
+                        <span class="link-name">Commands</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_telemetry.html">
+                        <i class='bx bx-line-chart'></i>
+                        <span class="link-name">Telemetry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_rules.html">
+                        <i class='bx bx-git-repo-forked'></i>
+                        <span class="link-name">Rules</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_webhooks.html">
+                        <i class='bx bx-broadcast'></i>
+                        <span class="link-name">Webhooks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_docs.html">
+                        <i class='bx bx-book-open'></i>
+                        <span class="link-name">Documentation</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="cloud_settings.html">
+                        <i class='bx bx-cog'></i>
+                        <span class="link-name">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_landing.html">
+                        <i class='bx bx-log-out'></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Search devices, projects...">
+                </div>
+                <div class="topbar-actions">
+                    
+                    <div class="nav-switcher" style="margin-right: 15px;">
+                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
+                            <i class="bx bx-cloud"></i>
+                        </a>
+                        <div class="switcher-dropdown">
+                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
+                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
+                        </div>
+                    </div>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="bx bx-sun"></i>
+                        <i class="bx bx-moon"></i>
+                    </button>
+                    <button class="icon-btn notification-btn">
+                        <i class='bx bx-bell'></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
+                        <div class="user-info">
+                            <span class="user-name" id="user-display-name">Loading...</span>
+                            <span class="user-role" id="user-display-role">Member</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-wrapper">
+                <div class="page-header" style="display: block; margin-bottom: 0;">
+                    <h1 style="margin-bottom: 18px;">Sensor Data</h1>
+
+                    <!-- Row 1: Project / Device / Metric filters, horizontally in
+                         line beneath the page title. -->
+                    <div class="filter-bar" style="margin-bottom: 16px;">
+                        <div>
+                            <label for="sensor-filter-project">Project</label>
+                            <select class="styled-select" id="sensor-filter-project">
+                                <option value="all">All Projects</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="sensor-filter-device">Device</label>
+                            <select class="styled-select" id="sensor-filter-device">
+                                <option value="all">All Devices</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="sensor-filter-type">Metric</label>
+                            <select class="styled-select" id="sensor-filter-type">
+                                <option value="all">All Metrics</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: actions. The spacer pushes Add Sensor to the far right. -->
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn-ghost" onclick="openTestIngestModal()" style="display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-weight: 500;">
+                            <i class='bx bx-broadcast'></i> Connect / Ingest Data
+                        </button>
+                        <a href="cloud_telemetry.html" class="btn-ghost" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                            <i class='bx bx-line-chart'></i> View Full Telemetry History
+                        </a>
+                        <span class="flex-spacer"></span>
+                        <a href="cloud_sensor_add.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class='bx bx-plus'></i> Add Sensor</a>
+                    </div>
+                </div>
+
+                <div id="sensors-summary" class="filter-bar" style="margin: 18px 0 16px; font-size: 12.5px; color: var(--text-muted-dark);"></div>
+
+                <div class="sensors-grid" id="sensors-grid-container">
+                    <div class="glass-panel" style="padding: 24px; grid-column: 1/-1; text-align: center; color: var(--text-muted-dark);">Loading sensor cards...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Device Connection & Real Ingest -->
+    <div id="testIngestModal" class="modal-backdrop" style="display: none;">
+        <div class="glass-panel modal-content" style="max-width: 500px; width: 90%; margin: auto; padding: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                <h3 style="font-size: 18px; font-weight: 700;"><i class='bx bx-broadcast'></i> Device Connection & Telemetry</h3>
+                <button onclick="closeModal('testIngestModal')" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+
+            <!-- Device Connection Status Card -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div>
+                        <div style="font-size: 12px; color: var(--text-muted-light);">Device Connection State</div>
+                        <strong id="modal-device-name" style="font-size: 15px;">—</strong>
+                    </div>
+                    <div id="modal-device-status-badge">
+                        <span class="badge b-red">Offline</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="modal-connect-btn" class="btn-primary" style="flex: 1; padding: 8px 14px; font-size: 13px; justify-content: center;" onclick="modalToggleConnection()">
+                        <i class='bx bx-wifi'></i> Connect Device
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ingest Form -->
+            <form id="sensorIngestForm">
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Select Device</label>
+                    <select id="modal-device-select" class="styled-select" style="width: 100%; height: 40px;" required>
+                        <option value="">Select device...</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Sensor / Variable</label>
+                    <select id="modal-variable-select" class="styled-select" style="width: 100%; height: 40px;" required>
+                        <option value="">Select sensor variable...</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Device Secret Key</label>
+                    <input type="text" id="modal-device-secret" class="styled-select" style="width: 100%; height: 40px;" placeholder="sk_live_... (required by /ingest)" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Real Numeric Value</label>
+                    <div style="position: relative;">
+                        <input type="number" step="any" id="modal-ingest-value" class="styled-select" style="width: 100%; height: 40px;" placeholder="e.g. 24.5" required>
+                        <span id="modal-value-unit" style="position: absolute; right: 12px; top: 10px; color: var(--text-muted); font-size: 13px;"></span>
+                    </div>
+                    <small style="color: var(--text-muted-dark); font-size: 11px; margin-top: 4px; display: block;">Transmits real reading to the cloud. The sensor card will immediately display this real value.</small>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                    <button type="button" class="btn-ghost" onclick="closeModal('testIngestModal')">Cancel</button>
+                    <button type="submit" class="btn-primary" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <i class='bx bx-send'></i> Send to Cloud
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/validation.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cloud.js"></script>
+    <script src="js/ui.js"></script>
+    
+    <!-- Dynamic Sensors View Logic -->
+    <script>
+        let allSensorVariables = [];
+        let allDevices = [];
+        let allProjects = [];
+
+        // How many recent readings each card shows (the latest plus the ones
+        // before it). Cards are populated lazily so only the variables actually
+        // visible after filtering are ever queried.
+        const CARD_HISTORY_COUNT = 3;
+        const HISTORY_TTL_MS = 15000;
+        // variableId -> { fetchedAt: ms, points: [{ value, recorded_at }] } newest-first
+        const cardHistory = new Map();
+
+        function timeAgo(iso) {
+            if (!iso) return '—';
+            const diffMins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+            if (!isFinite(diffMins)) return '—';
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            if (diffMins < 1440) return `${Math.floor(diffMins / 60)}h ago`;
+            return `${Math.floor(diffMins / 1440)}d ago`;
+        }
+
+        // Renders the last-N strip for one variable from cache (no network).
+        function renderCardHistory(variableId, unit) {
+            const host = document.getElementById(`sensor-history-${variableId}`);
+            if (!host) return;
+
+            const entry = cardHistory.get(variableId);
+            if (!entry || !entry.points || entry.points.length === 0) {
+                host.innerHTML = `<div class="sensor-history-label">Last ${CARD_HISTORY_COUNT} readings</div>
+                    <div class="sensor-history-empty">No readings recorded yet.</div>`;
+                return;
+            }
+
+            const rows = entry.points.slice(0, CARD_HISTORY_COUNT).map((p, i) => {
+                const cls = i === 0 ? 'is-latest' : (i === 1 ? 'is-prev' : 'is-older');
+                return `<div class="sensor-history-row ${cls}">
+                        <span class="sensor-history-value">${escapeHtml(p.value)}${unit ? ' ' + escapeHtml(unit) : ''}</span>
+                        <span class="sensor-history-time">${escapeHtml(timeAgo(p.recorded_at))}</span>
+                    </div>`;
+            }).join('');
+
+            host.innerHTML = `<div class="sensor-history-label">Last ${CARD_HISTORY_COUNT} readings</div>${rows}`;
+        }
+
+        /**
+         * Fetches the last CARD_HISTORY_COUNT readings for the given variables and
+         * fills in their cards. Only variables whose cache is missing or stale are
+         * queried, so switching filters or the periodic refresh does not re-request
+         * everything. getRecent() is used because a plain `limit` on the telemetry
+         * endpoint returns the OLDEST rows of the window, not the newest.
+         */
+        async function refreshCardHistories(variables) {
+            const stale = variables.filter(v => {
+                const e = cardHistory.get(v.id);
+                return !e || (Date.now() - e.fetchedAt) > HISTORY_TTL_MS;
+            });
+
+            await Promise.all(stale.map(async (v) => {
+                try {
+                    const points = await api.telemetry.getRecent(v.id, CARD_HISTORY_COUNT);
+                    cardHistory.set(v.id, {
+                        fetchedAt: Date.now(),
+                        points: (points || []).map(p => ({ value: p.value, recorded_at: p.recorded_at })).reverse()
+                    });
+                } catch (e) {
+                    // Leave any previously cached points in place on failure.
+                    console.warn(`History unavailable for ${v.label}:`, e && (e.message || e));
+                    if (!cardHistory.has(v.id)) cardHistory.set(v.id, { fetchedAt: Date.now(), points: [] });
+                }
+                renderCardHistory(v.id, v.unit);
+            }));
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const api = window.api;
+
+            const gridContainer = document.getElementById('sensors-grid-container');
+            const filterSelect = document.getElementById('sensor-filter-type');
+            const projectFilter = document.getElementById('sensor-filter-project');
+            const deviceFilter = document.getElementById('sensor-filter-device');
+
+            await loadSensorsData();
+            rebuildFilterOptions();
+
+            // The gateway has no WebSocket route yet, so live pushes never arrive.
+            // Poll instead, otherwise the cards would only refresh on page load or
+            // after an ingest made from this page.
+            setInterval(() => {
+                if (document.hidden) return;
+                // Age out the cached histories so the next render refetches them.
+                cardHistory.forEach((entry) => { entry.fetchedAt = 0; });
+                renderSensorGrid();
+            }, 15000);
+
+            // Setup WebSocket Connection for real-time telemetry and device connection events
+            api.connectWebSocket((msg) => {
+                if (msg.type === 'telemetry.update') {
+                    const { variable_id, value, recorded_at, device_id } = msg;
+
+                    // Update memory store
+                    const targetVar = allSensorVariables.find(v => v.id === variable_id);
+                    if (targetVar) {
+                        targetVar.latest_value = value;
+                        targetVar.latest_at = recorded_at;
+                        targetVar.deviceStatus = 'online';
+                    }
+
+                    // Push the live point onto the card strip so it updates without
+                    // waiting for the next poll.
+                    const cached = cardHistory.get(variable_id);
+                    if (cached && Array.isArray(cached.points)) {
+                        cached.points.unshift({ value, recorded_at });
+                        cached.points = cached.points.slice(0, CARD_HISTORY_COUNT);
+                        cached.fetchedAt = Date.now();
+                    }
+
+                    // Update device in list if matched
+                    const targetDev = allDevices.find(d => d.id === device_id);
+                    if (targetDev) targetDev.status = 'online';
+
+                    // Re-render components with latest real data
+                    renderSensorGrid();
+                } else if (msg.type === 'device.status') {
+                    const { device_id, status } = msg;
+                    allSensorVariables.forEach(v => {
+                        if (v.deviceId === device_id) {
+                            v.deviceStatus = status;
+                        }
+                    });
+                    const targetDev = allDevices.find(d => d.id === device_id);
+                    if (targetDev) targetDev.status = status;
+
+                    renderSensorGrid();
+                    updateModalDeviceState();
+                }
+            });
+
+            async function loadSensorsData() {
+                try {
+                    const projRes = await api.projects.list();
+                    if (!projRes.success) return;
+
+                    const projects = projRes.data;
+                    allProjects = projects;
+                    allDevices = [];
+                    allSensorVariables = [];
+
+                    for (let proj of projects) {
+                        const devRes = await api.devices.list(proj.id);
+                        if (devRes.success) {
+                            for (let dev of devRes.data) {
+                                allDevices.push({ ...dev, projectId: proj.id, projectName: proj.name });
+
+                                const sensRes = await api.sensors.list(dev.id);
+                                if (sensRes.success) {
+                                    for (let sen of sensRes.data) {
+                                        const varRes = await api.variables.list(sen.id);
+                                        if (varRes.success) {
+                                            varRes.data.forEach(v => {
+                                                allSensorVariables.push({
+                                                    ...v,
+                                                    sensorId: sen.id,
+                                                    sensorName: sen.name,
+                                                    unit: sen.unit,
+                                                    deviceName: dev.name,
+                                                    deviceId: dev.id,
+                                                    projectId: proj.id,
+                                                    projectName: proj.name,
+                                                    deviceStatus: dev.status || 'offline'
+                                                });
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    renderSensorGrid();
+
+                } catch (e) {
+                    console.error("Failed to load sensors configuration:", e);
+                }
+            }
+
+            // Populate the Project / Device / Metric dropdowns from loaded data.
+            // Device options cascade from the selected project.
+            function rebuildFilterOptions() {
+                const projectFilter = document.getElementById('sensor-filter-project');
+                const deviceFilter = document.getElementById('sensor-filter-device');
+                const metricFilter = document.getElementById('sensor-filter-type');
+                if (!projectFilter || !deviceFilter || !metricFilter) return;
+
+                const keepProject = projectFilter.value || 'all';
+                projectFilter.innerHTML = '<option value="all">All Projects</option>' +
+                    allProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                projectFilter.value = allProjects.some(p => p.id === keepProject) ? keepProject : 'all';
+
+                const scopedDevices = allDevices.filter(d =>
+                    projectFilter.value === 'all' || d.projectId === projectFilter.value);
+                const keepDevice = deviceFilter.value || 'all';
+                deviceFilter.innerHTML = '<option value="all">All Devices</option>' +
+                    scopedDevices.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('');
+                deviceFilter.value = scopedDevices.some(d => d.id === keepDevice) ? keepDevice : 'all';
+
+                const scopedVars = allSensorVariables.filter(v =>
+                    (projectFilter.value === 'all' || v.projectId === projectFilter.value) &&
+                    (deviceFilter.value === 'all' || v.deviceId === deviceFilter.value));
+                const labels = [...new Set(scopedVars.map(v => v.label))].sort();
+                const keepMetric = metricFilter.value || 'all';
+                metricFilter.innerHTML = '<option value="all">All Metrics</option>' +
+                    labels.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
+                metricFilter.value = labels.includes(keepMetric) ? keepMetric : 'all';
+            }
+
+            function calculateBounds(label, value) {
+                if (value === null || value === undefined) {
+                    return { status: 'No Data', color: 'text-muted' };
+                }
+                const cleanLabel = (label || '').toLowerCase();
+                if (cleanLabel.includes('temp')) {
+                    if (value > 30) return { status: 'Warning: High Temp', color: 'text-red' };
+                    if (value < 15) return { status: 'Warning: Low Temp', color: 'text-red' };
+                    return { status: 'Normal Range', color: 'text-green' };
+                } else if (cleanLabel.includes('humid')) {
+                    if (value > 75) return { status: 'Warning: High Humid', color: 'text-red' };
+                    if (value < 40) return { status: 'Warning: Low Humid', color: 'text-red' };
+                    return { status: 'Optimal', color: 'text-green' };
+                } else if (cleanLabel.includes('vibe')) {
+                    if (value > 10) return { status: 'Warning: Abnormal', color: 'text-red' };
+                    return { status: 'Stable', color: 'text-green' };
+                }
+                return { status: 'Live / Normal', color: 'text-green' };
+            }
+
+            function renderSensorGrid() {
+                const summaryEl = document.getElementById('sensors-summary');
+                if (allSensorVariables.length === 0) {
+                    if (summaryEl) summaryEl.innerHTML = '';
+                    gridContainer.innerHTML = `
+                        <div class="glass-panel" style="grid-column: 1/-1; padding: 48px 24px; text-align: center;">
+                            <div style="width: 64px; height: 64px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                <i class='bx bx-chip' style="font-size: 32px; color: var(--primary);"></i>
+                            </div>
+                            <h3 style="font-size: 18px; margin-bottom: 8px;">No Sensors Configured</h3>
+                            <p style="color: var(--text-muted-dark); max-width: 440px; margin: 0 auto 20px; font-size: 14px;">
+                                Devices start with no sensors. Add a sensor and a telemetry variable to begin streaming temperature, humidity, vibration and other metrics.
+                            </p>
+                            <a href="cloud_sensor_add.html" class="btn-primary" style="display: inline-flex; text-decoration: none; align-items: center; gap: 8px;">
+                                <i class='bx bx-plus'></i> Add Sensor
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const activeProject = document.getElementById('sensor-filter-project').value;
+                const activeDevice = document.getElementById('sensor-filter-device').value;
+                const activeMetric = filterSelect.value;
+
+                // Cascading filters: project -> device -> metric.
+                let filtered = allSensorVariables;
+                if (activeProject !== 'all') filtered = filtered.filter(v => v.projectId === activeProject);
+                if (activeDevice !== 'all') filtered = filtered.filter(v => v.deviceId === activeDevice);
+                if (activeMetric !== 'all') filtered = filtered.filter(v => v.label === activeMetric);
+
+                const onlineCount = filtered.filter(v => v.deviceStatus === 'online').length;
+
+                if (summaryEl) {
+                    const scope = [];
+                    if (activeProject !== 'all') {
+                        const p = allProjects.find(x => x.id === activeProject);
+                        if (p) scope.push(escapeHtml(p.name));
+                    }
+                    if (activeDevice !== 'all') {
+                        const d = allDevices.find(x => x.id === activeDevice);
+                        if (d) scope.push(escapeHtml(d.name));
+                    }
+                    if (activeMetric !== 'all') scope.push(escapeHtml(activeMetric));
+                    const scopeText = scope.length > 0 ? ` · ${scope.join(' › ')}` : '';
+                    summaryEl.innerHTML = `
+                        <span><strong>${filtered.length}</strong> of ${allSensorVariables.length} metrics${scopeText}</span>
+                        <span style="color: #10b981;"><i class='bx bx-broadcast'></i> ${onlineCount} streaming</span>
+                        <span style="color: #ef4444;"><i class='bx bx-wifi-off'></i> ${filtered.length - onlineCount} offline</span>
+                        ${(activeProject !== 'all' || activeDevice !== 'all' || activeMetric !== 'all')
+                            ? `<button type="button" class="btn-ghost" style="padding: 2px 10px; font-size: 11.5px;" onclick="resetSensorFilters()"><i class='bx bx-x'></i> Clear filters</button>`
+                            : ''}
+                    `;
+                }
+
+                if (filtered.length === 0) {
+                    gridContainer.innerHTML = '<div class="glass-panel" style="padding: 30px; grid-column: 1/-1; text-align: center; color: var(--text-muted-dark);">No metrics match the selected filters.<br><button type="button" class="btn-ghost" style="margin-top: 12px;" onclick="resetSensorFilters()"><i class=\'bx bx-reset\'></i> Clear filters</button></div>';
+                    return;
+                }
+
+                gridContainer.innerHTML = filtered.map(v => {
+                    let iconClass = 'bx bx-chip';
+                    let iconBg = 'b-blue';
+                    const cleanLabel = v.label.toLowerCase();
+
+                    if (cleanLabel.includes('temp')) {
+                        iconClass = 'bx bxs-thermometer';
+                        iconBg = 'b-red';
+                    } else if (cleanLabel.includes('humid')) {
+                        iconClass = 'bx bx-water';
+                        iconBg = 'b-blue';
+                    } else if (cleanLabel.includes('vibe')) {
+                        iconClass = 'bx bx-pulse';
+                        iconBg = 'b-purple';
+                    } else if (cleanLabel.includes('light')) {
+                        iconClass = 'bx bx-sun';
+                        iconBg = 'b-green';
+                    }
+
+                    const isOnline = v.deviceStatus === 'online';
+                    const hasRealData = isOnline && v.latest_value !== null && v.latest_value !== undefined;
+
+                    let valueHtml = '';
+                    let statusHtml = '';
+                    let badgeHtml = '';
+
+                    if (!isOnline) {
+                        valueHtml = `<span class="sensor-card-value" style="color: #ef4444;">—</span>`;
+                        statusHtml = `<span class="sensor-card-status text-red"><i class='bx bx-wifi-off'></i> Device offline — no live data</span>`;
+                        badgeHtml = `<span class="sensor-card-badge b-red"><i class='bx bx-radio-circle'></i> Offline</span>`;
+                    } else if (hasRealData) {
+                        const bounds = calculateBounds(v.label, v.latest_value);
+                        valueHtml = `<span class="sensor-card-value" style="color: #10b981;">${escapeHtml(v.latest_value)}</span>` +
+                            (v.unit ? `<span class="sensor-card-unit">${escapeHtml(v.unit)}</span>` : '');
+                        statusHtml = `<span class="sensor-card-status ${bounds.color}"><i class='bx bx-check-circle'></i> ${escapeHtml(bounds.status)}</span>`;
+                        badgeHtml = `<span class="sensor-card-badge b-green"><i class='bx bx-broadcast'></i> Live</span>`;
+                    } else {
+                        valueHtml = `<span class="sensor-card-value" style="color: var(--text-muted);">—</span>`;
+                        statusHtml = `<span class="sensor-card-status text-muted"><i class='bx bx-time'></i> Waiting for first reading</span>`;
+                        badgeHtml = `<span class="sensor-card-badge b-blue"><i class='bx bx-wifi'></i> Idle</span>`;
+                    }
+
+                    const lastSeen = v.latest_at
+                        ? new Date(v.latest_at).toLocaleTimeString()
+                        : 'No data yet';
+
+                    return `
+                        <div class="sensor-card glass-panel ${isOnline ? 'is-online' : 'is-offline'}" id="sensor-card-${v.id}">
+                            <div class="sensor-card-head">
+                                <div class="sensor-card-title">
+                                    <div class="sensor-card-glyph ${isOnline ? iconBg : 'b-gray'}"><i class='${iconClass}'></i></div>
+                                    <div style="min-width: 0;">
+                                        <div class="sensor-card-name">${escapeHtml(v.label)}</div>
+                                        <div style="font-size: 10.5px; color: var(--text-muted-dark);">${escapeHtml(v.sensorName || 'Sensor')}</div>
+                                    </div>
+                                </div>
+                                ${badgeHtml}
+                            </div>
+
+                            <div class="sensor-card-reading">${valueHtml}</div>
+                            ${statusHtml}
+
+                            <div class="sensor-card-history" id="sensor-history-${v.id}">
+                                <div class="sensor-history-label">Last ${CARD_HISTORY_COUNT} readings</div>
+                                <div class="sensor-history-empty">Loading…</div>
+                            </div>
+
+                            <div class="sensor-card-foot">
+                                <span class="sensor-card-device" title="${escapeHtml(v.deviceName)}">
+                                    <i class='bx bx-chip'></i> <span>${escapeHtml(v.deviceName)}</span>
+                                </span>
+                                <span style="white-space: nowrap;">${escapeHtml(lastSeen)}</span>
+                            </div>
+
+                            <div style="display: flex; gap: 6px; margin-top: 10px;">
+                                <button type="button" class="btn-ghost" style="flex: 1; justify-content: center; padding: 5px 8px; font-size: 11.5px; color: var(--primary);" onclick="openIngestForVar('${v.deviceId}', '${v.id}')" title="Transmit a test reading">
+                                    <i class='bx bx-send'></i> Ingest
+                                </button>
+                                <button type="button" class="btn-ghost" style="flex: 1; justify-content: center; padding: 5px 8px; font-size: 11.5px;" onclick="copyText('${v.id}', 'Variable ID')" title="Copy the variable UUID">
+                                    <i class='bx bx-copy'></i> Variable ID
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Cards are painted first, then only the visible ones have their
+                // last-N history fetched, so a large fleet filtered to a few cards
+                // does not trigger a request per variable in the account.
+                refreshCardHistories(filtered).catch(err => console.warn('Card history refresh failed:', err));
+            }
+
+            function resetSensorFilters() {
+                document.getElementById('sensor-filter-project').value = 'all';
+                document.getElementById('sensor-filter-device').value = 'all';
+                document.getElementById('sensor-filter-type').value = 'all';
+                rebuildFilterOptions();
+                renderSensorGrid();
+            }
+
+            window.resetSensorFilters = resetSensorFilters;
+
+            // Cascading filters: changing the project rebuilds the device + metric
+            // options, and changing the device rebuilds the metric options.
+            filterSelect.addEventListener('change', renderSensorGrid);
+            projectFilter.addEventListener('change', () => { rebuildFilterOptions(); renderSensorGrid(); });
+            deviceFilter.addEventListener('change', () => { rebuildFilterOptions(); renderSensorGrid(); });
+
+            // Ingest Form Submit
+            const ingestForm = document.getElementById('sensorIngestForm');
+            if (ingestForm) {
+                ingestForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const devId = document.getElementById('modal-device-select').value;
+                    const varId = document.getElementById('modal-variable-select').value;
+                    const secretInput = document.getElementById('modal-device-secret');
+                    const valInput = document.getElementById('modal-ingest-value');
+
+                    if (!devId) {
+                        showToast('Please select a device.', 'error');
+                        return;
+                    }
+                    if (!varId) {
+                        showToast('Please select a sensor variable.', 'error');
+                        return;
+                    }
+                    if (!secretInput.value.trim()) {
+                        showToast('Device secret key is required for /ingest.', 'error');
+                        return;
+                    }
+
+                    const numVal = parseFloat(valInput.value);
+                    if (isNaN(numVal) || !isFinite(numVal)) {
+                        showToast('Value must be a valid number.', 'error');
+                        return;
+                    }
+
+                    try {
+                        const res = await api.ingest.telemetry({
+                            device_id: devId,
+                            secret_key: secretInput.value.trim(),
+                            readings: [{
+                                variable_id: varId,
+                                value: numVal,
+                                recorded_at: new Date().toISOString()
+                            }]
+                        });
+
+                        const inserted = res.data ? (res.data.inserted !== undefined ? res.data.inserted : res.data.inserted_count) : 0;
+                        if (res.success || inserted > 0) {
+                            showToast(`Telemetry reading (${numVal}) received by cloud!`, 'success');
+                            closeModal('testIngestModal');
+                            // Drop the cached strip for this variable so the new
+                            // reading is fetched rather than served from cache.
+                            cardHistory.delete(varId);
+                            // Load and refresh
+                            await loadSensorsData();
+                        } else {
+                            showToast(res.error?.message || 'Failed to ingest telemetry.', 'error');
+                        }
+                    } catch (err) {
+                        showToast(err.message || 'Error transmitting data.', 'error');
+                    }
+                });
+            }
+
+            // Populate device select when opening modal
+            const devSelect = document.getElementById('modal-device-select');
+            if (devSelect) {
+                devSelect.addEventListener('change', () => {
+                    updateModalDeviceState();
+                    populateModalVariables();
+                    fillDeviceSecretIfAvailable('modal-device-select', 'modal-device-secret');
+                });
+            }
+        });
+
+        function openTestIngestModal() {
+            const devSelect = document.getElementById('modal-device-select');
+            if (!devSelect) return;
+
+            if (allDevices.length === 0) {
+                showToast("No devices available. Please provision a device first.", "error");
+                return;
+            }
+
+            devSelect.innerHTML = '<option value="">Select device...</option>' + 
+                allDevices.map(d => `<option value="${d.id}">${d.name} (${d.status || 'offline'})</option>`).join('');
+
+            if (allDevices.length > 0) {
+                devSelect.value = allDevices[0].id;
+                updateModalDeviceState();
+                populateModalVariables();
+                fillDeviceSecretIfAvailable('modal-device-select', 'modal-device-secret');
+            }
+
+            openModal('testIngestModal');
+        }
+
+        function openIngestForVar(deviceId, varId) {
+            openTestIngestModal();
+            const devSelect = document.getElementById('modal-device-select');
+            if (devSelect) {
+                devSelect.value = deviceId;
+                updateModalDeviceState();
+                populateModalVariables();
+                const varSelect = document.getElementById('modal-variable-select');
+                if (varSelect) varSelect.value = varId;
+                fillDeviceSecretIfAvailable('modal-device-select', 'modal-device-secret');
+            }
+        }
+
+        function updateModalDeviceState() {
+            const devSelect = document.getElementById('modal-device-select');
+            const devId = devSelect?.value;
+            const dev = allDevices.find(d => d.id === devId);
+
+            const nameEl = document.getElementById('modal-device-name');
+            const badgeEl = document.getElementById('modal-device-status-badge');
+            const btnEl = document.getElementById('modal-connect-btn');
+
+            if (!dev) {
+                if (nameEl) nameEl.textContent = '—';
+                if (badgeEl) badgeEl.innerHTML = '<span class="badge b-gray">None</span>';
+                if (btnEl) btnEl.disabled = true;
+                return;
+            }
+
+            if (nameEl) nameEl.textContent = dev.name;
+            const isOnline = dev.status === 'online';
+
+            if (badgeEl) {
+                badgeEl.innerHTML = isOnline 
+                    ? '<span class="badge b-green"><i class="bx bx-radio-circle"></i> Connected Online</span>'
+                    : '<span class="badge b-red"><i class="bx bx-radio-circle"></i> Disconnected Offline</span>';
+            }
+
+            if (btnEl) {
+                btnEl.disabled = false;
+                if (isOnline) {
+                    btnEl.className = 'btn-ghost';
+                    btnEl.style.color = '#ef4444';
+                    btnEl.style.border = '1px solid rgba(239,68,68,0.4)';
+                    btnEl.innerHTML = "<i class='bx bx-power-off'></i> Disconnect Device";
+                } else {
+                    btnEl.className = 'btn-primary';
+                    btnEl.style.color = '#fff';
+                    btnEl.style.border = 'none';
+                    btnEl.innerHTML = "<i class='bx bx-wifi'></i> Connect Device to Cloud";
+                }
+            }
+        }
+
+        function populateModalVariables() {
+            const devSelect = document.getElementById('modal-device-select');
+            const varSelect = document.getElementById('modal-variable-select');
+            const devId = devSelect?.value;
+
+            if (!varSelect) return;
+
+            const devVars = allSensorVariables.filter(v => v.deviceId === devId);
+            if (devVars.length === 0) {
+                varSelect.innerHTML = '<option value="">No sensors found on this device</option>';
+                return;
+            }
+
+            varSelect.innerHTML = '<option value="">Select sensor variable...</option>' + 
+                devVars.map(v => `<option value="${v.id}">${v.label} (${v.sensorName}) [${v.unit || 'unit'}]</option>`).join('');
+            
+            varSelect.value = devVars[0].id;
+
+            const unitSpan = document.getElementById('modal-value-unit');
+            if (unitSpan) unitSpan.textContent = devVars[0].unit || '';
+
+            varSelect.onchange = () => {
+                const selected = devVars.find(v => v.id === varSelect.value);
+                if (unitSpan) unitSpan.textContent = selected?.unit || '';
+            };
+        }
+
+        async function modalToggleConnection() {
+            const devSelect = document.getElementById('modal-device-select');
+            const devId = devSelect?.value;
+            const dev = allDevices.find(d => d.id === devId);
+            if (!dev) return;
+
+            const isOnline = dev.status === 'online';
+            try {
+                if (isOnline) {
+                    const res = await api.devices.disconnect(devId);
+                    if (res.success) {
+                        dev.status = 'offline';
+                        showToast(`Device "${dev.name}" is now offline.`, 'info');
+                    }
+                } else {
+                    const res = await api.devices.connect(devId);
+                    if (res.success) {
+                        dev.status = 'online';
+                        showToast(`Device "${dev.name}" connected to cloud!`, 'success');
+                    }
+                }
+                updateModalDeviceState();
+                allSensorVariables.forEach(v => {
+                    if (v.deviceId === devId) v.deviceStatus = dev.status;
+                });
+                renderSensorGrid();
+            } catch (e) {
+                showToast('Failed to toggle connection: ' + e.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
+

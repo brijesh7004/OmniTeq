@@ -1,0 +1,905 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - OmniTeq Cloud</title>
+    <meta name="description" content="Create your free OmniTeq Cloud account. Join thousands of engineers building the future of IoT with our ultimate real-time command center.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/ui.css">
+    <style>
+        /* Custom layout for signup screen splits */
+        .auth-container {
+            max-width: 1050px !important;
+            transition: all 0.5s ease;
+        }
+        
+        .split-wrapper {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .form-side {
+            flex: 1.1;
+            min-width: 320px;
+        }
+        
+        .checkout-side {
+            flex: 0.9;
+            min-width: 320px;
+            position: sticky;
+            top: 100px;
+        }
+        
+        @media (max-width: 850px) {
+            .split-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .checkout-side {
+                position: static;
+            }
+        }
+        
+        /* Checkout Summary Card */
+        .checkout-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+        .checkout-card-header {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .checkout-plan-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        .checkout-plan-info p {
+            font-size: 12.5px;
+            color: var(--text-muted-dark);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+        .checkout-price-display {
+            text-align: right;
+        }
+        .checkout-price-display .price {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .checkout-price-display .period {
+            font-size: 11px;
+            color: var(--text-muted-dark);
+        }
+        
+        /* Consent pill */
+        .consent-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* Quotas checkout list */
+        .checkout-quotas-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 13px;
+        }
+        .checkout-quotas-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-muted-light);
+        }
+        .checkout-quotas-list li strong {
+            color: var(--text-light);
+        }
+        .checkout-quotas-list i {
+            color: var(--success);
+            font-size: 15px;
+            margin-right: 4px;
+        }
+        
+        /* Ingest micro-rates grid */
+        .checkout-rates-box {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+        .checkout-rates-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .checkout-rates-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12.5px;
+            color: var(--text-muted-light);
+        }
+        .checkout-rates-row strong {
+            color: var(--text-light);
+        }
+        
+        /* Plan selector inside signup form */
+        .signup-plan-select-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .signup-plan-select-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted-dark);
+        }
+        .signup-plan-select-group select {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-dark);
+            color: var(--text-dark);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-main);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+            cursor: pointer;
+        }
+        .signup-plan-select-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        /* Interactive Terms Modal Styles */
+        .terms-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .terms-modal-card {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.3s ease;
+            text-align: left;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .terms-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 16px;
+        }
+        .terms-modal-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        .terms-modal-header button {
+            background: none;
+            border: none;
+            color: var(--text-muted-light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .terms-modal-header button:hover {
+            color: var(--text-light);
+        }
+        .terms-modal-body {
+            overflow-y: auto;
+            flex: 1;
+            padding-right: 8px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-muted-light);
+        }
+        .terms-modal-body h4 {
+            color: var(--text-light);
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 14.5px;
+            font-weight: 600;
+        }
+        .terms-modal-body p {
+            margin-bottom: 12px;
+        }
+        .terms-modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .terms-modal-footer {
+            border-top: 1px solid var(--border-light);
+            padding-top: 16px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="dark-theme auth-page">
+    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    
+    <!-- Background Elements -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="auth-graphic ag-1"></div>
+    <div class="auth-graphic ag-2"></div>
+
+    <!-- Navigation -->
+    <nav class="landing-nav glass-panel">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="cloud_landing.html" style="display: flex; align-items: center; text-decoration: none;">
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 36px;">
+                </a>
+            </div>
+            <ul class="nav-links-desktop">
+                <li><a href="cloud_landing.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="cloud_landing.html#features">Features</a></li>
+                <li><a href="cloud_landing.html#pricing">Pricing</a></li>
+                <li><a href="api-reference.html">API</a></li>
+            </ul>
+            <div class="nav-actions">
+            <div class="nav-switcher">
+                <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
+                    <i class="bx bx-cloud"></i>
+                </a>
+                <div class="switcher-dropdown">
+                    <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
+                    <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
+                </div>
+            </div>
+                <a href="login.html" class="btn-ghost">Log In</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="auth-container">
+        <div class="auth-header animate-on-scroll">
+            <h1>Complete Your Subscription</h1>
+            <p>Deploy and scale your global IoT fleet in real-time with OmniTeq.</p>
+        </div>
+
+        <div class="split-wrapper">
+            <!-- Left Side: Registration Form -->
+            <div class="form-side">
+                <div class="auth-card glass-panel animate-on-scroll delay-1">
+                    <form action="#" method="post" class="auth-form" id="signupForm">
+                        
+                        <!-- Subscription Plan Selector (pre-filled or manual) -->
+                        <div class="signup-plan-select-group" id="planSelectGroup">
+                            <label for="planSelect">Selected Subscription Plan</label>
+                            <select id="planSelect" onchange="handlePlanChange(this.value)">
+                                <option value="free">Developer Sandbox (No Cost)</option>
+                                <option value="basic">Basic Prepaid (₹499/mo)</option>
+                                <option value="moderate">Moderate Prepaid (₹1,999/mo)</option>
+                                <option value="payg-standard">Standard Pay-As-You-Grow</option>
+                                <option value="payg-enterprise">Enterprise Pay-As-You-Grow</option>
+                            </select>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div class="form-group has-icon">
+                                <label for="firstName">First Name</label>
+                                <i class='bx bx-user input-icon'></i>
+                                <input type="text" id="firstName" name="given-name" placeholder="John" autocomplete="given-name" required>
+                            </div>
+                            <div class="form-group has-icon">
+                                <label for="lastName">Last Name</label>
+                                <i class='bx bx-user input-icon'></i>
+                                <input type="text" id="lastName" name="family-name" placeholder="Doe" autocomplete="family-name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-icon">
+                            <label for="email">Work Email</label>
+                            <i class='bx bx-envelope input-icon'></i>
+                            <input type="email" id="email" name="email" placeholder="name@company.com" autocomplete="email" autocapitalize="none" spellcheck="false" required>
+                        </div>
+
+                        <div class="form-group has-icon">
+                            <label for="password">Password</label>
+                            <i class='bx bx-lock-alt input-icon'></i>
+                            <input type="password" id="password" name="new-password" placeholder="Create a secure password" autocomplete="new-password" required>
+                            <i class='bx bx-hide password-toggle' id="togglePassword"></i>
+                        </div>
+                        
+                        <div class="form-group has-icon">
+                            <label for="company">Company Name (Optional)</label>
+                            <i class='bx bx-buildings input-icon'></i>
+                            <input type="text" id="company" name="organization" placeholder="Acme Inc." autocomplete="organization">
+                        </div>
+
+                        <div class="auth-options" style="margin-bottom: 24px; display: flex; align-items: flex-start; justify-content: flex-start; text-align: left;">
+                            <label class="custom-checkbox" style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: var(--text-muted-light);">
+                                <input type="checkbox" id="terms" required onchange="handleConsentCheckboxChange(this.checked)">
+                                <div class="checkmark" style="margin-top: 2px; flex-shrink: 0;"><i class='bx bx-check'></i></div>
+                                <span style="font-size: 13.5px; line-height: 1.4; color: var(--text-muted-light);">I explicitly agree to the <a href="#" id="termsLink" style="color: var(--primary); text-decoration: underline; font-weight: 600;">Terms of Service</a> & Overage Billing Consent.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary auth-btn" data-no-autoload>
+                            Complete Setup <i class='bx bx-check-double'></i>
+                        </button>
+
+                        <div class="auth-divider">
+                            <span>OR SIGN UP WITH</span>
+                        </div>
+
+                        <div class="social-auth">
+                            <button type="button" class="btn-social">
+                                <i class='bx bxl-github'></i> GitHub
+                            </button>
+                            <button type="button" class="btn-social">
+                                <i class='bx bxl-google' style="color: #DB4437;"></i> Google
+                            </button>
+                        </div>
+
+                        <div class="auth-footer">
+                            Already have an account? <a href="login.html">Log in here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side: Checkout Summary Card -->
+            <div class="checkout-side">
+                <div class="checkout-card glass-panel" id="checkoutCard">
+                    <div class="checkout-card-header">
+                        <div class="checkout-plan-info">
+                            <h3 id="checkoutPlanTitle">Moderate Prepaid</h3>
+                            <p id="checkoutPlanSubtitle">Perfect for incubated hardware startups and factory MSMEs.</p>
+                        </div>
+                        <div class="checkout-price-display">
+                            <div class="price" id="checkoutPlanPrice">₹1,999</div>
+                            <div class="period" id="checkoutPlanPeriod">/ month</div>
+                        </div>
+                    </div>
+                    
+                    <div class="consent-pill" id="checkoutConsentPill" style="display: none;">
+                        <i class='bx bxs-check-shield'></i>
+                        <span>Overage Consent Verified</span>
+                    </div>
+                    
+                    <div class="consent-pill" id="checkoutConsentPending" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger); display: flex;">
+                        <i class='bx bx-info-circle'></i>
+                        <span>Terms Consent Required</span>
+                    </div>
+
+                    <h4 style="font-size:11px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px dashed rgba(255,255,255,0.05); padding-bottom:8px; margin-top:8px;">Included Plan Quotas</h4>
+                    <ul class="checkout-quotas-list" id="checkoutQuotas">
+                        <li><span><i class='bx bx-check'></i> Connected Devices</span> <strong id="quotaDevices">100 active</strong></li>
+                        <li><span><i class='bx bx-check'></i> Telemetry Ingest</span> <strong id="quotaTelemetry">15 Million / mo</strong></li>
+                        <li><span><i class='bx bx-check'></i> Data Retention</span> <strong id="quotaRetention">180 Days</strong></li>
+                        <li><span><i class='bx bx-check'></i> Dev Seats</span> <strong id="quotaSeats">3 Seats</strong></li>
+                    </ul>
+
+                    <div class="checkout-rates-box" id="checkoutRatesBox">
+                        <div class="checkout-rates-title"><i class='bx bx-calculator'></i> Micro-Billing Rate Sheet</div>
+                        <div class="checkout-rates-row">
+                            <span>Overage Ingestion</span>
+                            <strong id="rateIngest">₹2.90 / Million</strong>
+                        </div>
+                        <div class="checkout-rates-row">
+                            <span>SMS / WhatsApp Alerts</span>
+                            <strong id="rateSMS">5,000 / mo included</strong>
+                        </div>
+                        <div class="checkout-rates-row">
+                            <span>Platform Support SLA</span>
+                            <strong id="rateSupport">Priority (12-hr)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="landing-footer" style="width: 100%; position: relative; z-index: 10;">
+        <div class="container footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; max-width: 1200px; margin: 0 auto 40px;">
+            <div class="footer-brand" style="flex: 1; min-width: 250px;">
+                <div class="logo">
+                    <a href="cloud_landing.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 36px;">
+                    </a>
+                </div>
+                <p style="color: var(--text-muted-dark); margin-top: 12px; line-height: 1.6;">Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 20px;">
+                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://x.com/omniteq_info" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+            <div class="footer-links" style="flex: 2; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;">
+                <div style="min-width: 150px;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Quick Links</h4>
+                    <a href="cloud_landing.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Home</a>
+                    <a href="about.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">About Us</a>
+                    <a href="https://omniteq.in/products.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Products</a>
+                    <a href="https://omniteq.in/services.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Services</a>
+                    <a href="https://omniteq.in/resources.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Resources</a>
+                    <a href="https://omniteq.in/contact.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Contact</a>
+                </div>
+                <div style="min-width: 150px;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Our Services</h4>
+                    <a href="https://omniteq.in/services.html#iot" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">IoT Solutions</a>
+                    <a href="https://omniteq.in/services.html#plc" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">PLC Programming</a>
+                    <a href="https://omniteq.in/services.html#embedded" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Embedded Systems</a>
+                    <a href="https://omniteq.in/services.html#ai-ml" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">AI & ML Integration</a>
+                    <a href="https://omniteq.in/services.html#outsourcing" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Resource Outsourcing</a>
+                </div>
+                <div style="min-width: 200px;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Contact Us</h4>
+                    <a href="mailto:info@omniteq.in" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;"><i class='bx bx-envelope'></i> info@omniteq.in</a>
+                    <a href="tel:+919825246857" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;"><i class='bx bx-phone'></i> +91 98252 46857</a>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.5;"><i class='bx bx-map' style="font-size: 16px; margin-top: 2px;"></i> Aditya House, Iscon Mega City, Bhavnagar</div>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.5;"><i class='bx bx-time' style="font-size: 16px; margin-top: 2px;"></i> Mon-Fri: 9:00 AM - 6:00 PM</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center" style="border-top: 1px solid var(--border-dark); padding-top: 20px; color: var(--text-muted-dark); font-size: 14px;">
+            <p>&copy; 2026 OmniTeq. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Terms Detail Drawer / Modal -->
+    <div class="terms-modal-overlay" id="termsDetailModal">
+        <div class="terms-modal-card">
+            <div class="terms-modal-header">
+                <h3 id="termsModalTitle">OmniTeq Terms of Service</h3>
+                <button type="button" onclick="closeTermsDetailModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="terms-modal-body" id="termsModalBody">
+                <!-- Dynamically filled based on selected plan -->
+            </div>
+            <div class="terms-modal-footer">
+                <button type="button" class="btn-ghost" onclick="closeTermsDetailModal()" style="padding: 10px 20px; border-radius: var(--radius-md); cursor: pointer; border: 1px solid var(--border-light); background: transparent; color: var(--text-light);">Cancel</button>
+                <button type="button" class="btn-primary" onclick="acceptTermsInModal()" style="padding: 10px 24px; border-radius: var(--radius-md); cursor: pointer; display: flex; align-items: center; gap: 6px; border: none; font-weight: 600; color: #fff;">
+                    <i class='bx bx-check-circle'></i> I Agree & Consent
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/validation.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // This application talks to the live OmniTeq gateway only. Clear any
+        // local-simulation flags left behind by older builds so requests cannot
+        // be silently answered from browser storage.
+        localStorage.removeItem('omniteq_use_mock_api');
+
+        // Definitive Subscription Plan Data
+        const plansData = {
+            'free': {
+                title: 'Developer Sandbox',
+                subtitle: 'Designed for individual prototypes, student labs, and evaluation.',
+                price: '₹0',
+                period: 'free forever',
+                devices: '2 active max',
+                telemetry: '100k points / mo',
+                retention: '7 Days',
+                seats: '1 Seat',
+                ingestRate: 'Included (fair use)',
+                smsRate: 'Email alerts only',
+                support: 'Community Email',
+                terms: `
+                    <h4>1. Developer Sandbox Agreement</h4>
+                    <p>The Developer Sandbox is a no-cost tier for individual prototypes, student labs and evaluation. No payment method is required and this tier never auto-upgrades into a paid plan.</p>
+                    <h4>2. Sandbox Entitlements</h4>
+                    <p>The sandbox is provisioned with hard limits that are enforced by the API gateway:</p>
+                    <ul>
+                        <li>Devices: 2 active devices maximum.</li>
+                        <li>Sensors per device: 3.</li>
+                        <li>Variables per sensor: 3.</li>
+                        <li>Command dispatch: 100 per month.</li>
+                        <li>Telemetry query range / retention: 7 days.</li>
+                        <li>Rule engine, outbound webhooks and telemetry export: not available on this tier.</li>
+                    </ul>
+                    <h4>3. No Uptime SLA</h4>
+                    <p>The Developer Sandbox is provided "as is" for non-production use and carries no uptime SLA. Upgrade to a paid tier for production SLAs and priority support.</p>
+                `
+            },
+            'basic': {
+                title: 'Basic Prepaid Plan',
+                subtitle: 'For small production fleets that need longer retention and CSV export.',
+                price: '₹499',
+                period: '/ month',
+                devices: '10 active max',
+                telemetry: '1.0 Million / mo',
+                retention: '30 Days',
+                seats: '1 Seat',
+                ingestRate: 'Included up to quota',
+                smsRate: 'Email alerts included',
+                support: 'Priority Email (24-hr)',
+                terms: `
+                    <h4>1. Service Agreement</h4>
+                    <p>By registering for the Basic Prepaid tier you agree to the standard OmniTeq SaaS subscription model. Subscriptions are billed monthly and renew automatically until cancelled.</p>
+                    <h4>2. Tier Entitlements</h4>
+                    <p>This tier is provisioned with the following limits, enforced by the API gateway:</p>
+                    <ul>
+                        <li>Devices: 10 active devices maximum.</li>
+                        <li>Sensors per device: 5. Variables per sensor: 5.</li>
+                        <li>Command templates per device: 5. Command dispatch: 2,000 per month.</li>
+                        <li>Telemetry query range / retention: 30 days.</li>
+                        <li>Telemetry CSV export: enabled. JSON export: not included.</li>
+                        <li>Rule engine and outbound webhooks: not available on this tier.</li>
+                    </ul>
+                    <h4>3. Support SLA</h4>
+                    <p>OmniTeq commits to a 99.0% Gateway Uptime SLA and guarantees email support response within 24 hours.</p>
+                `
+            },
+            'moderate': {
+                title: 'Moderate Prepaid Plan',
+                subtitle: 'Perfect for incubated hardware startups and MSMEs.',
+                price: '₹1,999',
+                period: '/ month',
+                devices: '50 active max',
+                telemetry: '15 Million / mo',
+                retention: '90 Days',
+                seats: '3 Seats',
+                ingestRate: 'Included up to quota',
+                smsRate: '5,000 email alerts included',
+                support: 'Priority Email (12-hr)',
+                terms: `
+                    <h4>1. Commercial Scale Agreement</h4>
+                    <p>Designed for commercial hardware incubation with rule-engine automation and JSON export.</p>
+                    <h4>2. Tier Entitlements</h4>
+                    <p>The gateway enforces the following limits on this tier. Exceeding them returns an explicit PLAN_LIMIT_EXCEEDED error rather than silently dropping data:</p>
+                    <ul>
+                        <li>Devices: 50 active devices maximum.</li>
+                        <li>Sensors per device: 10. Variables per sensor: 10.</li>
+                        <li>Command templates per device: 15. Command dispatch: 8,000 per month.</li>
+                        <li>Telemetry ingestion: 15 Million points per month.</li>
+                        <li>Telemetry query range / retention: 90 days.</li>
+                        <li>Telemetry CSV and JSON export: enabled.</li>
+                        <li>Rule engine: enabled. Outbound webhooks: not available on this tier.</li>
+                        <li>Team members: 3 seats.</li>
+                    </ul>
+                    <h4>3. Startups Priority SLA</h4>
+                    <p>OmniTeq commits to a 99.50% API Gateway Uptime SLA with priority email assistance and a guaranteed 12-hour resolution window.</p>
+                `
+            },
+            'payg-standard': {
+                title: 'Standard Pay-As-You-Grow',
+                subtitle: 'Zero fixed fee. Billed strictly on consumption.',
+                price: 'Metered',
+                period: 'Pay-As-You-Grow',
+                devices: 'First 25 free',
+                telemetry: '₹3.90 / Million',
+                retention: 'Unlimited / Archive',
+                seats: '2 Seats',
+                ingestRate: '₹3.90 / Million logs',
+                smsRate: 'SMS: ₹0.15 | WA: ₹0.40',
+                support: 'Web Ticket (24-hr)',
+                terms: `
+                    <h4>1. Utility Billing Structure</h4>
+                    <p>The Pay-As-You-Grow (PAYG) standard tier has zero fixed monthly fees. Billed consumption is calculated daily based on active resources and settled at the end of each billing cycle.</p>
+                    <h4>2. Standard Metered Rates (INR)</h4>
+                    <p>By proceeding, you agree to the following transactional metered charges:</p>
+                    <ul>
+                        <li>Startup Welcome Pack: ₹500 free credits applied automatically.</li>
+                        <li>Device Cost: First 25 connected devices free. Additional active devices are billed at ₹45.00 per device-year (accrued daily).</li>
+                        <li>Telemetry Ingestion: Billed at ₹3.90 per Million telemetry points.</li>
+                        <li>Rule Evaluations: Billed at ₹350.00 per Million logic executions.</li>
+                        <li>Alert Dispatches: SMS alerts at ₹0.15 per message; WhatsApp triggers at ₹0.40 per message.</li>
+                        <li>Commands Dispatch: Billed at ₹75.00 per 10,000 dispatches.</li>
+                    </ul>
+                    <h4>3. Pay-As-You-Grow Uptime SLA</h4>
+                    <p>Includes a 99.9% Gateway Uptime SLA with standard web ticket support resolution in 24 hours.</p>
+                `
+            },
+            'payg-enterprise': {
+                title: 'Enterprise Pay-As-You-Grow',
+                subtitle: 'Industrial bulk rates. ₹9,999 min commit.',
+                price: 'Bulk Metered',
+                period: '₹9,999 commit',
+                devices: 'First 100 free',
+                telemetry: '₹1.90 / Million',
+                retention: 'Unlimited / Cold storage',
+                seats: 'Unlimited Seats',
+                ingestRate: '₹1.90 / Million logs',
+                smsRate: 'SMS: ₹0.12 | WA: ₹0.35',
+                support: 'Dedicated Manager (24/7)',
+                terms: `
+                    <h4>1. Enterprise Gateway Agreement</h4>
+                    <p>Designed for high-frequency industrial timeseries databases. Requires a minimum monthly expenditure commitment of ₹9,999. Includes full portal white-labeling on custom domains (e.g. iot.company.in).</p>
+                    <h4>2. Bulk Discount Metered Rates (INR)</h4>
+                    <p>By proceeding, you agree to the bulk metered charges:</p>
+                    <ul>
+                        <li>Startup Welcome Pack: ₹5,000 free credits applied automatically.</li>
+                        <li>Device Cost: First 100 connected devices free. Additional active devices are billed at ₹25.00 per device-year (accrued daily).</li>
+                        <li>Telemetry Ingestion: Deeply discounted rate of ₹1.90 per Million telemetry points.</li>
+                        <li>Rule Evaluations: Discounted rate of ₹180.00 per Million logic executions.</li>
+                        <li>Alert Dispatches: SMS alerts at ₹0.12 per message; WhatsApp triggers at ₹0.35 per message.</li>
+                        <li>Commands Dispatch: Discounted rate of ₹35.00 per 10,000 dispatches.</li>
+                    </ul>
+                    <h4>3. 24/7 Dedicated SLA</h4>
+                    <p>Guarantees a premium 99.99% Gateway Uptime SLA. Provides a dedicated system manager and 24/7 phone support lines.</p>
+                `
+            }
+        };
+
+        let selectedPlanKey = 'free';
+
+        // Initialize Router and specs on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const planParam = urlParams.get('plan');
+            const consentParam = urlParams.get('consent');
+
+            if (planParam && plansData[planParam]) {
+                selectedPlanKey = planParam;
+            } else {
+                selectedPlanKey = 'free';
+            }
+
+            // Sync Dropdown select
+            const planSelect = document.getElementById('planSelect');
+            if (planSelect) {
+                planSelect.value = selectedPlanKey;
+            }
+
+            // Trigger checkout view sync
+            handlePlanChange(selectedPlanKey);
+
+            // Handle pre-filled terms consent check
+            if (consentParam === 'true') {
+                const termsCheck = document.getElementById('terms');
+                if (termsCheck) {
+                    termsCheck.checked = true;
+                    handleConsentCheckboxChange(true);
+                }
+            }
+        });
+
+        // Syncs right Checkout card details when plan changes
+        window.handlePlanChange = function(planKey) {
+            selectedPlanKey = planKey;
+            const data = plansData[planKey];
+            if (!data) return;
+
+            document.getElementById('checkoutPlanTitle').innerText = data.title;
+            document.getElementById('checkoutPlanSubtitle').innerText = data.subtitle;
+            document.getElementById('checkoutPlanPrice').innerText = data.price;
+            document.getElementById('checkoutPlanPeriod').innerText = data.period;
+
+            // Sync limits
+            document.getElementById('quotaDevices').innerText = data.devices;
+            document.getElementById('quotaTelemetry').innerText = data.telemetry;
+            document.getElementById('quotaRetention').innerText = data.retention;
+            document.getElementById('quotaSeats').innerText = data.seats;
+
+            // Sync rates
+            document.getElementById('rateIngest').innerText = data.ingestRate;
+            document.getElementById('rateSMS').innerText = data.smsRate;
+            document.getElementById('rateSupport').innerText = data.support;
+            
+            // Sync Plan selector dropdown if not matching
+            const planSelect = document.getElementById('planSelect');
+            if (planSelect && planSelect.value !== planKey) {
+                planSelect.value = planKey;
+            }
+        };
+
+        // Checkbox state updates checkout card badge pill
+        window.handleConsentCheckboxChange = function(isChecked) {
+            const pillSuccess = document.getElementById('checkoutConsentPill');
+            const pillPending = document.getElementById('checkoutConsentPending');
+            
+            if (isChecked) {
+                pillSuccess.style.display = 'flex';
+                pillPending.style.display = 'none';
+            } else {
+                pillSuccess.style.display = 'none';
+                pillPending.style.display = 'flex';
+            }
+        };
+
+        // Interactive Terms Drawer modal handlers
+        document.getElementById('termsLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            openTermsDetailModal();
+        });
+
+        window.openTermsDetailModal = function() {
+            const data = plansData[selectedPlanKey];
+            if (!data) return;
+
+            document.getElementById('termsModalTitle').innerText = `${data.title} — Detailed Terms & SLA`;
+            document.getElementById('termsModalBody').innerHTML = data.terms;
+            document.getElementById('termsDetailModal').style.display = 'flex';
+        };
+
+        window.closeTermsDetailModal = function() {
+            document.getElementById('termsDetailModal').style.display = 'none';
+        };
+
+        window.acceptTermsInModal = function() {
+            const termsCheck = document.getElementById('terms');
+            if (termsCheck) {
+                termsCheck.checked = true;
+                handleConsentCheckboxChange(true);
+            }
+            closeTermsDetailModal();
+        };
+
+        // Simple password toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('bx-hide');
+            this.classList.toggle('bx-show');
+        });
+
+        // Form submission authentication logic
+        const signupForm = document.getElementById('signupForm');
+        OmniTeqValidator.bindLiveValidation(signupForm);
+
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            const fnVal = OmniTeqValidator.validateText(firstNameInput.value, 'First Name', 2);
+            if (!fnVal.valid) {
+                OmniTeqValidator.markFieldError(firstNameInput, fnVal.error);
+                showToast(fnVal.error, 'error');
+                return;
+            }
+
+            const lnVal = OmniTeqValidator.validateText(lastNameInput.value, 'Last Name', 2);
+            if (!lnVal.valid) {
+                OmniTeqValidator.markFieldError(lastNameInput, lnVal.error);
+                showToast(lnVal.error, 'error');
+                return;
+            }
+
+            const emailVal = OmniTeqValidator.validateEmail(emailInput.value);
+            if (!emailVal.valid) {
+                OmniTeqValidator.markFieldError(emailInput, emailVal.error);
+                showToast(emailVal.error, 'error');
+                return;
+            }
+
+            const passwordVal = OmniTeqValidator.validateText(passwordInput.value, 'Password', 6);
+            if (!passwordVal.valid) {
+                OmniTeqValidator.markFieldError(passwordInput, passwordVal.error);
+                showToast(passwordVal.error, 'error');
+                return;
+            }
+            
+            const btn = this.querySelector('.auth-btn');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Creating Account...';
+            btn.disabled = true;
+            btn.style.opacity = '0.8';
+            btn.style.cursor = 'not-allowed';
+            
+            try {
+                const display_name = `${fnVal.value} ${lnVal.value}`;
+                const res = await window.api.auth.register({
+                    display_name,
+                    email: emailVal.value,
+                    password: passwordVal.value
+                });
+                
+                if (res.success) {
+                    // Log in automatically after registration
+                    await window.api.auth.login(emailVal.value, passwordVal.value);
+
+                    // Apply the selected plan through the documented entitlement endpoint.
+                    const planMap = (window.api.account && window.api.account.uiToApiPlan) || {};
+                    const apiPlanCode = planMap[selectedPlanKey] || 'free';
+                    try {
+                        const planRes = await window.api.account.updatePlan(apiPlanCode);
+                        if (planRes && !planRes.success) {
+                            console.warn('Plan selection not applied:', planRes.error);
+                        }
+                    } catch (e) {
+                        console.error("Failed to apply selected plan:", e);
+                    }
+
+                    btn.innerHTML = '<i class="bx bx-check"></i> Redirecting...';
+                    showToast('Account created successfully! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'cloud_dashboard.html';
+                    }, 1000);
+                } else {
+                    throw new Error((res.error && res.error.message) || res.message || "Registration failed");
+                }
+            } catch (err) {
+                showToast(err.message || "Registration failed. Email might already be taken.", 'error');
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }
+        });
+    </script>
+    <script src="js/cloud.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>
+

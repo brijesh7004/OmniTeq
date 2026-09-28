@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTeq Cloud - The Ultimate IoT Command Center</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/ui.css">
+</head>
+<body class="dark-theme landing-page">
+    
+    <!-- Background Elements -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+
+    <!-- Navigation -->
+    <nav class="landing-nav glass-panel">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="cloud_landing.html" style="display: flex; align-items: center; text-decoration: none;">
+                    <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 36px;">
+                </a>
+            </div>
+            <ul class="nav-links-desktop">
+                <li><a href="cloud_landing.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#integration">API Integration</a></li>
+                <li><a href="#developers">Developers</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-ghost">Log In</a>
+                <a href="signup.html" class="btn-primary">Sign Up Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content animate-on-scroll">
+            <div class="badge-pill">Introducing OmniTeq Cloud v1.0</div>
+            <h1 class="hero-title">The Ultimate IoT <br><span class="text-gradient">Command Center</span></h1>
+            <p class="hero-subtitle">Deploy, monitor, and command your global fleet of IoT devices in real-time. Secure, scalable, and built for modern engineering teams.</p>
+            <div class="hero-cta">
+                <a href="cloud_dashboard.html" class="btn-primary btn-lg">View Live Demo</a>
+                <a href="api-reference.html" class="btn-secondary btn-lg"><i class='bx bx-book-open'></i> Read Documentation</a>
+            </div>
+        </div>
+        
+        <div class="hero-visual animate-on-scroll delay-1">
+            <div class="dashboard-mockup glass-panel">
+                <div class="mockup-header">
+                    <div class="mockup-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="mockup-body">
+                    <!-- Abstract representation of the dashboard -->
+                    <div class="mockup-sidebar"></div>
+                    <div class="mockup-content">
+                        <div class="mockup-cards">
+                            <div class="m-card"></div>
+                            <div class="m-card"></div>
+                            <div class="m-card"></div>
+                        </div>
+                        <div class="m-chart">
+                            <div class="m-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div class="floating-element f-1 glass-panel">
+                <i class='bx bxs-check-circle text-green'></i> Device Connected
+            </div>
+            <div class="floating-element f-2 glass-panel">
+                <i class='bx bx-terminal text-purple'></i> changeLevel(75) Executed
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-header text-center animate-on-scroll">
+            <h2 class="section-title">Everything you need to <span class="text-gradient">scale</span></h2>
+            <p class="section-subtitle">A complete suite of tools to manage your IoT infrastructure from prototype to production.</p>
+        </div>
+
+        <div class="features-grid container">
+            <!-- Feature 1 -->
+            <div class="feature-card glass-panel animate-on-scroll">
+                <div class="f-icon b-blue"><i class='bx bx-pulse'></i></div>
+                <h3>Real-Time Telemetry</h3>
+                <p>Stream massive volumes of sensor data with ultra-low latency over WebSockets. Visualize trends instantly on your dashboard.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card glass-panel animate-on-scroll delay-1">
+                <div class="f-icon b-purple"><i class='bx bx-terminal'></i></div>
+                <h3>Instant Commands</h3>
+                <p>Dispatch complex commands to remote devices. Track delivery status, execution success, and handle failures automatically.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card glass-panel animate-on-scroll delay-2">
+                <div class="f-icon b-green"><i class='bx bx-lock-alt'></i></div>
+                <h3>Secure Provisioning</h3>
+                <p>Generate one-time secret keys for physical devices. End-to-end encryption ensures your infrastructure remains impenetrable.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card glass-panel animate-on-scroll">
+                <div class="f-icon b-red"><i class='bx bx-sitemap'></i></div>
+                <h3>Project Hierarchy</h3>
+                <p>Organize thousands of devices into logical projects. Manage permissions, status, and aggregation seamlessly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- API / Developer Section -->
+    <section id="integration" class="api-section">
+        <div class="container api-container">
+            <div class="api-content animate-on-scroll">
+                <h2 class="section-title">Built for <span class="text-gradient">Developers</span></h2>
+                <p class="section-subtitle">Integrate your hardware in minutes using our comprehensive RESTful APIs and WebSocket streams. Native support for Node.js, Python, and C++.</p>
+                <ul class="api-list">
+                    <li><i class='bx bx-check'></i> <strong>UUID Based:</strong> Collision-free architecture.</li>
+                    <li><i class='bx bx-check'></i> <strong>Pagination & Filtering:</strong> Fast historical queries.</li>
+                    <li><i class='bx bx-check'></i> <strong>Bi-directional:</strong> Pub/Sub via WebSockets.</li>
+                </ul>
+                <br>
+                <a href="api-reference.html" class="btn-ghost">Explore API Reference <i class='bx bx-right-arrow-alt'></i></a>
+            </div>
+            <div class="api-code-block glass-panel animate-on-scroll delay-1">
+                <div class="code-header">
+                    <span>dispatch_command.js</span>
+                </div>
+                <pre><code><span class="comment">// Requires a user access token (JWT), not a device secret key</span>
+<span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'<span data-endpoint="api"></span>/command-templates/&lt;templateId&gt;/dispatch'</span>, {
+  method: <span class="string">'POST'</span>,
+  headers: {
+    <span class="string">'Authorization'</span>: <span class="string">`Bearer ${accessToken}`</span>,
+    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>
+  },
+  body: JSON.stringify({
+    parameters: {
+      <span class="property">level</span>: <span class="number">75</span>
+    },
+    ttl_seconds: <span class="number">3600</span>
+  })
+});</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center">
+        <div class="cta-box glass-panel animate-on-scroll">
+            <h2>Ready to connect the unconnected?</h2>
+            <p>Join thousands of engineers building the future of IoT with OmniTeq Cloud.</p>
+            <div class="hero-cta">
+                <a href="signup.html" class="btn-primary btn-lg">Start Free Trial</a>
+                <a href="contact.html" class="btn-ghost btn-lg">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; max-width: 1200px; margin: 0 auto 40px;">
+            <div class="footer-brand" style="flex: 1; min-width: 250px;">
+                <div class="logo">
+                    <a href="cloud_landing.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 36px;">
+                    </a>
+                </div>
+                <p style="color: var(--text-muted-dark); margin-top: 12px; line-height: 1.6;">Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 20px;">
+                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://x.com/omniteq_info" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+            <div class="footer-links" style="flex: 2; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;">
+                <div style="min-width: 150px;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Quick Links</h4>
+                    <a href="cloud_landing.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Home</a>
+                    <a href="about.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">About Us</a>
+                    <a href="https://omniteq.in/products.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Products</a>
+                    <a href="https://omniteq.in/services.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Services</a>
+                    <a href="https://omniteq.in/resources.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Resources</a>
+                    <a href="https://omniteq.in/contact.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Contact</a>
+                </div>
+                <div style="min-width: 150px;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Our Services</h4>
+                    <a href="https://omniteq.in/services.html#iot" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">IoT Solutions</a>
+                    <a href="https://omniteq.in/services.html#plc" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">PLC Programming</a>
+                    <a href="https://omniteq.in/services.html#embedded" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Embedded Systems</a>
+                    <a href="https://omniteq.in/services.html#ai-ml" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">AI & ML Integration</a>
+                    <a href="https://omniteq.in/services.html#outsourcing" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Resource Outsourcing</a>
+                </div>
+                <div style="min-width: 200px;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Contact Us</h4>
+                    <a href="mailto:info@omniteq.in" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;"><i class='bx bx-envelope'></i> info@omniteq.in</a>
+                    <a href="tel:+919825246857" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;"><i class='bx bx-phone'></i> +91 98252 46857</a>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.5;"><i class='bx bx-map' style="font-size: 16px; margin-top: 2px;"></i> Aditya House, Iscon Mega City, Bhavnagar</div>
+                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.5;"><i class='bx bx-time' style="font-size: 16px; margin-top: 2px;"></i> Mon-Fri: 9:00 AM - 6:00 PM</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center" style="border-top: 1px solid var(--border-dark); padding-top: 20px; color: var(--text-muted-dark); font-size: 14px;">
+            <p>&copy; 2026 OmniTeq. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cloud.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿
+<style>
+#erd2 svg { width: 100%; height: auto; }
+#erd2 svg.erDiagram .divider path { stroke-opacity: 0.4; }
+#erd2 svg.erDiagram .row-rect-odd path,
+#erd2 svg.erDiagram .row-rect-odd rect,
+#erd2 svg.erDiagram .row-rect-even path,
+#erd2 svg.erDiagram .row-rect-even rect { stroke: none !important; }
+</style>
+<h2 class="sr-only">Entity-relationship diagram: commands and telemetry — command templates, parameters, instances, and sensor readings</h2>
+<div id="erd2" style="min-height:560px;padding:8px 0"></div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    primaryColor: dark ? '#2a2828' : '#f4f2ef',
+    primaryBorderColor: dark ? '#4a4845' : '#c8c6be',
+    attributeBackgroundColorEven: dark ? '#222120' : '#faf9f7',
+    attributeBackgroundColorOdd: dark ? '#2e2c2b' : '#f0ede8',
+  },
+});
+const src = `erDiagram
+    devices {
+        uuid id PK
+    }
+    users {
+        uuid id PK
+    }
+    variables {
+        uuid id PK
+    }
+    cmd_templates {
+        uuid id PK
+        uuid device_id FK
+        string name
+        text description
+        timestamp created_at
+    }
+    cmd_parameters {
+        uuid id PK
+        uuid template_id FK
+        string param_name
+        string param_type
+        int param_order
+        string default_value
+        boolean is_required
+    }
+    cmd_instances {
+        uuid id PK
+        uuid template_id FK
+        uuid issued_by FK
+        string status
+        timestamp created_at
+        timestamp queued_at
+        timestamp sent_at
+        timestamp executed_at
+        timestamp expired_at
+        text failure_reason
+    }
+    cmd_instance_params {
+        uuid id PK
+        uuid instance_id FK
+        uuid parameter_id FK
+        string value
+    }
+    telemetry {
+        uuid id PK
+        uuid variable_id FK
+        float value
+        timestamp recorded_at
+    }
+    devices ||--o{ cmd_templates : "defines"
+    cmd_templates ||--o{ cmd_parameters : "has"
+    cmd_templates ||--o{ cmd_instances : "dispatched as"
+    users ||--o{ cmd_instances : "issues"
+    cmd_instances ||--o{ cmd_instance_params : "carries"
+    cmd_parameters ||--o{ cmd_instance_params : "fills"
+    variables ||--o{ telemetry : "records"
+`;
+const { svg } = await mermaid.render('erd2-svg', src);
+document.getElementById('erd2').innerHTML = svg;
+document.querySelectorAll('#erd2 svg.erDiagram .node').forEach(node => {
+  const firstPath = node.querySelector('path[d]');
+  if (!firstPath) return;
+  const d = firstPath.getAttribute('d');
+  const nums = d.match(/-?[\d.]+/g)?.map(Number);
+  if (!nums || nums.length < 8) return;
+  const xs = [nums[0], nums[2], nums[4], nums[6]];
+  const ys = [nums[1], nums[3], nums[5], nums[7]];
+  const x = Math.min(...xs), y = Math.min(...ys);
+  const w = Math.max(...xs) - x, h = Math.max(...ys) - y;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', x); rect.setAttribute('y', y);
+  rect.setAttribute('width', w); rect.setAttribute('height', h);
+  rect.setAttribute('rx', '8');
+  for (const a of ['fill', 'stroke', 'stroke-width', 'class', 'style']) {
+    if (firstPath.hasAttribute(a)) rect.setAttribute(a, firstPath.getAttribute(a));
+  }
+  firstPath.replaceWith(rect);
+});
+document.querySelectorAll('#erd2 svg.erDiagram .row-rect-odd path, #erd2 svg.erDiagram .row-rect-even path').forEach(p => {
+  p.setAttribute('stroke', 'none');
+});
+</script>
+

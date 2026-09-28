@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTeq Cloud - Devices</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/ui.css">
+</head>
+<body class="dark-theme dashboard-page">
+    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <!-- Ambient Glow Backgrounds -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass-panel-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    </a>
+                </div>
+                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="cloud_dashboard.html">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_projects.html">
+                        <i class='bx bx-folder'></i>
+                        <span class="link-name">Projects</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="cloud_devices.html">
+                        <i class='bx bx-devices'></i>
+                        <span class="link-name">Devices</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_sensors.html">
+                        <i class='bx bx-chip'></i>
+                        <span class="link-name">Sensors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_commands.html">
+                        <i class='bx bx-terminal'></i>
+                        <span class="link-name">Commands</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_telemetry.html">
+                        <i class='bx bx-line-chart'></i>
+                        <span class="link-name">Telemetry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_rules.html">
+                        <i class='bx bx-git-repo-forked'></i>
+                        <span class="link-name">Rules</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_webhooks.html">
+                        <i class='bx bx-broadcast'></i>
+                        <span class="link-name">Webhooks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_docs.html">
+                        <i class='bx bx-book-open'></i>
+                        <span class="link-name">Documentation</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="cloud_settings.html">
+                        <i class='bx bx-cog'></i>
+                        <span class="link-name">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class='bx bx-log-out'></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="device-search" placeholder="Search devices by name...">
+                </div>
+                <div class="topbar-actions">
+                    <div class="nav-switcher" style="margin-right: 15px;">
+                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
+                            <i class="bx bx-cloud"></i>
+                        </a>
+                        <div class="switcher-dropdown">
+                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
+                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
+                        </div>
+                    </div>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="bx bx-sun"></i>
+                        <i class="bx bx-moon"></i>
+                    </button>
+                    <button class="icon-btn notification-btn">
+                        <i class='bx bx-bell'></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
+                        <div class="user-info">
+                            <span class="user-name" id="user-display-name">Loading...</span>
+                            <span class="user-role" id="user-display-role">Member</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Devices Fleet</h1>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button class="btn-primary" onclick="openCreateDeviceModal()" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i class='bx bx-plus'></i> Quick Add Device
+                        </button>
+                        <a href="cloud_device_add.html" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class='bx bx-slider-alt'></i> Full Provisioning Form
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Filters Toolbar -->
+                <div class="glass-panel" style="padding: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-size: 13px; color: var(--text-muted-dark); font-weight: 600;">Filter:</span>
+                        <select id="project-filter" class="styled-select" style="width: auto; min-width: 160px; height: 38px;">
+                            <option value="all">All Projects</option>
+                        </select>
+                        <select id="status-filter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;">
+                            <option value="all">All Statuses</option>
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="glass-panel" style="padding: 24px;">
+                    <div class="table-responsive">
+                        <table class="styled-table" style="width: 100%; margin: 0;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;">Status</th>
+                                    <th>Device Name</th>
+                                    <th>Project</th>
+                                    <th>Firmware</th>
+                                    <th>IP Address</th>
+                                    <th>Last Seen</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="device-fleet-table-body">
+                                <tr>
+                                    <td colspan="7"><div class="ui-loading" role="status"><i class='bx bx-loader-alt bx-spin ui-loading-icon'></i><span>Loading devices fleet…</span></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal: Create Device -->
+            <div id="createDeviceModal" class="modal-backdrop" style="display: none;">
+                <div class="modal-card">
+                    <div class="modal-header">
+                        <h3><i class='bx bx-chip' style="color: var(--primary);"></i> Quick Add Device</h3>
+                        <button type="button" class="modal-close-btn" onclick="closeModal('createDeviceModal')">&times;</button>
+                    </div>
+
+                    <form id="createDeviceForm">
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Assign to Project</label>
+                            <select id="deviceProjectSelect" class="styled-select" style="width: 100%; height: 42px;" required>
+                                <option value="">Select project...</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Device Name</label>
+                            <input type="text" id="deviceNameInput" class="styled-select" style="width: 100%; height: 42px;" placeholder="e.g. Edge-Node-01" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <label style="font-size: 13px; font-weight: 600;">Physical Device UUID (Optional)</label>
+                                <button type="button" class="btn-ghost" onclick="generateDeviceUUID('deviceUuidInput')" style="padding: 2px 8px; font-size: 11px; height: auto;">
+                                    <i class='bx bx-refresh'></i> Generate UUID
+                                </button>
+                            </div>
+                            <input type="text" id="deviceUuidInput" class="styled-select" style="width: 100%; height: 42px; font-family: monospace; font-size: 12.5px;" placeholder="e.g. 123e4567-e89b-12d3-a456-426614174000">
+                            <small style="color: var(--text-muted-dark); font-size: 11px; margin-top: 4px; display: block;">
+                                Format: 8-4-4-4-12 UUID. If left blank, a secure canonical UUID will be automatically generated.
+                            </small>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Description (Optional)</label>
+                            <input type="text" id="deviceDescInput" class="styled-select" style="width: 100%; height: 42px;" placeholder="e.g. Workshop temperature and humidity monitor">
+                        </div>
+                        <div class="modal-actions" style="justify-content: flex-end;">
+                            <button type="button" class="btn-ghost" onclick="closeModal('createDeviceModal')">Cancel</button>
+                            <button type="submit" class="btn-primary" style="display: inline-flex; align-items: center; gap: 6px;">
+                                <i class='bx bx-check'></i> Provision Device
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal: Device Credentials & Hardware Code Display -->
+            <div id="deviceSecretModal" class="modal-backdrop" style="display: none;">
+                <div class="modal-card" style="max-width: 580px; width: 92%;">
+                    <div style="text-align: center; margin-bottom: 18px;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+                            <i class='bx bx-check-shield' style="font-size: 28px; color: #10b981;"></i>
+                        </div>
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Device Provisioned Successfully</h3>
+                        <p style="font-size: 13px; color: var(--text-muted-dark); line-height: 1.4;">
+                            Hardware credentials generated. Store your <strong>SECRET_KEY</strong> securely (shown <strong>ONCE ONLY</strong>). Copy these identifiers to connect your microcontroller or ESP8266.
+                        </p>
+                    </div>
+
+                    <!-- Credential Fields List -->
+                    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px;">
+                        <!-- DEVICE_ID -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                <label style="font-size: 12px; font-weight: 600; color: var(--text-muted-light);">DEVICE_ID (UUID)</label>
+                                <button type="button" class="btn-ghost" onclick="copyTextValue('deviceModalIdVal', 'Device ID')" style="padding: 2px 8px; font-size: 11px; height: auto;">
+                                    <i class='bx bx-copy'></i> Copy
+                                </button>
+                            </div>
+                            <input type="text" id="deviceModalIdVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.3); cursor: pointer;" onclick="this.select()">
+                        </div>
+
+                        <!-- SECRET_KEY -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                <label style="font-size: 12px; font-weight: 600; color: #10b981;"><i class='bx bx-key'></i> SECRET_KEY (Shown Once)</label>
+                                <button type="button" class="btn-ghost" onclick="copyTextValue('deviceModalSecretVal', 'Secret Key')" style="padding: 2px 8px; font-size: 11px; height: auto;">
+                                    <i class='bx bx-copy'></i> Copy
+                                </button>
+                            </div>
+                            <input type="text" id="deviceModalSecretVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.3); border-color: rgba(16, 185, 129, 0.4); color: #10b981; cursor: pointer;" onclick="this.select()">
+                        </div>
+
+                        <!-- VAR_TEMP_ID -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                <label style="font-size: 12px; font-weight: 600; color: var(--text-muted-light);">VAR_TEMP_ID (Temperature Variable UUID)</label>
+                                <button type="button" class="btn-ghost" onclick="copyTextValue('deviceModalVarVal', 'Variable UUID')" style="padding: 2px 8px; font-size: 11px; height: auto;">
+                                    <i class='bx bx-copy'></i> Copy
+                                </button>
+                            </div>
+                            <input type="text" id="deviceModalVarVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.3); cursor: pointer;" onclick="this.select()">
+                        </div>
+                    </div>
+
+                    <!-- Code Snippet Box -->
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 12px; font-weight: 600; color: var(--text-light);"><i class='bx bx-code-alt'></i> C++ / Arduino ESP8266 Configuration</span>
+                            <button type="button" class="btn-ghost" onclick="copyArduinoSnippet()" style="padding: 2px 10px; font-size: 11px; height: auto;">
+                                <i class='bx bx-copy'></i> Copy Snippet
+                            </button>
+                        </div>
+                        <pre id="deviceArduinoSnippet" style="background: rgba(0,0,0,0.5); padding: 12px; border-radius: 8px; border: 1px solid var(--border-light); font-family: monospace; font-size: 12px; color: #38bdf8; overflow-x: auto; white-space: pre-wrap; margin: 0;"></pre>
+                    </div>
+
+                    <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="closeModal('deviceSecretModal')">
+                        <i class='bx bx-check'></i> I Have Copied My Credentials
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/validation.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cloud.js"></script>
+    <script src="js/ui.js"></script>
+    
+    <script>
+        let allDevices = [];
+        let allProjects = [];
+        let createdSecretKey = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadInitialData();
+            const devForm = document.getElementById('createDeviceForm');
+            OmniTeqValidator.bindLiveValidation(devForm);
+            devForm.addEventListener('submit', handleCreateDevice);
+        });
+
+        async function loadInitialData() {
+            try {
+                const projRes = await api.projects.list();
+                if (projRes && projRes.success && projRes.data) {
+                    allProjects = projRes.data;
+
+                    const projectSelect = document.getElementById('project-filter');
+                    const modalProjSelect = document.getElementById('deviceProjectSelect');
+                    
+                    if (projectSelect) {
+                        projectSelect.innerHTML = '<option value="all">All Projects</option>' + 
+                            allProjects.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+                    }
+                    if (modalProjSelect) {
+                        modalProjSelect.innerHTML = allProjects.length > 0 
+                            ? ('<option value="">Select project...</option>' + allProjects.map(p => `<option value="${p.id}">${p.name}</option>`).join(''))
+                            : '<option value="">No projects found (Create project first)</option>';
+                    }
+
+                    // Directly fetch only user devices across all projects
+                    const devRes = await api.devices.listAll();
+                    allDevices = (devRes && devRes.success && devRes.data) ? devRes.data : [];
+                } else {
+                    allProjects = [];
+                    allDevices = [];
+                }
+
+                renderDevices(allDevices);
+
+                const projectSelect = document.getElementById('project-filter');
+                if (projectSelect) projectSelect.addEventListener('change', filterAndRender);
+                const statusSelect = document.getElementById('status-filter');
+                if (statusSelect) statusSelect.addEventListener('change', filterAndRender);
+                const searchInput = document.getElementById('device-search');
+                if (searchInput) searchInput.addEventListener('input', filterAndRender);
+
+            } catch (e) {
+                console.warn("Failed to load live devices fleet:", e);
+                renderDevices([]);
+            }
+        }
+
+        function filterAndRender() {
+            const projectFilter = document.getElementById('project-filter')?.value || 'all';
+            const statusFilter = document.getElementById('status-filter')?.value || 'all';
+            const searchVal = document.getElementById('device-search')?.value.toLowerCase() || '';
+
+            let filtered = allDevices;
+            if (projectFilter !== 'all') filtered = filtered.filter(d => d.project_id === projectFilter);
+            if (statusFilter !== 'all') filtered = filtered.filter(d => d.status === statusFilter);
+            if (searchVal) filtered = filtered.filter(d => d.name.toLowerCase().includes(searchVal));
+
+            renderDevices(filtered);
+        }
+
+        function renderDevices(devices) {
+            const bodyEl = document.getElementById('device-fleet-table-body');
+            if (!bodyEl) return;
+
+            if (devices.length === 0) {
+                bodyEl.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 48px 20px;">
+                            <div style="max-width: 340px; margin: 0 auto;">
+                                <i class='bx bx-chip' style="font-size: 42px; color: var(--text-muted-dark); margin-bottom: 12px; display: block;"></i>
+                                <h4 style="font-size: 16px; margin-bottom: 6px; color: var(--text-light);">No Devices In Fleet</h4>
+                                <p style="color: var(--text-muted-dark); font-size: 13px; margin-bottom: 16px;">You haven't provisioned any devices yet. Add your first device to begin monitoring and telemetry collection.</p>
+                                <a href="cloud_device_add.html" class="btn-primary" style="display: inline-flex; justify-content: center; text-decoration: none;"><i class='bx bx-plus'></i> Add Device</a>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            bodyEl.innerHTML = devices.map(d => {
+                const isOnline = d.status === 'online';
+                const firmwareBadge = d.firmware_version ? `<span class="badge b-gray">${d.firmware_version}</span>` : '<span style="color: var(--text-muted-dark); font-size: 11px;">None</span>';
+                const ipStr = isOnline ? (d.ip_address || 'Not reported') : '<span style="color: #ef4444; font-size: 11px;">Disconnected</span>';
+                
+                let timeStr = 'Never';
+                if (d.last_seen_at) {
+                    const diffMs = Date.now() - new Date(d.last_seen_at).getTime();
+                    const diffMins = Math.floor(diffMs / 60000);
+                    if (diffMins < 1) timeStr = 'Just now';
+                    else if (diffMins < 60) timeStr = `${diffMins} mins ago`;
+                    else timeStr = `${Math.floor(diffMins/60)} hours ago`;
+                }
+
+                return `
+                    <tr>
+                        <td style="padding: 14px;">
+                            <span class="status-pill ${isOnline ? 'is-online' : 'is-offline'}">${isOnline ? 'Online' : 'Offline'}</span>
+                        </td>
+                        <td style="padding: 14px;"><strong>${escapeHtml(d.name)}</strong></td>
+                        <td style="padding: 14px;">${escapeHtml(d.projectName || '—')}</td>
+                        <td style="padding: 14px;">${firmwareBadge}</td>
+                        <td style="padding: 14px;" class="id-col">${ipStr}</td>
+                        <td style="padding: 14px;">${timeStr}</td>
+                        <td style="padding: 14px; text-align: right;">
+                            <div class="action-group">
+                                <button onclick="toggleDeviceFleetConnection('${d.id}', ${!isOnline})" class="btn-icon" style="color: ${isOnline ? '#ef4444' : '#10b981'};" title="${isOnline ? 'Disconnect Device' : 'Connect Device'}">
+                                    <i class='${isOnline ? 'bx bx-power-off' : 'bx bx-wifi'}'></i>
+                                </button>
+                                <a href="cloud_device_view.html?id=${d.id}" class="btn-icon" title="Manage Device"><i class='bx bx-show'></i></a>
+                                <button onclick="deleteDevice('${d.id}')" class="btn-icon" style="color: #ef4444;" title="Delete Device"><i class='bx bx-trash'></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function toggleDeviceFleetConnection(deviceId, connect) {
+            try {
+                if (connect) {
+                    const res = await api.devices.connect(deviceId);
+                    if (res.success) {
+                        showToast("Device connected to cloud!", "success");
+                        const d = allDevices.find(dev => dev.id === deviceId);
+                        if (d) d.status = 'online';
+                        filterAndRender();
+                    }
+                } else {
+                    const res = await api.devices.disconnect(deviceId);
+                    if (res.success) {
+                        showToast("Device disconnected.", "info");
+                        const d = allDevices.find(dev => dev.id === deviceId);
+                        if (d) d.status = 'offline';
+                        filterAndRender();
+                    }
+                }
+            } catch (e) {
+                showToast("Connection toggle failed: " + e.message, "error");
+            }
+        }
+        function generateDeviceUUID(inputId) {
+            const el = document.getElementById(inputId);
+            if (el) {
+                el.value = OmniTeqValidator.generateUUIDv4();
+                OmniTeqValidator.clearFieldError(el);
+                showToast('Generated fresh UUIDv4!', 'info');
+            }
+        }
+
+        function copyTextValue(elementId, label) {
+            const el = document.getElementById(elementId);
+            if (el && el.value) {
+                navigator.clipboard.writeText(el.value);
+                showToast(`${label} copied to clipboard!`, 'success');
+            }
+        }
+
+        function copyArduinoSnippet() {
+            const el = document.getElementById('deviceArduinoSnippet');
+            if (el) {
+                navigator.clipboard.writeText(el.textContent);
+                showToast('Arduino configuration snippet copied!', 'success');
+            }
+        }
+
+        function openCreateDeviceModal() {
+            const modalProjSelect = document.getElementById('deviceProjectSelect');
+            if (modalProjSelect && allProjects.length > 0) {
+                modalProjSelect.innerHTML = '<option value="">Select project...</option>' + 
+                    allProjects.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+                if (allProjects.length === 1 || !modalProjSelect.value) {
+                    modalProjSelect.value = allProjects[0].id;
+                }
+            }
+            const nameInput = document.getElementById('deviceNameInput');
+            if (nameInput) {
+                nameInput.value = '';
+                OmniTeqValidator.clearFieldError(nameInput);
+            }
+            const uuidInput = document.getElementById('deviceUuidInput');
+            if (uuidInput) {
+                uuidInput.value = '';
+                OmniTeqValidator.clearFieldError(uuidInput);
+            }
+            const descInput = document.getElementById('deviceDescInput');
+            if (descInput) descInput.value = '';
+            openModal('createDeviceModal');
+        }
+
+        async function handleCreateDevice(e) {
+            e.preventDefault();
+            const projSelect = document.getElementById('deviceProjectSelect');
+            const projectId = projSelect.value;
+            if (!projectId) {
+                OmniTeqValidator.markFieldError(projSelect, 'Please select a project assignment or create a project first.');
+                showToast('Please select a project or create one first.', 'error');
+                return;
+            }
+            const nameInput = document.getElementById('deviceNameInput');
+            const descInput = document.getElementById('deviceDescInput');
+            const uuidInput = document.getElementById('deviceUuidInput');
+
+            const nameVal = OmniTeqValidator.validateText(nameInput.value, 'Device Name', 3);
+            if (!nameVal.valid) {
+                OmniTeqValidator.markFieldError(nameInput, nameVal.error);
+                showToast(nameVal.error, 'error');
+                return;
+            }
+
+            let physicalUuid = uuidInput ? uuidInput.value.trim() : '';
+            if (physicalUuid) {
+                const uuidVal = OmniTeqValidator.validateUUID(physicalUuid, 'Physical Device UUID', false);
+                if (!uuidVal.valid) {
+                    OmniTeqValidator.markFieldError(uuidInput, uuidVal.error);
+                    showToast(uuidVal.error, 'error');
+                    return;
+                }
+                physicalUuid = uuidVal.value;
+            }
+
+            try {
+                // POST /projects/:id/devices accepts ONLY name and description;
+                // device_id/physical_id are rejected with 400. The physical UUID is
+                // recorded in the description so it is still persisted, and the
+                // gateway still issues the real device UUID on creation.
+                const userDesc = descInput ? descInput.value.trim() : '';
+                const description = physicalUuid
+                    ? [userDesc, `Physical UUID: ${physicalUuid}`].filter(Boolean).join('\n')
+                    : userDesc;
+
+                const payload = {
+                    name: nameVal.value,
+                    description
+                };
+
+                const res = await api.devices.create(projectId, payload);
+                if (res.success && res.data) {
+                    const devId = res.data.id;
+                    const secretKey = res.data.secret_key;
+
+                    // A new device starts with NO sensors and NO variables. Sensor
+                    // and variable IDs therefore do not exist yet: add a sensor on
+                    // the Sensors page, and the firmware snippet in
+                    // cloud_device_view.html fills in the real IDs once it does.
+                    closeModal('createDeviceModal');
+                    document.getElementById('deviceModalIdVal').value = devId;
+                    document.getElementById('deviceModalSecretVal').value = secretKey || '';
+                    document.getElementById('deviceModalVarVal').value = 'Not created yet — add a sensor first';
+
+                    const snippet = `// Copy & paste directly into esp8266_omniteq_cloud.ino:\n` +
+                        `const char* DEVICE_ID   = "${devId}";\n` +
+                        `const char* SECRET_KEY  = "${secretKey || ''}";\n` +
+                        `// Sensor/variable ID does not exist until you add a sensor.\n` +
+                        `// After adding one, open this device and copy the ready-made snippet.`;
+
+                    showToast('Device created. Add a sensor to start collecting telemetry.', 'success');
+
+                    document.getElementById('deviceArduinoSnippet').textContent = snippet;
+
+                    openModal('deviceSecretModal');
+                    loadInitialData();
+                } else {
+                    showToast('Failed to create device: ' + (res.error?.message || 'Unknown error'), 'error');
+                }
+            } catch (err) {
+                showToast(err.message || 'Failed to create device', 'error');
+            }
+        }
+
+        async function deleteDevice(deviceId) {
+            if (!await UI.confirmDelete('this device', { message: 'Its sensors, variables and command history will be removed too. This cannot be undone.' })) return;
+            try {
+                // deleteCascade clears command templates first, working around a
+                // gateway 500 when the device has dispatched commands.
+                const res = await api.devices.deleteCascade(deviceId);
+                if (res.success) {
+                    showToast('Device deleted successfully', 'success');
+                    loadInitialData();
+                } else {
+                    showToast('Failed to delete device: ' + (res.error?.message || 'Unknown error'), 'error');
+                }
+            } catch (e) {
+                const msg = (e && e.error && e.error.message) || (e && e.message) || 'Failed to delete device';
+                showToast('Failed to delete device: ' + msg, 'error');
+            }
+        }
+
+        // Setup WebSocket listener for fleet updates
+        if (window.api) {
+            api.connectWebSocket((msg) => {
+                if (msg.type === 'device.status') {
+                    const dev = allDevices.find(d => d.id === msg.device_id);
+                    if (dev) {
+                        dev.status = msg.status;
+                        filterAndRender();
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

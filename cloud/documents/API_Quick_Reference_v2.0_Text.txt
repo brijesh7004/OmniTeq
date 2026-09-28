@@ -1,0 +1,268 @@
+﻿--- PAGE 1 ---
+IoT Cloud Platform 
+API Quick Reference 
+Base URL:  http://<server-ip>:3000/api/v1 
+Auth column legend: 
+  JWT  — Include header:  Authorization: Bearer <access_token> 
+  Key  — Device endpoints: pass device_id + secret_key in body/query string 
+  None — No authentication required 
+ 
+All responses follow the envelope:  { "success": true/false, "data": {...}, "error": {...} } 
+Timestamps use ISO-8601 format (e.g. 2026-05-23T17:00:00.000Z) 
+ 
+1. HEALTH 
+Method Endpoint Auth Parameters Returns 
+ GET  /health None — status, timestamp, version 
+ 
+2. AUTHENTICATION 
+Method Endpoint Auth Parameters Returns 
+ POST  /auth/register None email, password, 
+display_name 
+user object, access_token, 
+refresh_token, expires_in 
+ POST  /auth/login None email, password user object, access_token, 
+refresh_token, expires_in 
+ GET  /auth/me JWT — user object (id, email, 
+display_name, is_verified, 
+timestamps) 
+--- PAGE 2 ---
+Method Endpoint Auth Parameters Returns 
+ POST  /auth/refresh None refresh_token access_token, expires_in 
+ POST  /auth/logout JWT refresh_token success message 
+ 
+3. PROJECTS 
+Method Endpoint Auth Parameters Returns 
+ GET  /projects JWT — array of projects (with 
+device_count) 
+ POST  /projects JWT name, description? created project object 
+ GET  /projects/:projectId JWT :projectId (URL) single project (with 
+device_count) 
+ PUT  /projects/:projectId JWT name?, description? updated project object 
+ 
+DELETE  
+/projects/:projectId JWT :projectId (URL) success message 
+ 
+4. DEVICES 
+Method Endpoint Auth Parameters Returns 
+ GET  /projects/:projectId/devices JWT :projectId (URL) array of devices (with 
+status, sensor_count) 
+ POST  /projects/:projectId/devices JWT name, 
+description? 
+created device + 
+secret_key (shown 
+once only!) 
+ GET  /devices/:deviceId JWT :deviceId (URL) single device (with 
+status, sensor_count) 
+ PUT  /devices/:deviceId JWT name?, 
+description? 
+updated device object 
+ 
+DELETE  
+/devices/:deviceId JWT :deviceId (URL) success message 
+--- PAGE 3 ---
+Method Endpoint Auth Parameters Returns 
+ GET  /devices/:deviceId/status JWT :deviceId (URL) status, ip_address, 
+last_seen_at 
+ 
+⚠   secret_key is returned only once when a device is created. Store it securely — it cannot be retrieved again. 
+   Auth column "JWT" = user JWT.  Devices authenticate separately with their own secret_key (see Section 8). 
+ 
+5. SENSORS 
+Method Endpoint Auth Parameters Returns 
+ GET  /devices/:deviceId/sensors JWT :deviceId (URL) array of sensors (with 
+variable_count) 
+ POST  /devices/:deviceId/sensors JWT name, 
+description?, 
+unit? 
+created sensor object 
+ GET  /sensors/:sensorId JWT :sensorId (URL) sensor object with 
+embedded variables[] 
+ PUT  /sensors/:sensorId JWT name?, 
+description?, 
+unit? 
+updated sensor object 
+ 
+DELETE  
+/sensors/:sensorId JWT :sensorId (URL) success message 
+ 
+6. VARIABLES 
+Method Endpoint Auth Parameters Returns 
+ GET  /sensors/:sensorId/variables JWT :sensorId (URL) array of variables (each 
+includes latest_value, 
+latest_at) 
+ POST  /sensors/:sensorId/variables JWT label, data_type created variable object 
+--- PAGE 4 ---
+Method Endpoint Auth Parameters Returns 
+ GET  /variables/:variableId JWT :variableId 
+(URL) 
+variable with 
+latest_value, 
+latest_string_value, 
+latest_at 
+ PUT  /variables/:variableId JWT label updated variable object 
+ 
+DELETE  
+/variables/:variableId JWT :variableId 
+(URL) 
+success message 
+ 
+data_type must be one of:  float | integer | boolean | string 
+data_type is immutable after creation — only the label can be renamed. 
+boolean values are stored as 1 (true) or 0 (false) in numeric readings. 
+ 
+7. COMMAND TEMPLATES 
+Method Endpoint Auth Parameters Returns 
+ GET  /devices/:deviceId/command-
+templates 
+JWT :deviceId (URL) array of templates 
+(each includes 
+parameters[]) 
+ POST  /devices/:deviceId/command-
+templates 
+JWT name, 
+description?, 
+parameters[] 
+created template with 
+parameters[] 
+ GET  /command-templates/:templateId JWT :templateId 
+(URL) 
+template with 
+parameters[] 
+ PUT  /command-templates/:templateId JWT name?, 
+description?, 
+parameters[]? 
+updated template 
+ 
+DELETE  
+/command-templates/:templateId JWT :templateId 
+(URL) 
+success message 
+(deletes all instances 
+too) 
+ POST  /command-
+templates/:templateId/dispatch 
+JWT parameters{} 
+(key-value), 
+created command 
+instance (status: 
+--- PAGE 5 ---
+Method Endpoint Auth Parameters Returns 
+ttl_seconds? 
+(default 3600) 
+queued) — HTTP 
+202 
+ GET  /command-instances/:instanceId JWT :instanceId 
+(URL) 
+instance with status, 
+parameters{}, 
+timestamps 
+ GET  /devices/:deviceId/command-
+history 
+JWT :deviceId, 
+?page, ?limit, 
+?status 
+paginated list of 
+command instances 
+(meta: total, page, 
+total_pages) 
+ 
+Parameter object fields:  param_name (string), param_type (integer|float|string|boolean), param_order (int), 
+is_required (bool), default_value (string|null) 
+Command status lifecycle:  received → queued → sent → executed → success | failed | expired 
+dispatch returns HTTP 202 Accepted (not 200) — command is queued, not yet executed. 
+Dispatch validates: all required params present, values match declared param_type. 
+ 
+8. DEVICE INGEST  (CALLED BY IOT DEVICES, NOT THE APP) 
+Method Endpoint Auth Parameters Returns 
+ POST  /ingest/telemetry Key device_id, 
+secret_key, 
+readings[] 
+inserted count, 
+rejected count 
+(HTTP 207 if 
+partial failure) 
+ GET  /ingest/commands/pending Key ?device_id, 
+?secret_key 
+array of queued 
+commands 
+(auto-marked as 
+sent) 
+ POST  /ingest/commands/:instanceId/ack Key device_id, 
+secret_key, status 
+(success|failed), 
+failure_reason? 
+updated instance 
+(id, status, 
+executed_at) 
+ POST  /ingest/heartbeat Key device_id, 
+secret_key, 
+status: online, 
+device_id 
+--- PAGE 6 ---
+Method Endpoint Auth Parameters Returns 
+firmware_version?, 
+ip_address? 
+ 
+readings[] item fields:  variable_id (UUID), value (any), recorded_at? (ISO-8601, defaults to server time) 
+Max 500 readings per /ingest/telemetry call. 
+Polling /commands/pending automatically marks returned commands as "sent". 
+After executing a command, device must POST to /commands/:id/ack with status = "success" or "failed". 
+ 
+9. TELEMETRY QUERIES  (READ-ONLY, CALLED BY APP) 
+Method Endpoint Auth Parameters Returns 
+ GET  /variables/:variableId/telemetry JWT :variableId, ?from 
+(ISO), ?to (ISO), ?limit 
+(1-5000, default 1000) 
+readings[] 
+with value 
+and 
+recorded_at. 
+Max 5000 
+rows. 
+ GET  /devices/:deviceId/telemetry/latest JWT :deviceId (URL) latest value 
+for every 
+variable on 
+the device 
+ GET  /variables/:variableId/telemetry/aggregate JWT :variableId, ?from 
+(ISO), ?to (ISO), 
+?interval 
+(1m|5m|15m|30m|1h|6h|1d) 
+buckets[] 
+with time, 
+min, max, 
+avg, count 
+ 
+from and to are required for /telemetry and /telemetry/aggregate. 
+interval defaults to 1h if omitted. Only numeric types support aggregation (not string). 
+Aggregate uses TimescaleDB time_bucket() — highly efficient for large datasets. 
+ 
+  
+--- PAGE 7 ---
+10. STANDARD ERROR CODES 
+Error Code HTTP 
+Status 
+When It Occurs 
+VALIDATION_ERROR 400 Request body/params failed schema validation 
+MISSING_PARAMS 400 Required query params (from, to) are missing 
+INVALID_INTERVAL 400 Aggregate interval is not one of the allowed values 
+MISSING_REQUIRED_PARAM 400 A required command parameter was not supplied 
+INVALID_PARAM_TYPE 400 Command parameter value does not match declared type 
+UNSUPPORTED_TYPE 400 Aggregation requested on a string variable 
+UNAUTHORIZED 401 Missing or expired JWT access token 
+INVALID_CREDENTIALS 401 Wrong email or password on login 
+INVALID_REFRESH_TOKEN 401 Refresh token is invalid, expired, or already used 
+DEVICE_UNAUTHORIZED 401 Device secret_key does not match stored hash 
+NOT_DEVICE_OWNER 403 Template belongs to a device not owned by caller 
+PROJECT_NOT_FOUND 404 Project does not exist or belongs to another user 
+DEVICE_NOT_FOUND 404 Device does not exist or belongs to another user 
+SENSOR_NOT_FOUND 404 Sensor does not exist or belongs to another user 
+VARIABLE_NOT_FOUND 404 Variable does not exist or belongs to another user 
+TEMPLATE_NOT_FOUND 404 Command template not found 
+INSTANCE_NOT_FOUND 404 Command instance not found or already acknowledged 
+EMAIL_ALREADY_EXISTS 409 Email is already registered 
+DEVICE_NAME_EXISTS 409 Device name already used within this project 
+LABEL_ALREADY_EXISTS 409 Variable label already used on this sensor 
+TEMPLATE_NAME_EXISTS 409 Command template name already used on this device 
+INTERNAL_ERROR 500 Unexpected server error 
+--- PAGE 8 ---
+ 

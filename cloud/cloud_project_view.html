@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTeq Cloud - Project Details</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/ui.css">
+</head>
+<body class="dark-theme dashboard-page">
+    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <!-- Ambient Glow Backgrounds -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass-panel-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    </a>
+                </div>
+                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="cloud_dashboard.html">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="cloud_projects.html">
+                        <i class='bx bx-folder'></i>
+                        <span class="link-name">Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_devices.html">
+                        <i class='bx bx-devices'></i>
+                        <span class="link-name">Devices</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_sensors.html">
+                        <i class='bx bx-chip'></i>
+                        <span class="link-name">Sensors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_commands.html">
+                        <i class='bx bx-terminal'></i>
+                        <span class="link-name">Commands</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_telemetry.html">
+                        <i class='bx bx-line-chart'></i>
+                        <span class="link-name">Telemetry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_docs.html">
+                        <i class='bx bx-book-open'></i>
+                        <span class="link-name">Documentation</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="cloud_settings.html">
+                        <i class='bx bx-cog'></i>
+                        <span class="link-name">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_landing.html">
+                        <i class='bx bx-log-out'></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Search devices, projects...">
+                </div>
+                <div class="topbar-actions">
+                    
+                    <div class="nav-switcher" style="margin-right: 15px;">
+                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
+                            <i class="bx bx-cloud"></i>
+                        </a>
+                        <div class="switcher-dropdown">
+                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
+                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
+                        </div>
+                    </div>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="bx bx-sun"></i>
+                        <i class="bx bx-moon"></i>
+                    </button>
+                    <button class="icon-btn notification-btn">
+                        <i class='bx bx-bell'></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
+                        <div class="user-info">
+                            <span class="user-name" id="user-display-name">Loading...</span>
+                            <span class="user-role" id="user-display-role">Member</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <div>
+                        <a href="cloud_projects.html" style="color: var(--text-muted-light); text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 10px;"><i class='bx bx-left-arrow-alt'></i> Back to Projects</a>
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <h1 id="project-view-name" style="margin: 0;">Loading Project...</h1>
+                        </div>
+                        <p id="project-view-desc" style="color: var(--text-muted-light); margin-top: 5px;">—</p>
+                    </div>
+                    <div class="panel-actions" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <a id="cloudStudioBtn" href="cloud_studio/cloud_studio.html" class="btn-ghost" title="Generate Arduino/ESP32 firmware for this project's devices"><i class='bx bx-code-alt'></i> Cloud Studio</a>
+                        <button type="button" class="btn-ghost" id="editProjectBtn" onclick="openEditModal()"><i class='bx bx-edit'></i> Edit Project</button>
+                        <button type="button" class="btn-ghost" id="deleteProjectBtn" onclick="deleteCurrentProject()" style="color: var(--danger);"><i class='bx bx-trash'></i> Delete</button>
+                        <a id="addDeviceBtn" href="cloud_device_add.html" class="btn-primary" style="text-decoration: none;"><i class='bx bx-plus'></i> Add Device</a>
+                    </div>
+                </div>
+
+                <!-- Stats Cards for Project -->
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-blue">
+                            <i class='bx bx-devices'></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Project Devices</h3>
+                            <h2 id="project-device-count">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-green">
+                            <i class='bx bx-wifi'></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Online</h3>
+                            <h2 id="project-online-count">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-red">
+                            <i class='bx bx-wifi-off'></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Offline</h3>
+                            <h2 id="project-offline-count">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-purple">
+                            <i class='bx bx-chip'></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Active Sensors</h3>
+                            <h2 id="project-sensor-count">0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                    
+                    <div class="table-container glass-panel mt-4">
+                        <div class="panel-header">
+                            <h2>Project Fleet</h2>
+                            <a id="cloudStudioFleetBtn" href="cloud_studio/cloud_studio.html" class="btn-ghost" style="font-size: 13px; text-decoration: none;" title="Open the firmware studio with this project's context"><i class='bx bx-code-alt'></i> Generate Firmware</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="styled-table" style="margin-bottom: 0;">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Device Name</th>
+                                        <th>Sensors</th>
+                                        <th>IP Address</th>
+                                        <th>Firmware</th>
+                                        <th>Last Seen</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="project-devices-tbody">
+                                    <tr>
+                                        <td colspan="7" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Loading project fleet...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="editProjectModal" class="modal-backdrop" onclick="if(event.target === this) closeEditModal();">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class='bx bx-edit'></i> Edit Project</h3>
+                <button type="button" class="modal-close-btn" onclick="closeEditModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <form id="editProjectForm">
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; color: var(--text-light);">Project Name *</label>
+                    <input type="text" id="editProjectName" class="styled-select" style="width: 100%; padding: 10px 12px; border-radius: var(--radius-sm);" required>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; color: var(--text-light);">Description</label>
+                    <textarea id="editProjectDesc" class="styled-select" style="width: 100%; padding: 10px 12px; border-radius: var(--radius-sm); min-height: 90px; resize: vertical;" placeholder="Project purpose and fleet scope..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-ghost" style="color: var(--danger);" onclick="deleteCurrentProject()"><i class='bx bx-trash'></i> Delete Project</button>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="btn-ghost" onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" id="saveProjectBtn" class="btn-primary"><i class='bx bx-check'></i> Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/validation.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cloud.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        let currentProject = null;
+        let currentProjectId = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const api = window.api;
+            const urlParams = new URLSearchParams(window.location.search);
+            currentProjectId = urlParams.get('id');
+
+            if (!currentProjectId) {
+                try {
+                    const projRes = await api.projects.list();
+                    if (projRes.success && projRes.data && projRes.data.length > 0) {
+                        currentProjectId = projRes.data[0].id;
+                        // Reflect current project ID in URL query param
+                        history.replaceState(null, '', 'cloud_project_view.html?id=' + encodeURIComponent(currentProjectId));
+                    }
+                } catch(e) {
+                    console.error("Failed to fetch projects list:", e);
+                }
+            }
+
+            if (!currentProjectId) {
+                document.getElementById('project-view-name').textContent = "No Projects Found";
+                document.getElementById('project-view-desc').textContent = "Please create a project first.";
+                const editBtn = document.getElementById('editProjectBtn');
+                const delBtn = document.getElementById('deleteProjectBtn');
+                if (editBtn) editBtn.style.display = 'none';
+                if (delBtn) delBtn.style.display = 'none';
+                document.getElementById('project-devices-tbody').innerHTML = `
+                    <tr><td colspan="7" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
+                        <i class='bx bx-folder' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
+                        No projects created yet.<br>
+                        <a href="cloud_project_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Create your first project</a>
+                    </td></tr>
+                `;
+                return;
+            }
+
+            // Bind Add Device button
+            const addDevBtn = document.getElementById('addDeviceBtn');
+            if (addDevBtn) {
+                addDevBtn.href = `cloud_device_add.html?project_id=${encodeURIComponent(currentProjectId)}`;
+            }
+
+            // Bind edit form
+            const editForm = document.getElementById('editProjectForm');
+            if (editForm) {
+                editForm.addEventListener('submit', handleEditSubmit);
+            }
+
+            await loadProjectData();
+        });
+
+        async function loadProjectData() {
+            try {
+                const projRes = await api.projects.get(currentProjectId);
+                if (projRes.success && projRes.data) {
+                    currentProject = projRes.data;
+                    renderProjectHeader(currentProject);
+                    bindCloudStudioButton();
+                } else {
+                    document.getElementById('project-view-name').textContent = "Project Not Found";
+                    document.getElementById('project-view-desc').textContent = "The requested project could not be located.";
+                    const editBtn = document.getElementById('editProjectBtn');
+                    const delBtn = document.getElementById('deleteProjectBtn');
+                    const addDevBtn = document.getElementById('addDeviceBtn');
+                    if (editBtn) editBtn.style.display = 'none';
+                    if (delBtn) delBtn.style.display = 'none';
+                    if (addDevBtn) addDevBtn.style.display = 'none';
+                    document.getElementById('project-devices-tbody').innerHTML = `
+                        <tr><td colspan="7" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
+                            <i class='bx bx-error-circle' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
+                            Project not found.<br>
+                            <a href="cloud_projects.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Return to Projects list</a>
+                        </td></tr>
+                    `;
+                    return;
+                }
+
+                const devRes = await api.devices.list(currentProjectId);
+                const devices = devRes.success ? (devRes.data || []) : [];
+                
+                let onlineCount = 0;
+                let offlineCount = 0;
+                let totalSensors = 0;
+
+                // status and sensor_count are provided by the devices list, so no
+                // per-device sensor requests are needed.
+                for (let dev of devices) {
+                    if (dev.status === 'online') onlineCount++;
+                    else offlineCount++;
+                    totalSensors += (typeof dev.sensor_count === 'number' ? dev.sensor_count : 0);
+                }
+
+                document.getElementById('project-device-count').textContent = devices.length;
+                document.getElementById('project-online-count').textContent = onlineCount;
+                document.getElementById('project-offline-count').textContent = offlineCount;
+                document.getElementById('project-sensor-count').textContent = totalSensors;
+
+                const tbody = document.getElementById('project-devices-tbody');
+                if (devices.length === 0) {
+                    tbody.innerHTML = `
+                        <tr><td colspan="7" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
+                            <i class='bx bx-devices' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
+                            No devices provisioned in this project yet.<br>
+                            <a href="cloud_device_add.html?project_id=${encodeURIComponent(currentProjectId)}" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Provision a device</a>
+                        </td></tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = devices.map(dev => {
+                    const isOnline = dev.status === 'online';
+                    const sensorCount = typeof dev.sensor_count === 'number' ? dev.sensor_count : 0;
+                    const lastSeen = dev.last_seen_at
+                        ? new Date(dev.last_seen_at).toLocaleString()
+                        : 'Never';
+                    return `
+                        <tr>
+                            <td><span class="status-pill ${isOnline ? 'is-online' : 'is-offline'}">${isOnline ? 'Online' : 'Offline'}</span></td>
+                            <td><strong>${escapeHtml(dev.name)}</strong></td>
+                            <td>${sensorCount}</td>
+                            <td class="id-col">${escapeHtml(dev.ip_address || 'Not reported')}</td>
+                            <td>${escapeHtml(dev.firmware_version || 'Not reported')}</td>
+                            <td>${lastSeen}</td>
+                            <td>
+                                <div style="display: flex; gap: 5px;">
+                                    <a href="cloud_device_view.html?id=${encodeURIComponent(dev.id)}" class="btn-icon" title="View Details"><i class='bx bx-show'></i></a>
+                                    <a href="${buildStudioUrl(dev)}" class="btn-icon" title="Generate firmware in Cloud Studio"><i class='bx bx-code-alt'></i></a>
+                                    <button type="button" class="btn-icon" style="color: var(--danger);" title="Delete Device" onclick="deleteDevice('${dev.id}')"><i class='bx bx-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error("Error loading project view:", err);
+                document.getElementById('project-view-name').textContent = "Error Loading Project";
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>"']/g, m => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[m]));
+        }
+
+        function renderProjectHeader(proj) {
+            document.getElementById('project-view-name').textContent = proj.name;
+            document.getElementById('project-view-desc').textContent = proj.description || 'OmniTeq Managed Fleet Group';
+        }
+
+        /**
+         * Cloud Studio deep link. The studio reads these query params to prefill
+         * Section 01 (device identity + Wi-Fi + gateway credentials) so generated
+         * firmware targets the device that was actually provisioned here.
+         */
+        function buildStudioUrl(device) {
+            const params = new URLSearchParams();
+            if (currentProject) params.set('project', currentProject.name || '');
+            if (currentProjectId) params.set('project_id', currentProjectId);
+            if (device) {
+                params.set('node_name', device.name || '');
+                if (device.id) params.set('device_id', device.id);
+            }
+            return 'cloud_studio/cloud_studio.html?' + params.toString();
+        }
+
+        function bindCloudStudioButton() {
+            const url = buildStudioUrl(null);
+            ['cloudStudioBtn', 'cloudStudioFleetBtn'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.href = url;
+            });
+        }
+
+        function openEditModal() {
+            if (!currentProject) return;
+            document.getElementById('editProjectName').value = currentProject.name || '';
+            document.getElementById('editProjectDesc').value = currentProject.description || '';
+            
+            const modal = document.getElementById('editProjectModal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('editProjectModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        async function handleEditSubmit(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('editProjectName');
+            const descInput = document.getElementById('editProjectDesc');
+
+            const nameVal = OmniTeqValidator.validateText(nameInput.value, 'Project Name', 3);
+            if (!nameVal.valid) {
+                OmniTeqValidator.markFieldError(nameInput, nameVal.error);
+                showToast(nameVal.error, 'error');
+                return;
+            }
+
+            const saveBtn = document.getElementById('saveProjectBtn');
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Saving...';
+
+            try {
+                // PUT /projects/:id accepts only name + description.
+                const res = await api.projects.update(currentProjectId, {
+                    name: nameVal.value,
+                    description: descInput.value.trim()
+                });
+
+                if (res && res.success) {
+                    currentProject = res.data;
+                    renderProjectHeader(currentProject);
+                    closeEditModal();
+                    showToast('Project updated successfully!', 'success');
+                } else {
+                    showToast('Failed to update project: ' + (res.error?.message || 'Error'), 'error');
+                }
+            } catch (err) {
+                showToast(err.message || 'Failed to update project.', 'error');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="bx bx-check"></i> Save Changes';
+            }
+        }
+
+        async function deleteCurrentProject() {
+            const projName = currentProject ? currentProject.name : 'this project';
+            const confirmed = await UI.confirmDelete(projName, { message: "All devices in this project will be removed too. This cannot be undone." });
+            if (!confirmed) return;
+
+            try {
+                const res = await api.projects.deleteCascade(currentProjectId);
+                if (res && res.success) {
+                    showToast('Project deleted successfully.', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'cloud_projects.html';
+                    }, 800);
+                } else {
+                    showToast('Failed to delete project: ' + (res.error?.message || 'Error'), 'error');
+                }
+            } catch (err) {
+                const msg = (err && err.error && err.error.message) || (err && err.message) || 'Failed to delete project.';
+                showToast('Failed to delete project: ' + msg, 'error');
+            }
+        }
+
+        async function deleteDevice(deviceId) {
+            if (!await UI.confirmDelete('this device', { message: 'Its sensors, variables and command history will be removed too. This cannot be undone.' })) return;
+            try {
+                const res = await api.devices.deleteCascade(deviceId);
+                if (res && res.success) {
+                    showToast('Device deleted successfully.', 'success');
+                    await loadProjectData();
+                } else {
+                    showToast('Failed to delete device: ' + (res.error?.message || 'Error'), 'error');
+                }
+            } catch(e) {
+                const msg = (e && e.error && e.error.message) || (e && e.message) || 'Failed to delete device.';
+                showToast('Failed to delete device: ' + msg, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,1903 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IoT Cloud — API Reference</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --border: #e3e1da;
+    --text: #1c1b18;
+    --muted: #6b6960;
+    --accent: #185FA5;
+    --get: #0f6e56; --get-bg: #e1f5ee;
+    --post: #185FA5; --post-bg: #e6f1fb;
+    --put: #854F0B; --put-bg: #faeeda;
+    --del: #A32D2D; --del-bg: #fcebeb;
+    --patch: #993556; --patch-bg: #fbeaf0;
+    --code-bg: #f0ede8;
+    --sidebar-w: 240px;
+    --font: system-ui, -apple-system, sans-serif;
+    --mono: 'Menlo', 'Consolas', monospace;
+  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; display: flex; min-height: 100vh; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Sidebar */
+  nav { width: var(--sidebar-w); flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 20px 0 40px; }
+  .nav-logo { padding: 0 16px 16px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .nav-logo h1 { font-size: 14px; font-weight: 600; color: var(--text); }
+  .nav-logo p { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .nav-section { padding: 8px 16px 4px; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  nav a { display: flex; align-items: center; gap: 8px; padding: 5px 16px; font-size: 13px; color: var(--muted); border-left: 2px solid transparent; }
+  nav a:hover { color: var(--text); background: var(--bg); text-decoration: none; }
+  nav a .badge { font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; flex-shrink: 0; }
+  .b-get { background: var(--get-bg); color: var(--get); }
+  .b-post { background: var(--post-bg); color: var(--post); }
+  .b-put { background: var(--put-bg); color: var(--put); }
+  .b-del { background: var(--del-bg); color: var(--del); }
+  .b-patch { background: var(--patch-bg); color: var(--patch); }
+  .b-ws { background: #eeedfe; color: #534AB7; }
+
+  /* Main */
+  main { flex: 1; max-width: 820px; padding: 40px 48px; }
+  .page-header { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .page-header h1 { font-size: 26px; font-weight: 600; margin-bottom: 8px; }
+  .page-header p { color: var(--muted); font-size: 14px; line-height: 1.7; max-width: 600px; }
+  .meta-row { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+  .meta-item { font-size: 13px; }
+  .meta-item strong { color: var(--text); }
+  .meta-item span { color: var(--muted); }
+  code { font-family: var(--mono); font-size: 12px; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+
+  /* Section headers */
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+  /* Endpoint card */
+  .endpoint { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .endpoint-header { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; cursor: pointer; user-select: none; }
+  .endpoint-header:hover { background: var(--bg); }
+  .method { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 5px; flex-shrink: 0; font-family: var(--mono); margin-top: 1px; }
+  .m-get { background: var(--get-bg); color: var(--get); }
+  .m-post { background: var(--post-bg); color: var(--post); }
+  .m-put { background: var(--put-bg); color: var(--put); }
+  .m-delete { background: var(--del-bg); color: var(--del); }
+  .m-patch { background: var(--patch-bg); color: var(--patch); }
+  .endpoint-meta { flex: 1; }
+  .endpoint-path { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--text); }
+  .endpoint-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .endpoint-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .tag { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
+  .tag-auth { background: #eeedfe; color: #534AB7; }
+  .tag-no-auth { background: #f1efe8; color: #5f5e5a; }
+  .chevron { color: var(--muted); font-size: 12px; margin-top: 4px; transition: transform 0.2s; flex-shrink: 0; }
+  .endpoint.open .chevron { transform: rotate(180deg); }
+  .endpoint-body { display: none; border-top: 1px solid var(--border); }
+  .endpoint.open .endpoint-body { display: block; }
+
+  /* Tabs inside endpoint */
+  .tabs { display: flex; border-bottom: 1px solid var(--border); padding: 0 20px; }
+  .tab { padding: 10px 14px; font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel { display: none; padding: 16px 20px; }
+  .tab-panel.active { display: block; }
+
+  /* Params table */
+  .params-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .params-table th { text-align: left; padding: 6px 10px; background: var(--bg); color: var(--muted); font-weight: 600; font-size: 11px; border-bottom: 1px solid var(--border); }
+  .params-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .params-table tr:last-child td { border-bottom: none; }
+  .param-name { font-family: var(--mono); font-size: 12px; font-weight: 500; }
+  .param-type { color: var(--muted); font-family: var(--mono); font-size: 11px; }
+  .required { color: var(--del); font-size: 10px; font-weight: 600; }
+  .optional { color: var(--muted); font-size: 10px; }
+
+  /* JSON blocks */
+  pre { background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: 16px; font-size: 12px; font-family: var(--mono); overflow-x: auto; line-height: 1.6; }
+  .json-key { color: #89b4fa; }
+  .json-str { color: #a6e3a1; }
+  .json-num { color: #fab387; }
+  .json-bool { color: #cba6f7; }
+  .json-null { color: #f38ba8; }
+  .json-comment { color: #6c7086; font-style: italic; }
+  .block-label { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Error table */
+  .error-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .error-table th { text-align: left; padding: 6px 10px; background: var(--bg); color: var(--muted); font-size: 11px; font-weight: 600; border-bottom: 1px solid var(--border); }
+  .error-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  .error-table tr:last-child td { border-bottom: none; }
+  .status-code { font-family: var(--mono); font-weight: 600; font-size: 12px; }
+  .s-2 { color: var(--get); }
+  .s-4 { color: var(--del); }
+  .s-5 { color: #854F0B; }
+
+  /* WS section */
+  .ws-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; padding: 20px; }
+  .ws-event { font-family: var(--mono); font-size: 13px; font-weight: 600; color: #534AB7; margin-bottom: 6px; }
+  .ws-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+  /* Info box */
+  .info-box { background: #e6f1fb; border: 1px solid #b5d4f4; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #0c447c; margin-bottom: 16px; line-height: 1.6; }
+  .warn-box { background: #faeeda; border: 1px solid #fac775; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #633806; margin-bottom: 16px; line-height: 1.6; }
+
+  @media (max-width: 700px) {
+    nav { display: none; }
+    main { padding: 24px 20px; }
+  }
+</style>
+<!-- Gateway endpoints come from js/config.js so this page can never drift from
+     the rest of the console. Edit the host there, not here. -->
+<script src="js/config.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <h1>IoT Cloud API</h1>
+    <p>v1.0 — REST + WebSocket</p>
+  </div>
+
+  <div class="nav-section">Auth</div>
+  <a href="#auth-register"><span class="badge b-post">POST</span> Register</a>
+  <a href="#auth-login"><span class="badge b-post">POST</span> Login</a>
+  <a href="#auth-me"><span class="badge b-get">GET</span> Current user</a>
+  <a href="#auth-refresh"><span class="badge b-post">POST</span> Refresh token</a>
+  <a href="#auth-logout"><span class="badge b-post">POST</span> Logout</a>
+
+  <div class="nav-section">Projects</div>
+  <a href="#proj-list"><span class="badge b-get">GET</span> List projects</a>
+  <a href="#proj-create"><span class="badge b-post">POST</span> Create project</a>
+  <a href="#proj-get"><span class="badge b-get">GET</span> Get project</a>
+  <a href="#proj-update"><span class="badge b-put">PUT</span> Update project</a>
+  <a href="#proj-delete"><span class="badge b-del">DEL</span> Delete project</a>
+
+  <div class="nav-section">Devices</div>
+  <a href="#dev-list"><span class="badge b-get">GET</span> List devices</a>
+  <a href="#dev-create"><span class="badge b-post">POST</span> Create device</a>
+  <a href="#dev-get"><span class="badge b-get">GET</span> Get device</a>
+  <a href="#dev-update"><span class="badge b-put">PUT</span> Update device</a>
+  <a href="#dev-delete"><span class="badge b-del">DEL</span> Delete device</a>
+  <a href="#dev-status"><span class="badge b-get">GET</span> Device status</a>
+
+  <div class="nav-section">Sensors</div>
+  <a href="#sen-list"><span class="badge b-get">GET</span> List sensors</a>
+  <a href="#sen-create"><span class="badge b-post">POST</span> Create sensor</a>
+  <a href="#sen-get"><span class="badge b-get">GET</span> Get sensor</a>
+  <a href="#sen-update"><span class="badge b-put">PUT</span> Update sensor</a>
+  <a href="#sen-delete"><span class="badge b-del">DEL</span> Delete sensor</a>
+
+  <div class="nav-section">Variables</div>
+  <a href="#var-list"><span class="badge b-get">GET</span> List variables</a>
+  <a href="#var-create"><span class="badge b-post">POST</span> Create variable</a>
+  <a href="#var-get"><span class="badge b-get">GET</span> Get variable</a>
+  <a href="#var-update"><span class="badge b-put">PUT</span> Update variable</a>
+  <a href="#var-delete"><span class="badge b-del">DEL</span> Delete variable</a>
+
+  <div class="nav-section">Command Templates</div>
+  <a href="#cmd-list"><span class="badge b-get">GET</span> List templates</a>
+  <a href="#cmd-create"><span class="badge b-post">POST</span> Create template</a>
+  <a href="#cmd-get"><span class="badge b-get">GET</span> Get template</a>
+  <a href="#cmd-update"><span class="badge b-put">PUT</span> Update template</a>
+  <a href="#cmd-delete"><span class="badge b-del">DEL</span> Delete template</a>
+
+  <div class="nav-section">Command Dispatch</div>
+  <a href="#cmd-dispatch"><span class="badge b-post">POST</span> Dispatch command</a>
+  <a href="#cmd-instance"><span class="badge b-get">GET</span> Get instance</a>
+  <a href="#cmd-history"><span class="badge b-get">GET</span> Command history</a>
+
+  <div class="nav-section">Telemetry</div>
+  <a href="#tele-history"><span class="badge b-get">GET</span> Variable history</a>
+  <a href="#tele-latest"><span class="badge b-get">GET</span> Latest readings</a>
+  <a href="#tele-aggregate"><span class="badge b-get">GET</span> Aggregates</a>
+
+  <div class="nav-section">Device Ingest</div>
+  <a href="#ingest-telemetry"><span class="badge b-post">POST</span> Publish readings</a>
+  <a href="#ingest-heartbeat"><span class="badge b-post">POST</span> Heartbeat</a>
+  <a href="#ingest-pending"><span class="badge b-get">GET</span> Pending commands</a>
+  <a href="#ingest-ack"><span class="badge b-post">POST</span> Acknowledge command</a>
+
+  <div class="nav-section">Webhooks</div>
+  <a href="#hook-create"><span class="badge b-post">POST</span> Create webhook</a>
+  <a href="#hook-list"><span class="badge b-get">GET</span> List webhooks</a>
+  <a href="#hook-deliveries"><span class="badge b-get">GET</span> Delivery log</a>
+  <a href="#hook-delete"><span class="badge b-del">DEL</span> Delete webhook</a>
+
+  <div class="nav-section">Real-time (WS)</div>
+  <a href="#ws"><span class="badge b-ws">WS</span> WebSocket events</a>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>IoT Cloud — API Reference</h1>
+    <p>All endpoints use JSON. Authenticated routes require a Bearer token in the <code>Authorization</code> header. All timestamps are ISO 8601 UTC. All IDs are UUIDs.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Base URL</strong> <span><code data-endpoint="api">—</code></span></div>
+      <div class="meta-item"><strong>WebSocket</strong> <span><code data-endpoint="ws">—</code></span></div>
+      <div class="meta-item"><strong>Content-Type</strong> <span><code>application/json</code></span></div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>For frontend developers:</strong> Response bodies below show the exact shapes the live gateway returns. Values are illustrative examples.
+  </div>
+
+  <!-- ═══════════════════════════════════════════ AUTH ══════════════════════════════════════ -->
+  <div class="section-title" id="auth">Authentication</div>
+
+  <!-- Register -->
+  <div class="endpoint" id="auth-register">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/auth/register</div>
+        <div class="endpoint-desc">Register a new user account</div>
+        <div class="endpoint-tags"><span class="tag tag-no-auth">No auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+        <div class="tab" onclick="switchTab(this,'errors')">Errors</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">display_name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Full name shown in the UI</td></tr>
+          <tr><td class="param-name">email</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Unique email address</td></tr>
+          <tr><td class="param-name">password</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Min 8 characters</td></tr>
+        </table>
+        <br>
+        <div class="block-label">Example request body</div>
+        <pre><span class="json-key">"display_name"</span>: <span class="json-str">"Arjun Mehta"</span>,
+<span class="json-key">"email"</span>: <span class="json-str">"arjun@example.com"</span>,
+<span class="json-key">"password"</span>: <span class="json-str">"securePass123"</span></pre>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">201 Created</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"user"</span>: {
+      <span class="json-key">"id"</span>: <span class="json-str">"usr_01HXKJ2P3M4N5Q6R7S8T9V0W"</span>,
+      <span class="json-key">"display_name"</span>: <span class="json-str">"Arjun Mehta"</span>,
+      <span class="json-key">"email"</span>: <span class="json-str">"arjun@example.com"</span>,
+      <span class="json-key">"is_verified"</span>: <span class="json-bool">false</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-15T09:23:45Z"</span>
+    },
+    <span class="json-key">"access_token"</span>: <span class="json-str">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span>,
+    <span class="json-key">"refresh_token"</span>: <span class="json-str">"rt_8fKj2mP9xZqL3nR7sT..."</span>,
+    <span class="json-key">"expires_in"</span>: <span class="json-num">3600</span>
+  }
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="errors">
+        <table class="error-table">
+          <tr><th>Status</th><th>Code</th><th>Reason</th></tr>
+          <tr><td class="status-code s-4">400</td><td><code>VALIDATION_ERROR</code></td><td>Missing or invalid fields</td></tr>
+          <tr><td class="status-code s-4">409</td><td><code>EMAIL_ALREADY_EXISTS</code></td><td>Email is already registered</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div class="endpoint" id="auth-login">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/auth/login</div>
+        <div class="endpoint-desc">Authenticate and receive access + refresh tokens</div>
+        <div class="endpoint-tags"><span class="tag tag-no-auth">No auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+        <div class="tab" onclick="switchTab(this,'errors')">Errors</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">email</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Registered email</td></tr>
+          <tr><td class="param-name">password</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Account password</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"user"</span>: {
+      <span class="json-key">"id"</span>: <span class="json-str">"usr_01HXKJ2P3M4N5Q6R7S8T9V0W"</span>,
+      <span class="json-key">"display_name"</span>: <span class="json-str">"Arjun Mehta"</span>,
+      <span class="json-key">"email"</span>: <span class="json-str">"arjun@example.com"</span>,
+      <span class="json-key">"is_verified"</span>: <span class="json-bool">true</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-15T09:23:45Z"</span>
+    },
+    <span class="json-key">"access_token"</span>: <span class="json-str">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span>,
+    <span class="json-key">"refresh_token"</span>: <span class="json-str">"rt_8fKj2mP9xZqL3nR7sT..."</span>,
+    <span class="json-key">"expires_in"</span>: <span class="json-num">3600</span>
+  }
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="errors">
+        <table class="error-table">
+          <tr><th>Status</th><th>Code</th><th>Reason</th></tr>
+          <tr><td class="status-code s-4">401</td><td><code>INVALID_CREDENTIALS</code></td><td>Wrong email or password</td></tr>
+          <tr><td class="status-code s-4">403</td><td><code>EMAIL_NOT_VERIFIED</code></td><td>Account not yet verified</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Me -->
+  <div class="endpoint" id="auth-me">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/auth/me</div>
+        <div class="endpoint-desc">Get the authenticated user's profile</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"usr_01HXKJ2P3M4N5Q6R7S8T9V0W"</span>,
+    <span class="json-key">"display_name"</span>: <span class="json-str">"Arjun Mehta"</span>,
+    <span class="json-key">"email"</span>: <span class="json-str">"arjun@example.com"</span>,
+    <span class="json-key">"is_verified"</span>: <span class="json-bool">true</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-15T09:23:45Z"</span>,
+    <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-03-10T14:05:00Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Refresh -->
+  <div class="endpoint" id="auth-refresh">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/auth/refresh</div>
+        <div class="endpoint-desc">Exchange a refresh token for a new access token</div>
+        <div class="endpoint-tags"><span class="tag tag-no-auth">No auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">refresh_token</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Refresh token from login/register</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"access_token"</span>: <span class="json-str">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span>,
+    <span class="json-key">"expires_in"</span>: <span class="json-num">3600</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout -->
+  <div class="endpoint" id="auth-logout">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/auth/logout</div>
+        <div class="endpoint-desc">Invalidate the current refresh token</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">refresh_token</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Token to revoke</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"message"</span>: <span class="json-str">"Logged out successfully"</span>
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ PROJECTS ══════════════════════════════════ -->
+  <div class="section-title" id="projects">Projects</div>
+
+  <div class="endpoint" id="proj-list">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects</div>
+        <div class="endpoint-desc">List all projects owned by the authenticated user</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"prj_01HXKM3A2B4C5D6E7F8G9H0J"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Solar Fleet Alpha"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Climate and irrigation monitoring"</span>,
+      <span class="json-key">"device_count"</span>: <span class="json-num">4</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-20T08:00:00Z"</span>,
+      <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-03-01T12:30:00Z"</span>
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"prj_02JYKN4B3C5D6E7F8G9H1K2L"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Factory Floor Monitor"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Temperature and vibration on CNC machines"</span>,
+      <span class="json-key">"device_count"</span>: <span class="json-num">12</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-02-05T10:15:00Z"</span>,
+      <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-03-15T09:00:00Z"</span>
+    }
+  ],
+  <span class="json-key">"meta"</span>: { <span class="json-key">"total"</span>: <span class="json-num">2</span> }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="proj-create">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects</div>
+        <div class="endpoint-desc">Create a new project</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Project name (max 80 chars)</td></tr>
+          <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Short description (max 500 chars)</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">201 Created</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"prj_03KZLN5C4D6E7F8G9H0J1K3M"</span>,
+    <span class="json-key">"name"</span>: <span class="json-str">"Home Automation"</span>,
+    <span class="json-key">"description"</span>: <span class="json-str">"Smart home sensors and controls"</span>,
+    <span class="json-key">"device_count"</span>: <span class="json-num">0</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-04-01T11:00:00Z"</span>,
+    <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-04-01T11:00:00Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="proj-get">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects/:projectId</div>
+        <div class="endpoint-desc">Get a single project by ID</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+        <div class="tab" onclick="switchTab(this,'errors')">Errors</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"prj_01HXKM3A2B4C5D6E7F8G9H0J"</span>,
+    <span class="json-key">"name"</span>: <span class="json-str">"Solar Fleet Alpha"</span>,
+    <span class="json-key">"description"</span>: <span class="json-str">"Climate and irrigation monitoring"</span>,
+    <span class="json-key">"device_count"</span>: <span class="json-num">4</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-20T08:00:00Z"</span>,
+    <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-03-01T12:30:00Z"</span>
+  }
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="errors">
+        <table class="error-table">
+          <tr><th>Status</th><th>Code</th><th>Reason</th></tr>
+          <tr><td class="status-code s-4">404</td><td><code>PROJECT_NOT_FOUND</code></td><td>No project with that ID, or not owned by user</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="proj-update">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-put">PUT</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects/:projectId</div>
+        <div class="endpoint-desc">Update project name or description</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>New project name</td></tr>
+          <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>New description</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK — returns updated project object (same shape as GET)</div>
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* updated project */</span> } }</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="proj-delete">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-delete">DELETE</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects/:projectId</div>
+        <div class="endpoint-desc">Delete a project and all its devices (cascading)</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"message"</span>: <span class="json-str">"Project deleted"</span> }</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DEVICES ══════════════════════════════════ -->
+  <div class="section-title" id="devices">Devices</div>
+
+  <div class="endpoint" id="dev-list">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects/:projectId/devices</div>
+        <div class="endpoint-desc">List all devices in a project</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+      <span class="json-key">"project_id"</span>: <span class="json-str">"prj_01HXKM3A2B4C5D6E7F8G9H0J"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Solar-Node-01"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"North greenhouse bay sensors"</span>,
+      <span class="json-key">"firmware_version"</span>: <span class="json-str">"1.4.2"</span>,
+      <span class="json-key">"sensor_count"</span>: <span class="json-num">3</span>,
+      <span class="json-key">"status"</span>: <span class="json-str">"online"</span>,
+      <span class="json-key">"last_seen_at"</span>: <span class="json-str">"2025-04-30T18:55:00Z"</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-22T10:00:00Z"</span>
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"dev_02JYKP7E6F8G9H0J1K2L3M4N"</span>,
+      <span class="json-key">"project_id"</span>: <span class="json-str">"prj_01HXKM3A2B4C5D6E7F8G9H0J"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"GH-Irrigation-Ctrl"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Irrigation valve controller"</span>,
+      <span class="json-key">"firmware_version"</span>: <span class="json-str">"2.0.0"</span>,
+      <span class="json-key">"sensor_count"</span>: <span class="json-num">1</span>,
+      <span class="json-key">"status"</span>: <span class="json-str">"offline"</span>,
+      <span class="json-key">"last_seen_at"</span>: <span class="json-str">"2025-04-29T03:12:00Z"</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-25T14:00:00Z"</span>
+    }
+  ],
+  <span class="json-key">"meta"</span>: { <span class="json-key">"total"</span>: <span class="json-num">2</span> }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="dev-create">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/projects/:projectId/devices</div>
+        <div class="endpoint-desc">Register a new device under a project. Returns a one-time secret key for the physical device.</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Unique name within the project</td></tr>
+          <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Human description of device's role</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">201 Created</div>
+        <div class="warn-box">The <code>secret_key</code> is only returned once at creation. Flash it to the physical device immediately — it cannot be retrieved again.</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"dev_03KZLQ8F7G9H0J1K2L3M4N5P"</span>,
+    <span class="json-key">"project_id"</span>: <span class="json-str">"prj_01HXKM3A2B4C5D6E7F8G9H0J"</span>,
+    <span class="json-key">"name"</span>: <span class="json-str">"GH-CO2-Sensor"</span>,
+    <span class="json-key">"description"</span>: <span class="json-str">"CO2 level monitor"</span>,
+    <span class="json-key">"secret_key"</span>: <span class="json-str">"sk_live_Xk9mP2nQ7rT4vW8yZ..."</span>,
+    <span class="json-key">"firmware_version"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-04-30T19:00:00Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="dev-get">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId</div>
+        <div class="endpoint-desc">Get a single device (includes live status)</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+    <span class="json-key">"project_id"</span>: <span class="json-str">"prj_01HXKM3A2B4C5D6E7F8G9H0J"</span>,
+    <span class="json-key">"name"</span>: <span class="json-str">"Solar-Node-01"</span>,
+    <span class="json-key">"description"</span>: <span class="json-str">"North greenhouse bay sensors"</span>,
+    <span class="json-key">"firmware_version"</span>: <span class="json-str">"1.4.2"</span>,
+    <span class="json-key">"status"</span>: <span class="json-str">"online"</span>,
+    <span class="json-key">"ip_address"</span>: <span class="json-str">"192.168.1.45"</span>,
+    <span class="json-key">"last_seen_at"</span>: <span class="json-str">"2025-04-30T18:55:00Z"</span>,
+    <span class="json-key">"sensor_count"</span>: <span class="json-num">3</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-22T10:00:00Z"</span>,
+    <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-03-10T08:00:00Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="dev-update">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-put">PUT</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId</div>
+        <div class="endpoint-desc">Update device name or description</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>New device name</td></tr>
+          <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>New description</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* updated device object */</span> } }</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="dev-delete">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-delete">DELETE</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId</div>
+        <div class="endpoint-desc">Delete a device and all its sensors, variables, and telemetry</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"message"</span>: <span class="json-str">"Device deleted"</span> }</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="dev-status">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId/status</div>
+        <div class="endpoint-desc">Get real-time online/offline status of a device</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+    <span class="json-key">"status"</span>: <span class="json-str">"online"</span>,
+    <span class="json-key">"ip_address"</span>: <span class="json-str">"192.168.1.45"</span>,
+    <span class="json-key">"last_seen_at"</span>: <span class="json-str">"2025-04-30T18:55:00Z"</span>,
+    <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-04-30T18:55:02Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ SENSORS ══════════════════════════════════ -->
+  <div class="section-title" id="sensors">Sensors</div>
+
+  <div class="endpoint" id="sen-list">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId/sensors</div>
+        <div class="endpoint-desc">List all sensors attached to a device</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"sen_01HXKR9G8H0J1K2L3M4N5P6Q"</span>,
+      <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"DS18B20"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Waterproof digital temperature sensor"</span>,
+      <span class="json-key">"unit"</span>: <span class="json-str">"Â°C"</span>,
+      <span class="json-key">"variable_count"</span>: <span class="json-num">1</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-23T11:00:00Z"</span>
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"sen_02JYKS0H9J1K2L3M4N5P6Q7R"</span>,
+      <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"SHT31"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Temperature and humidity combo"</span>,
+      <span class="json-key">"unit"</span>: <span class="json-null">null</span>,
+      <span class="json-key">"variable_count"</span>: <span class="json-num">2</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-23T11:05:00Z"</span>
+    }
+  ],
+  <span class="json-key">"meta"</span>: { <span class="json-key">"total"</span>: <span class="json-num">2</span> }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="sen-create">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId/sensors</div>
+        <div class="endpoint-desc">Add a sensor to a device</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Sensor model or identifier name</td></tr>
+          <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Human-readable description</td></tr>
+          <tr><td class="param-name">unit</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Physical unit e.g. <code>Â°C</code>, <code>hPa</code>, <code>%</code></td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">201 Created — returns created sensor object</div>
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* sensor object */</span> } }</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="sen-get">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/sensors/:sensorId</div>
+        <div class="endpoint-desc">Get a single sensor with its variables</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"sen_02JYKS0H9J1K2L3M4N5P6Q7R"</span>,
+    <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+    <span class="json-key">"name"</span>: <span class="json-str">"SHT31"</span>,
+    <span class="json-key">"description"</span>: <span class="json-str">"Temperature and humidity combo"</span>,
+    <span class="json-key">"unit"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"variables"</span>: [
+      { <span class="json-key">"id"</span>: <span class="json-str">"var_01..."</span>, <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>, <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span> },
+      { <span class="json-key">"id"</span>: <span class="json-str">"var_02..."</span>, <span class="json-key">"label"</span>: <span class="json-str">"humidity"</span>, <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span> }
+    ],
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-23T11:05:00Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="sen-update">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-put">PUT</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/sensors/:sensorId</div><div class="endpoint-desc">Update sensor name, description, or unit</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* updated sensor */</span> } }</pre></div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="sen-delete">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-delete">DELETE</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/sensors/:sensorId</div><div class="endpoint-desc">Delete sensor and its variables (cascades telemetry)</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"message"</span>: <span class="json-str">"Sensor deleted"</span> }</pre></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ VARIABLES ════════════════════════════════ -->
+  <div class="section-title" id="variables">Variables</div>
+  <div class="info-box"><strong>Data types:</strong> Variables support four types — <code>float</code>, <code>integer</code>, <code>boolean</code>, <code>string</code>. The label is used as the key in telemetry payloads from the device.</div>
+
+  <div class="endpoint" id="var-list">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/sensors/:sensorId/variables</div><div class="endpoint-desc">List all variables defined on a sensor</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"var_01HXKT1J0K2L3M4N5P6Q7R8S"</span>,
+      <span class="json-key">"sensor_id"</span>: <span class="json-str">"sen_02JYKS0H9J1K2L3M4N5P6Q7R"</span>,
+      <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>,
+      <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
+      <span class="json-key">"latest_value"</span>: <span class="json-num">24.7</span>,
+      <span class="json-key">"latest_at"</span>: <span class="json-str">"2025-04-30T18:54:30Z"</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-23T12:00:00Z"</span>
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"var_02JYKU2K1L3M4N5P6Q7R8S9T"</span>,
+      <span class="json-key">"sensor_id"</span>: <span class="json-str">"sen_02JYKS0H9J1K2L3M4N5P6Q7R"</span>,
+      <span class="json-key">"label"</span>: <span class="json-str">"humidity"</span>,
+      <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
+      <span class="json-key">"latest_value"</span>: <span class="json-num">68.2</span>,
+      <span class="json-key">"latest_at"</span>: <span class="json-str">"2025-04-30T18:54:30Z"</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-23T12:00:00Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="var-create">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/sensors/:sensorId/variables</div><div class="endpoint-desc">Define a new variable on a sensor</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+        <div class="tab" onclick="switchTab(this,'errors')">Errors</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">label</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Unique label within the sensor e.g. <code>temperature</code></td></tr>
+          <tr><td class="param-name">data_type</td><td class="param-type">enum</td><td><span class="required">required</span></td><td><code>float</code> | <code>integer</code> | <code>boolean</code> | <code>string</code></td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">201 Created</div>
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* variable object */</span> } }</pre>
+      </div>
+      <div class="tab-panel" data-tab="errors">
+        <table class="error-table">
+          <tr><th>Status</th><th>Code</th><th>Reason</th></tr>
+          <tr><td class="status-code s-4">409</td><td><code>LABEL_ALREADY_EXISTS</code></td><td>Label already used on this sensor</td></tr>
+          <tr><td class="status-code s-4">400</td><td><code>INVALID_DATA_TYPE</code></td><td>data_type must be one of the allowed enum values</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="var-get">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/variables/:variableId</div><div class="endpoint-desc">Get a single variable</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* variable object with latest_value */</span> } }</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="var-update">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-put">PUT</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/variables/:variableId</div><div class="endpoint-desc">Update variable label (data_type is immutable once telemetry exists)</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* updated variable */</span> } }</pre></div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="var-delete">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-delete">DELETE</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/variables/:variableId</div><div class="endpoint-desc">Delete variable and all its telemetry history</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"message"</span>: <span class="json-str">"Variable deleted"</span> }</pre></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ COMMAND TEMPLATES ════════════════════════ -->
+  <div class="section-title" id="command-templates">Command Templates</div>
+
+  <div class="endpoint" id="cmd-list">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/devices/:deviceId/command-templates</div><div class="endpoint-desc">List all command templates defined for a device</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"cmt_01HXKV3L2M4N5P6Q7R8S9T0V"</span>,
+      <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"changeLevel"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Set irrigation valve level (0-100%)"</span>,
+      <span class="json-key">"parameters"</span>: [
+        {
+          <span class="json-key">"id"</span>: <span class="json-str">"cmp_01HXKW4M3N5P6Q7R8S9T0V1W"</span>,
+          <span class="json-key">"param_name"</span>: <span class="json-str">"level"</span>,
+          <span class="json-key">"param_type"</span>: <span class="json-str">"integer"</span>,
+          <span class="json-key">"param_order"</span>: <span class="json-num">1</span>,
+          <span class="json-key">"default_value"</span>: <span class="json-str">"0"</span>,
+          <span class="json-key">"is_required"</span>: <span class="json-bool">true</span>
+        }
+      ],
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-02-01T09:00:00Z"</span>
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"cmt_02JYKW4M3N5P6Q7R8S9T0V1W"</span>,
+      <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"reboot"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Reboot the device firmware"</span>,
+      <span class="json-key">"parameters"</span>: [],
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2025-02-01T09:05:00Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="cmd-create">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/devices/:deviceId/command-templates</div><div class="endpoint-desc">Create a new command template with optional parameters</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Command name e.g. <code>changeLevel</code></td></tr>
+          <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>What the command does</td></tr>
+          <tr><td class="param-name">parameters</td><td class="param-type">array</td><td><span class="optional">optional</span></td><td>Array of parameter definitions (see below)</td></tr>
+          <tr><td class="param-name">parameters[].param_name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Parameter name e.g. <code>level</code></td></tr>
+          <tr><td class="param-name">parameters[].param_type</td><td class="param-type">enum</td><td><span class="required">required</span></td><td><code>integer</code> | <code>float</code> | <code>string</code> | <code>boolean</code></td></tr>
+          <tr><td class="param-name">parameters[].param_order</td><td class="param-type">integer</td><td><span class="required">required</span></td><td>Display order (1-based)</td></tr>
+          <tr><td class="param-name">parameters[].default_value</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Default value as string</td></tr>
+          <tr><td class="param-name">parameters[].is_required</td><td class="param-type">boolean</td><td><span class="optional">optional</span></td><td>Defaults to <code>true</code></td></tr>
+        </table>
+        <br>
+        <div class="block-label">Example — changeLevel(int level)</div>
+        <pre>{
+  <span class="json-key">"name"</span>: <span class="json-str">"changeLevel"</span>,
+  <span class="json-key">"description"</span>: <span class="json-str">"Set irrigation valve level 0-100"</span>,
+  <span class="json-key">"parameters"</span>: [
+    {
+      <span class="json-key">"param_name"</span>: <span class="json-str">"level"</span>,
+      <span class="json-key">"param_type"</span>: <span class="json-str">"integer"</span>,
+      <span class="json-key">"param_order"</span>: <span class="json-num">1</span>,
+      <span class="json-key">"default_value"</span>: <span class="json-str">"0"</span>,
+      <span class="json-key">"is_required"</span>: <span class="json-bool">true</span>
+    }
+  ]
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">201 Created — returns full template with parameters</div>
+        <pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* template object */</span> } }</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="cmd-get">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/command-templates/:templateId</div><div class="endpoint-desc">Get a single command template with its parameters</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* template + parameters array */</span> } }</pre></div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="cmd-update">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-put">PUT</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/command-templates/:templateId</div><div class="endpoint-desc">Update name, description, or replace parameters array</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"data"</span>: { <span class="json-comment">/* updated template */</span> } }</pre></div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="cmd-delete">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-delete">DELETE</span>
+      <div class="endpoint-meta"><div class="endpoint-path">/command-templates/:templateId</div><div class="endpoint-desc">Delete a command template (does not delete historic instances)</div><div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"message"</span>: <span class="json-str">"Command template deleted"</span> }</pre></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ COMMAND DISPATCH ══════════════════════════ -->
+  <div class="section-title" id="command-dispatch">Command Dispatch</div>
+
+  <div class="endpoint" id="cmd-dispatch">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/command-templates/:templateId/dispatch</div>
+        <div class="endpoint-desc">Send a command to a device. Server validates ownership, argument types, and queues delivery. Returns a command instance to track status.</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+        <div class="tab" onclick="switchTab(this,'errors')">Errors</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">parameters</td><td class="param-type">object</td><td><span class="optional">optional</span></td><td>Key-value pairs matching parameter names defined in the template</td></tr>
+          <tr><td class="param-name">ttl_seconds</td><td class="param-type">integer</td><td><span class="optional">optional</span></td><td>Command expires after this many seconds if not delivered. Default: 3600</td></tr>
+        </table>
+        <br>
+        <div class="block-label">Example — dispatch changeLevel(level=75)</div>
+        <pre>{
+  <span class="json-key">"parameters"</span>: {
+    <span class="json-key">"level"</span>: <span class="json-num">75</span>
+  },
+  <span class="json-key">"ttl_seconds"</span>: <span class="json-num">300</span>
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">202 Accepted</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"cmi_01HXKX5N4P6Q7R8S9T0V1W2X"</span>,
+    <span class="json-key">"template_id"</span>: <span class="json-str">"cmt_01HXKV3L2M4N5P6Q7R8S9T0V"</span>,
+    <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+    <span class="json-key">"command_name"</span>: <span class="json-str">"changeLevel"</span>,
+    <span class="json-key">"parameters"</span>: { <span class="json-key">"level"</span>: <span class="json-num">75</span> },
+    <span class="json-key">"status"</span>: <span class="json-str">"queued"</span>,
+    <span class="json-key">"issued_by"</span>: <span class="json-str">"usr_01HXKJ2P3M4N5Q6R7S8T9V0W"</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-04-30T19:10:00Z"</span>,
+    <span class="json-key">"queued_at"</span>: <span class="json-str">"2025-04-30T19:10:01Z"</span>,
+    <span class="json-key">"sent_at"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"executed_at"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"expired_at"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"failure_reason"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"expires_at"</span>: <span class="json-str">"2025-04-30T19:15:00Z"</span>
+  }
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="errors">
+        <table class="error-table">
+          <tr><th>Status</th><th>Code</th><th>Reason</th></tr>
+          <tr><td class="status-code s-4">403</td><td><code>NOT_DEVICE_OWNER</code></td><td>Authenticated user does not own this device</td></tr>
+          <tr><td class="status-code s-4">400</td><td><code>MISSING_REQUIRED_PARAM</code></td><td>A required parameter was not provided</td></tr>
+          <tr><td class="status-code s-4">400</td><td><code>INVALID_PARAM_TYPE</code></td><td>Parameter value does not match declared type</td></tr>
+          <tr><td class="status-code s-4">422</td><td><code>DEVICE_QUEUE_FULL</code></td><td>Too many pending commands for this device</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="cmd-instance">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/command-instances/:instanceId</div>
+        <div class="endpoint-desc">Poll the current status of a dispatched command</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK — example after device executes successfully</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"cmi_01HXKX5N4P6Q7R8S9T0V1W2X"</span>,
+    <span class="json-key">"command_name"</span>: <span class="json-str">"changeLevel"</span>,
+    <span class="json-key">"parameters"</span>: { <span class="json-key">"level"</span>: <span class="json-num">75</span> },
+    <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2025-04-30T19:10:00Z"</span>,
+    <span class="json-key">"queued_at"</span>: <span class="json-str">"2025-04-30T19:10:01Z"</span>,
+    <span class="json-key">"sent_at"</span>: <span class="json-str">"2025-04-30T19:10:03Z"</span>,
+    <span class="json-key">"executed_at"</span>: <span class="json-str">"2025-04-30T19:10:05Z"</span>,
+    <span class="json-key">"expired_at"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"failure_reason"</span>: <span class="json-null">null</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="cmd-history">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId/command-history</div>
+        <div class="endpoint-desc">Paginated history of all command instances sent to a device</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'params')">Query params</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="params">
+        <table class="params-table">
+          <tr><th>Param</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          <tr><td class="param-name">page</td><td class="param-type">integer</td><td>1</td><td>Page number</td></tr>
+          <tr><td class="param-name">limit</td><td class="param-type">integer</td><td>20</td><td>Items per page (max 100)</td></tr>
+          <tr><td class="param-name">status</td><td class="param-type">string</td><td>—</td><td>Filter by status e.g. <code>failed</code></td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    { <span class="json-key">"id"</span>: <span class="json-str">"cmi_01..."</span>, <span class="json-key">"command_name"</span>: <span class="json-str">"changeLevel"</span>, <span class="json-key">"status"</span>: <span class="json-str">"success"</span>, <span class="json-key">"created_at"</span>: <span class="json-str">"2025-04-30T19:10:00Z"</span> },
+    { <span class="json-key">"id"</span>: <span class="json-str">"cmi_02..."</span>, <span class="json-key">"command_name"</span>: <span class="json-str">"reboot"</span>, <span class="json-key">"status"</span>: <span class="json-str">"expired"</span>, <span class="json-key">"created_at"</span>: <span class="json-str">"2025-04-29T08:00:00Z"</span> }
+  ],
+  <span class="json-key">"meta"</span>: { <span class="json-key">"total"</span>: <span class="json-num">24</span>, <span class="json-key">"page"</span>: <span class="json-num">1</span>, <span class="json-key">"limit"</span>: <span class="json-num">20</span>, <span class="json-key">"total_pages"</span>: <span class="json-num">2</span> }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ TELEMETRY ════════════════════════════════ -->
+  <div class="section-title" id="telemetry">Telemetry</div>
+
+  <div class="endpoint" id="tele-history">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/variables/:variableId/telemetry</div>
+        <div class="endpoint-desc">Fetch time-series readings for a variable within a time range</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'params')">Query params</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="params">
+        <table class="params-table">
+          <tr><th>Param</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">from</td><td class="param-type">ISO 8601</td><td><span class="required">required</span></td><td>Start of time range e.g. <code>2025-04-30T00:00:00Z</code></td></tr>
+          <tr><td class="param-name">to</td><td class="param-type">ISO 8601</td><td><span class="required">required</span></td><td>End of time range</td></tr>
+          <tr><td class="param-name">limit</td><td class="param-type">integer</td><td>—</td><td>Max datapoints (default 1000, max 5000)</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"variable_id"</span>: <span class="json-str">"var_01HXKT1J0K2L3M4N5P6Q7R8S"</span>,
+    <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>,
+    <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
+    <span class="json-key">"unit"</span>: <span class="json-str">"Â°C"</span>,
+    <span class="json-key">"readings"</span>: [
+      { <span class="json-key">"value"</span>: <span class="json-num">24.3</span>, <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:00:00Z"</span> },
+      { <span class="json-key">"value"</span>: <span class="json-num">24.5</span>, <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:05:00Z"</span> },
+      { <span class="json-key">"value"</span>: <span class="json-num">24.7</span>, <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:10:00Z"</span> },
+      { <span class="json-key">"value"</span>: <span class="json-num">25.1</span>, <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:15:00Z"</span> }
+    ],
+    <span class="json-key">"meta"</span>: {
+      <span class="json-key">"count"</span>: <span class="json-num">4</span>,
+      <span class="json-key">"from"</span>: <span class="json-str">"2025-04-30T18:00:00Z"</span>,
+      <span class="json-key">"to"</span>: <span class="json-str">"2025-04-30T18:15:00Z"</span>
+    }
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="tele-latest">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/devices/:deviceId/telemetry/latest</div>
+        <div class="endpoint-desc">Get the single most recent reading for every variable on a device (for dashboard snapshot)</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"variable_id"</span>: <span class="json-str">"var_01HXKT1J0K2L3M4N5P6Q7R8S"</span>,
+      <span class="json-key">"sensor_name"</span>: <span class="json-str">"SHT31"</span>,
+      <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>,
+      <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
+      <span class="json-key">"value"</span>: <span class="json-num">24.7</span>,
+      <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:54:30Z"</span>
+    },
+    {
+      <span class="json-key">"variable_id"</span>: <span class="json-str">"var_02JYKU2K1L3M4N5P6Q7R8S9T"</span>,
+      <span class="json-key">"sensor_name"</span>: <span class="json-str">"SHT31"</span>,
+      <span class="json-key">"label"</span>: <span class="json-str">"humidity"</span>,
+      <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
+      <span class="json-key">"value"</span>: <span class="json-num">68.2</span>,
+      <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:54:30Z"</span>
+    },
+    {
+      <span class="json-key">"variable_id"</span>: <span class="json-str">"var_03KZLV3L2M4N5P6Q7R8S9T0V"</span>,
+      <span class="json-key">"sensor_name"</span>: <span class="json-str">"DS18B20"</span>,
+      <span class="json-key">"label"</span>: <span class="json-str">"soil_temp"</span>,
+      <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
+      <span class="json-key">"value"</span>: <span class="json-num">19.1</span>,
+      <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:54:28Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="tele-aggregate">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/variables/:variableId/telemetry/aggregate</div>
+        <div class="endpoint-desc">Get aggregated stats (min, max, avg, count) for a variable over a time window</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'params')">Query params</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="params">
+        <table class="params-table">
+          <tr><th>Param</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">from</td><td class="param-type">ISO 8601</td><td><span class="required">required</span></td><td>Start of window</td></tr>
+          <tr><td class="param-name">to</td><td class="param-type">ISO 8601</td><td><span class="required">required</span></td><td>End of window</td></tr>
+          <tr><td class="param-name">interval</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td><code>1m</code> | <code>5m</code> | <code>1h</code> | <code>1d</code> — bucketing interval</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <div class="block-label">200 OK</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"variable_id"</span>: <span class="json-str">"var_01HXKT1J0K2L3M4N5P6Q7R8S"</span>,
+    <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>,
+    <span class="json-key">"interval"</span>: <span class="json-str">"1h"</span>,
+    <span class="json-key">"buckets"</span>: [
+      { <span class="json-key">"time"</span>: <span class="json-str">"2025-04-30T16:00:00Z"</span>, <span class="json-key">"min"</span>: <span class="json-num">23.1</span>, <span class="json-key">"max"</span>: <span class="json-num">24.9</span>, <span class="json-key">"avg"</span>: <span class="json-num">24.0</span>, <span class="json-key">"count"</span>: <span class="json-num">12</span> },
+      { <span class="json-key">"time"</span>: <span class="json-str">"2025-04-30T17:00:00Z"</span>, <span class="json-key">"min"</span>: <span class="json-num">23.8</span>, <span class="json-key">"max"</span>: <span class="json-num">25.4</span>, <span class="json-key">"avg"</span>: <span class="json-num">24.5</span>, <span class="json-key">"count"</span>: <span class="json-num">12</span> },
+      { <span class="json-key">"time"</span>: <span class="json-str">"2025-04-30T18:00:00Z"</span>, <span class="json-key">"min"</span>: <span class="json-num">24.3</span>, <span class="json-key">"max"</span>: <span class="json-num">25.1</span>, <span class="json-key">"avg"</span>: <span class="json-num">24.7</span>, <span class="json-key">"count"</span>: <span class="json-num">11</span> }
+    ]
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ WEBSOCKET ════════════════════════════════ -->
+  <div class="section-title" id="ws">Real-time WebSocket Events</div>
+  <div class="info-box">
+    Connect to <code><span data-endpoint="ws"></span>?token=&lt;access_token&gt;</code>. After connecting, subscribe to a device's feed. All messages are JSON with a <code>type</code> field.
+    <br><br><strong>Deployment note:</strong> the reference gateway currently does not expose a <code>/ws</code> route, so real-time push is unavailable and the console loads data on demand. These frames describe the intended contract.
+  </div>
+
+  <div class="ws-card">
+    <div class="ws-event">↑ Client → Server: subscribe</div>
+    <div class="ws-desc">Subscribe to real-time events for one or more devices</div>
+    <pre>{
+  <span class="json-key">"type"</span>: <span class="json-str">"subscribe"</span>,
+  <span class="json-key">"device_ids"</span>: [<span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>, <span class="json-str">"dev_02JYKP7E6..."</span>]
+}</pre>
+    <pre><span class="json-comment">// Server acknowledges:</span>
+{
+  <span class="json-key">"type"</span>: <span class="json-str">"subscribed"</span>,
+  <span class="json-key">"device_ids"</span>: [<span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>]
+}</pre>
+  </div>
+
+  <div class="ws-card">
+    <div class="ws-event">↓ Server → Client: telemetry.update</div>
+    <div class="ws-desc">Pushed whenever a subscribed device sends a new sensor reading</div>
+    <pre>{
+  <span class="json-key">"type"</span>: <span class="json-str">"telemetry.update"</span>,
+  <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+  <span class="json-key">"variable_id"</span>: <span class="json-str">"var_01HXKT1J0K2L3M4N5P6Q7R8S"</span>,
+  <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>,
+  <span class="json-key">"value"</span>: <span class="json-num">25.3</span>,
+  <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T19:12:00Z"</span>
+}</pre>
+  </div>
+
+  <div class="ws-card">
+    <div class="ws-event">↓ Server → Client: device.status</div>
+    <div class="ws-desc">Pushed when a subscribed device comes online or goes offline</div>
+    <pre>{
+  <span class="json-key">"type"</span>: <span class="json-str">"device.status"</span>,
+  <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"online"</span>,
+  <span class="json-key">"last_seen_at"</span>: <span class="json-str">"2025-04-30T19:12:01Z"</span>
+}</pre>
+  </div>
+
+  <div class="ws-card">
+    <div class="ws-event">↓ Server → Client: command.status</div>
+    <div class="ws-desc">Pushed whenever the status of a dispatched command changes (queued → sent → success/failed/expired)</div>
+    <pre>{
+  <span class="json-key">"type"</span>: <span class="json-str">"command.status"</span>,
+  <span class="json-key">"instance_id"</span>: <span class="json-str">"cmi_01HXKX5N4P6Q7R8S9T0V1W2X"</span>,
+  <span class="json-key">"command_name"</span>: <span class="json-str">"changeLevel"</span>,
+  <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+  <span class="json-key">"updated_at"</span>: <span class="json-str">"2025-04-30T19:12:05Z"</span>,
+  <span class="json-key">"failure_reason"</span>: <span class="json-null">null</span>
+}</pre>
+  </div>
+
+  <div class="ws-card">
+    <div class="ws-event">↑ Client → Server: unsubscribe</div>
+    <div class="ws-desc">Stop receiving events for specific devices</div>
+    <pre>{
+  <span class="json-key">"type"</span>: <span class="json-str">"unsubscribe"</span>,
+  <span class="json-key">"device_ids"</span>: [<span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>]
+}</pre>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ INGEST ═══════════════════════════════════ -->
+  <div class="section-title" id="ingest">Device Ingest</div>
+  <div class="info-box">
+    Device-facing routes. These are <strong>not</strong> JWT-authenticated: each call must carry the device's
+    <code>device_id</code> and its <code>secret_key</code> (returned once when the device was created).
+    A missing credential pair returns <code>400</code>; a mismatched one returns <code>401 DEVICE_UNAUTHORIZED</code>.
+  </div>
+
+  <div class="endpoint" id="ingest-telemetry">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/ingest/telemetry</div>
+        <div class="endpoint-desc">Publish one or more sensor readings. Up to 500 readings per call; each <code>variable_id</code> must belong to the calling device.</div>
+        <div class="endpoint-tags"><span class="tag tag-key">Device key</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">device_id</td><td class="param-type">string</td><td><span class="required">required</span></td><td>UUID of the sending device</td></tr>
+          <tr><td class="param-name">secret_key</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Device secret issued at creation</td></tr>
+          <tr><td class="param-name">readings</td><td class="param-type">array</td><td><span class="required">required</span></td><td>1–500 reading objects</td></tr>
+          <tr><td class="param-name">readings[].variable_id</td><td class="param-type">string</td><td><span class="required">required</span></td><td>UUID of the target variable on this device</td></tr>
+          <tr><td class="param-name">readings[].value</td><td class="param-type">number | string | boolean</td><td><span class="required">required</span></td><td>Must match the variable's <code>data_type</code></td></tr>
+          <tr><td class="param-name">readings[].recorded_at</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>ISO 8601 UTC. Defaults to server receive time</td></tr>
+        </table>
+        <br>
+        <div class="block-label">Example</div>
+        <pre>{
+  <span class="json-key">"device_id"</span>: <span class="json-str">"3f8c1e0a-9b2d-4c7e-8a1f-5d6e7c8b9a01"</span>,
+  <span class="json-key">"secret_key"</span>: <span class="json-str">"sk_live_6c085b3b19424c88a8f15efdf281e05a"</span>,
+  <span class="json-key">"readings"</span>: [
+    {
+      <span class="json-key">"variable_id"</span>: <span class="json-str">"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"</span>,
+      <span class="json-key">"value"</span>: <span class="json-num">25.4</span>,
+      <span class="json-key">"recorded_at"</span>: <span class="json-str">"2026-09-26T16:20:18.472Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"inserted"</span>: <span class="json-num">1</span>,
+    <span class="json-key">"rejected"</span>: <span class="json-num">0</span>
+  }
+}</pre>
+        <br>
+        <div class="block-label">Partially accepted batch — HTTP 207, per-reading reasons in errors[]</div>
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">false</span>,
+  <span class="json-key">"data"</span>: { <span class="json-key">"inserted"</span>: <span class="json-num">1</span>, <span class="json-key">"rejected"</span>: <span class="json-num">1</span> },
+  <span class="json-key">"errors"</span>: [
+    { <span class="json-key">"variable_id"</span>: <span class="json-str">"00000000-0000-0000-0000-000000000000"</span>, <span class="json-key">"error"</span>: <span class="json-str">"Variable not found or not owned by device"</span> }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="ingest-heartbeat">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/ingest/heartbeat</div>
+        <div class="endpoint-desc">Periodic liveness ping. Marks the device <code>online</code>, refreshes <code>last_seen_at</code> and records the reported firmware version.</div>
+        <div class="endpoint-tags"><span class="tag tag-key">Device key</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">device_id</td><td class="param-type">string</td><td><span class="required">required</span></td><td>UUID of the sending device</td></tr>
+          <tr><td class="param-name">secret_key</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Device secret issued at creation</td></tr>
+          <tr><td class="param-name">firmware_version</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Reported by the device; stored on the device record</td></tr>
+          <tr><td class="param-name">ip_address</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Last observed IP address</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"status"</span>: <span class="json-str">"online"</span>,
+    <span class="json-key">"device_id"</span>: <span class="json-str">"3f8c1e0a-9b2d-4c7e-8a1f-5d6e7c8b9a01"</span>,
+    <span class="json-key">"last_seen_at"</span>: <span class="json-str">"2026-09-26T16:20:18.472Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="ingest-pending">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/ingest/commands/pending?device_id=&amp;secret_key=</div>
+        <div class="endpoint-desc">Poll for queued commands. Returned commands are marked <code>sent</code>, so a command is delivered exactly once.</div>
+        <div class="endpoint-tags"><span class="tag tag-key">Device key</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"e5b28dc6-2924-476c-a951-828f5d7eb957"</span>,
+      <span class="json-key">"command_name"</span>: <span class="json-str">"set_pwm"</span>,
+      <span class="json-key">"template_name"</span>: <span class="json-str">"set_pwm"</span>,
+      <span class="json-key">"device_id"</span>: <span class="json-str">"3f8c1e0a-9b2d-4c7e-8a1f-5d6e7c8b9a01"</span>,
+      <span class="json-key">"status"</span>: <span class="json-str">"sent"</span>,
+      <span class="json-key">"parameters"</span>: { <span class="json-key">"duty"</span>: <span class="json-num">512</span> },
+      <span class="json-key">"expires_at"</span>: <span class="json-str">"2026-09-26T17:20:18.472Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="ingest-ack">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/ingest/commands/:instanceId/ack</div>
+        <div class="endpoint-desc">Report the execution result. A second ack for the same instance returns <code>404 INSTANCE_NOT_FOUND</code>.</div>
+        <div class="endpoint-tags"><span class="tag tag-key">Device key</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">device_id</td><td class="param-type">string</td><td><span class="required">required</span></td><td>UUID of the executing device</td></tr>
+          <tr><td class="param-name">secret_key</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Device secret issued at creation</td></tr>
+          <tr><td class="param-name">status</td><td class="param-type">string</td><td><span class="required">required</span></td><td><code>success</code> or <code>failed</code></td></tr>
+          <tr><td class="param-name">failure_reason</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Required in practice when status is <code>failed</code></td></tr>
+        </table>
+        <br>
+        <pre>{
+  <span class="json-key">"device_id"</span>: <span class="json-str">"3f8c1e0a-9b2d-4c7e-8a1f-5d6e7c8b9a01"</span>,
+  <span class="json-key">"secret_key"</span>: <span class="json-str">"sk_live_6c085b3b19424c88a8f15efdf281e05a"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>
+}</pre>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"e5b28dc6-2924-476c-a951-828f5d7eb957"</span>,
+    <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+    <span class="json-key">"executed_at"</span>: <span class="json-str">"2026-09-26T16:20:20.118Z"</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ WEBHOOKS ══════════════════════════════════ -->
+  <div class="section-title" id="webhooks">Webhooks</div>
+  <div class="info-box">
+    Outbound event delivery to your own HTTPS endpoint. Requires a plan with <code>webhooks_enabled</code>.
+    The signing <code>secret</code> is returned <strong>once</strong>, in the creation response.
+  </div>
+  <div class="warn-box">
+    <strong>Verified contract.</strong> The request body accepts only the three fields below. Any additional
+    field, and any event value outside the enum, is rejected with <code>400</code>.
+  </div>
+
+  <div class="endpoint" id="hook-create">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-post">POST</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/webhooks</div>
+        <div class="endpoint-desc">Register an outbound webhook and receive its signing secret.</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'body')">Request body</div>
+        <div class="tab" onclick="switchTab(this,'response')">Response</div>
+      </div>
+      <div class="tab-panel active" data-tab="body">
+        <table class="params-table">
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="param-name">url</td><td class="param-type">string</td><td><span class="required">required</span></td><td>HTTPS endpoint that will receive deliveries</td></tr>
+          <tr><td class="param-name">event_types</td><td class="param-type">array</td><td><span class="required">required</span></td><td>One or more values from the event enum below. This is the only accepted key name</td></tr>
+          <tr><td class="param-name">enabled</td><td class="param-type">boolean</td><td><span class="required">required</span></td><td>Whether deliveries are active</td></tr>
+        </table>
+        <br>
+        <div class="block-label">Example</div>
+        <pre>{
+  <span class="json-key">"url"</span>: <span class="json-str">"https://api.yourdomain.com/webhooks"</span>,
+  <span class="json-key">"event_types"</span>: [<span class="json-str">"device.online"</span>, <span class="json-str">"command.success"</span>],
+  <span class="json-key">"enabled"</span>: <span class="json-bool">true</span>
+}</pre>
+        <br>
+        <div class="block-label">Allowed event_types (strict enum)</div>
+        <table class="params-table">
+          <tr><th>Value</th><th>Fires when</th></tr>
+          <tr><td class="param-name">device.online</td><td>A device reports in after being offline</td></tr>
+          <tr><td class="param-name">device.offline</td><td>A device stops reporting</td></tr>
+          <tr><td class="param-name">command.success</td><td>A dispatched command is acknowledged as executed</td></tr>
+          <tr><td class="param-name">command.failed</td><td>A dispatched command is acknowledged as failed</td></tr>
+        </table>
+      </div>
+      <div class="tab-panel" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"7c9bc7b1-aa08-40a1-8178-30a6a08b3394"</span>,
+    <span class="json-key">"url"</span>: <span class="json-str">"https://api.yourdomain.com/webhooks"</span>,
+    <span class="json-key">"event_types"</span>: [<span class="json-str">"device.online"</span>, <span class="json-str">"command.success"</span>],
+    <span class="json-key">"enabled"</span>: <span class="json-bool">true</span>,
+    <span class="json-key">"created_at"</span>: <span class="json-str">"2026-09-26T16:20:18.472Z"</span>,
+    <span class="json-key">"secret"</span>: <span class="json-str">"fbde143c23b8e001d2a9ef0f1fb90ed4a2ab60d514700fe0"</span>
+  }
+}</pre>
+        <br>
+        <div class="block-label">Verify each delivery by recomputing the signature over the raw request body with this secret.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="hook-list">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/webhooks</div>
+        <div class="endpoint-desc">List the account's registered webhooks. The signing secret is never returned here.</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"7c9bc7b1-aa08-40a1-8178-30a6a08b3394"</span>,
+      <span class="json-key">"url"</span>: <span class="json-str">"https://api.yourdomain.com/webhooks"</span>,
+      <span class="json-key">"event_types"</span>: [<span class="json-str">"device.online"</span>],
+      <span class="json-key">"enabled"</span>: <span class="json-bool">true</span>,
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2026-09-26T16:20:18.472Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="hook-deliveries">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-get">GET</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/webhooks/:webhookId/deliveries</div>
+        <div class="endpoint-desc">Delivery log for one webhook, including the response status returned by your endpoint.</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"dlv_01J8..."</span>,
+      <span class="json-key">"event_type"</span>: <span class="json-str">"device.online"</span>,
+      <span class="json-key">"response_status"</span>: <span class="json-num">200</span>,
+      <span class="json-key">"payload"</span>: { <span class="json-key">"device_id"</span>: <span class="json-str">"3f8c1e0a-..."</span> },
+      <span class="json-key">"created_at"</span>: <span class="json-str">"2026-09-26T16:20:19.001Z"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="endpoint" id="hook-delete">
+    <div class="endpoint-header" onclick="toggle(this)">
+      <span class="method m-delete">DELETE</span>
+      <div class="endpoint-meta">
+        <div class="endpoint-path">/webhooks/:webhookId</div>
+        <div class="endpoint-desc">Delete a webhook and stop its deliveries.</div>
+        <div class="endpoint-tags"><span class="tag tag-auth">Auth required</span></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="endpoint-body">
+      <div class="tabs"><div class="tab active" onclick="switchTab(this,'response')">Response</div></div>
+      <div class="tab-panel active" data-tab="response"><pre>{ <span class="json-key">"success"</span>: <span class="json-bool">true</span>, <span class="json-key">"message"</span>: <span class="json-str">"Webhook deleted"</span> }</pre></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ STANDARD ERRORS ══════════════════════════ -->
+  <div class="section-title">Standard error envelope</div>
+  <div class="warn-box">All error responses follow this shape. Frontend should check <code>success: false</code> and display <code>error.message</code> to users.</div>
+  <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-str">"INVALID_PARAM_TYPE"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Parameter 'level' expected integer, got string"</span>,
+    <span class="json-key">"details"</span>: { <span class="json-key">"field"</span>: <span class="json-str">"level"</span>, <span class="json-key">"expected"</span>: <span class="json-str">"integer"</span>, <span class="json-key">"received"</span>: <span class="json-str">"string"</span> }
+  }
+}</pre>
+
+  <br><br>
+
+</main>
+
+<script>
+function toggle(header) {
+  const ep = header.closest('.endpoint');
+  ep.classList.toggle('open');
+}
+function switchTab(tab, name) {
+  const body = tab.closest('.endpoint-body');
+  body.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  body.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  body.querySelector('[data-tab="' + name + '"]').classList.add('active');
+}
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); el.classList.add('open'); }
+  });
+});
+</script>
+</body>
+</html>
+

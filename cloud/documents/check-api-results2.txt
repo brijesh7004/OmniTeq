@@ -1,0 +1,225 @@
+﻿
+==========================================================================
+  0. PREFLIGHT
+==========================================================================
+  Target : http://100.93.48.124:3000/api/v1
+  Time   : 2026-09-26 21:44:34
+  PASS  GET /health -> 200
+        server status=ok version=1.0.0 time=2026-09-26T16:14:35.270Z
+  PASS  server clock within 120s of client (telemetry windows)
+
+==========================================================================
+  1. AUTHENTICATION
+==========================================================================
+  PASS  POST /auth/register -> 201
+  PASS  register returns access_token + refresh_token
+  PASS  register hides password_hash
+  PASS  POST /auth/login -> 200
+  PASS  login user exposes display_name
+  PASS  login user hides password_hash
+  PASS  POST /auth/login wrong password -> 401
+  PASS  GET /auth/me -> 200 (JWT)
+  PASS  GET /auth/me without JWT -> 401
+  PASS  POST /auth/refresh -> 200
+  PASS  refresh returns a new access_token
+  PASS  refresh response hides password_hash
+  PASS  no hardcoded demo credentials remain in the UI (this login is expected to fail)
+
+==========================================================================
+  2. PROJECTS  (cloud_projects / cloud_project_add / cloud_project_view)
+==========================================================================
+  PASS  POST /projects {name,description} -> 201
+  PASS    create response has device_count
+  PASS    create response has no 'location' field
+  PASS  POST /projects with 'location' -> 400 (page must NOT send location)
+  PASS  GET /projects -> 200 array
+  PASS    list rows include device_count
+  PASS    list rows include no 'location'
+  PASS  GET /projects/:id -> 200 single
+  PASS  PUT /projects/:id {name,description} -> 200
+  PASS  PUT /projects/:id with 'location' -> 400
+
+==========================================================================
+  3. DEVICES  (cloud_devices / cloud_device_add / cloud_device_view)
+==========================================================================
+  PASS  POST devices {name,description} -> 201
+  PASS    create returns secret_key (once)
+  PASS    create hides secret_key_hash
+  PASS    create returns no auto-provisioned variable
+  PASS  POST devices with mac/eui/firmware_version -> 400 (cloud_device_add must NOT send these)
+  PASS  POST devices with device_id/physical_id -> 400 (must NOT be sent)
+  PASS  GET /projects/:id/devices -> 200
+  PASS    device row has status
+  PASS    device row has sensor_count
+  PASS    device row has last_seen_at (not last_seen)
+  PASS    device row has none 'hardware'
+  PASS    device row hides secret_key_hash
+  PASS  GET /devices/:id -> 200
+  PASS  PUT /devices/:id {name,description} -> 200
+  PASS  PUT /devices/:id with firmware_version -> 400 (cloud_device_view must NOT send it)
+  PASS  GET /devices/:id/status -> 200
+
+==========================================================================
+  4. SENSORS + VARIABLES  (cloud_sensors / cloud_sensor_add)
+==========================================================================
+  PASS  POST sensors {name,unit,description} -> 201
+  PASS  GET sensors -> 200
+  PASS    sensor row has variable_count
+  PASS  POST variables {label,data_type=float} -> 201
+  PASS  POST variables data_type='numeric' -> 400 (invalid enum)
+  PASS  POST duplicate label -> 409 LABEL_ALREADY_EXISTS
+  PASS  GET variables -> 200 with latest_value
+  PASS  GET /variables/:id -> 200
+  PASS  PUT /variables/:id {label} -> 200
+
+==========================================================================
+  5. DEVICE INGEST  (firmware + cloud_telemetry / cloud_sensors test buttons)
+==========================================================================
+  PASS  ingest telemetry WITHOUT secret -> 400
+  PASS  ingest telemetry WRONG secret -> 401 DEVICE_UNAUTHORIZED
+  PASS  ingest telemetry valid -> 2xx inserted=1
+  PASS  ingest non-numeric value -> rejected with errors[]
+  PASS  ingest unknown variable_id -> rejected (not silent success)
+  PASS  ingest 501 readings -> 400 (max 500)
+  PASS  POST /ingest/heartbeat -> 2xx online
+
+==========================================================================
+  6. TELEMETRY QUERIES  (cloud_dashboard / cloud_telemetry / cloud_sensors)
+==========================================================================
+  PASS  GET telemetry WITHOUT from/to -> 400 MISSING_PARAMS
+  PASS  GET telemetry with from/to -> 200 readings[]
+  PASS    reading has value + recorded_at
+  PASS    the reading just ingested is visible (clock-skew window)
+  PASS  GET aggregate -> 200 buckets[]
+  PASS    bucket has time/min/max/avg/count
+  PASS  GET aggregate bad interval -> 400 INVALID_INTERVAL
+  PASS  GET telemetry/latest -> 200
+  PASS    latest row has sensor_name + data_type + value
+
+==========================================================================
+  7. COMMAND TEMPLATES + DISPATCH  (cloud_commands / cloud_command_add / device_view)
+==========================================================================
+  PASS  POST command-template -> 201 with parameters[]
+  PASS  POST duplicate template name -> 409
+  PASS  GET device command-templates -> 200
+  PASS  GET /command-templates/:id -> 200
+  PASS  PUT /command-templates/:id -> 200
+  WARN  dispatch missing required param -> 400 (server deviation: accepts it)
+        HTTP 202 echoed parameters={"duty":""} - gateway does NOT enforce required params; the console blocks this client-side
+  PASS  dispatch wrong param type -> 400 INVALID_PARAM_TYPE
+  PASS  dispatch valid -> 202 queued
+  PASS    instance has command_name + parameters
+  PASS  GET /command-instances/:id -> 200
+  PASS  GET command-history -> 200 with meta.total_pages
+  PASS  GET /ingest/commands/pending -> 2xx
+  PASS    pending frame exposes command_name
+  PASS  POST /ingest/commands/:id/ack -> 2xx success
+  PASS  double ack -> 404 INSTANCE_NOT_FOUND
+
+==========================================================================
+  8. PLANS + ACCOUNT  (cloud_settings)
+==========================================================================
+  PASS  GET /plans -> 200
+  PASS    plan row has code
+  PASS    plan row has included_devices
+  PASS    plan row has query_range_days
+  PASS  GET /account/plan -> 200
+  PASS    response has nested plan.code (client flattens it)
+  PASS    response has usage.devices.used (client flattens to current_devices_count)
+  PASS    plan exposes query_range_days
+  PASS  PUT /account/plan 'standard' -> 200
+  PASS  PUT /account/plan 'moderate' (UI key) -> 400 (must map to plan_code)
+  PASS  PUT /account/plan 'enterprise' -> 403 (not self-serve)
+  PASS  PUT /account/plan 'free' -> 200
+  PASS  GET /team/members -> 200
+  PASS    shape is { owner, members } (client flattens)
+  PASS  GET /team/invitations -> 200
+
+==========================================================================
+  9. PLAN ENTITLEMENTS  (the console reads these to gate the UI)
+==========================================================================
+  PASS  PUT /account/plan 'professional' -> 200 (test setup)
+  PASS  plan exposes rule_engine_enabled (rules page gates on it)
+  PASS  plan exposes webhooks_enabled (webhooks page gates on it)
+  PASS  plan exposes export_csv
+        plan=professional rules=True webhooks=True devices=100
+
+==========================================================================
+  10. RULES  (cloud_rules)
+==========================================================================
+  PASS  GET /devices/:id/rules -> 200
+  PASS  POST /devices/:id/rules -> 201
+  PASS  GET /rules/:id/logs -> 200
+  PASS  DELETE /rules/:id -> 200
+
+==========================================================================
+  11. WEBHOOKS  (cloud_webhooks)
+==========================================================================
+  PASS  GET /webhooks -> 200
+  [reject 400    ] url + event_types[] + enabled
+  [reject 400    ] url + events[] + enabled
+  [reject 400    ] url + events[] (no enabled)
+  [reject 400    ] url + event_types[] (no enabled)
+  [reject 400    ] url only
+  [reject 400    ] url + enabled
+  [reject 400    ] url + event_types[] + secret + enabled
+  [reject 400    ] url + event + enabled
+  WARN  POST /webhooks accepts a documented payload shape
+        no probed shape was accepted; last HTTP 400 . cloud_webhooks.html sends 'url + event_types[] + enabled'.
+
+==========================================================================
+  12. FREE-PLAN DENIAL  (the UI relies on this entitlement being enforced)
+==========================================================================
+  PASS  PUT /account/plan 'free' -> 200
+        free plan: rule_engine_enabled=False webhooks_enabled=False
+  PASS  free plan refuses rule creation (403)
+
+==========================================================================
+  13. ALERTS
+==========================================================================
+  PASS  GET /alerts/history -> 200
+
+==========================================================================
+  14. DELETE + CASCADE  (known server FK defect workaround)
+==========================================================================
+  PASS  DELETE /devices/:id with no command history -> 200
+  WARN  DELETE /devices/:id with command history -> 200
+        HTTP 500 - server FK defect: cmd_instance_params -> cmd_parameters cascade missing. The console works around it via devices.deleteCascade().
+  PASS    workaround: DELETE /command-templates/:id -> 200
+  PASS    workaround: device then deletes -> 200
+  PASS  DELETE /projects/:id -> 200
+  PASS  GET deleted project -> 404
+
+==========================================================================
+  15. LOGOUT
+==========================================================================
+  PASS  fresh session registered for logout checks
+  PASS  POST /auth/logout without refresh_token -> 400
+  PASS  POST /auth/logout {refresh_token} -> 200
+  PASS  GET /auth/me after logout -> 401 (token revoked)
+  PASS  POST /auth/refresh with revoked refresh_token -> 401
+
+==========================================================================
+  16. ERROR ENVELOPE QUALITY  (the console shows these messages)
+==========================================================================
+  WARN  403 rule denial: error body is machine-readable
+        HTTP 403 with an EMPTY body - the console falls back to a status-based message (api.js _describeStatus)
+  WARN  400 bad enum: error body is machine-readable
+        HTTP 400 with an EMPTY body - the console falls back to a status-based message (api.js _describeStatus)
+  WARN  404 unknown project: error body is machine-readable
+        HTTP 404 with an EMPTY body - the console falls back to a status-based message (api.js _describeStatus)
+
+==========================================================================
+  SUMMARY
+==========================================================================
+
+  PASS : 117
+  WARN : 6  (server-side deviations, or non-conformance the console compensates for)
+  FAIL : 0  (console breaks on these)
+
+  account used : check_214434@omniteq.test
+  gateway      : http://100.93.48.124:3000
+
+  RESULT: ALL CONSOLE CHECKS PASSED
+          6 known server-side deviation(s) listed above as WARN.
+

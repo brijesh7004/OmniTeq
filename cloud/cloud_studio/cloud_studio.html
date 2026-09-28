@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniTeq Cloud Studio | Arduino & ESP32 Firmware Generator</title>
+  <meta name="description" content="Generate production-ready Arduino & ESP32 firmware for the OmniTeq Cloud Platform: telemetry batch ingest, heartbeat, command polling and ACK.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="studio-ui.css">
+</head>
+<body class="theme-dark mode-studio" id="app-body">
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="brand-container">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="3 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">OmniTeq Cloud Studio <span class="badge-version">v3.0</span></h1>
+        <p class="brand-subtitle">Firmware Studio & OmniTeq Cloud Code Generator</p>
+      </div>
+    </div>
+
+    <!-- View Mode Switcher: Studio (Split) vs Step Wizard (Page-by-Page) -->
+    <div class="view-mode-toggle">
+      <button class="mode-btn active" id="btn-mode-studio" title="Split view with live code preview">
+        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+        Studio View
+      </button>
+      <button class="mode-btn" id="btn-mode-wizard" title="Step-by-step page wizard walkthrough">
+        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Page Wizard
+      </button>
+    </div>
+
+    <div class="nav-controls">
+      <button class="btn btn-secondary" id="btn-load-sample" title="Load smart greenhouse sample project">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        Demo
+      </button>
+
+      <button class="btn btn-primary" id="btn-push-all" title="Create/push the device, sensors, variables, commands and rules to the OmniTeq Cloud gateway">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+          <polyline points="12 12 12 18"></polyline>
+          <polyline points="9 15 12 12 15 15"></polyline>
+        </svg>
+        Provision Cloud
+      </button>
+
+      <button class="btn btn-secondary" id="btn-export-json" title="Save configuration as JSON file">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Export
+      </button>
+
+      <label class="btn btn-secondary file-upload-btn" title="Import previously saved JSON config">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        Import
+        <input type="file" id="file-import-json" accept=".json" style="display: none;">
+      </label>
+
+      <button class="btn btn-danger-outline" id="btn-reset-all" title="Reset all forms to blank">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        Reset
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Studio Workspace Container -->
+  <main class="studio-container">
+    
+    <!-- Left Configuration Panel (Or Wizard Active Step View) -->
+    <div class="config-panel" id="config-panel">
+      <!-- Section Stepper Progress Bar -->
+      <nav class="stepper-nav" aria-label="Configuration Sections" id="stepper-nav">
+        <button class="step-item active" data-step="1">
+          <span class="step-num">01</span>
+          <span class="step-text">Project & Cloud</span>
+        </button>
+        <button class="step-item" data-step="2">
+          <span class="step-num">02</span>
+          <span class="step-text">Controller (ESP32)</span>
+        </button>
+        <button class="step-item" data-step="3">
+          <span class="step-num">03</span>
+          <span class="step-text">Input Sensors</span>
+        </button>
+        <button class="step-item" data-step="4">
+          <span class="step-num">04</span>
+          <span class="step-text">Output Actuators</span>
+        </button>
+        <button class="step-item" data-step="5">
+          <span class="step-num">05</span>
+          <span class="step-text">Logic & Limits</span>
+        </button>
+        <button class="step-item wizard-only-step" data-step="6" style="display: none;">
+          <span class="step-num">06</span>
+          <span class="step-text">Final Firmware</span>
+        </button>
+      </nav>
+
+      <!-- SECTION 1: DEVICE IDENTITY, WI-FI & OMNITEQ CLOUD CREDENTIALS -->
+      <section id="sec-project" class="section-card glassmorphic section-page" data-page="1">
+        <div class="section-header">
+          <div class="sec-badge">SEC 01</div>
+          <div class="sec-title-group">
+            <h2 class="sec-title">Device Identity, Wi-Fi & OmniTeq Cloud Credentials</h2>
+            <p class="sec-desc">Configure the device node, wireless network credentials, and the OmniTeq Cloud REST API credentials issued when the device was provisioned.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="project-name">Project / Node Name <span class="required">*</span></label>
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              <input type="text" id="project-name" class="form-control" placeholder="e.g., Smart Greenhouse Node 01" value="Smart Greenhouse Node 01">
+            </div>
+            <small class="form-hint">Used for the sketch header, OTA naming, and the device registration on OmniTeq Cloud.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="project-location">Location / Zone <span class="required">*</span></label>
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <input type="text" id="project-location" class="form-control" placeholder="e.g., Bay 3 - Hydroponics Rack" value="Greenhouse Sector 4B">
+            </div>
+            <small class="form-hint">Physical deployment spot tagged in the telemetry payload.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="wifi-ssid">Wi-Fi SSID (Network Name) <span class="required">*</span></label>
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+              <input type="text" id="wifi-ssid" class="form-control" placeholder="Your Wi-Fi SSID" value="IoT_Lab_WiFi">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="wifi-pass">Wi-Fi Password</label>
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="wifi-pass" autocomplete="off" class="form-control" placeholder="WPA2/WPA3 Key" value="SecurePass@2026">
+              <button type="button" class="btn-input-action" id="toggle-wifi-pass" title="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+
+          <!-- OmniTeq Cloud Gateway Endpoint Header Card -->
+          <div class="form-group full-width">
+            <div class="custom-server-banner">
+              <div class="custom-server-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 style="font-size: 0.96rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.2rem;">OmniTeq Cloud Gateway Endpoint</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Devices authenticate with <code>device_id</code> + <code>secret_key</code>, then stream batch telemetry, heartbeats, and poll queued commands. Set the gateway here; the per-device identity (<strong>Device ID, MAC, Secret Key</strong>) is configured after choosing the controller in <strong>Section 02</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="cloud-url">Cloud API Base URL <span class="required">*</span></label>
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <input type="text" id="cloud-url" class="form-control" placeholder="https://omniteq-server.tail206540.ts.net/api/v1" value="https://omniteq-server.tail206540.ts.net/api/v1">
+            </div>
+            <small class="form-hint">Gateway origin + <code>/api/v1</code> (matches <code>js/config.js</code> → CLOUD_URL in the sketch). Live gateway: <code data-endpoint="api">…</code>. Device ingest routes: <code>/ingest/telemetry</code>, <code>/ingest/heartbeat</code>, <code>/ingest/commands/pending</code>.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="status-variable-id">Status Variable UUID</label>
+
+            <label class="mini-toggle" for="status-uuid-auto">
+              <input type="checkbox" id="status-uuid-auto" checked>
+              <span>Auto-generate (server-issued)</span>
+            </label>
+
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="7" y1="9" x2="17" y2="9"></line><line x1="7" y1="14" x2="13" y2="14"></line></svg>
+              <input type="text" id="status-variable-id" class="form-control uuid-input" placeholder="YOUR_STATUS_VARIABLE_UUID" value="YOUR_STATUS_VARIABLE_UUID" spellcheck="false">
+              <button type="button" class="btn-input-action btn-input-action-secondary" id="btn-copy-status-uuid" title="Copy the status variable UUID">📋</button>
+              <button type="button" class="btn-input-action" id="btn-generate-status-uuid" title="Generate a status variable UUID">🎲</button>
+            </div>
+
+            <small class="form-hint" id="status-uuid-hint">A <code>string</code> variable used to stream node status (e.g. <code>"RUNNING"</code>), exactly like the device demo sketches.</small>
+          </div>
+
+          <div class="form-group">
+            <label class="rule-cloud-toggle" style="margin-top: 1.6rem;">
+              <input type="checkbox" id="debug-log" checked>
+              <span><strong>Debug logging</strong> — emit verbose serial traces (<code>config.debug</code>)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="telemetry-interval">Telemetry Publish Rate</label>
+            <select id="telemetry-interval" class="form-control">
+              <option value="2000">Every 2 seconds (Fast Debug)</option>
+              <option value="5000">Every 5 seconds</option>
+              <option value="10000" selected>Every 10 seconds (Standard)</option>
+              <option value="30000">Every 30 seconds (Balanced)</option>
+              <option value="60000">Every 1 minute (Low Bandwidth)</option>
+            </select>
+            <small class="form-hint">How often batch telemetry is uploaded. The gateway accepts a max of <strong>500 readings</strong> per <code>/ingest/telemetry</code> call.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="heartbeat-interval">Automatic Heartbeat Interval</label>
+            <select id="heartbeat-interval" class="form-control">
+              <option value="15000">Every 15 seconds</option>
+              <option value="30000" selected>Every 30 seconds (Recommended)</option>
+              <option value="60000">Every 60 seconds</option>
+              <option value="120000">Every 2 minutes</option>
+            </select>
+            <small class="form-hint">Sets <code>config.autoHeartbeat</code> + <code>heartbeatIntervalMs</code>.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="command-poll-interval">Command Poll Interval</label>
+            <select id="command-poll-interval" class="form-control">
+              <option value="5000">Every 5 seconds</option>
+              <option value="10000" selected>Every 10 seconds (Standard)</option>
+              <option value="30000">Every 30 seconds</option>
+              <option value="60000">Every 1 minute</option>
+            </select>
+            <small class="form-hint">Sets <code>commandPollIntervalMs</code>. Pending commands are auto-marked <em>sent</em> on poll.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="max-commands">Max Commands Per Poll</label>
+            <select id="max-commands" class="form-control">
+              <option value="3">3 commands</option>
+              <option value="5" selected>5 commands (Recommended)</option>
+              <option value="10">10 commands</option>
+            </select>
+            <small class="form-hint">Size of the <code>CloudCommand</code> buffer passed to <code>cloud.getCommands()</code>.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="http-timeout">HTTP Timeout (ms)</label>
+            <select id="http-timeout" class="form-control">
+              <option value="5000">5000 ms</option>
+              <option value="10000" selected>10000 ms (Recommended)</option>
+              <option value="20000">20000 ms</option>
+            </select>
+            <small class="form-hint">Sets <code>config.timeoutMs</code> for every gateway request.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="retry-count">HTTP Retry Count</label>
+            <select id="retry-count" class="form-control">
+              <option value="0">No retries</option>
+              <option value="1">1 retry</option>
+              <option value="2" selected>2 retries (Recommended)</option>
+              <option value="3">3 retries</option>
+            </select>
+            <small class="form-hint">Sets <code>config.retryCount</code>.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="serial-baud">Serial Monitor Baud Rate</label>
+            <select id="serial-baud" class="form-control">
+              <option value="9600">9600 bps</option>
+              <option value="19200">19200 bps</option>
+              <option value="115200" selected>115200 bps (Recommended for ESP32)</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <div class="checklist-box">
+              <div class="checklist-title">Cloud Provisioning Checklist</div>
+              <ul class="checklist-list">
+                <li>Add the device from <strong>Section 02 → Add Device</strong>: the gateway stores it and returns the one-time <strong>secret key</strong>, which then appears in the generated sketch.</li>
+                <li>At least one sensor with variables (<code>POST /sensors/:sensorId/variables</code>) — every <code>label</code> gets a UUID used as <code>variable_id</code> in telemetry readings.</li>
+                <li>Command templates per actuator (<code>POST /devices/:deviceId/command-templates</code>) — the template id drives incoming command dispatch.</li>
+                <li>Variable UUIDs pasted into the sensor/actuator cards below so <code>CloudReading</code> entries reference real cloud variables.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizard Page Navigation Footer -->
+        <div class="wizard-footer">
+          <div></div>
+          <button class="btn btn-primary btn-next-step" data-next="2">
+            Next: Controller (ESP32) →
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 2: CONTROLLER (ESP32 FOCUSED) + DEVICE IDENTITY -->
+      <section id="sec-controller" class="section-card glassmorphic section-page" data-page="2">
+        <div class="section-header">
+          <div class="sec-badge">SEC 02</div>
+          <div class="sec-title-group">
+            <h2 class="sec-title">Hardware Controller Selection & Device Identity</h2>
+            <p class="sec-desc">Choose the micro-controller architecture, then register the device identity (MAC, Device ID, Secret Key) and the board-specific build settings for the OmniTeq Cloud gateway.</p>
+          </div>
+        </div>
+
+        <div class="controller-deck">
+          <!-- ESP32 DevKit (Highlighted Recommended) -->
+          <label class="controller-card active" data-controller="esp32_devkit">
+            <input type="radio" name="controller-choice" value="esp32_devkit" checked>
+            <div class="card-glow"></div>
+            <div class="card-badge">Default Target</div>
+            <div class="controller-icon-art">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#00F0FF" stroke-width="2"/>
+                <rect x="18" y="20" width="28" height="24" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+                <path d="M22 28H42M22 34H36M22 40H30" stroke="#00F0FF" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="12" cy="18" r="1.5" fill="#F59E0B"/><circle cx="12" cy="24" r="1.5" fill="#F59E0B"/><circle cx="12" cy="30" r="1.5" fill="#F59E0B"/><circle cx="12" cy="36" r="1.5" fill="#F59E0B"/><circle cx="12" cy="42" r="1.5" fill="#F59E0B"/>
+                <circle cx="52" cy="18" r="1.5" fill="#F59E0B"/><circle cx="52" cy="24" r="1.5" fill="#F59E0B"/><circle cx="52" cy="30" r="1.5" fill="#F59E0B"/><circle cx="52" cy="36" r="1.5" fill="#F59E0B"/><circle cx="52" cy="42" r="1.5" fill="#F59E0B"/>
+              </svg>
+            </div>
+            <div class="controller-info">
+              <h3 class="controller-name">ESP32 DevKit V1 (30/38 Pins)</h3>
+              <p class="controller-specs">Xtensa Dual-Core 240MHz • 520KB SRAM • 2.4GHz Wi-Fi + BLE</p>
+              <div class="specs-tags">
+                <span class="tag">ADC1/ADC2</span>
+                <span class="tag">Hardware PWM</span>
+                <span class="tag">I2C (GPIO 21/22)</span>
+                <span class="tag">Capacitive Touch</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- ESP32-S3 -->
+          <label class="controller-card" data-controller="esp32_s3">
+            <input type="radio" name="controller-choice" value="esp32_s3">
+            <div class="card-glow"></div>
+            <div class="controller-icon-art">
+              <svg viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+                <rect x="18" y="20" width="28" height="24" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+                <path d="M22 28H42M22 34H36" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="controller-info">
+              <h3 class="controller-name">ESP32-S3 (AI & Vector Accel)</h3>
+              <p class="controller-specs">Dual-Core LX7 • Native USB OTG • 8MB Octal PSRAM</p>
+              <div class="specs-tags">
+                <span class="tag">USB-CDC</span>
+                <span class="tag">Rich GPIOs</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- ESP8266 NodeMCU -->
+          <label class="controller-card" data-controller="esp8266">
+            <input type="radio" name="controller-choice" value="esp8266">
+            <div class="card-glow"></div>
+            <div class="controller-icon-art">
+              <svg viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+                <rect x="18" y="22" width="28" height="20" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+                <path d="M22 30H38" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="controller-info">
+              <h3 class="controller-name">ESP8266 NodeMCU (ESP-12E)</h3>
+              <p class="controller-specs">Single Core 80MHz • 1x Analog ADC (A0 max 1.0V) • 802.11 b/g/n</p>
+              <div class="specs-tags">
+                <span class="tag">Legacy Compact</span>
+                <span class="tag">1x ADC0</span>
+              </div>
+            </div>
+          </label>
+
+          <!-- Arduino Nano 33 IoT -->
+          <label class="controller-card" data-controller="nano33_iot">
+            <input type="radio" name="controller-choice" value="nano33_iot">
+            <div class="card-glow"></div>
+            <div class="controller-icon-art">
+              <svg viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+                <rect x="18" y="22" width="28" height="20" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+                <circle cx="32" cy="32" r="5" stroke="#EC4899" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="controller-info">
+              <h3 class="controller-name">Arduino Nano 33 IoT</h3>
+              <p class="controller-specs">SAMD21 ARM Cortex-M0+ • ATECC608A Cryptochip • NINA-W102</p>
+              <div class="specs-tags">
+                <span class="tag">Native Arduino Cloud</span>
+                <span class="tag">3.3V Logic</span>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <!-- ============================================================
+             DEVICE IDENTITY & CLOUD PROVISIONING (resolved per controller)
+             ============================================================ -->
+        <div class="device-identity-panel">
+          <div class="device-identity-header">
+            <div class="device-identity-title-group">
+              <h3 class="device-identity-title">Device Identity & Cloud Provisioning</h3>
+              <p class="device-identity-sub">Board-specific identity for the selected controller. These values become the <code>DEVICE_ID</code>, <code>DEVICE_MAC</code> and <code>SECRET_KEY</code> constants in the generated sketch.</p>
+            </div>
+            <div class="device-ready-badge" id="device-ready-badge">
+              <span class="ready-dot"></span>
+              <span id="device-ready-text">Checking device identity…</span>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="detected-board">Detected Board / Chip Model</label>
+              <div class="input-icon-wrapper">
+                <svg viewBox="0 0 24 24" class="input-icon"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
+                <input type="text" id="detected-board" class="form-control" value="ESP32 DevKit V1 (30/38 Pins)" readonly>
+              </div>
+              <small class="form-hint">Derived from the controller card selected above (also sets the default flash, CPU and upload speed).</small>
+            </div>
+
+            <div class="form-group">
+              <label for="device-mac">MAC Address (Hardware ID) <span class="required">*</span></label>
+              <div class="input-icon-wrapper">
+                <svg viewBox="0 0 24 24" class="input-icon"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><line x1="6" y1="10" x2="6.01" y2="10"></line><line x1="10" y1="10" x2="10.01" y2="10"></line><line x1="14" y1="10" x2="14.01" y2="10"></line><line x1="18" y1="10" x2="18.01" y2="10"></line><line x1="6" y1="14" x2="18" y2="14"></line></svg>
+                <input type="text" id="device-mac" class="form-control uuid-input" placeholder="02:1A:C4:9F:33:7B" value="02:1A:C4:9F:33:7B" spellcheck="false">
+                <button type="button" class="btn-input-action" id="btn-generate-mac" title="Generate a random locally-administered MAC">🎲</button>
+              </div>
+              <small class="form-hint" id="device-mac-hint">Format <code>AA:BB:CC:DD:EE:FF</code>. Use the real hardware MAC of the board (ESP32/ESP8266 print it on boot: <code>WiFi.macAddress()</code>).</small>
+            </div>
+
+            <div class="form-group">
+              <label for="device-id">Device ID (UUID) <span class="required">*</span></label>
+              <div class="input-icon-wrapper">
+                <svg viewBox="0 0 24 24" class="input-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <input type="text" id="device-id" class="form-control uuid-input" placeholder="YOUR_DEVICE_ID" value="YOUR_DEVICE_ID" spellcheck="false">
+                <button type="button" class="btn-input-action" id="btn-generate-uuid" title="Generate a random UUID v4">🎲</button>
+              </div>
+              <small class="form-hint">The gateway returns this as the device <code>id</code> at creation. If you have not provisioned the device yet, generate one here or derive it deterministically from the MAC.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="firmware-version">Firmware Version</label>
+              <div class="input-icon-wrapper">
+                <svg viewBox="0 0 24 24" class="input-icon"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+                <input type="text" id="firmware-version" class="form-control" placeholder="1.0.4" value="1.0.4">
+              </div>
+              <small class="form-hint">Reported on every heartbeat (<code>config.firmwareVersion</code>) and recorded on the device when it is registered.</small>
+            </div>
+          </div>
+
+          <!-- Register the node on the gateway (server issues the secret key) -->
+          <div class="identity-action-row identity-provision-row">
+            <button type="button" class="btn btn-primary" id="btn-add-device-server">
+              <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              Add Device
+            </button>
+            <span class="identity-action-note" id="add-device-status">Registers this node on the OmniTeq Cloud gateway (<code>POST /projects/:projectId/devices</code>) and returns the one-time secret key.</span>
+          </div>
+
+          <!-- Server-generated credential: displayed only, never editable here -->
+          <div class="form-group full-width">
+            <label for="device-secret">Device Secret Key <span class="required">*</span> <span class="server-issued-tag">SERVER ISSUED</span></label>
+            <div class="input-icon-wrapper">
+              <svg viewBox="0 0 24 24" class="input-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="device-secret" autocomplete="off" class="form-control uuid-input" placeholder="Generated by the server when you press Add Device" value="YOUR_SECRET_KEY" spellcheck="false" readonly aria-readonly="true">
+              <button type="button" class="btn-input-action btn-input-action-secondary" id="btn-copy-device-secret" title="Copy the secret key">📋</button>
+              <button type="button" class="btn-input-action" id="toggle-device-secret" title="Show / hide the secret key">👁️</button>
+            </div>
+            <small class="form-hint">Issued by the gateway and <strong>shown only once</strong> at device creation — it cannot be retrieved again and is never editable here. Scope this key to your plan &amp; project and rotate it from <strong>Cloud → Settings</strong> if it leaks.</small>
+          </div>
+
+          <!-- Identity actions -->
+          <div class="identity-action-row">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-derive-uuid-from-mac">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+              Derive Device ID from MAC
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-generate-identity">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"></path></svg>
+              Generate Full Identity
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-identity">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy Identity Block
+            </button>
+            <span class="identity-action-note" id="identity-action-note">Derived IDs are deterministic for a given MAC, so re-deriving never changes an already registered device.</span>
+          </div>
+
+          <!-- Controller-derived build settings -->
+          <div class="form-grid" style="margin-top: 1rem;">
+            <div class="form-group">
+              <label for="cpu-frequency">CPU Frequency</label>
+              <select id="cpu-frequency" class="form-control">
+                <option value="48 MHz">48 MHz</option>
+                <option value="80 MHz">80 MHz</option>
+                <option value="160 MHz">160 MHz</option>
+                <option value="240 MHz" selected>240 MHz</option>
+              </select>
+              <small class="form-hint">Default per controller; written into the sketch header as the target clock.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="flash-size">Flash Size</label>
+              <select id="flash-size" class="form-control">
+                <option value="256 KB">256 KB</option>
+                <option value="1 MB">1 MB</option>
+                <option value="2 MB">2 MB</option>
+                <option value="4 MB" selected>4 MB</option>
+                <option value="8 MB">8 MB</option>
+                <option value="16 MB">16 MB</option>
+              </select>
+              <small class="form-hint">Select the flash size reported by the board.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="upload-speed">Upload Speed</label>
+              <select id="upload-speed" class="form-control">
+                <option value="115200">115200 baud</option>
+                <option value="230400">230400 baud</option>
+                <option value="460800">460800 baud</option>
+                <option value="921600" selected>921600 baud</option>
+              </select>
+              <small class="form-hint">Arduino IDE upload speed (115200 is the safe value for ESP8266/Nano 33 IoT).</small>
+            </div>
+
+            <div class="form-group">
+              <label for="node-role">Node Role</label>
+              <select id="node-role" class="form-control">
+                <option value="field_node" selected>Field Node (Sensors + Actuators)</option>
+                <option value="sensor_only">Sensor Node (Telemetry Only)</option>
+                <option value="actuator_only">Actuator Node (Command Sink)</option>
+                <option value="gateway">Local Gateway / Bridge</option>
+              </select>
+              <small class="form-hint">Documentation + sketch header tag describing the node's function in the deployment.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-time Pin Collision / Health Warning Banner -->
+        <div id="pin-collision-banner" class="pin-status-banner safe">
+          <div class="banner-icon">✓</div>
+          <div class="banner-text">
+            <strong id="pin-status-title">Pin Mapping Clean:</strong>
+            <span id="pin-status-detail">All allocated GPIOs are uniquely assigned with no hardware resource collisions.</span>
+          </div>
+        </div>
+
+        <!-- Wizard Page Navigation Footer -->
+        <div class="wizard-footer">
+          <button class="btn btn-secondary btn-prev-step" data-prev="1">
+            ← Back: Project
+          </button>
+          <button class="btn btn-primary btn-next-step" data-next="3">
+            Next: Input Sensors →
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 3: INPUT SENSOR LIST -->
+      <section id="sec-sensors" class="section-card glassmorphic section-page" data-page="3">
+        <div class="section-header">
+          <div class="sec-badge">SEC 03</div>
+          <div class="sec-title-group">
+            <h2 class="sec-title">Input Sensor & Cloud Variable Configuration</h2>
+            <p class="sec-desc">Attach environmental, analog, presence, or biometric sensors to hardware channels and bind each reading to a real OmniTeq Cloud variable UUID.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="btn-open-add-sensor-page">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              Open Add Sensor Catalog
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Sensor Quick-Add Badges -->
+        <div class="quick-add-bar">
+          <span class="quick-label">Quick Add:</span>
+          <button class="badge-add-btn" data-preset="pushbutton">+ Switch/Pushbutton</button>
+          <button class="badge-add-btn" data-preset="toggle_switch">+ Toggle Button</button>
+          <button class="badge-add-btn" data-preset="rtc_ds3231">+ RTC DS3231</button>
+          <button class="badge-add-btn" data-preset="sd_card">+ SD Card Adapter</button>
+          <button class="badge-add-btn" data-preset="rfid_rc522">+ RFID</button>
+          <button class="badge-add-btn" data-preset="mpu6050">+ Acceleration sensors</button>
+          <button class="badge-add-btn" data-preset="gsm_gps">+ GSM/GPS sensors</button>
+          <button class="badge-add-btn" data-preset="ir_sensor">+ Infrared sensors</button>
+          <button class="badge-add-btn" data-preset="dht22">+ DHT22 (Temp/Hum)</button>
+          <button class="badge-add-btn" data-preset="soil">+ Soil Moisture</button>
+          <button class="badge-add-btn" data-preset="ldr">+ LDR Light</button>
+        </div>
+
+        <div class="cloud-note">
+          <span class="cloud-note-icon">☁</span>
+          <div>
+            <strong>Sensor → Variable → Readings:</strong> pressing <strong>Push Sensors to Cloud</strong> creates each sensor with <code>POST /devices/:deviceId/sensors</code> and then each telemetry key with <code>POST /sensors/:sensorId/variables</code>. The returned <code>variable_id</code> is read-only here because it is server-issued, and it becomes the first argument of every <code>CloudReading(variable_id, value)</code> in the firmware. Data types are immutable after creation (<code>float | integer | boolean | string</code>).
+          </div>
+        </div>
+
+        <!-- Active Sensors Container -->
+        <div class="items-list-container" id="sensors-container">
+          <!-- Dynamic Sensor Cards injected here -->
+        </div>
+
+        <!-- Add Sensor footer -->
+        <div class="add-row-footer">
+          <button type="button" class="btn btn-secondary" id="btn-add-sensor-row">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            Add Sensor
+          </button>
+          <button type="button" class="btn btn-primary" id="btn-push-sensors">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path><polyline points="12 12 12 18"></polyline><polyline points="9 15 12 12 15 15"></polyline></svg>
+            Push Sensors to Cloud
+          </button>
+          <span class="identity-action-note" id="sensors-push-status">Add a sensor, give it a <strong>Display Name</strong> and a <strong>Telemetry Key</strong>, then push to receive the server-issued <code>variable_id</code> values.</span>
+        </div>
+
+        <!-- Wizard Page Navigation Footer -->
+        <div class="wizard-footer">
+          <button class="btn btn-secondary btn-prev-step" data-prev="2">
+            ← Back: Controller
+          </button>
+          <button class="btn btn-primary btn-next-step" data-next="4">
+            Next: Output Actuators →
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 4: OUTPUT CONTROLLER / ACTUATORS -->
+      <section id="sec-actuators" class="section-card glassmorphic section-page" data-page="4">
+        <div class="section-header">
+          <div class="sec-badge">SEC 04</div>
+          <div class="sec-title-group">
+            <h2 class="sec-title">Output Actuators & Command Templates</h2>
+            <p class="sec-desc">Define power switches, relays, motors, buzzers, and local displays, then map each one to an OmniTeq Cloud command template.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="btn-open-add-actuator-page">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              Open Add Actuator Catalog
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Output Badges -->
+        <div class="quick-add-bar">
+          <span class="quick-label">Quick Add:</span>
+          <button class="badge-add-btn" data-preset-out="lcd_16x2">+ I2C LCD (16x2)</button>
+          <button class="badge-add-btn" data-preset-out="lcd_20x4">+ I2 C LCD (20x4)</button>
+          <button class="badge-add-btn" data-preset-out="motor_pwm">+ Motor Speed control using PWM</button>
+          <button class="badge-add-btn" data-preset-out="stepper_motor">+ Stepper Motor</button>
+          <button class="badge-add-btn" data-preset-out="relay_pump">+ Relay (Pump/Fan)</button>
+          <button class="badge-add-btn" data-preset-out="pwm_led">+ PWM LED</button>
+          <button class="badge-add-btn" data-preset-out="servo">+ Servo Motor</button>
+          <button class="badge-add-btn" data-preset-out="buzzer">+ Alarm Buzzer</button>
+          <button class="badge-add-btn" data-preset-out="oled">+ SSD1306 OLED</button>
+        </div>
+
+        <div class="cloud-note">
+          <span class="cloud-note-icon">☁</span>
+          <div>
+            <strong>Actuators vs. Command Templates:</strong> an <em>actuator</em> is a physical output on a GPIO; a <em>command template</em> is the cloud-side definition a dashboard button or rule dispatches. Commands arrive through <code>GET /ingest/commands/pending</code> as a template id plus a parameters JSON string and must be answered with <code>POST /ingest/commands/:instanceId/ack</code>. Bind each actuator to a template below so the generated <code>processCommand()</code> can dispatch it.
+          </div>
+        </div>
+
+        <!-- Active Outputs Container -->
+        <div class="items-list-container" id="actuators-container">
+          <!-- Dynamic Actuator Cards injected here -->
+        </div>
+
+        <!-- Cloud Command Templates (main-project command schema) -->
+        <div class="subsection-header">
+          <div class="subsection-title-group">
+            <h3 class="subsection-title">Cloud Command Templates</h3>
+            <p class="subsection-sub">Exactly the schema used by <strong>Cloud → Commands → Add Template</strong>: a name, a description and an ordered parameter list.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-push-commands">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path><polyline points="12 12 12 18"></polyline><polyline points="9 15 12 12 15 15"></polyline></svg>
+            Push Commands to Cloud
+          </button>
+        </div>
+
+        <div class="items-list-container" id="commands-container">
+          <!-- Dynamic Command Template Cards injected here -->
+        </div>
+
+        <!-- Add Command footer -->
+        <div class="add-row-footer">
+          <button type="button" class="btn btn-secondary" id="btn-add-command-row">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            Add Command
+          </button>
+          <span class="identity-action-note" id="commands-push-status">Each parameter mirrors <code>param_name / param_type / param_order / is_required / default_value</code>.</span>
+        </div>
+
+        <!-- Wizard Page Navigation Footer -->
+        <div class="wizard-footer">
+          <button class="btn btn-secondary btn-prev-step" data-prev="3">
+            ← Back: Sensors
+          </button>
+          <button class="btn btn-primary btn-next-step" data-next="5">
+            Next: Logic & Limits →
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 5: LOGIC / I/O CONNECTION & LIMITS -->
+      <section id="sec-logic" class="section-card glassmorphic section-page" data-page="5">
+        <div class="section-header">
+          <div class="sec-badge">SEC 05</div>
+          <div class="sec-title-group">
+            <h2 class="sec-title">Cloud Rule Engine, Edge Automation & Failsafe</h2>
+            <p class="sec-desc">Configure server-side rules on the platform, plus on-device edge automation and the cloud-disconnect failsafe policy.</p>
+          </div>
+        </div>
+
+        <!-- Safety Failsafe Behavior Setting -->
+        <div class="failsafe-box">
+          <div class="failsafe-info">
+            <div class="failsafe-title">Cloud Disconnect Failsafe Policy</div>
+            <div class="failsafe-desc">Behavior if Wi-Fi or the OmniTeq Cloud gateway becomes unreachable during operation:</div>
+          </div>
+          <select id="failsafe-policy" class="form-control" style="width: auto; min-width: 240px;">
+            <option value="keep_local_loop" selected>Maintain Autonomous Local Loop</option>
+            <option value="safe_shutdown">Turn All Outputs OFF (Safety First)</option>
+            <option value="freeze_state">Lock Actuators at Last Known State</option>
+          </select>
+        </div>
+
+        <!-- ============================================================
+             OMNITEQ CLOUD RULE ENGINE (server-side, main-project schema)
+             ============================================================ -->
+        <div class="subsection-header">
+          <div class="subsection-title-group">
+            <h3 class="subsection-title">OmniTeq Cloud Rule Engine</h3>
+            <p class="subsection-sub">Server-side automation created with <code>POST /devices/:deviceId/rules</code>. Evaluated by the platform against incoming telemetry — no firmware logic required.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-push-rules">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path><polyline points="12 12 12 18"></polyline><polyline points="9 15 12 12 15 15"></polyline></svg>
+            Push Rules to Cloud
+          </button>
+        </div>
+
+        <div class="rules-list-container" id="cloud-rules-container">
+          <!-- Dynamic Cloud Rule Cards injected here -->
+        </div>
+
+        <!-- ============================================================
+             LOCAL EDGE AUTOMATION (generated into the firmware)
+             ============================================================ -->
+        <div class="subsection-header">
+          <div class="subsection-title-group">
+            <h3 class="subsection-title">Local Edge Automation (on-device)</h3>
+            <p class="subsection-sub">Baked directly into the sketch so the node keeps reacting while offline, independent of the cloud rule engine.</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-open-add-rule-page">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            Open Edge Rule Builder
+          </button>
+        </div>
+
+        <!-- Dynamic Logic Rules Container -->
+        <div class="rules-list-container" id="rules-container">
+          <!-- Rules cards injected here -->
+        </div>
+
+        <!-- Add Rule footer (end of Section 5) -->
+        <div class="add-row-footer">
+          <button type="button" class="btn btn-secondary" id="btn-add-cloud-rule-row">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            Add Rule
+          </button>
+          <span class="identity-action-note" id="rules-push-status">Adds a server-side rule. Fields match the platform rule engine: variable, operator, threshold, action type and alert channels. Requires the <code>rule_engine_enabled</code> plan entitlement.</span>
+        </div>
+
+        <!-- Wizard Page Navigation Footer -->
+        <div class="wizard-footer">
+          <button class="btn btn-secondary btn-prev-step" data-prev="4">
+            ← Back: Actuators
+          </button>
+          <button class="btn btn-primary btn-next-step" data-next="6" id="btn-goto-final-firmware">
+            Generate & Review Firmware →
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 6: DEDICATED FIRMWARE REVIEW PAGE (FOR WIZARD MODE) -->
+      <section id="sec-firmware" class="section-card glassmorphic section-page wizard-only-page" data-page="6" style="display: none;">
+        <div class="section-header">
+          <div class="sec-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald); border-color: rgba(16, 185, 129, 0.4);">SEC 06</div>
+          <div class="sec-title-group">
+            <h2 class="sec-title">Firmware Deployment & Cloud Link Ready</h2>
+            <p class="sec-desc">Your OmniteqIoTCloud sketch is generated and ready for flashing with the Arduino IDE or Arduino CLI.</p>
+          </div>
+        </div>
+
+        <div class="deployment-banner">
+          <div class="dep-steps">
+            <div class="dep-step-card">
+              <div class="dep-step-num">1</div>
+              <div class="dep-step-title">Install the Library</div>
+              <div class="dep-step-desc">
+                Arduino IDE &rarr; <strong>Sketch &rarr; Include Library &rarr; Add .ZIP Library…</strong> and select
+                <code>OmniteqIoTCloud-1.0.0.zip</code> (the sketch starts with <code>#include &lt;OmniteqIoTCloud.h&gt;</code>).
+                The board's own Wi-Fi stack is built in: <code>WiFi</code>/<code>WiFiClientSecure</code> for ESP32 &amp; ESP32-S3,
+                <code>ESP8266WiFi</code> for ESP8266, or <code>WiFiNINA</code> for the Nano 33 IoT.
+              </div>
+            </div>
+            <div class="dep-step-card">
+              <div class="dep-step-num">2</div>
+              <div class="dep-step-title">Paste Credentials</div>
+              <div class="dep-step-desc">Replace <code>YOUR_WIFI_SSID</code>, <code>YOUR_DEVICE_ID</code>, <code>YOUR_SECRET_KEY</code> and every <code>YOUR_*_VARIABLE_UUID</code> placeholder, or regenerate after filling Section 01.</div>
+            </div>
+            <div class="dep-step-card">
+              <div class="dep-step-num">3</div>
+              <div class="dep-step-title">Flash & Watch Telemetry</div>
+              <div class="dep-step-desc">Upload, open Serial at 115200 baud, then confirm the boot heartbeat plus batch telemetry in <strong>Cloud → Telemetry</strong>.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cloud-note" style="margin-top: 1.25rem;">
+          <span class="cloud-note-icon">☁</span>
+          <div>
+            The generated sketch performs: Wi-Fi connect → <code>cloud.begin()</code> → immediate startup heartbeat → automatic heartbeat → batch telemetry on the configured interval → command polling, execution and ACK. HTTPS uses <code>client.setInsecure()</code> for the public Tailscale URL; replace it with CA validation for production.
+          </div>
+        </div>
+
+        <div class="wizard-footer" style="margin-top: 2rem;">
+          <button class="btn btn-secondary btn-prev-step" data-prev="5">
+            ← Back: Logic & Limits
+          </button>
+          <button class="btn btn-secondary" id="btn-send-test-telemetry" title="Publish one reading per bound variable through POST /ingest/telemetry">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+            Send Test Reading
+          </button>
+          <button class="btn btn-primary" id="btn-wizard-download-ino">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Final Firmware (.ino)
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Live Code Generation & Cloud Preview Panel -->
+    <aside class="code-preview-panel" id="code-preview-panel">
+      <div class="code-panel-header">
+        <div class="panel-tabs">
+          <button class="tab-btn active" data-tab="arduino-code">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Firmware (.ino)
+          </button>
+          <button class="tab-btn" data-tab="cloud-properties">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+            </svg>
+            Cloud Schema
+          </button>
+          <button class="tab-btn" data-tab="pin-map">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+            </svg>
+            Pin Mapping
+          </button>
+          <button class="tab-btn" data-tab="cloud-api">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+              <line x1="14" y1="4" x2="10" y2="20"></line>
+            </svg>
+            Cloud API
+          </button>
+        </div>
+
+        <div class="code-actions">
+          <button class="btn btn-secondary btn-sm" id="btn-copy-code" title="Copy code to clipboard">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copy-label">Copy Code</span>
+          </button>
+
+          <button class="btn btn-primary btn-sm" id="btn-download-ino" title="Download .ino file directly">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download .ino
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab View 1: Arduino C++ Code -->
+      <div class="tab-content active" id="tab-arduino-code">
+        <div class="code-editor-wrapper">
+          <div class="code-stats-bar">
+            <div class="stat-item"><span class="dot live"></span> Generated in real-time</div>
+            <div class="stat-item" id="code-line-count">Lines: 0</div>
+            <div class="stat-item" id="code-target-badge">ESP32 • OmniTeq Cloud</div>
+          </div>
+          <pre class="code-display"><code id="code-output" class="language-cpp">// Loading code generator engine...</code></pre>
+        </div>
+      </div>
+
+      <!-- Tab View 2: Cloud Variable Schema -->
+      <div class="tab-content" id="tab-cloud-properties">
+        <div class="cloud-schema-view">
+          <div class="schema-header">
+            <h3>Registered Cloud Variables</h3>
+            <p>Every row is one <code>CloudReading(variable_id, value)</code> the firmware will publish through <code>POST /ingest/telemetry</code>.</p>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Variable UUID</th>
+                  <th>Cloud Label</th>
+                  <th>Source Item</th>
+                  <th>Data Type</th>
+                  <th>Endpoint</th>
+                  <th>Direction</th>
+                </tr>
+              </thead>
+              <tbody id="cloud-schema-tbody">
+                <!-- Dynamically generated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab View 3: Hardware Pin Allocation Map -->
+      <div class="tab-content" id="tab-pin-map">
+        <div class="pin-map-view">
+          <div class="schema-header">
+            <h3>Hardware GPIO Routing Map</h3>
+            <p>Inspect microcontroller pin assignments and verify ADC/PWM capabilities.</p>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>GPIO</th>
+                  <th>Function / Device</th>
+                  <th>Signal Mode</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="pin-map-tbody">
+                <!-- Dynamically generated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab View 4: Cloud REST / Ingest Endpoint Plan -->
+      <div class="tab-content" id="tab-cloud-api">
+        <div class="cloud-schema-view">
+          <div class="schema-header">
+            <h3>Runtime Cloud API Calls</h3>
+            <p>Exactly what the generated firmware calls at runtime, in order, against the device ingest API.</p>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Method &amp; Endpoint</th>
+                  <th>Trigger</th>
+                  <th>Payload / Query</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody id="cloud-api-tbody">
+                <!-- Dynamically generated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- =========================================================================
+       DEDICATED ADD PAGES (FULL-SCREEN GLASSMORPHIIC MODAL PAGES)
+       ========================================================================= -->
+
+  <!-- MODAL PAGE 1: ADD INPUT SENSOR PAGE -->
+  <div class="modal-overlay" id="modal-add-sensor">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="sec-badge">CATALOG</div>
+          <h2 class="modal-title">Add Input Sensor to Node</h2>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modal-add-sensor">✕</button>
+      </div>
+
+      <!-- Modal Body (Two-Column: Sensor Catalog on Left, Parameter Tuning on Right) -->
+      <div class="modal-split-body">
+        <div class="modal-catalog-pane">
+          <!-- Search & Category Filters -->
+          <div class="catalog-filters">
+            <input type="text" class="catalog-search-input" id="sensor-search-input" placeholder="Search sensors (e.g. DHT22, Soil, BME280, Ultrasonic)...">
+            <div class="catalog-tabs" id="sensor-category-tabs">
+              <button class="cat-btn active" data-cat="all">All</button>
+              <button class="cat-btn" data-cat="buttons">Buttons & Switches</button>
+              <button class="cat-btn" data-cat="time_storage">Time & Storage</button>
+              <button class="cat-btn" data-cat="id_nav">RFID & GPS</button>
+              <button class="cat-btn" data-cat="motion">Acceleration & Motion</button>
+              <button class="cat-btn" data-cat="climate">Climate & Air</button>
+              <button class="cat-btn" data-cat="soil">Soil & Water</button>
+              <button class="cat-btn" data-cat="optical">Optical & IR</button>
+              <button class="cat-btn" data-cat="custom">Custom</button>
+            </div>
+          </div>
+
+          <!-- Sensor Cards Grid -->
+          <div class="catalog-grid" id="sensor-catalog-grid">
+            <!-- Dynamically populated from SENSOR_CATALOG -->
+          </div>
+        </div>
+
+        <!-- Right Side: Sensor Parameters Form -->
+        <div class="modal-config-pane">
+          <h3 class="config-pane-title">Sensor Routing & Cloud Variable Binding</h3>
+          <p class="config-pane-sub">Configure channel pins, sampling interval, and bind each reading to a real OmniTeq Cloud variable UUID.</p>
+
+          <form id="form-add-sensor" onsubmit="return false;">
+            <input type="hidden" id="add-sensor-type" value="dht22">
+            
+            <div class="form-group">
+              <label for="add-sensor-name">Sensor Display Name <span class="required">*</span></label>
+              <input type="text" id="add-sensor-name" class="form-control" value="DHT22 Climate Sensor">
+            </div>
+
+            <div class="form-group">
+              <label for="add-sensor-pin">Hardware GPIO Pin <span class="required">*</span></label>
+              <select id="add-sensor-pin" class="form-control pin-select">
+                <!-- Injected based on current controller -->
+              </select>
+              <small class="form-hint" id="add-sensor-pin-hint">Digital GPIO</small>
+            </div>
+
+            <div class="form-grid" style="margin-top: 0.5rem;">
+              <div class="form-group">
+                <label for="add-sensor-interval">Sampling Interval (ms)</label>
+                <select id="add-sensor-interval" class="form-control">
+                  <option value="1000">1000 ms (1 sec)</option>
+                  <option value="2000" selected>2000 ms (2 sec)</option>
+                  <option value="5000">5000 ms (5 sec)</option>
+                  <option value="10000">10000 ms (10 sec)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="add-sensor-unit">Measurement Unit</label>
+                <input type="text" id="add-sensor-unit" class="form-control" value="°C">
+              </div>
+            </div>
+
+            <!-- Cloud Variable Binding: Primary -->
+            <div class="cloud-bind-block">
+              <div class="cloud-bind-title">Cloud Variable <span id="add-sensor-primary-role">Primary Reading</span></div>
+
+              <div class="form-group">
+                <label for="add-sensor-var">Cloud Variable Label <span class="required">*</span></label>
+                <input type="text" id="add-sensor-var" class="form-control" value="temperature">
+                <small class="form-hint">The <code>label</code> used when creating the variable on the gateway.</small>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="add-sensor-datatype">Cloud Data Type</label>
+                  <select id="add-sensor-datatype" class="form-control">
+                    <option value="float" selected>float</option>
+                    <option value="integer">integer</option>
+                    <option value="boolean">boolean</option>
+                    <option value="string">string</option>
+                  </select>
+                  <small class="form-hint">Immutable after creation on the gateway.</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="add-sensor-random-preset">Random Value Generator</label>
+                  <select id="add-sensor-random-preset" class="form-control">
+                    <option value="off" selected>Off — read real hardware</option>
+                    <option value="uniform">On — uniform random (min → max)</option>
+                    <option value="walk">On — random walk (drift)</option>
+                    <option value="sine">On — sine wave</option>
+                    <option value="ramp">On — ramp / counter</option>
+                  </select>
+                  <small class="form-hint">Fine-tune min/max, decimals and interval on the sensor card after adding it.</small>
+                </div>
+              </div>
+
+              <small class="form-hint">The <code>variable_id</code> is issued by the server when you press <strong>Push Sensors to Cloud</strong> — it is shown read-only on the sensor card.</small>
+            </div>
+
+            <!-- Cloud Variable Binding: Secondary (DHT / BMP sensors) -->
+            <div class="cloud-bind-block" id="group-sensor-second" style="display: none;">
+              <div class="cloud-bind-title">Cloud Variable <span id="add-sensor-secondary-role">Secondary Reading</span></div>
+
+              <div class="form-group">
+                <label for="add-sensor-var2">Cloud Variable Label <span class="required">*</span></label>
+                <input type="text" id="add-sensor-var2" class="form-control" value="humidity">
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="add-sensor-datatype2">Cloud Data Type</label>
+                  <select id="add-sensor-datatype2" class="form-control">
+                    <option value="float" selected>float</option>
+                    <option value="integer">integer</option>
+                    <option value="boolean">boolean</option>
+                    <option value="string">string</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-actions-footer">
+              <button type="button" class="btn btn-secondary" data-close-modal="modal-add-sensor">Cancel</button>
+              <button type="button" class="btn btn-primary" id="btn-submit-add-sensor">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Add to Device
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PAGE 2: ADD OUTPUT ACTUATOR PAGE -->
+  <div class="modal-overlay" id="modal-add-actuator">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="sec-badge" style="background: rgba(139, 92, 246, 0.15); color: var(--electric-violet); border-color: rgba(139, 92, 246, 0.4);">ACTUATORS</div>
+          <h2 class="modal-title">Add Output Actuator / Controller</h2>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modal-add-actuator">✕</button>
+      </div>
+
+      <div class="modal-split-body">
+        <div class="modal-catalog-pane">
+          <div class="catalog-filters">
+            <input type="text" class="catalog-search-input" id="actuator-search-input" placeholder="Search actuators (e.g. Relay, Servo, OLED, Buzzer, PWM)...">
+            <div class="catalog-tabs" id="actuator-category-tabs">
+              <button class="cat-btn active" data-cat="all">All</button>
+              <button class="cat-btn" data-cat="displays">LCDs & Displays</button>
+              <button class="cat-btn" data-cat="motors">Motors & Motion</button>
+              <button class="cat-btn" data-cat="relays">Relays & Power</button>
+              <button class="cat-btn" data-cat="light">Illumination & PWM</button>
+              <button class="cat-btn" data-cat="audio">Audio & Alarms</button>
+            </div>
+          </div>
+
+          <div class="catalog-grid" id="actuator-catalog-grid">
+            <!-- Dynamically populated from ACTUATOR_CATALOG -->
+          </div>
+        </div>
+
+        <div class="modal-config-pane">
+          <h3 class="config-pane-title">Actuator Output & Command Template Binding</h3>
+          <p class="config-pane-sub">Set pin routing and logic level, then bind the actuator to the OmniTeq Cloud command template that drives it.</p>
+
+          <form id="form-add-actuator" onsubmit="return false;">
+            <input type="hidden" id="add-actuator-type" value="relay">
+            
+            <div class="form-group">
+              <label for="add-actuator-name">Actuator Name <span class="required">*</span></label>
+              <input type="text" id="add-actuator-name" class="form-control" value="Main Water Pump Relay">
+            </div>
+
+            <div class="form-group">
+              <label for="add-actuator-pin">Control GPIO Pin <span class="required">*</span></label>
+              <select id="add-actuator-pin" class="form-control pin-select">
+                <!-- Injected based on current controller -->
+              </select>
+            </div>
+
+            <div class="form-grid" style="margin-top: 0.5rem;">
+              <div class="form-group">
+                <label for="add-actuator-logic">Trigger Logic</label>
+                <select id="add-actuator-logic" class="form-control">
+                  <option value="active_low" selected>Active LOW (Standard Relay)</option>
+                  <option value="active_high">Active HIGH (Direct 3.3V)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="add-actuator-default">Initial Boot State</label>
+                <select id="add-actuator-default" class="form-control">
+                  <option value="LOW" selected>OFF (Default Safe)</option>
+                  <option value="HIGH">ON</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Built-in LED visual feedback -->
+            <div class="cloud-bind-block">
+              <div class="cloud-bind-title">Visual Response Feedback</div>
+
+              <label class="rule-cloud-toggle" for="add-actuator-builtin-led">
+                <input type="checkbox" id="add-actuator-builtin-led">
+                <span><strong>Mirror state to the built-in LED</strong> — lights the onboard LED whenever this output turns ON, so you can verify the command landed without extra wiring.</span>
+              </label>
+
+              <small class="form-hint" id="add-actuator-builtin-led-hint">The onboard LED pin is resolved from the selected controller.</small>
+            </div>
+
+            <!-- Cloud Command Template Binding -->
+            <div class="cloud-bind-block">
+              <div class="cloud-bind-title">Cloud Command Binding</div>
+
+              <div class="form-group">
+                <label for="add-actuator-var">Command Parameter Key <span class="required">*</span></label>
+                <input type="text" id="add-actuator-var" class="form-control" value="waterPumpState">
+                <small class="form-hint">Key looked up inside the incoming <code>parametersJson</code> when a command executes.</small>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="add-actuator-datatype">Parameter Type</label>
+                  <select id="add-actuator-datatype" class="form-control">
+                    <option value="boolean" selected>boolean</option>
+                    <option value="integer">integer</option>
+                    <option value="float">float</option>
+                    <option value="string">string</option>
+                  </select>
+                  <small class="form-hint">Must match the template's <code>param_type</code>.</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="add-actuator-template">Command Template ID</label>
+                  <input type="text" id="add-actuator-template" class="form-control uuid-input" placeholder="YOUR_COMMAND_TEMPLATE_UUID" value="YOUR_COMMAND_TEMPLATE_UUID">
+                  <small class="form-hint">CloudCommand <code>templateId</code> the device reacts to.</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-actions-footer">
+              <button type="button" class="btn btn-secondary" data-close-modal="modal-add-actuator">Cancel</button>
+              <button type="button" class="btn btn-primary" id="btn-submit-add-actuator">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Attach Actuator
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PAGE 3: ADD AUTOMATION LOGIC RULE PAGE -->
+  <div class="modal-overlay" id="modal-add-rule">
+    <div class="modal-window modal-window-medium">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="sec-badge" style="background: rgba(245, 158, 11, 0.15); color: var(--amber); border-color: rgba(245, 158, 11, 0.4);">LOGIC</div>
+          <h2 class="modal-title">Create Autonomous Edge Rule</h2>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modal-add-rule">✕</button>
+      </div>
+
+      <div class="modal-body-pad">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Define trigger conditions, thresholds, target actuators, and cloud notification behaviors that execute autonomously on the microcontroller.
+        </p>
+
+        <!-- Condition Card -->
+        <div class="logic-builder-card">
+          <div class="logic-section-title">1. Trigger Condition (IF)</div>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="modal-rule-sensor">Source Sensor <span class="required">*</span></label>
+              <select id="modal-rule-sensor" class="form-control"></select>
+            </div>
+
+            <!-- Dynamic condition fields populated per selected sensor -->
+            <div id="modal-rule-condition-dynamic" class="form-grid full-width" style="grid-column: 1 / -1; display: contents;"></div>
+          </div>
+        </div>
+
+        <!-- Action Card -->
+        <div class="logic-builder-card" style="margin-top: 1rem;">
+          <div class="logic-section-title">2. Target Action (THEN)</div>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="modal-rule-actuator">Target Actuator <span class="required">*</span></label>
+              <select id="modal-rule-actuator" class="form-control"></select>
+            </div>
+
+            <!-- Dynamic action fields populated per selected actuator -->
+            <div id="modal-rule-action-dynamic" class="form-grid full-width" style="grid-column: 1 / -1; display: contents;"></div>
+
+            <div class="form-group full-width">
+              <label class="rule-cloud-toggle" style="margin-top: 0.5rem;">
+                <input type="checkbox" id="modal-rule-cloud-alert" checked>
+                <span><strong>Push Cloud Alert:</strong> log the breach to the Serial trace and flag it in outbound telemetry so the platform alert history records it</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule Engine Coverage Note -->
+        <div class="cloud-bind-block" style="margin-top: 1rem;">
+          <div class="cloud-bind-title">Cloud Rule Engine Note</div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+            Edge rules generated here run on the device. Server-side automation, alerting history and webhook fan-out are configured separately in <strong>Cloud → Rules</strong> and <strong>Cloud → Webhooks</strong> while your plan has <code>rule_engine_enabled</code> / <code>webhooks_enabled</code>.
+          </p>
+        </div>
+
+        <div class="modal-actions-footer" style="margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" data-close-modal="modal-add-rule">Cancel</button>
+          <button type="button" class="btn btn-primary" id="btn-submit-add-rule">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Save Automation Rule
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSION RESUME PROMPT
+       Shown on load when this browser already holds a saved device setup, so the
+       user chooses between restoring it and starting clean. The dialog has no
+       dismiss button: clicking the backdrop resolves it as "Previous Session",
+       which is the non-destructive default. -->
+  <div class="modal-overlay" id="modal-session-choice">
+    <div class="modal-window modal-window-medium">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="sec-badge">SESSION</div>
+          <h2 class="modal-title">Previous device setup found</h2>
+        </div>
+      </div>
+
+      <div class="modal-body-pad">
+        <p class="session-lead">
+          A saved setup for this browser was found. Would you like to open the <strong>previous session</strong> of this
+          device setup, or begin a <strong>clean setup</strong>?
+        </p>
+
+        <div class="session-summary" id="session-summary">
+          <!-- Populated from the saved session -->
+        </div>
+
+        <div class="session-options">
+          <button type="button" class="session-option" id="btn-session-previous">
+            <span class="session-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.8" fill="none">
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+                <polyline points="3 3 3 8 8 8"></polyline>
+                <polyline points="12 8 12 12 15 14"></polyline>
+              </svg>
+            </span>
+            <span class="session-option-title">Previous Session</span>
+            <span class="session-option-desc">Restore the saved device identity, sensors, actuators, commands and rules exactly as they were left.</span>
+          </button>
+
+          <button type="button" class="session-option" id="btn-session-new">
+            <span class="session-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.8" fill="none">
+                <path d="M12 2v6"></path>
+                <path d="M12 8 8.5 4.5"></path>
+                <path d="M12 8l3.5-3.5"></path>
+                <path d="M4.6 13.4a8 8 0 1 0 14.8 0"></path>
+              </svg>
+            </span>
+            <span class="session-option-title">New Setup</span>
+            <span class="session-option-desc">Clear the saved setup and start blank. Project, Wi-Fi and device identity are kept from the page you came from.</span>
+          </button>
+        </div>
+
+        <p class="session-note">
+          Nothing is sent anywhere until you press <strong>Add Device</strong> or a <strong>Push</strong> button.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden>Action completed</div>
+
+  <!-- Main JavaScript Application Logic -->
+  <!-- Shared gateway configuration (also used by the OmniTeq Cloud console pages) -->
+  <script src="../js/config.js"></script>
+  <script src="studio-ui.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

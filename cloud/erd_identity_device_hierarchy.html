@@ -1,0 +1,114 @@
+﻿
+<style>
+#erd1 svg { width: 100%; height: auto; }
+#erd1 svg.erDiagram .divider path { stroke-opacity: 0.4; }
+#erd1 svg.erDiagram .row-rect-odd path,
+#erd1 svg.erDiagram .row-rect-odd rect,
+#erd1 svg.erDiagram .row-rect-even path,
+#erd1 svg.erDiagram .row-rect-even rect { stroke: none !important; }
+</style>
+<h2 class="sr-only">Entity-relationship diagram: identity and device hierarchy — users, projects, devices, device status, sensors, and variables</h2>
+<div id="erd1" style="min-height:520px;padding:8px 0"></div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    primaryColor: dark ? '#2a2828' : '#f4f2ef',
+    primaryBorderColor: dark ? '#4a4845' : '#c8c6be',
+    attributeBackgroundColorEven: dark ? '#222120' : '#faf9f7',
+    attributeBackgroundColorOdd: dark ? '#2e2c2b' : '#f0ede8',
+  },
+});
+const src = `erDiagram
+    users {
+        uuid id PK
+        string email
+        string password_hash
+        string display_name
+        boolean is_verified
+        timestamp created_at
+        timestamp updated_at
+    }
+    projects {
+        uuid id PK
+        uuid user_id FK
+        string name
+        text description
+        timestamp created_at
+        timestamp updated_at
+    }
+    devices {
+        uuid id PK
+        uuid project_id FK
+        string name
+        text description
+        string secret_key_hash
+        string firmware_version
+        timestamp created_at
+        timestamp updated_at
+    }
+    device_status {
+        uuid id PK
+        uuid device_id FK
+        string status
+        string ip_address
+        timestamp last_seen_at
+        timestamp updated_at
+    }
+    sensors {
+        uuid id PK
+        uuid device_id FK
+        string name
+        string unit
+        text description
+        timestamp created_at
+    }
+    variables {
+        uuid id PK
+        uuid sensor_id FK
+        string label
+        string data_type
+        timestamp created_at
+    }
+    users ||--o{ projects : "owns"
+    projects ||--o{ devices : "contains"
+    devices ||--|| device_status : "has"
+    devices ||--o{ sensors : "has"
+    sensors ||--o{ variables : "has"
+`;
+const { svg } = await mermaid.render('erd1-svg', src);
+document.getElementById('erd1').innerHTML = svg;
+document.querySelectorAll('#erd1 svg.erDiagram .node').forEach(node => {
+  const firstPath = node.querySelector('path[d]');
+  if (!firstPath) return;
+  const d = firstPath.getAttribute('d');
+  const nums = d.match(/-?[\d.]+/g)?.map(Number);
+  if (!nums || nums.length < 8) return;
+  const xs = [nums[0], nums[2], nums[4], nums[6]];
+  const ys = [nums[1], nums[3], nums[5], nums[7]];
+  const x = Math.min(...xs), y = Math.min(...ys);
+  const w = Math.max(...xs) - x, h = Math.max(...ys) - y;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', x); rect.setAttribute('y', y);
+  rect.setAttribute('width', w); rect.setAttribute('height', h);
+  rect.setAttribute('rx', '8');
+  for (const a of ['fill', 'stroke', 'stroke-width', 'class', 'style']) {
+    if (firstPath.hasAttribute(a)) rect.setAttribute(a, firstPath.getAttribute(a));
+  }
+  firstPath.replaceWith(rect);
+});
+document.querySelectorAll('#erd1 svg.erDiagram .row-rect-odd path, #erd1 svg.erDiagram .row-rect-even path').forEach(p => {
+  p.setAttribute('stroke', 'none');
+});
+</script>
+

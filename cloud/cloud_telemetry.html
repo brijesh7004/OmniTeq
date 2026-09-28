@@ -1,0 +1,677 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTeq Cloud - Telemetry</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cloud.css">
+    <link rel="stylesheet" href="css/ui.css">
+</head>
+<body class="dark-theme dashboard-page">
+    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <!-- Ambient Glow Backgrounds -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+    <div class="glow-bg glow-3"></div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass-panel-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    </a>
+                </div>
+                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="cloud_dashboard.html">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_projects.html">
+                        <i class='bx bx-folder'></i>
+                        <span class="link-name">Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_devices.html">
+                        <i class='bx bx-devices'></i>
+                        <span class="link-name">Devices</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_sensors.html">
+                        <i class='bx bx-chip'></i>
+                        <span class="link-name">Sensors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_commands.html">
+                        <i class='bx bx-terminal'></i>
+                        <span class="link-name">Commands</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="cloud_telemetry.html">
+                        <i class='bx bx-line-chart'></i>
+                        <span class="link-name">Telemetry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_rules.html">
+                        <i class='bx bx-git-repo-forked'></i>
+                        <span class="link-name">Rules</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_webhooks.html">
+                        <i class='bx bx-broadcast'></i>
+                        <span class="link-name">Webhooks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cloud_docs.html">
+                        <i class='bx bx-book-open'></i>
+                        <span class="link-name">Documentation</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="cloud_settings.html">
+                        <i class='bx bx-cog'></i>
+                        <span class="link-name">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class='bx bx-log-out'></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Search devices, projects...">
+                </div>
+                <div class="topbar-actions">
+                    
+                    <div class="nav-switcher" style="margin-right: 15px;">
+                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
+                            <i class="bx bx-cloud"></i>
+                        </a>
+                        <div class="switcher-dropdown">
+                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
+                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
+                        </div>
+                    </div>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="bx bx-sun"></i>
+                        <i class="bx bx-moon"></i>
+                    </button>
+                    <button class="icon-btn notification-btn">
+                        <i class='bx bx-bell'></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
+                        <div class="user-info">
+                            <span class="user-name" id="user-display-name">Loading...</span>
+                            <span class="user-role" id="user-display-role">Member</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Telemetry Analysis</h1>
+                    <div class="panel-actions" style="display: flex; gap: 10px;">
+                        <button class="btn-primary" id="openIngestModalBtn" onclick="openModal('ingestTelemetryModal')"><i class='bx bx-upload'></i> Push Reading</button>
+                        <button class="btn-ghost" id="export-csv-btn" style="color: var(--text-light);"><i class='bx bx-download'></i> Export CSV</button>
+                        <select class="styled-select" id="time-window-select">
+                            <option value="24h">Last 24 hours</option>
+                            <option value="7d" selected>Last 7 days</option>
+                            <option value="30d">Last 30 days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                    <!-- Chart Section -->
+                    <div class="chart-container glass-panel">
+                        <div class="panel-header">
+                            <h2>Detailed Telemetry Plot</h2>
+                            <div class="panel-actions">
+                                <select class="styled-select" id="telemetry-device-select">
+                                    <option value="">Select Device...</option>
+                                </select>
+                                <select class="styled-select" id="telemetry-variable-select">
+                                    <option value="">Select Metric...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="canvas-wrapper" style="height: 450px;">
+                            <!-- Reusing the same ID so cloud.js initializes the chart here -->
+                            <canvas id="telemetryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container glass-panel mt-4">
+                    <div class="panel-header">
+                        <h2>Raw Data Logs</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Device</th>
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                    <th>Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="raw-telemetry-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Please select a device and metric to load telemetry raw logs.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Ingest Telemetry Data -->
+    <div id="ingestTelemetryModal" class="modal-backdrop" style="display: none;">
+        <div class="glass-panel modal-content" style="max-width: 520px; width: 90%; margin: auto; padding: 28px; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                <h3 style="font-size: 20px; font-weight: 700;"><i class='bx bx-line-chart'></i> Push Telemetry Reading</h3>
+                <button onclick="closeModal('ingestTelemetryModal')" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            <form id="ingestTelemetryForm">
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Target Device</label>
+                    <select id="ingestTargetDevice" class="styled-select" style="width: 100%;" required>
+                        <option value="">Select a device...</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Telemetry Variable</label>
+                    <select id="ingestVariableId" class="styled-select" style="width: 100%;" required>
+                        <option value="">Select a device first...</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Device Secret Key</label>
+                    <input type="text" id="ingestSecretKey" class="styled-select" style="width: 100%;" placeholder="sk_live_... (required by /ingest)" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Telemetry Value (Numeric)</label>
+                    <input type="number" step="any" id="ingestValue" class="styled-select" style="width: 100%;" placeholder="e.g. 24.5" required>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('ingestTelemetryModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Telemetry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/validation.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cloud.js"></script>
+    <script src="js/ui.js"></script>
+    
+    <!-- Dynamic Telemetry Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const api = window.api;
+
+            const deviceSelect = document.getElementById('telemetry-device-select');
+            const variableSelect = document.getElementById('telemetry-variable-select');
+            const tableBody = document.getElementById('raw-telemetry-body');
+            const timeSelect = document.getElementById('time-window-select');
+            const exportBtn = document.getElementById('export-csv-btn');
+
+            let allDevices = [];
+            let currentVariables = [];
+            let activeHistory = [];
+            let selectedDeviceName = '';
+            let selectedVariableName = '';
+            let selectedUnit = '';
+
+            // The telemetry endpoint requires a bounded [from, to] window.
+            const WINDOW_MS = { '24h': 24 * 60 * 60 * 1000, '7d': 7 * 24 * 60 * 60 * 1000, '30d': 30 * 24 * 60 * 60 * 1000 };
+            const MAX_ROWS = 500;
+            const MAX_CHART_POINTS = 50;
+
+            function currentWindow() {
+                const span = WINDOW_MS[timeSelect.value] || WINDOW_MS['7d'];
+                const to = new Date();
+                return { from: new Date(to.getTime() - span).toISOString(), to: to.toISOString() };
+            }
+
+            // Create the chart BEFORE any data arrives. Nothing previously
+            // constructed it, so renderChart() only ever called .update() on an
+            // undefined object and the plot stayed blank.
+            window.omniteqInitTelemetryChart('telemetryChart', {
+                label: 'Telemetry',
+                showLegend: false,
+                pointRadius: 2
+            });
+
+            // Learn the account's query window before loading data, so the 24h/7d/30d
+            // selector is clamped to what the plan actually allows (api.js uses this
+            // when building the from/to range and the gateway rejects over-range windows).
+            try { await api.account.getPlan(); } catch (e) { /* falls back to the 7-day default */ }
+
+            await loadDevices();
+
+            // Setup WebSocket telemetry stream listening
+            api.connectWebSocket((msg) => {
+                const activeVarId = variableSelect.value;
+                if (msg.type === 'telemetry.update' && msg.variable_id === activeVarId) {
+                    const pt = {
+                        id: Date.now().toString(),
+                        variable_id: msg.variable_id,
+                        value: msg.value,
+                        recorded_at: msg.recorded_at,
+                        label: msg.label,
+                        unit: msg.unit
+                    };
+
+                    // Add to active history
+                    activeHistory.unshift(pt);
+                    if (activeHistory.length > MAX_ROWS) {
+                        activeHistory = activeHistory.slice(0, MAX_ROWS);
+                    }
+
+                    // Update Raw Table
+                    renderRawTable();
+
+                    // Shift Chart
+                    if (window.telemetryChart) {
+                        const date = new Date(pt.recorded_at);
+                        const labelStr = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+                        
+                        // Push new, shift when the chart is full
+                        window.telemetryChart.data.labels.push(labelStr);
+                        window.telemetryChart.data.datasets[0].data.push(pt.value);
+
+                        if (window.telemetryChart.data.labels.length > MAX_CHART_POINTS) {
+                            window.telemetryChart.data.labels.shift();
+                            window.telemetryChart.data.datasets[0].data.shift();
+                        }
+                        window.telemetryChart.update();
+                    }
+                }
+            });
+
+            async function loadDevices() {
+                try {
+                    const projRes = await api.projects.list();
+                    if (projRes.success) {
+                        const projects = projRes.data;
+                        allDevices = [];
+                        let options = '<option value="">Select Device...</option>';
+
+                        for (let proj of projects) {
+                            const devRes = await api.devices.list(proj.id);
+                            if (devRes.success) {
+                                devRes.data.forEach(dev => {
+                                    allDevices.push(dev);
+                                    options += `<option value="${dev.id}">${dev.name} [${dev.status || 'offline'}] (${proj.name})</option>`;
+                                });
+                            }
+                        }
+                        if (allDevices.length === 0) {
+                            options = '<option value="">No devices registered</option>';
+                            tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
+                                <i class='bx bx-devices' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
+                                No devices found in your account.<br>
+                                <a href="cloud_device_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Add a device</a> to start viewing telemetry.
+                            </td></tr>`;
+                        }
+                        deviceSelect.innerHTML = options;
+                        const ingestTarget = document.getElementById('ingestTargetDevice');
+                        if (ingestTarget) ingestTarget.innerHTML = options;
+                    }
+                } catch (e) {
+                    console.error("Failed to load devices:", e);
+                }
+            }
+
+            // Populate variables on device change
+            deviceSelect.addEventListener('change', async () => {
+                const deviceId = deviceSelect.value;
+                variableSelect.innerHTML = '<option value="">Select Metric...</option>';
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Please select a metric to load telemetry.</td></tr>';
+                
+                if (!deviceId) return;
+
+                const device = allDevices.find(d => d.id === deviceId);
+                selectedDeviceName = device ? device.name : '';
+
+                try {
+                    const sensRes = await api.sensors.list(deviceId);
+                    if (sensRes.success) {
+                        currentVariables = [];
+                        let options = '<option value="">Select Metric...</option>';
+
+                        for (let sen of sensRes.data) {
+                            const varRes = await api.variables.list(sen.id);
+                            if (varRes.success) {
+                                varRes.data.forEach(v => {
+                                    currentVariables.push({
+                                        ...v,
+                                        unit: sen.unit
+                                    });
+                                    options += `<option value="${v.id}">${v.label} (${sen.unit})</option>`;
+                                });
+                            }
+                        }
+                        variableSelect.innerHTML = options;
+                    }
+                } catch (e) {
+                    console.error("Failed to load metrics:", e);
+                }
+            });
+
+            // Load telemetry on variable change
+            variableSelect.addEventListener('change', loadTelemetryHistory);
+            timeSelect.addEventListener('change', loadTelemetryHistory);
+
+            async function loadTelemetryHistory() {
+                const varId = variableSelect.value;
+                if (!varId) {
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Please select a metric to load telemetry.</td></tr>';
+                    return;
+                }
+
+                const variable = currentVariables.find(v => v.id === varId);
+                selectedVariableName = variable ? variable.label : '';
+                selectedUnit = variable ? variable.unit : '';
+
+                // The dropdown selects a TIME WINDOW (24h / 7d / 30d), not a row
+                // count. It used to be passed as `limit`, so "Last 7 days" became
+                // limit=7. The window is now sent as from/to and a real row cap is
+                // requested separately.
+                //
+                // `limit` is applied by the gateway to the OLDEST rows in the
+                // window, so a plain query would show the beginning of the window
+                // and hide the newest readings. getRecent() narrows the window
+                // until it holds fewer rows than the cap, which guarantees the rows
+                // shown are the most recent ones.
+                const win = currentWindow();
+                const spanMs = new Date(win.to).getTime() - new Date(win.from).getTime();
+                const rowLimit = 500;
+
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Loading telemetry history logs...</td></tr>';
+
+                // Fetch first, render after. Previously both lived in one try block,
+                // so a chart/render error overwrote successfully-loaded rows with
+                // "Error loading history."
+                let readings;
+                try {
+                    readings = await api.telemetry.getRecent(varId, rowLimit, spanMs);
+                } catch (e) {
+                    console.error("Error loading telemetry history:", e);
+                    const msg = (e && e.error && e.error.message) || (e && e.message) || 'Unknown error';
+                    tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 24px; color: #ef4444;">Could not load telemetry: ${escapeHtml(msg)}</td></tr>`;
+                    if (window.telemetryChart) {
+                        window.telemetryChart.data.labels = [];
+                        window.telemetryChart.data.datasets[0].data = [];
+                        window.telemetryChart.update();
+                    }
+                    return;
+                }
+
+                if (!Array.isArray(readings) || readings.length === 0) {
+                    activeHistory = [];
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">No telemetry logs recorded in this window.</td></tr>';
+                    if (window.telemetryChart) {
+                        window.telemetryChart.data.labels = [];
+                        window.telemetryChart.data.datasets[0].data = [];
+                        window.telemetryChart.update();
+                    }
+                    return;
+                }
+
+                activeHistory = readings.map(pt => ({
+                    ...pt,
+                    label: selectedVariableName,
+                    unit: selectedUnit
+                }));
+
+                try {
+                    renderRawTable();
+                    renderChart();
+                } catch (e) {
+                    // A rendering problem must not be reported as a data problem.
+                    console.error("Telemetry render failed:", e);
+                }
+            }
+
+            function renderRawTable() {
+                if (activeHistory.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">No telemetry logs recorded.</td></tr>';
+                    return;
+                }
+
+                // Newest first. The API returns readings oldest-first, while live
+                // WebSocket points are unshifted onto the front, so the array order
+                // was mixed. Sorting here makes the table order deterministic.
+                const rows = [...activeHistory]
+                    .sort((a, b) => new Date(b.recorded_at) - new Date(a.recorded_at));
+
+                tableBody.innerHTML = rows.map(pt => {
+                    const dateStr = new Date(pt.recorded_at).toLocaleString();
+                    return `
+                        <tr>
+                            <td>${escapeHtml(dateStr)}</td>
+                            <td>${escapeHtml(selectedDeviceName)}</td>
+                            <td>${escapeHtml(pt.label)}</td>
+                            <td class="id-col"><strong>${escapeHtml(pt.value)}</strong></td>
+                            <td>${escapeHtml(pt.unit)}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            function renderChart() {
+                if (activeHistory.length === 0) return;
+
+                const labels = [];
+                const data = [];
+
+                // Sort ascending in time order for plotting
+                const sorted = [...activeHistory].sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at));
+
+                sorted.forEach(pt => {
+                    const date = new Date(pt.recorded_at);
+                    const labelStr = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+                    labels.push(labelStr);
+                    data.push(pt.value);
+                });
+
+                if (window.telemetryChart) {
+                    window.telemetryChart.data.labels = labels;
+                    window.telemetryChart.data.datasets[0].label = `${selectedVariableName} (${selectedUnit})`;
+                    window.telemetryChart.data.datasets[0].data = data;
+                    
+                    // Adjust chart accent color matching page accent color dynamically
+                    const computedStyle = getComputedStyle(document.body);
+                    const primaryColor = computedStyle.getPropertyValue('--primary-color') || '#3b82f6';
+                    
+                    window.telemetryChart.data.datasets[0].borderColor = primaryColor;
+                    window.telemetryChart.data.datasets[0].pointBorderColor = primaryColor;
+                    window.telemetryChart.update();
+                }
+            }
+
+            // Export CSV Download Handler
+            exportBtn.addEventListener('click', () => {
+                if (activeHistory.length === 0) {
+                    showToast('No active data to export. Please select a device and metric first.', 'warning');
+                    return;
+                }
+
+                const headers = ["Timestamp", "Device", "Metric", "Value", "Unit"];
+                const rows = activeHistory.map(pt => [
+                    `"${new Date(pt.recorded_at).toISOString()}"`,
+                    `"${selectedDeviceName}"`,
+                    `"${pt.label}"`,
+                    pt.value,
+                    `"${pt.unit}"`
+                ]);
+
+                const csvContent = "data:text/csv;charset=utf-8," 
+                    + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+                
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", `telemetry_${selectedDeviceName.replace(/\s+/g, '_')}_${selectedVariableName.replace(/\s+/g, '_')}.csv`);
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+
+            // Ingest Telemetry Submit Handler
+            const ingestForm = document.getElementById('ingestTelemetryForm');
+            if (ingestForm) {
+                OmniTeqValidator.bindLiveValidation(ingestForm);
+                const targetDevEl = document.getElementById('ingestTargetDevice');
+                const ingestVarEl = document.getElementById('ingestVariableId');
+
+                // The gateway needs a variable UUID, which no one can type from
+                // memory, so the variable list is loaded for the chosen device.
+                async function loadIngestVariables(deviceId) {
+                    if (!ingestVarEl) return;
+                    if (!deviceId) {
+                        ingestVarEl.innerHTML = '<option value="">Select a device first...</option>';
+                        return;
+                    }
+                    ingestVarEl.innerHTML = '<option value="">Loading variables...</option>';
+                    try {
+                        const sensorsRes = await api.sensors.list(deviceId);
+                        const options = [];
+                        if (sensorsRes && sensorsRes.success && Array.isArray(sensorsRes.data)) {
+                            for (const sensor of sensorsRes.data) {
+                                const varsRes = await api.variables.list(sensor.id);
+                                if (varsRes && varsRes.success && Array.isArray(varsRes.data)) {
+                                    varsRes.data.forEach(v => {
+                                        options.push(`<option value="${v.id}">${escapeHtml(v.label)} — ${escapeHtml(sensor.name)}${sensor.unit ? ' (' + escapeHtml(sensor.unit) + ')' : ''}</option>`);
+                                    });
+                                }
+                            }
+                        }
+                        ingestVarEl.innerHTML = options.length > 0
+                            ? '<option value="">Select a variable...</option>' + options.join('')
+                            : '<option value="">No variables on this device — add a sensor first</option>';
+                    } catch (e) {
+                        ingestVarEl.innerHTML = '<option value="">Failed to load variables</option>';
+                    }
+                }
+
+                if (targetDevEl && deviceSelect) {
+                    targetDevEl.innerHTML = deviceSelect.innerHTML;
+                    targetDevEl.addEventListener('change', () => {
+                        fillDeviceSecretIfAvailable('ingestTargetDevice', 'ingestSecretKey');
+                        loadIngestVariables(targetDevEl.value);
+                    });
+                }
+
+                // Copy the currently selected device's scope when opening the modal
+                const ingestModalBtn = document.getElementById('openIngestModalBtn');
+                if (ingestModalBtn) {
+                    ingestModalBtn.addEventListener('click', () => {
+                        if (deviceSelect.value && targetDevEl) targetDevEl.value = deviceSelect.value;
+                        fillDeviceSecretIfAvailable('ingestTargetDevice', 'ingestSecretKey');
+                        loadIngestVariables(targetDevEl ? targetDevEl.value : '');
+                    });
+                }
+
+                ingestForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const devId = document.getElementById('ingestTargetDevice').value;
+                    const varInput = document.getElementById('ingestVariableId');
+                    const secretInput = document.getElementById('ingestSecretKey');
+                    const valInput = document.getElementById('ingestValue');
+
+                    if (!devId) {
+                        showToast('Please select a target device.', 'error');
+                        return;
+                    }
+
+                    const varVal = OmniTeqValidator.validateText(varInput.value, 'Telemetry Variable', 1);
+                    if (!varVal.valid) {
+                        OmniTeqValidator.markFieldError(varInput, varVal.error);
+                        showToast('Please select a telemetry variable.', 'error');
+                        return;
+                    }
+
+                    const numVal = parseFloat(valInput.value);
+                    if (isNaN(numVal) || !isFinite(numVal)) {
+                        OmniTeqValidator.markFieldError(valInput, 'Value must be a valid finite number.');
+                        showToast('Telemetry value must be a valid number.', 'error');
+                        return;
+                    }
+
+                    const telCheck = OmniTeqValidator.validateTelemetry({ device_id: devId, variable: varVal.value, value: numVal });
+                    if (!telCheck.valid) {
+                        showToast(telCheck.error, 'error');
+                        return;
+                    }
+
+                    try {
+                        const res = await api.telemetry.ingest({
+                            device_id: devId,
+                            secret_key: secretInput.value.trim(),
+                            readings: [{ variable_id: varVal.value, value: numVal, recorded_at: new Date().toISOString() }]
+                        });
+                        const inserted = res.data ? (res.data.inserted !== undefined ? res.data.inserted : res.data.inserted_count) : 0;
+                        if (res.success || inserted > 0) {
+                            showToast(`Telemetry reading (${numVal}) pushed successfully!`, 'success');
+                            closeModal('ingestTelemetryModal');
+                            if (deviceSelect.value === devId) {
+                                loadTelemetryHistory();
+                            }
+                        } else {
+                            showToast(res.error?.message || 'Failed to ingest telemetry.', 'error');
+                        }
+                    } catch (err) {
+                        showToast(err.message || 'Error pushing telemetry.', 'error');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
