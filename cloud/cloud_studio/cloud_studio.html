@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OmniTeq Cloud Studio | Arduino & ESP32 Firmware Generator</title>
   <meta name="description" content="Generate production-ready Arduino & ESP32 firmware for the OmniTeq Cloud Platform: telemetry batch ingest, heartbeat, command polling and ACK.">
+  <!-- Theme: honour the shared preference before paint to avoid a flash. -->
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('theme-dark',t==='dark');e.classList.toggle('theme-light',t==='light');e.style.colorScheme=t;}catch(err){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Shared project design tokens & palette (single source of truth). -->
+  <link rel="stylesheet" href="../css/cloud.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="studio-ui.css">
 </head>
@@ -15,32 +19,49 @@
   <!-- Top Navigation Bar -->
   <header class="top-nav">
     <div class="brand-container">
-      <div class="brand-icon">
+      <a class="back-console-btn" id="btn-back-console" href="../cloud_dashboard.html" title="Back to the Cloud Console">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <!-- <span class="back-console-label">Back</span> -->
+      </a>
+      <!-- <div class="brand-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
           <polyline points="3 17 12 22 22 17"></polyline>
           <polyline points="2 12 12 17 22 12"></polyline>
         </svg>
-      </div>
+      </div> -->
       <div>
-        <h1 class="brand-title">OmniTeq Cloud Studio <span class="badge-version">v3.0</span></h1>
+        <h1 class="brand-title">OmniTeq Cloud Studio 
+          <span class="badge-version">v1.0</span>
+        </h1>
         <p class="brand-subtitle">Firmware Studio & OmniTeq Cloud Code Generator</p>
       </div>
+
     </div>
 
     <!-- View Mode Switcher: Studio (Split) vs Step Wizard (Page-by-Page) -->
-    <div class="view-mode-toggle">
-      <button class="mode-btn active" id="btn-mode-studio" title="Split view with live code preview">
-        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
-        Studio View
-      </button>
-      <button class="mode-btn" id="btn-mode-wizard" title="Step-by-step page wizard walkthrough">
-        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-        Page Wizard
-      </button>
+    <div>
+      <span class="studio-project-chip" id="studio-project-chip" title="Active project context" style="display: none;">
+        <span class="spc-name"></span>
+        <span class="spc-meta"></span>
+      </span>      
+      <div class="view-mode-toggle">
+        <button class="mode-btn active" id="btn-mode-studio" title="Split view with live code preview">
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+          Studio View
+        </button>
+        <button class="mode-btn" id="btn-mode-wizard" title="Step-by-step page wizard walkthrough">
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          Page Wizard
+        </button>
+      </div>
     </div>
 
     <div class="nav-controls">
+      <button type="button" class="btn btn-secondary studio-theme-toggle" id="btn-studio-theme" title="Toggle light / dark theme" aria-label="Toggle light or dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
       <button class="btn btn-secondary" id="btn-load-sample" title="Load smart greenhouse sample project">
         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
           <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -87,6 +108,20 @@
       </button>
     </div>
   </header>
+
+  <!-- Bug 8 — JSON backup guidance. Dismissible; preference is remembered. -->
+  <div class="studio-json-hint" id="studio-json-hint">
+    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+    <div class="studio-json-hint-text">
+      <strong>Save your project as JSON</strong>
+      <span>Download the project configuration to keep a backup or continue editing it later — use <b>Export</b> and <b>Import</b> above.</span>
+    </div>
+    <button type="button" class="studio-json-hint-close" id="studio-json-hint-close" aria-label="Dismiss">&times;</button>
+  </div>
 
   <!-- Main Studio Workspace Container -->
   <main class="studio-container">
@@ -330,11 +365,11 @@
             <div class="card-badge">Default Target</div>
             <div class="controller-icon-art">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#00F0FF" stroke-width="2"/>
-                <rect x="18" y="20" width="28" height="24" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
-                <path d="M22 28H42M22 34H36M22 40H30" stroke="#00F0FF" stroke-width="1.5" stroke-linecap="round"/>
-                <circle cx="12" cy="18" r="1.5" fill="#F59E0B"/><circle cx="12" cy="24" r="1.5" fill="#F59E0B"/><circle cx="12" cy="30" r="1.5" fill="#F59E0B"/><circle cx="12" cy="36" r="1.5" fill="#F59E0B"/><circle cx="12" cy="42" r="1.5" fill="#F59E0B"/>
-                <circle cx="52" cy="18" r="1.5" fill="#F59E0B"/><circle cx="52" cy="24" r="1.5" fill="#F59E0B"/><circle cx="52" cy="30" r="1.5" fill="#F59E0B"/><circle cx="52" cy="36" r="1.5" fill="#F59E0B"/><circle cx="52" cy="42" r="1.5" fill="#F59E0B"/>
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="var(--bg-card)" stroke="var(--neon-cyan)" stroke-width="2"/>
+                <rect x="18" y="20" width="28" height="24" rx="2" fill="var(--bg-card)" stroke="var(--border-glass)" stroke-width="1.5"/>
+                <path d="M22 28H42M22 34H36M22 40H30" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="12" cy="18" r="1.5" fill="var(--amber)"/><circle cx="12" cy="24" r="1.5" fill="var(--amber)"/><circle cx="12" cy="30" r="1.5" fill="var(--amber)"/><circle cx="12" cy="36" r="1.5" fill="var(--amber)"/><circle cx="12" cy="42" r="1.5" fill="var(--amber)"/>
+                <circle cx="52" cy="18" r="1.5" fill="var(--amber)"/><circle cx="52" cy="24" r="1.5" fill="var(--amber)"/><circle cx="52" cy="30" r="1.5" fill="var(--amber)"/><circle cx="52" cy="36" r="1.5" fill="var(--amber)"/><circle cx="52" cy="42" r="1.5" fill="var(--amber)"/>
               </svg>
             </div>
             <div class="controller-info">
@@ -355,9 +390,9 @@
             <div class="card-glow"></div>
             <div class="controller-icon-art">
               <svg viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
-                <rect x="18" y="20" width="28" height="24" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
-                <path d="M22 28H42M22 34H36" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="var(--bg-card)" stroke="var(--text-dim)" stroke-width="2"/>
+                <rect x="18" y="20" width="28" height="24" rx="2" fill="var(--bg-card)" stroke="var(--border-glass)" stroke-width="1.5"/>
+                <path d="M22 28H42M22 34H36" stroke="var(--emerald)" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="controller-info">
@@ -376,9 +411,9 @@
             <div class="card-glow"></div>
             <div class="controller-icon-art">
               <svg viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
-                <rect x="18" y="22" width="28" height="20" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
-                <path d="M22 30H38" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="var(--bg-card)" stroke="var(--text-dim)" stroke-width="2"/>
+                <rect x="18" y="22" width="28" height="20" rx="2" fill="var(--bg-card)" stroke="var(--border-glass)" stroke-width="1.5"/>
+                <path d="M22 30H38" stroke="var(--electric-violet)" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="controller-info">
@@ -397,8 +432,8 @@
             <div class="card-glow"></div>
             <div class="controller-icon-art">
               <svg viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="12" width="48" height="40" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
-                <rect x="18" y="22" width="28" height="20" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+                <rect x="8" y="12" width="48" height="40" rx="4" fill="var(--bg-card)" stroke="var(--text-dim)" stroke-width="2"/>
+                <rect x="18" y="22" width="28" height="20" rx="2" fill="var(--bg-card)" stroke="var(--border-glass)" stroke-width="1.5"/>
                 <circle cx="32" cy="32" r="5" stroke="#EC4899" stroke-width="1.5"/>
               </svg>
             </div>
@@ -616,6 +651,23 @@
           <button class="badge-add-btn" data-preset="ldr">+ LDR Light</button>
         </div>
 
+        <!-- Bug 9 — guidance toward the full sensor catalog (animated arrow) -->
+        <div class="quick-add-guide">
+          <div class="quick-add-guide-text">
+            <strong>Can't find your sensor?</strong>
+            <span>You can find more sensors by clicking <b>Open Add Sensor Catalog</b>.</span>
+          </div>
+          <div class="quick-add-guide-cta">
+            <span class="guide-arrow-label">Click here to find more sensors</span>
+            <svg class="guide-arrow" viewBox="0 0 120 24" width="112" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="4" y1="12" x2="104" y2="12"></line>
+              <polyline points="94 5 104 12 94 19"></polyline>
+            </svg>
+            <button class="btn btn-secondary" id="btn-open-add-sensor-page-guide" type="button">Open Add Sensor Catalog</button>
+          </div>
+        </div>
+
+
         <div class="cloud-note">
           <span class="cloud-note-icon">☁</span>
           <div>
@@ -821,7 +873,7 @@
       <!-- SECTION 6: DEDICATED FIRMWARE REVIEW PAGE (FOR WIZARD MODE) -->
       <section id="sec-firmware" class="section-card glassmorphic section-page wizard-only-page" data-page="6" style="display: none;">
         <div class="section-header">
-          <div class="sec-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald); border-color: rgba(16, 185, 129, 0.4);">SEC 06</div>
+          <div class="sec-badge" style="background: rgba(var(--emerald-rgb), 0.15); color: var(--emerald); border-color: rgba(var(--emerald-rgb), 0.4);">SEC 06</div>
           <div class="sec-title-group">
             <h2 class="sec-title">Firmware Deployment & Cloud Link Ready</h2>
             <p class="sec-desc">Your OmniteqIoTCloud sketch is generated and ready for flashing with the Arduino IDE or Arduino CLI.</p>
@@ -1182,7 +1234,7 @@
     <div class="modal-window">
       <div class="modal-header">
         <div class="modal-title-group">
-          <div class="sec-badge" style="background: rgba(139, 92, 246, 0.15); color: var(--electric-violet); border-color: rgba(139, 92, 246, 0.4);">ACTUATORS</div>
+          <div class="sec-badge" style="background: rgba(var(--electric-violet-rgb), 0.15); color: var(--electric-violet); border-color: rgba(var(--electric-violet-rgb), 0.4);">ACTUATORS</div>
           <h2 class="modal-title">Add Output Actuator / Controller</h2>
         </div>
         <button class="modal-close-btn" data-close-modal="modal-add-actuator">✕</button>
@@ -1304,7 +1356,7 @@
     <div class="modal-window modal-window-medium">
       <div class="modal-header">
         <div class="modal-title-group">
-          <div class="sec-badge" style="background: rgba(245, 158, 11, 0.15); color: var(--amber); border-color: rgba(245, 158, 11, 0.4);">LOGIC</div>
+          <div class="sec-badge" style="background: rgba(var(--amber-rgb), 0.15); color: var(--amber); border-color: rgba(var(--amber-rgb), 0.4);">LOGIC</div>
           <h2 class="modal-title">Create Autonomous Edge Rule</h2>
         </div>
         <button class="modal-close-btn" data-close-modal="modal-add-rule">✕</button>
@@ -1432,6 +1484,7 @@
 
   <!-- Main JavaScript Application Logic -->
   <!-- Shared gateway configuration (also used by the OmniTeq Cloud console pages) -->
+  <script src="../js/format.js"></script>
   <script src="../js/config.js"></script>
   <script src="studio-ui.js"></script>
   <script src="app.js"></script>

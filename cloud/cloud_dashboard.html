@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
@@ -23,114 +23,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li class="active">
-                    <a href="cloud_dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link-name">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_projects.html">
-                        <i class='bx bx-folder'></i>
-                        <span class="link-name">Projects</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_devices.html">
-                        <i class='bx bx-devices'></i>
-                        <span class="link-name">Devices</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_sensors.html">
-                        <i class='bx bx-chip'></i>
-                        <span class="link-name">Sensors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_commands.html">
-                        <i class='bx bx-terminal'></i>
-                        <span class="link-name">Commands</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_telemetry.html">
-                        <i class='bx bx-line-chart'></i>
-                        <span class="link-name">Telemetry</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_rules.html">
-                        <i class='bx bx-git-repo-forked'></i>
-                        <span class="link-name">Rules</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_webhooks.html">
-                        <i class='bx bx-broadcast'></i>
-                        <span class="link-name">Webhooks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_docs.html">
-                        <i class='bx bx-book-open'></i>
-                        <span class="link-name">Documentation</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="cloud_settings.html">
-                        <i class='bx bx-cog'></i>
-                        <span class="link-name">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="login.html">
-                        <i class='bx bx-log-out'></i>
-                        <span class="link-name">Logout</span>
-                    </a>
-                </li>
+                <li class="nav-section">Overview</li>
+                <li class="active"><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
+                <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
+                <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
+                <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
+                <li class="nav-section">Monitor</li>
+                <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
+                <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
+                <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
+                <li class="nav-section">System</li>
+                <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search devices, projects...">
                 </div>
                 <div class="topbar-actions">
-                    
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -144,10 +93,15 @@
             <!-- Dashboard Content -->
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1>Overview</h1>
-                    <a href="cloud_device_add.html" class="btn-primary" style="text-decoration: none;">
-                        <i class='bx bx-plus'></i> Add Device
-                    </a>
+                    <div class="page-header-main"><h1>Dashboard</h1><p class="page-subtitle">Monitor your IoT infrastructure in real-time</p></div>
+                    <div class="page-header-actions">
+                        <select class="styled-select" style="height: 38px; min-width: 160px;">
+                            <option>Last 24 hours</option>
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                        </select>
+                        <button class="icon-btn" id="dashboardRefresh" title="Refresh" onclick="window.location.reload()"><i class='bx bx-refresh'></i></button>
+                    </div>
                 </div>
 
                 <!-- Stats Cards -->
@@ -195,28 +149,43 @@
                 </div>
 
                 <div class="dashboard-grid">
-                    <!-- Chart Section -->
+                    <!-- Telemetry Overview -->
                     <div class="chart-container glass-panel">
                         <div class="panel-header">
-                            <h2>Telemetry Trends (Live)</h2>
+                            <h2>Telemetry Overview</h2>
                             <div class="panel-actions">
-                                <select class="styled-select">
-                                    <option>Temperature</option>
-                                    <option>Humidity</option>
-                                    <option>CO2 Levels</option>
+                                <select class="styled-select" id="telemetryMetricSelect" aria-label="Telemetry metric">
+                                    <option value="all">All Metrics</option>
+                                    <option value="temperature">Temperature</option>
+                                    <option value="humidity">Humidity</option>
+                                    <option value="voltage">Voltage</option>
                                 </select>
-                                <select class="styled-select">
-                                    <option>Last 24 Hours</option>
-                                    <option>Last 7 Days</option>
+                                <select class="styled-select" id="telemetryRangeSelect" aria-label="Telemetry time range">
+                                    <option value="24h">Last 24 Hours</option>
+                                    <option value="7d" selected>Last 7 Days</option>
+                                    <option value="30d">Last 30 Days</option>
                                 </select>
                             </div>
                         </div>
                         <div class="canvas-wrapper">
                             <canvas id="telemetryChart"></canvas>
                         </div>
+                        <div class="chart-legend" id="telemetryLegend"></div>
                     </div>
 
-                    <!-- Recent Devices / Quick Dispatch -->
+                    <!-- Device Health -->
+                    <div class="health-container glass-panel">
+                        <div class="panel-header"><h2>Device Health</h2></div>
+                        <div class="donut-wrapper" >
+                            <canvas id="deviceHealthChart"></canvas>
+                            <div class="donut-center"><span id="health-total">0</span><small>Devices</small></div>
+                        </div>
+                        <ul class="health-legend" id="health-legend" style="padding: 12px;"></ul>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid bottom-grid" style="margin-top: 16px;">
+                    <!-- Recent Devices -->
                     <div class="devices-container glass-panel">
                         <div class="panel-header">
                             <h2>Recent Devices</h2>
@@ -228,10 +197,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Recent Alerts -->
+                    <div class="alerts-container glass-panel">
+                        <div class="panel-header">
+                            <h2>Recent Alerts</h2>
+                            <a href="cloud_rules.html" class="view-all">View All</a>
+                        </div>
+                        <div class="alert-list" id="recent-alerts-list" style="padding: 6px 12px;"  >
+                            <div style="padding: 24px; text-align: center; color: var(--text-muted-dark); font-size: 13px;">
+                                <i class='bx bx-loader-alt bx-spin ui-loading-icon'></i> Loading alerts...
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 
                 <!-- Active Commands Table -->
-                <div class="table-container glass-panel mt-4">
+                <div class="table-container glass-panel mt-4" style="margin-top: 16px;">
                     <div class="panel-header">
                         <h2>Recent Command History</h2>
                     </div>
@@ -262,6 +245,7 @@
     </div>
 
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -272,14 +256,43 @@
         document.addEventListener('DOMContentLoaded', () => {
             const api = window.api;
 
+            // Projects from the last load, so the Telemetry selectors can
+            // re-query the same account without re-walking everything.
+            let dashboardProjects = [];
+
+            // Chart handles are kept in this scope on purpose. They must NOT be
+            // read back off `window`: the <canvas> ids are `telemetryChart` and
+            // `deviceHealthChart`, and HTML named access exposes every id as a
+            // window property, so `window.telemetryChart` resolves to the canvas
+            // ELEMENT until a chart is assigned over it. Guards like
+            // `if (!window.telemetryChart) return;` therefore passed on a canvas
+            // and the following `.data`/`.destroy()` access threw.
+            let telemetryChart = null;
+            let deviceHealthChart = null;
+
+            // Declared here, NOT further down the handler. `const` is hoisted but
+            // left uninitialised (temporal dead zone), so declaring it below
+            // initTelemetryMultiChart() made that call throw
+            // "Cannot access 'TELEMETRY_SERIES' before initialization" — which
+            // aborted this whole DOMContentLoaded handler and left every panel
+            // on its "Loading..." placeholder.
+            const TELEMETRY_SERIES = [
+                { key: 'temperature', label: 'Temperature', color: '#0EA5E9', matcher: /temp/i, varId: null },
+                { key: 'humidity', label: 'Humidity', color: '#8B5CF6', matcher: /humid|hum\b/i, varId: null },
+                { key: 'voltage', label: 'Voltage', color: '#34D399', matcher: /volt|battery/i, varId: null }
+            ];
+
             // Create the chart before any data arrives. Nothing previously
             // constructed it, so every update() call below was a no-op and the
             // overview canvas stayed blank.
-            window.omniteqInitTelemetryChart('telemetryChart', {
-                label: 'Live Telemetry',
-                showLegend: false,
-                pointRadius: 3
-            });
+            // Multi-series telemetry overview (Temperature / Humidity / Voltage).
+            initTelemetryMultiChart();
+
+            // Telemetry Overview controls: metric visibility + time range.
+            const metricSel = document.getElementById('telemetryMetricSelect');
+            if (metricSel) metricSel.addEventListener('change', applyTelemetryMetricVisibility);
+            const rangeSel = document.getElementById('telemetryRangeSelect');
+            if (rangeSel) rangeSel.addEventListener('change', () => loadTelemetryChartData(dashboardProjects));
 
             // Load user profile
             loadUserProfile();
@@ -300,68 +313,242 @@
                 }
             }
 
+            // "3m ago" / "2h ago" / "4d ago" from an ISO timestamp.
+            function relativeTime(iso) {
+                if (!iso) return 'never';
+                const diffMs = Date.now() - new Date(iso).getTime();
+                if (!isFinite(diffMs)) return 'unknown';
+                const mins = Math.floor(diffMs / 60000);
+                if (mins < 1) return 'just now';
+                if (mins < 60) return `${mins}m ago`;
+                const hours = Math.floor(mins / 60);
+                if (hours < 24) return `${hours}h ago`;
+                return `${Math.floor(hours / 24)}d ago`;
+            }
+
+            // Bucket a device status into the Device Health categories.
+            function deviceHealthKey(status) {
+                const s = String(status || '').toLowerCase();
+                if (s === 'online' || s === 'connected' || s === 'active') return 'online';
+                if (s.includes('provision') || s === 'pending' || s === 'registering') return 'provisioning';
+                if (s.includes('warn') || s.includes('error') || s === 'degraded') return 'warning';
+                return 'offline';
+            }
+
+            // Fetches every field the dashboard sections display and updates each
+            // section from its real data:
+            //   stat cards  -> devices / projects / command totals
+            //   Device Health -> online / offline / warning / provisioning
+            //   Recent Devices -> newest activity first
+            //   Recent Alerts -> alerts history
+            //   Recent Command History -> merged per-device history
+            //   Telemetry Overview -> Temperature / Humidity / Voltage series
             async function loadDashboardStats() {
+                const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+                let projects = [];
                 try {
                     const projRes = await api.projects.list();
-                    if (!projRes.success) return;
+                    projects = (projRes && projRes.success && Array.isArray(projRes.data)) ? projRes.data : [];
+                } catch (e) {
+                    console.error("Failed to load projects:", e);
+                    if (window.api && window.api.lastConnectionError && typeof showToast === 'function') {
+                        showToast('Cannot reach the OmniTeq gateway — dashboard data is unavailable.', 'error');
+                    }
+                }
+                dashboardProjects = projects;
 
-                    const projects = projRes.data;
+                let totalDevices = 0;
+                const health = { online: 0, offline: 0, warning: 0, provisioning: 0 };
+                const allDevicesList = [];
 
-                    let totalDevices = 0;
-                    let onlineDevices = 0;
-                    let offlineDevices = 0;
-                    let allDevicesList = [];
-
-                    for (let proj of projects) {
+                for (const proj of projects) {
+                    try {
                         const devRes = await api.devices.list(proj.id);
-                        if (devRes.success) {
+                        if (devRes && devRes.success && Array.isArray(devRes.data)) {
                             devRes.data.forEach(dev => {
+                                // Keep every field the Device list/health sections need.
                                 allDevicesList.push({
                                     ...dev,
+                                    projectId: proj.id,
                                     projectName: proj.name
                                 });
                                 totalDevices++;
-                                if (dev.status === 'online') {
-                                    onlineDevices++;
-                                } else {
-                                    offlineDevices++;
-                                }
+                                health[deviceHealthKey(dev.status)]++;
                             });
                         }
+                    } catch (e) {
+                        console.warn(`[Dashboard] Skipping project ${proj.id}:`, e && e.message);
                     }
+                }
 
-                    document.getElementById('stat-total-devices').textContent = totalDevices;
-                    document.getElementById('stat-online-devices').textContent = onlineDevices;
-                    document.getElementById('stat-offline-devices').textContent = offlineDevices;
-                    
-                    const activePercent = totalDevices > 0 ? Math.round((onlineDevices / totalDevices) * 100) : 0;
-                    document.getElementById('stat-active-percent').textContent = `${activePercent}% active`;
+                // ---- Stat cards ----
+                const onlineDevices = health.online;
+                const offlineDevices = health.offline;
+                const activePercent = totalDevices > 0 ? Math.round((onlineDevices / totalDevices) * 100) : 0;
 
-                    let totalCommands = 0;
-                    let globalCommandHistory = [];
+                setText('stat-total-devices', totalDevices);
+                setText('stat-devices-trend', projects.length
+                    ? `Across ${projects.length} project${projects.length === 1 ? '' : 's'}`
+                    : 'No projects yet');
+                setText('stat-online-devices', onlineDevices);
+                setText('stat-active-percent', `${activePercent}% online`);
+                setText('stat-offline-devices', offlineDevices);
+                setText('stat-offline-text', offlineDevices > 0
+                    ? `${offlineDevices} need attention`
+                    : 'All devices reachable');
 
-                    for (let dev of allDevicesList) {
-                        const cmdRes = await api.dispatch.getHistory(dev.id);
-                        if (cmdRes.success) {
-                            totalCommands += (cmdRes.meta && typeof cmdRes.meta.total === 'number') ? cmdRes.meta.total : (cmdRes.data ? cmdRes.data.length : 0);
-                            cmdRes.data.forEach(c => {
-                                globalCommandHistory.push({
-                                    ...c,
-                                    deviceName: dev.name
-                                });
+                // ---- Command totals + history (merged across devices) ----
+                let totalCommands = 0;
+                let succeededCommands = 0;
+                let failedCommands = 0;
+                let latestCommandAt = null;
+                const globalCommandHistory = [];
+
+                for (const dev of allDevicesList) {
+                    try {
+                        const cmdRes = await api.dispatch.getHistory(dev.id, { limit: 100 });
+                        if (cmdRes && cmdRes.success) {
+                            const rows = Array.isArray(cmdRes.data) ? cmdRes.data : [];
+                            totalCommands += (cmdRes.meta && typeof cmdRes.meta.total === 'number') ? cmdRes.meta.total : rows.length;
+                            rows.forEach(c => {
+                                const st = String(c.status || '').toLowerCase();
+                                if (st === 'success' || st === 'succeeded' || st === 'acked' || st === 'completed') succeededCommands++;
+                                else if (st === 'failed' || st === 'error' || st === 'timeout' || st === 'expired') failedCommands++;
+                                if (c.created_at && (!latestCommandAt || new Date(c.created_at) > new Date(latestCommandAt))) latestCommandAt = c.created_at;
+                                globalCommandHistory.push({ ...c, deviceName: dev.name, projectName: dev.projectName });
                             });
                         }
+                    } catch (e) {
+                        // One device's history must not stop the dashboard.
                     }
-                    document.getElementById('stat-commands-sent').textContent = totalCommands.toLocaleString();
+                }
 
-                    globalCommandHistory.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                setText('stat-commands-sent', totalCommands.toLocaleString());
+                setText('stat-commands-trend', totalCommands > 0
+                    ? `${succeededCommands} ok${failedCommands ? ` · ${failedCommands} failed` : ''}`
+                    : 'No commands yet');
 
-                    renderRecentDevices(allDevicesList);
-                    renderCommandHistory(globalCommandHistory.slice(0, 4));
-                    loadTelemetryChartData(projects);
+                globalCommandHistory.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
+                // ---- Sections ----
+                const recentDevices = allDevicesList.slice().sort((a, b) =>
+                    new Date(b.last_seen_at || 0) - new Date(a.last_seen_at || 0));
+
+                // Each panel is isolated: a failure in one must not abort the
+                // ones after it. Previously renderDeviceHealth() throwing took
+                // the Telemetry chart and Recent Alerts down with it.
+                try { renderRecentDevices(recentDevices); } catch (e) { console.warn('[Dashboard] Recent devices failed:', e); }
+                try { renderCommandHistory(globalCommandHistory.slice(0, 5)); } catch (e) { console.warn('[Dashboard] Command history failed:', e); }
+                try { renderDeviceHealth(health, totalDevices); } catch (e) { console.warn('[Dashboard] Device health failed:', e); }
+                try { loadTelemetryChartData(projects); } catch (e) { console.warn('[Dashboard] Telemetry chart failed:', e); }
+                try { loadRecentAlerts(); } catch (e) { console.warn('[Dashboard] Recent alerts failed:', e); }
+            }
+
+            // Releases a canvas before a new Chart is attached to it.
+            //
+            // `window.telemetryChart` / `window.deviceHealthChart` cannot be used
+            // as the existence test: the <canvas> elements carry those exact ids,
+            // and HTML named access puts every id on `window`. So on the first
+            // run `window.telemetryChart` is the canvas ELEMENT, not a chart —
+            // truthy, with no .destroy(), so `window.x.destroy()` threw
+            // "is not a function" and killed the rest of the load.
+            //
+            // Chart.getChart(canvas) asks Chart.js what is actually bound to the
+            // canvas, which also avoids "Canvas is already in use" when another
+            // script (js/cloud.js) built the chart.
+            function releaseCanvas(canvas) {
+                if (!canvas || typeof Chart === 'undefined') return;
+                try {
+                    const existing = (typeof Chart.getChart === 'function') ? Chart.getChart(canvas) : null;
+                    if (existing && typeof existing.destroy === 'function') existing.destroy();
                 } catch (e) {
-                    console.error("Dashboard calculation failed:", e);
+                    console.warn('[Dashboard] Could not release canvas:', e && e.message);
+                }
+            }
+
+            // Device Health donut + legend, built from the fleet status counts.
+            function renderDeviceHealth(health, total) {
+                const counts = health || { online: 0, offline: 0, warning: 0, provisioning: 0 };
+                const totalEl = document.getElementById('health-total');
+                if (totalEl) {
+                    totalEl.textContent = (total === undefined)
+                        ? (counts.online + counts.offline + counts.warning + counts.provisioning)
+                        : total;
+                }
+
+                const legendEl = document.getElementById('health-legend');
+                if (legendEl) {
+                    const rows = [
+                        ['Online', counts.online, '#34D399'],
+                        ['Offline', counts.offline, '#F87171'],
+                        ['Warning', counts.warning, '#FBBF24'],
+                        ['Provisioning', counts.provisioning, '#0EA5E9']
+                    ];
+                    legendEl.innerHTML = rows.map(r =>
+                        `<li><span class="hl-dot" style="background:${r[2]}"></span>${r[0]}<b>${r[1]}</b></li>`
+                    ).join('');
+                }
+
+                const canvas = document.getElementById('deviceHealthChart');
+                if (!canvas || typeof Chart === 'undefined') return;
+                releaseCanvas(canvas);
+                const colors = window.omniteqChartThemeColors ? window.omniteqChartThemeColors() : {};
+                deviceHealthChart = new Chart(canvas.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Online', 'Offline', 'Warning', 'Provisioning'],
+                        datasets: [{
+                            data: [counts.online, counts.offline, counts.warning, counts.provisioning],
+                            backgroundColor: ['#34D399', '#F87171', '#FBBF24', '#0EA5E9'],
+                            borderWidth: 0,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        cutout: '70%',
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: colors.tooltipBg,
+                                titleColor: colors.tooltipTitle,
+                                bodyColor: colors.tooltipBody,
+                                borderColor: colors.tooltipBorder,
+                                borderWidth: 1
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Recent Alerts from the alerts history endpoint.
+            async function loadRecentAlerts() {
+                const listEl = document.getElementById('recent-alerts-list');
+                if (!listEl) return;
+                try {
+                    const res = await api.alerts.history(1, 5);
+                    const alerts = (res && res.success && Array.isArray(res.data)) ? res.data : [];
+                    if (alerts.length === 0) {
+                        listEl.innerHTML = '<div class="alert-empty">No alerts recorded yet.</div>';
+                        return;
+                    }
+                    listEl.innerHTML = alerts.map(a => {
+                        const when = a.triggered_at || a.created_at || a.recorded_at;
+                        const time = when ? new Date(when).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
+                        const device = a.device_name || a.deviceName || a.device_id || 'Device';
+                        const msg = a.message || a.detail || a.alert_message || a.rule_name || 'Alert triggered';
+                        const sev = String(a.severity || a.status || '').toLowerCase();
+                        const dot = (sev.includes('crit') || sev.includes('high') || sev === 'failed') ? '#F87171'
+                            : sev.includes('warn') ? '#FBBF24' : '#34D399';
+                        return `<div class="alert-item">
+                            <span class="alert-time">${time}</span>
+                            <span class="alert-dot" style="background:${dot}"></span>
+                            <div class="alert-body"><strong>${escapeHtml(String(device))}</strong><span>${escapeHtml(String(msg))}</span></div>
+                        </div>`;
+                    }).join('');
+                } catch (e) {
+                    listEl.innerHTML = '<div class="alert-empty">Alerts are unavailable right now.</div>';
                 }
             }
 
@@ -381,18 +568,10 @@
                 }
 
                 listEl.innerHTML = devices.slice(0, 4).map(d => {
-                    const isOnline = d.status === 'online';
-                    const firmwareBadge = d.firmware_version ? `<span class="badge b-gray">${d.firmware_version}</span>` : '';
+                    const isOnline = deviceHealthKey(d.status) === 'online';
+                    const firmwareBadge = d.firmware_version ? `<span class="badge b-gray">${escapeHtml(d.firmware_version)}</span>` : '';
                     const statusPill = `<span class="status-pill ${isOnline ? 'is-online' : 'is-offline'}">${isOnline ? 'Online' : 'Offline'}</span>`;
-
-                    let timeStr = 'Never';
-                    if (d.last_seen_at) {
-                        const diffMs = Date.now() - new Date(d.last_seen_at).getTime();
-                        const diffMins = Math.floor(diffMs / 60000);
-                        if (diffMins < 1) timeStr = 'Just now';
-                        else if (diffMins < 60) timeStr = `${diffMins}m ago`;
-                        else timeStr = `${Math.floor(diffMins/60)}h ago`;
-                    }
+                    const timeStr = d.last_seen_at ? relativeTime(d.last_seen_at) : 'Never';
 
                     return `
                         <div class="device-item">
@@ -421,120 +600,206 @@
                 }
 
                 bodyEl.innerHTML = history.map(c => {
+                    const statusStr = String(c.status || 'queued').toLowerCase();
                     let statusClass = 'queued';
-                    if (c.status === 'success') statusClass = 'success';
-                    else if (c.status === 'failed') statusClass = 'failed';
-                    else if (c.status === 'sent') statusClass = 'sent';
+                    if (statusStr === 'success') statusClass = 'success';
+                    else if (statusStr === 'failed') statusClass = 'failed';
+                    else if (statusStr === 'sent') statusClass = 'sent';
 
-                    const cmdIdShort = c.id.substring(0, 10) + '...';
-                    
-                    let timeStr = 'Unknown';
-                    const diffMs = Date.now() - new Date(c.created_at).getTime();
-                    const diffMins = Math.floor(diffMs / 60000);
-                    if (diffMins < 1) timeStr = 'Just now';
-                    else if (diffMins < 60) timeStr = `${diffMins}m ago`;
-                    else timeStr = `${Math.floor(diffMins/60)}h ago`;
+                    const rawId = c.id ? String(c.id) : '';
+                    const cmdIdShort = rawId ? (rawId.length > 12 ? rawId.slice(0, 10) + '...' : rawId) : '—';
+                    const timeStr = c.created_at ? relativeTime(c.created_at) : 'Unknown';
+
+                    const params = (c.parameters && typeof c.parameters === 'object') ? Object.values(c.parameters).join(', ') : '';
+                    const cmdName = c.command_name || c.template_name || 'command';
 
                     return `
                         <tr>
-                            <td class="id-col" title="${c.id}">${cmdIdShort}</td>
-                            <td>${c.deviceName}</td>
-                            <td><code>${c.command_name || c.template_name}(${Object.values(c.parameters || {}).join(', ')})</code></td>
-                            <td>${c.issued_by_name}</td>
-                            <td><span class="status-badge ${statusClass}">${c.status.charAt(0).toUpperCase() + c.status.slice(1)}</span></td>
+                            <td class="id-col" title="${escapeHtml(rawId)}">${escapeHtml(cmdIdShort)}</td>
+                            <td>${escapeHtml(c.deviceName || '—')}</td>
+                            <td><code>${escapeHtml(cmdName)}(${escapeHtml(params)})</code></td>
+                            <td>${escapeHtml(c.issued_by_name || c.issued_by || '—')}</td>
+                            <td><span class="status-badge ${statusClass}">${statusStr.charAt(0).toUpperCase() + statusStr.slice(1)}</span></td>
                             <td>${timeStr}</td>
                         </tr>
                     `;
                 }).join('');
             }
 
+            // Time window for the Telemetry Overview, from the range selector.
+            // getRecent() clamps it to the plan's query_range_days.
+            function telemetrySpanMs() {
+                const sel = document.getElementById('telemetryRangeSelect');
+                const v = sel ? sel.value : '7d';
+                if (v === '24h') return 24 * 60 * 60 * 1000;
+                if (v === '30d') return 30 * 24 * 60 * 60 * 1000;
+                return 7 * 24 * 60 * 60 * 1000;
+            }
+
+            function selectedTelemetryMetric() {
+                const sel = document.getElementById('telemetryMetricSelect');
+                return sel ? sel.value : 'all';
+            }
+
+            // Show only the selected metric (or all), without refetching.
+            function applyTelemetryMetricVisibility() {
+                const chart = telemetryChart;
+                if (!chart) return;
+                const metric = selectedTelemetryMetric();
+                chart.data.datasets.forEach((ds, i) => {
+                    const key = TELEMETRY_SERIES[i] ? TELEMETRY_SERIES[i].key : null;
+                    ds.hidden = metric !== 'all' && key !== metric;
+                });
+                chart.update();
+            }
+
+            // HH:MM for intraday windows, MM/DD HH:MM for multi-day windows.
+            function telemetryLabel(iso) {
+                const d = new Date(iso);
+                const hm = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+                if (telemetrySpanMs() <= 24 * 60 * 60 * 1000) return hm;
+                return `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')} ${hm}`;
+            }
+
+            function hexToRgba(hex, a) {
+                const h = hex.replace('#', '');
+                const n = parseInt(h, 16);
+                return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+            }
+
+            function renderTelemetryLegend() {
+                const el = document.getElementById('telemetryLegend');
+                if (!el) return;
+                el.innerHTML = TELEMETRY_SERIES.map(s =>
+                    `<span class="legend-item"><span class="legend-dot" style="background:${s.color}"></span>${s.label}</span>`
+                ).join('');
+            }
+
+            // Multi-series overview chart (Temperature / Humidity / Voltage).
+            function initTelemetryMultiChart() {
+                const canvas = document.getElementById('telemetryChart');
+                if (!canvas || typeof Chart === 'undefined') return;
+                const colors = window.omniteqChartThemeColors ? window.omniteqChartThemeColors() : {};
+                releaseCanvas(canvas);
+                telemetryChart = new Chart(canvas.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: TELEMETRY_SERIES.map(s => ({
+                            label: s.label,
+                            data: [],
+                            borderColor: s.color,
+                            backgroundColor: hexToRgba(s.color, 0.12),
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 2,
+                            pointHitRadius: 8,
+                            pointBackgroundColor: s.color,
+                            borderWidth: 2
+                        }))
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: colors.tooltipBg,
+                                titleColor: colors.tooltipTitle,
+                                bodyColor: colors.tooltipBody,
+                                borderColor: colors.tooltipBorder,
+                                borderWidth: 1
+                            }
+                        },
+                        scales: {
+                            x: { grid: { color: colors.grid, drawBorder: false }, ticks: { color: colors.muted, maxTicksLimit: 8 } },
+                            y: { grid: { color: colors.grid, drawBorder: false }, ticks: { color: colors.muted }, beginAtZero: true }
+                        }
+                    }
+                });
+                renderTelemetryLegend();
+            }
+
             async function loadTelemetryChartData(projects) {
+                const projectList = Array.isArray(projects) ? projects : dashboardProjects;
                 try {
-                    let variableId = null;
-                    
-                    if (projects && projects.length > 0) {
-                        for (let proj of projects) {
+                    // Resolve each series to a real variable once, across the fleet.
+                    if (!TELEMETRY_SERIES.some(s => s.varId)) {
+                        for (const proj of projectList) {
                             const devRes = await api.devices.list(proj.id);
-                            if (devRes.success) {
-                                for (let dev of devRes.data) {
-                                    const senRes = await api.sensors.list(dev.id);
-                                    if (senRes.success) {
-                                        for (let sen of senRes.data) {
-                                            const varRes = await api.variables.list(sen.id);
-                                            if (varRes.success && varRes.data.length > 0) {
-                                                const tempVar = varRes.data.find(v => v.label.toLowerCase().includes('temp')) || varRes.data[0];
-                                                if (tempVar) {
-                                                    variableId = tempVar.id;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    if (variableId) break;
+                            if (!devRes || !devRes.success || !Array.isArray(devRes.data)) continue;
+                            for (const dev of devRes.data) {
+                                const senRes = await api.sensors.list(dev.id);
+                                if (!senRes || !senRes.success || !Array.isArray(senRes.data)) continue;
+                                for (const sen of senRes.data) {
+                                    const varRes = await api.variables.list(sen.id);
+                                    if (!varRes || !varRes.success || !Array.isArray(varRes.data)) continue;
+                                    varRes.data.forEach(v => {
+                                        TELEMETRY_SERIES.forEach(s => {
+                                            if (!s.varId && s.matcher.test(v.label || '')) s.varId = v.id;
+                                        });
+                                    });
                                 }
                             }
-                            if (variableId) break;
                         }
                     }
 
-                    if (!variableId) {
-                        if (window.telemetryChart) {
-                            window.telemetryChart.data.labels = ['No Data Stream'];
-                            window.telemetryChart.data.datasets[0].data = [0];
-                            window.telemetryChart.update();
+                    // Fetch the last-12 readings for each located variable over the
+                    // selected window.
+                    const span = telemetrySpanMs();
+                    const perSeries = [];
+                    let labels = [];
+                    for (const s of TELEMETRY_SERIES) {
+                        let readings = [];
+                        if (s.varId) {
+                            const recent = await api.telemetry.getRecent(s.varId, 12, span);
+                            readings = Array.isArray(recent) ? recent.slice(-12) : [];
                         }
-                        return;
+                        if (!labels.length && readings.length) {
+                            labels = readings.map(pt => telemetryLabel(pt.recorded_at));
+                        }
+                        perSeries.push(readings.map(pt => pt.value));
                     }
 
-                    // getRecent() rather than getHistory(.., 8): the gateway applies
-                    // `limit` to the OLDEST rows in the window, so limit=8 returned
-                    // the eight earliest readings and this chart plotted stale data.
-                    const recent = await api.telemetry.getRecent(variableId, 8);
-                    const historyReadings = Array.isArray(recent) ? recent : [];
-
-                    if (historyReadings.length > 0) {
-                        const labels = [];
-                        const data = [];
-
-                        // Keep only last 8 readings in ascending time order
-                        const readings = historyReadings.slice(-8);
-                        readings.forEach(pt => {
-                            const date = new Date(pt.recorded_at);
-                            const label = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-                            labels.push(label);
-                            data.push(pt.value);
-                        });
-
-                        if (window.telemetryChart) {
-                            window.telemetryChart.data.labels = labels;
-                            window.telemetryChart.data.datasets[0].data = data;
-                            window.telemetryChart.update();
+                    const chart = telemetryChart;
+                    if (!chart) return;
+                    if (!labels.length) labels = ['No Data Stream'];
+                    chart.data.labels = labels;
+                    chart.data.datasets.forEach((ds, i) => {
+                        const vals = perSeries[i] || [];
+                        // Align shorter series to the right of the shared label count.
+                        const aligned = new Array(labels.length).fill(null);
+                        const offset = Math.max(0, labels.length - vals.length);
+                        for (let k = 0; k < Math.min(vals.length, labels.length); k++) {
+                            aligned[offset + k] = vals[k];
                         }
-                    }
-
-                    // Dynamic WebSocket listening
-                    api.connectWebSocket((msg) => {
-                        if (msg.type === 'telemetry.update' && msg.variable_id === variableId) {
-                            const val = msg.value;
-                            const date = new Date(msg.recorded_at);
-                            const label = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-                            
-                            if (window.telemetryChart) {
-                                window.telemetryChart.data.labels.push(label);
-                                window.telemetryChart.data.datasets[0].data.push(val);
-                                
-                                if (window.telemetryChart.data.labels.length > 8) {
-                                    window.telemetryChart.data.labels.shift();
-                                    window.telemetryChart.data.datasets[0].data.shift();
-                                }
-                                
-                                window.telemetryChart.update();
-                            }
-                        } else if (msg.type === 'command.status' || msg.type === 'device.status') {
-                            loadDashboardStats();
-                        }
+                        ds.data = aligned;
                     });
+                    applyTelemetryMetricVisibility();
 
+                    // Register the live listener once: loadDashboardStats() can run
+                    // repeatedly (WebSocket events) and must not stack sockets.
+                    if (!window._dashboardWsConnected) {
+                        window._dashboardWsConnected = true;
+                        api.connectWebSocket((msg) => {
+                            if (msg.type === 'telemetry.update') {
+                                const idx = TELEMETRY_SERIES.findIndex(s => s.varId === msg.variable_id);
+                                if (idx >= 0 && telemetryChart) {
+                                    const label = telemetryLabel(msg.recorded_at);
+                                    telemetryChart.data.labels.push(label);
+                                    telemetryChart.data.datasets[idx].data.push(msg.value);
+                                    if (telemetryChart.data.labels.length > 12) {
+                                        telemetryChart.data.labels.shift();
+                                        telemetryChart.data.datasets.forEach(ds => ds.data.shift());
+                                    }
+                                    telemetryChart.update();
+                                }
+                            } else if (msg.type === 'command.status' || msg.type === 'device.status') {
+                                loadDashboardStats();
+                            }
+                        });
+                    }
                 } catch (e) {
                     console.error("Telemetry live loader failed:", e);
                 }

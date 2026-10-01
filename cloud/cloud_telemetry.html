@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
@@ -23,114 +23,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li>
-                    <a href="cloud_dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link-name">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_projects.html">
-                        <i class='bx bx-folder'></i>
-                        <span class="link-name">Projects</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_devices.html">
-                        <i class='bx bx-devices'></i>
-                        <span class="link-name">Devices</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_sensors.html">
-                        <i class='bx bx-chip'></i>
-                        <span class="link-name">Sensors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_commands.html">
-                        <i class='bx bx-terminal'></i>
-                        <span class="link-name">Commands</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="cloud_telemetry.html">
-                        <i class='bx bx-line-chart'></i>
-                        <span class="link-name">Telemetry</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_rules.html">
-                        <i class='bx bx-git-repo-forked'></i>
-                        <span class="link-name">Rules</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_webhooks.html">
-                        <i class='bx bx-broadcast'></i>
-                        <span class="link-name">Webhooks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_docs.html">
-                        <i class='bx bx-book-open'></i>
-                        <span class="link-name">Documentation</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="cloud_settings.html">
-                        <i class='bx bx-cog'></i>
-                        <span class="link-name">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="login.html">
-                        <i class='bx bx-log-out'></i>
-                        <span class="link-name">Logout</span>
-                    </a>
-                </li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
+                <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
+                <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
+                <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
+                <li class="nav-section">Monitor</li>
+                <li class="active"><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
+                <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
+                <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
+                <li class="nav-section">System</li>
+                <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search devices, projects...">
                 </div>
                 <div class="topbar-actions">
-                    
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -144,60 +93,98 @@
             <!-- Dashboard Content -->
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1>Telemetry Analysis</h1>
-                    <div class="panel-actions" style="display: flex; gap: 10px;">
-                        <button class="btn-primary" id="openIngestModalBtn" onclick="openModal('ingestTelemetryModal')"><i class='bx bx-upload'></i> Push Reading</button>
-                        <button class="btn-ghost" id="export-csv-btn" style="color: var(--text-light);"><i class='bx bx-download'></i> Export CSV</button>
-                        <select class="styled-select" id="time-window-select">
-                            <option value="24h">Last 24 hours</option>
-                            <option value="7d" selected>Last 7 days</option>
-                            <option value="30d">Last 30 days</option>
-                        </select>
+                    <div class="page-header-main"><h1>Telemetry</h1><p class="page-subtitle">View and analyze device telemetry data</p></div>
+                    <div class="page-header-actions">
+                        <label class="switch-field" title="Auto refresh the chart and table">
+                            <span class="switch-label">Auto Refresh</span>
+                            <input type="checkbox" id="auto-refresh-toggle" class="switch-input" checked>
+                            <span class="switch"></span>
+                        </label>
+                        <div class="dropdown" id="export-dropdown">
+                            <button type="button" class="btn-ghost" id="export-menu-btn"><i class='bx bx-export'></i> Export <i class='bx bx-chevron-down'></i></button>
+                            <div class="dropdown-menu">
+                                <button type="button" id="export-csv-btn"><i class='bx bx-download'></i> Export CSV</button>
+                                <button type="button" id="push-reading-btn" onclick="openModal('ingestTelemetryModal')"><i class='bx bx-upload'></i> Push Reading</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="dashboard-grid" style="grid-template-columns: 1fr;">
-                    <!-- Chart Section -->
+                <!-- Filter bar -->
+                <div class="glass-panel telem-filters">
+                    <div class="telem-field">
+                        <label for="project-select">Project</label>
+                        <select class="styled-select" id="project-select"><option value="all">All Projects</option></select>
+                    </div>
+                    <div class="telem-field">
+                        <label for="telemetry-device-select">Device</label>
+                        <select class="styled-select" id="telemetry-device-select"><option value="">Select Device...</option></select>
+                    </div>
+                    <div class="telem-field">
+                        <label for="telemetry-variable-select">Sensor / Metric</label>
+                        <select class="styled-select" id="telemetry-variable-select"><option value="">Select Metric...</option></select>
+                    </div>
+                    <div class="telem-field">
+                        <label for="time-window-select">Time Range</label>
+                        <select class="styled-select" id="time-window-select">
+                            <option value="24h" selected>Last 24 hours</option>
+                            <option value="7d">Last 7 days</option>
+                            <option value="30d">Last 30 days</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn-primary telem-apply" id="apply-filters-btn"><i class='bx bx-filter-alt'></i> Apply</button>
+                </div>
+
+                <!-- Chart + live stats -->
+                <div class="telem-main">
                     <div class="chart-container glass-panel">
                         <div class="panel-header">
-                            <h2>Detailed Telemetry Plot</h2>
-                            <div class="panel-actions">
-                                <select class="styled-select" id="telemetry-device-select">
-                                    <option value="">Select Device...</option>
-                                </select>
-                                <select class="styled-select" id="telemetry-variable-select">
-                                    <option value="">Select Metric...</option>
-                                </select>
-                            </div>
+                            <h2 id="telemetry-chart-title">Telemetry</h2>
                         </div>
-                        <div class="canvas-wrapper" style="height: 450px;">
-                            <!-- Reusing the same ID so cloud.js initializes the chart here -->
+                        <div class="canvas-wrapper" style="height: 320px;">
                             <canvas id="telemetryChart"></canvas>
                         </div>
+                        <div class="chart-legend" id="telemetry-legend"></div>
+                    </div>
+                    <div class="telem-stats">
+                        <div class="stat-card glass-panel"><div class="stat-details"><h3>Current</h3><h2 id="tel-current">—</h2><span class="kpi-delta muted" id="tel-current-time">No data</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-details"><h3>Minimum</h3><h2 id="tel-min">—</h2><span class="kpi-delta muted" id="tel-min-time">—</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-details"><h3>Average</h3><h2 id="tel-avg">—</h2><span class="kpi-delta muted">Selected range</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-details"><h3>Maximum</h3><h2 id="tel-max">—</h2><span class="kpi-delta muted" id="tel-max-time">—</span></div></div>
                     </div>
                 </div>
-                
-                <div class="table-container glass-panel mt-4">
-                    <div class="panel-header">
-                        <h2>Raw Data Logs</h2>
+
+                <!-- Data table + statistics -->
+                <div class="telem-bottom">
+                    <div class="table-container glass-panel">
+                        <div class="panel-header"><h2>Telemetry Data</h2></div>
+                        <div class="table-responsive">
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 48px;">#</th>
+                                        <th>Timestamp</th>
+                                        <th>Value</th>
+                                        <th>Device</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="raw-telemetry-body">
+                                    <tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-secondary);">Please select a device and metric to load telemetry.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>Timestamp</th>
-                                    <th>Device</th>
-                                    <th>Metric</th>
-                                    <th>Value</th>
-                                    <th>Unit</th>
-                                </tr>
-                            </thead>
-                            <tbody id="raw-telemetry-body">
-                                <tr>
-                                    <td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Please select a device and metric to load telemetry raw logs.</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="glass-panel telem-statistics">
+                        <div class="panel-header"><h2>Statistics</h2></div>
+                        <ul class="stats-list" id="telemetry-statistics">
+                            <li><span>Total Records</span><b id="stat-total-records">0</b></li>
+                            <li><span>Valid Records</span><b id="stat-valid-records" class="text-green">0</b></li>
+                            <li><span>Invalid Records</span><b id="stat-invalid-records" class="text-red">0</b></li>
+                            <li><span>Data Interval</span><b id="stat-data-interval">—</b></li>
+                            <li><span>First Record</span><b id="stat-first-record">—</b></li>
+                            <li><span>Last Record</span><b id="stat-last-record">—</b></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -241,6 +228,7 @@
     </div>
 
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -256,8 +244,11 @@
             const tableBody = document.getElementById('raw-telemetry-body');
             const timeSelect = document.getElementById('time-window-select');
             const exportBtn = document.getElementById('export-csv-btn');
+            const projectSelect = document.getElementById('project-select');
+            const applyBtn = document.getElementById('apply-filters-btn');
 
             let allDevices = [];
+            let allProjects = [];
             let currentVariables = [];
             let activeHistory = [];
             let selectedDeviceName = '';
@@ -334,35 +325,54 @@
             async function loadDevices() {
                 try {
                     const projRes = await api.projects.list();
-                    if (projRes.success) {
-                        const projects = projRes.data;
-                        allDevices = [];
-                        let options = '<option value="">Select Device...</option>';
+                    if (!projRes.success) return;
 
-                        for (let proj of projects) {
-                            const devRes = await api.devices.list(proj.id);
-                            if (devRes.success) {
-                                devRes.data.forEach(dev => {
-                                    allDevices.push(dev);
-                                    options += `<option value="${dev.id}">${dev.name} [${dev.status || 'offline'}] (${proj.name})</option>`;
-                                });
-                            }
+                    const projects = projRes.data;
+                    allProjects = projects;
+                    allDevices = [];
+
+                    for (let proj of projects) {
+                        const devRes = await api.devices.list(proj.id);
+                        if (devRes.success) {
+                            devRes.data.forEach(dev => {
+                                allDevices.push({ ...dev, projectId: proj.id, projectName: proj.name });
+                            });
                         }
-                        if (allDevices.length === 0) {
-                            options = '<option value="">No devices registered</option>';
-                            tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
-                                <i class='bx bx-devices' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
-                                No devices found in your account.<br>
-                                <a href="cloud_device_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Add a device</a> to start viewing telemetry.
-                            </td></tr>`;
-                        }
-                        deviceSelect.innerHTML = options;
-                        const ingestTarget = document.getElementById('ingestTargetDevice');
-                        if (ingestTarget) ingestTarget.innerHTML = options;
+                    }
+
+                    if (projectSelect) {
+                        projectSelect.innerHTML = '<option value="all">All Projects</option>' +
+                            projects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                    }
+
+                    rebuildDeviceOptions();
+
+                    if (allDevices.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 36px 20px; color: var(--text-secondary);">
+                            <i class='bx bx-devices' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
+                            No devices found in your account.<br>
+                            <a href="cloud_device_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Add a device</a> to start viewing telemetry.
+                        </td></tr>`;
                     }
                 } catch (e) {
                     console.error("Failed to load devices:", e);
                 }
+            }
+
+            // Device options cascade from the selected project. Resetting the
+            // dependent metric + table avoids querying a device that is no longer
+            // in scope.
+            function rebuildDeviceOptions() {
+                if (!deviceSelect) return;
+                const pid = projectSelect ? projectSelect.value : 'all';
+                const scoped = allDevices.filter(d => pid === 'all' || d.projectId === pid);
+                const options = scoped.length
+                    ? '<option value="">Select Device...</option>' + scoped.map(d => `<option value="${d.id}">${escapeHtml(d.name)} [${d.status || 'offline'}] (${escapeHtml(d.projectName)})</option>`).join('')
+                    : '<option value="">No devices</option>';
+                deviceSelect.innerHTML = options;
+                variableSelect.innerHTML = '<option value="">Select Metric...</option>';
+                const ingestTarget = document.getElementById('ingestTargetDevice');
+                if (ingestTarget) ingestTarget.innerHTML = options;
             }
 
             // Populate variables on device change
@@ -390,7 +400,8 @@
                                         ...v,
                                         unit: sen.unit
                                     });
-                                    options += `<option value="${v.id}">${v.label} (${sen.unit})</option>`;
+                                    const u = window.formatSensorUnit(sen.unit, v.label);
+                                    options += `<option value="${v.id}">${escapeHtml(v.label)}${u ? ' (' + escapeHtml(u) + ')' : ''}</option>`;
                                 });
                             }
                         }
@@ -405,6 +416,31 @@
             variableSelect.addEventListener('change', loadTelemetryHistory);
             timeSelect.addEventListener('change', loadTelemetryHistory);
 
+            if (projectSelect) projectSelect.addEventListener('change', rebuildDeviceOptions);
+            if (applyBtn) applyBtn.addEventListener('click', loadTelemetryHistory);
+
+            // Auto refresh: periodically re-run the active query. Live WebSocket
+            // points still stream in independently of this toggle.
+            const autoToggle = document.getElementById('auto-refresh-toggle');
+            let autoTimer = null;
+            function applyAutoRefresh() {
+                if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+                if (autoToggle && autoToggle.checked) {
+                    autoTimer = setInterval(() => {
+                        if (!document.hidden && variableSelect.value) loadTelemetryHistory();
+                    }, 15000);
+                }
+            }
+            if (autoToggle) { autoToggle.addEventListener('change', applyAutoRefresh); applyAutoRefresh(); }
+
+            // Export dropdown menu.
+            const exportDropdown = document.getElementById('export-dropdown');
+            const exportMenuBtn = document.getElementById('export-menu-btn');
+            if (exportDropdown && exportMenuBtn) {
+                exportMenuBtn.addEventListener('click', (e) => { e.stopPropagation(); exportDropdown.classList.toggle('open'); });
+                document.addEventListener('click', () => exportDropdown.classList.remove('open'));
+            }
+
             async function loadTelemetryHistory() {
                 const varId = variableSelect.value;
                 if (!varId) {
@@ -414,7 +450,7 @@
 
                 const variable = currentVariables.find(v => v.id === varId);
                 selectedVariableName = variable ? variable.label : '';
-                selectedUnit = variable ? variable.unit : '';
+                selectedUnit = variable ? window.formatSensorUnit(variable.unit, variable.label) : '';
 
                 // The dropdown selects a TIME WINDOW (24h / 7d / 30d), not a row
                 // count. It used to be passed as `limit`, so "Last 7 days" became
@@ -478,32 +514,74 @@
 
             function renderRawTable() {
                 if (activeHistory.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">No telemetry logs recorded.</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-secondary);">No telemetry logs recorded.</td></tr>';
                     return;
                 }
 
-                // Newest first. The API returns readings oldest-first, while live
-                // WebSocket points are unshifted onto the front, so the array order
-                // was mixed. Sorting here makes the table order deterministic.
+                // Newest first (the API returns oldest-first; live WS points are
+                // unshifted, so sorting makes the order deterministic).
                 const rows = [...activeHistory]
                     .sort((a, b) => new Date(b.recorded_at) - new Date(a.recorded_at));
 
-                tableBody.innerHTML = rows.map(pt => {
-                    const dateStr = new Date(pt.recorded_at).toLocaleString();
+                tableBody.innerHTML = rows.map((pt, i) => {
+                    const valid = isFinite(Number(pt.value));
                     return `
                         <tr>
-                            <td>${escapeHtml(dateStr)}</td>
+                            <td>${i + 1}</td>
+                            <td>${escapeHtml(new Date(pt.recorded_at).toLocaleString())}</td>
+                            <td><strong>${escapeHtml(window.formatSensorReading(pt.value, pt.unit, pt.label))}</strong></td>
                             <td>${escapeHtml(selectedDeviceName)}</td>
-                            <td>${escapeHtml(pt.label)}</td>
-                            <td class="id-col"><strong>${escapeHtml(pt.value)}</strong></td>
-                            <td>${escapeHtml(pt.unit)}</td>
+                            <td><span class="pill ${valid ? 'pill-success' : 'pill-danger'}">${valid ? 'Valid' : 'Invalid'}</span></td>
                         </tr>
                     `;
                 }).join('');
             }
 
+            function formatInterval(ms) {
+                const s = Math.round(ms / 1000);
+                if (s < 60) return s + ' seconds';
+                const m = Math.round(s / 60);
+                if (m < 60) return m + ' minutes';
+                const h = Math.round(m / 60);
+                if (h < 24) return h + ' hours';
+                return Math.round(h / 24) + ' days';
+            }
+
+            // Statistics panel (design): record counts, validity, cadence, range.
+            function renderStatistics(rows) {
+                const setS = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+                const total = rows.length;
+                const valid = rows.filter(p => isFinite(Number(p.value))).length;
+                const invalid = total - valid;
+
+                setS('stat-total-records', total.toLocaleString());
+                const validEl = document.getElementById('stat-valid-records');
+                if (validEl) validEl.textContent = `${valid.toLocaleString()} (${total ? (valid / total * 100).toFixed(2) : '0.00'}%)`;
+                const invalidEl = document.getElementById('stat-invalid-records');
+                if (invalidEl) invalidEl.textContent = `${invalid.toLocaleString()} (${total ? (invalid / total * 100).toFixed(2) : '0.00'}%)`;
+
+                const times = rows.map(p => new Date(p.recorded_at).getTime()).filter(t => isFinite(t)).sort((a, b) => a - b);
+                if (times.length >= 2) {
+                    const gaps = [];
+                    for (let i = 1; i < times.length; i++) gaps.push(times[i] - times[i - 1]);
+                    const avg = gaps.reduce((a, b) => a + b, 0) / gaps.length;
+                    setS('stat-data-interval', formatInterval(avg));
+                } else {
+                    setS('stat-data-interval', '—');
+                }
+                setS('stat-first-record', times.length ? new Date(times[0]).toLocaleString() : '—');
+                setS('stat-last-record', times.length ? new Date(times[times.length - 1]).toLocaleString() : '—');
+            }
+
             function renderChart() {
-                if (activeHistory.length === 0) return;
+                if (activeHistory.length === 0) {
+                    const t = document.getElementById('telemetry-chart-title');
+                    if (t) t.textContent = 'Telemetry';
+                    const l = document.getElementById('telemetry-legend');
+                    if (l) l.innerHTML = '';
+                    renderStatistics([]);
+                    return;
+                }
 
                 const labels = [];
                 const data = [];
@@ -518,19 +596,50 @@
                     data.push(pt.value);
                 });
 
+                // KPI summary (current / min / average / max).
+                const nums = data.filter(v => typeof v === 'number' && isFinite(v));
+                const setK = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+                if (nums.length) {
+                    const u = selectedUnit ? (' ' + selectedUnit) : '';
+                    const current = nums[nums.length - 1];
+                    const min = Math.min.apply(null, nums);
+                    const max = Math.max.apply(null, nums);
+                    const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
+                    setK('tel-current', window.formatSensorValue(current) + u);
+                    setK('tel-min', window.formatSensorValue(min) + u);
+                    setK('tel-avg', window.formatSensorValue(Math.round(avg * 100) / 100) + u);
+                    setK('tel-max', window.formatSensorValue(max) + u);
+                    const last = sorted[sorted.length - 1];
+                    setK('tel-current-time', last ? new Date(last.recorded_at).toLocaleTimeString() : 'No data');
+                    setK('tel-min-time', 'Selected range');
+                    setK('tel-max-time', 'Selected range');
+                } else {
+                    setK('tel-current', '—'); setK('tel-min', '—'); setK('tel-avg', '—'); setK('tel-max', '—');
+                }
+
+                const computedStyle = getComputedStyle(document.documentElement);
+                const primaryColor = (computedStyle.getPropertyValue('--primary') || '#3b82f6').trim() || '#3b82f6';
+
                 if (window.telemetryChart) {
                     window.telemetryChart.data.labels = labels;
                     window.telemetryChart.data.datasets[0].label = `${selectedVariableName} (${selectedUnit})`;
                     window.telemetryChart.data.datasets[0].data = data;
-                    
-                    // Adjust chart accent color matching page accent color dynamically
-                    const computedStyle = getComputedStyle(document.body);
-                    const primaryColor = computedStyle.getPropertyValue('--primary-color') || '#3b82f6';
-                    
                     window.telemetryChart.data.datasets[0].borderColor = primaryColor;
                     window.telemetryChart.data.datasets[0].pointBorderColor = primaryColor;
                     window.telemetryChart.update();
                 }
+
+                // Chart title + inline legend reflect the selected metric.
+                const titleEl = document.getElementById('telemetry-chart-title');
+                if (titleEl) titleEl.textContent = `${selectedVariableName || 'Telemetry'}${selectedUnit ? ' (' + selectedUnit + ')' : ''}`;
+                const legendEl = document.getElementById('telemetry-legend');
+                if (legendEl) {
+                    legendEl.innerHTML = selectedVariableName
+                        ? `<span class="legend-item"><span class="legend-dot" style="background:${primaryColor}"></span>${escapeHtml(selectedVariableName)}${selectedUnit ? ' (' + escapeHtml(selectedUnit) + ')' : ''}</span>`
+                        : '';
+                }
+
+                renderStatistics([...activeHistory]);
             }
 
             // Export CSV Download Handler
@@ -586,7 +695,8 @@
                                 const varsRes = await api.variables.list(sensor.id);
                                 if (varsRes && varsRes.success && Array.isArray(varsRes.data)) {
                                     varsRes.data.forEach(v => {
-                                        options.push(`<option value="${v.id}">${escapeHtml(v.label)} — ${escapeHtml(sensor.name)}${sensor.unit ? ' (' + escapeHtml(sensor.unit) + ')' : ''}</option>`);
+                                        const u = window.formatSensorUnit(sensor.unit, v.label);
+                                        options.push(`<option value="${v.id}">${escapeHtml(v.label)} — ${escapeHtml(sensor.name)}${u ? ' (' + escapeHtml(u) + ')' : ''}</option>`);
                                     });
                                 }
                             }
@@ -608,7 +718,7 @@
                 }
 
                 // Copy the currently selected device's scope when opening the modal
-                const ingestModalBtn = document.getElementById('openIngestModalBtn');
+                const ingestModalBtn = document.getElementById('push-reading-btn');
                 if (ingestModalBtn) {
                     ingestModalBtn.addEventListener('click', () => {
                         if (deviceSelect.value && targetDevEl) targetDevEl.value = deviceSelect.value;

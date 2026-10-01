@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
@@ -22,58 +22,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li><a href="cloud_dashboard.html"><i class='bx bx-grid-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
                 <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
                 <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
                 <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
-                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Monitor</li>
                 <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
-                <li><a href="cloud_rules.html"><i class='bx bx-git-repo-forked'></i><span class="link-name">Rules</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
                 <li class="active"><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
                 <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
-                <li class="divider"></li>
+                <li class="nav-section">System</li>
                 <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
-                <li><a href="login.html"><i class='bx bx-log-out'></i><span class="link-name">Logout</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Topbar -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search webhooks...">
                 </div>
                 <div class="topbar-actions">
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -81,7 +86,7 @@
                             <span class="user-role" id="user-display-role">Member</span>
                         </div>
                     </div>
-                </div>                
+                </div>
             </header>
 
             <!-- Dashboard Content -->
@@ -89,38 +94,66 @@
 
                 <!-- Page Header -->
                 <div class="page-header">
-                    <div>
-                        <h1>Webhooks &amp; Integration Endpoints</h1>
-                        <p style="color: var(--text-muted-dark); font-size: 14px; margin: 6px 0 0;">Stream IoT events (device.online, device.offline, command.success, command.failed) to external HTTPS endpoints.</p>
-                    </div>
+                    <div class="page-header-main"><h1>Webhooks</h1><p class="page-subtitle">Configure webhooks to receive real-time notifications</p></div>
                     <button class="btn-primary" id="addWebhookBtn" onclick="openCreateWebhookModal()" style="display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-plus'></i> Add Webhook</button>
+                </div>
+
+                <!-- KPIs -->
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 24px;">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-blue"><i class='bx bx-broadcast'></i></div>
+                        <div class="stat-details"><h3>Total Webhooks</h3><h2 id="wh-total">0</h2><span class="kpi-delta muted">All webhooks</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-green"><i class='bx bx-check-circle'></i></div>
+                        <div class="stat-details"><h3>Active</h3><h2 id="wh-active">0</h2><span class="kpi-delta up" id="wh-active-pct">0%</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-red"><i class='bx bx-x-circle'></i></div>
+                        <div class="stat-details"><h3>Inactive</h3><h2 id="wh-inactive">0</h2><span class="kpi-delta down" id="wh-inactive-pct">0%</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-purple"><i class='bx bx-send'></i></div>
+                        <div class="stat-details"><h3>Events Sent (24h)</h3><h2 id="wh-events">—</h2><span class="kpi-delta up">Delivery log</span></div>
+                    </div>
                 </div>
 
                 <!-- Plan entitlement notice (shown only when the plan excludes webhooks) -->
                 <div id="webhookNotice" class="glass-panel" style="display: none; padding: 14px 18px; margin-bottom: 24px; border-left: 3px solid #eab308; font-size: 14px; color: var(--text-dark);"></div>
 
-                <!-- Webhooks Table / List -->
-                <div class="glass-panel" style="padding: 24px; margin-bottom: 30px;">
-                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;"><i class='bx bx-broadcast'></i> Registered Webhooks</h3>
-                    
-                    <div style="overflow-x: auto;">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <!-- Filter bar -->
+                <div class="filter-bar" style="margin-bottom: 20px;">
+                    <input type="text" id="webhookSearch" class="styled-select" placeholder="Search webhooks..." style="height: 38px; min-width: 200px; flex: 1 1 200px;">
+                    <select id="webhookStatusFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <!-- Webhooks Table -->
+                <div class="table-container glass-panel" style="margin-bottom: 30px;">
+                    <div class="table-responsive">
+                        <table class="styled-table" style="margin: 0;">
                             <thead>
-                                <tr style="text-align: left; border-bottom: 1px solid var(--border-light); color: var(--text-muted-dark);">
-                                    <th style="padding: 12px;">Endpoint URL</th>
-                                    <th style="padding: 12px;">Subscribed Events</th>
-                                    <th style="padding: 12px;">Status</th>
-                                    <th style="padding: 12px;">Created</th>
-                                    <th style="padding: 12px; text-align: right;">Actions</th>
+                                <tr>
+                                    <th class="col-check"><input type="checkbox" class="table-check" id="webhookSelectAll" aria-label="Select all webhooks"></th>
+                                    <th>Name</th>
+                                    <th>URL</th>
+                                    <th>Events</th>
+                                    <th>Status</th>
+                                    <th>Last Delivery</th>
+                                    <th class="col-actions">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="webhooksTableBody">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted-dark);">Loading webhooks...</td>
+                                    <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-secondary);">Loading webhooks...</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div class="table-footer"><span id="webhook-count">Showing 0 webhooks</span></div>
                 </div>
             </div>  
 
@@ -165,7 +198,7 @@
                         Copy your webhook signing secret below. For security reasons, <strong>it will be shown ONCE only</strong>.
                     </p>
 
-                    <div style="background: rgba(0,0,0,0.4); padding: 14px; border-radius: 8px; border: 1px dashed var(--border-light); word-break: break-all; font-family: monospace; font-size: 14px; margin-bottom: 20px;" id="webhookSecretValue">
+                    <div style="background: var(--surface); padding: 14px; border-radius: 8px; border: 1px dashed var(--border-light); word-break: break-all; font-family: monospace; font-size: 14px; margin-bottom: 20px;" id="webhookSecretValue">
                         whsec_live_...
                     </div>
 
@@ -193,6 +226,7 @@
 
     <!-- Scripts -->
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -205,6 +239,10 @@
         document.addEventListener('DOMContentLoaded', async () => {
             await checkWebhookEntitlement();
             loadWebhooks();
+            const whSearch = document.getElementById('webhookSearch');
+            if (whSearch) whSearch.addEventListener('input', applyWebhookFilters);
+            const whStatus = document.getElementById('webhookStatusFilter');
+            if (whStatus) whStatus.addEventListener('change', applyWebhookFilters);
             const form = document.getElementById('createWebhookForm');
             OmniTeqValidator.bindLiveValidation(form);
             form.addEventListener('submit', handleCreateWebhook);
@@ -285,38 +323,134 @@
             return msg || 'Failed to register webhook.';
         }
 
+        let webhookList = [];
+
+        // Row kebab menu.
+        function toggleRowMenu(evt, menuId) {
+            evt.stopPropagation();
+            const menu = document.getElementById(menuId);
+            const isOpen = menu && menu.style.display !== 'none';
+            closeRowMenus();
+            if (menu && !isOpen) {
+                if (window.omniAnchorRowMenu) window.omniAnchorRowMenu(menu, evt.currentTarget);
+                else menu.style.display = 'block';
+            }
+        }
+        function closeRowMenus() {
+            if (window.omniCloseRowMenus) { window.omniCloseRowMenus(); return; }
+            document.querySelectorAll('.row-menu').forEach(m => { m.style.display = 'none'; });
+        }
+        document.addEventListener('click', closeRowMenus);
+
+        // Display-only name derived from the endpoint URL (the gateway stores no
+        // name field, so this is a friendly label rather than invented data).
+        function hookDisplayName(w) {
+            try {
+                const u = new URL(w.url);
+                const seg = u.pathname.split('/').filter(Boolean).pop() || u.hostname;
+                return seg.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            } catch (e) {
+                return 'Webhook';
+            }
+        }
+
+        function applyWebhookFilters() {
+            const q = (document.getElementById('webhookSearch')?.value || '').trim().toLowerCase();
+            const st = document.getElementById('webhookStatusFilter')?.value || 'all';
+            let rows = webhookList;
+            if (st !== 'all') rows = rows.filter(w => hookIsEnabled(w) === (st === 'active'));
+            if (q) rows = rows.filter(w =>
+                (w.url || '').toLowerCase().includes(q) ||
+                hookDisplayName(w).toLowerCase().includes(q) ||
+                hookEventList(w).join(' ').toLowerCase().includes(q));
+            renderWebhookRows(rows);
+        }
+
+        function renderWebhookRows(rows) {
+            const tableBody = document.getElementById('webhooksTableBody');
+            const countEl = document.getElementById('webhook-count');
+            if (countEl) countEl.textContent = `Showing ${rows.length} webhook${rows.length === 1 ? '' : 's'}`;
+
+            if (rows.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: var(--text-secondary);">No webhooks match the filters.</td></tr>`;
+                return;
+            }
+
+            tableBody.innerHTML = rows.map(w => {
+                const events = hookEventList(w);
+                const enabled = hookIsEnabled(w);
+                const name = hookDisplayName(w);
+                const last = w.last_delivery_at || w.last_delivered_at || w.last_delivery;
+                const lastStr = last ? new Date(last).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+                return `
+                    <tr>
+                        <td class="col-check"><input type="checkbox" class="table-check webhook-row-check" value="${w.id}"></td>
+                        <td><div class="rule-name-cell"><span class="rule-icon ${enabled ? 'b-blue' : 'b-red'}"><i class='bx bx-broadcast'></i></span><strong>${escapeHtml(name)}</strong></div></td>
+                        <td><code style="font-size: 12px; color: var(--text-secondary); word-break: break-all;">${escapeHtml(w.url)}</code></td>
+                        <td>${events.map(e => `<span class="badge b-gray" style="margin-right: 4px;">${escapeHtml(e)}</span>`).join('') || '—'}</td>
+                        <td>${enabled ? '<span class="pill pill-success">Active</span>' : '<span class="pill pill-danger">Inactive</span>'}</td>
+                        <td>${escapeHtml(lastStr)}</td>
+                        <td class="col-actions" style="position: relative;">
+                            <button class="kebab-btn" onclick="toggleRowMenu(event, 'wh-menu-${w.id}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button>
+                            <div class="row-menu" id="wh-menu-${w.id}" style="display: none;">
+                                <button onclick="viewDeliveries('${w.id}'); closeRowMenus();"><i class='bx bx-history'></i> View Deliveries</button>
+                                <button class="danger" onclick="deleteWebhook('${w.id}'); closeRowMenus();"><i class='bx bx-trash'></i> Delete Webhook</button>
+                            </div>
+                        </td>
+                    </tr>`;
+            }).join('');
+
+            const selectAll = document.getElementById('webhookSelectAll');
+            if (selectAll) {
+                selectAll.checked = false;
+                selectAll.onchange = () => document.querySelectorAll('.webhook-row-check').forEach(c => { c.checked = selectAll.checked; });
+            }
+        }
+
+        // Best-effort "Events Sent (24h)" from the delivery logs. Falls back to a
+        // dash when the delivery endpoint is unavailable, rather than inventing a number.
+        async function computeEventsSent() {
+            const el = document.getElementById('wh-events');
+            if (!el) return;
+            if (!webhookList.length || webhookList.length > 12) { el.textContent = '—'; return; }
+            const since = Date.now() - 24 * 60 * 60 * 1000;
+            let total = 0;
+            try {
+                for (const w of webhookList) {
+                    const res = await api.webhooks.deliveries(w.id);
+                    const rows = (res && res.success && Array.isArray(res.data)) ? res.data : [];
+                    total += rows.filter(d => {
+                        const t = new Date(d.created_at || d.delivered_at || d.timestamp).getTime();
+                        return isFinite(t) && t >= since;
+                    }).length;
+                }
+                el.textContent = total.toLocaleString();
+            } catch (e) {
+                el.textContent = '—';
+            }
+        }
+
         async function loadWebhooks() {
             const tableBody = document.getElementById('webhooksTableBody');
             try {
                 const res = await api.webhooks.list();
                 if (!res.success) {
-                    tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 30px; color: #ef4444;">Failed to load webhooks: ${escapeHtml((res.error && res.error.message) || 'Unknown error')}</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #ef4444;">Failed to load webhooks: ${escapeHtml((res.error && res.error.message) || 'Unknown error')}</td></tr>`;
                     return;
                 }
-                if (!res.data || res.data.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted-dark);">No webhooks registered yet. Click "Add Webhook" to integrate external endpoints.</td></tr>';
-                    return;
-                }
+                webhookList = Array.isArray(res.data) ? res.data : [];
+                const activeCount = webhookList.filter(hookIsEnabled).length;
+                const setKpi = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+                setKpi('wh-total', webhookList.length);
+                setKpi('wh-active', activeCount);
+                setKpi('wh-inactive', Math.max(0, webhookList.length - activeCount));
+                setKpi('wh-active-pct', webhookList.length ? Math.round(activeCount / webhookList.length * 100).toFixed(1) + '%' : '0%');
+                setKpi('wh-inactive-pct', webhookList.length ? Math.round((webhookList.length - activeCount) / webhookList.length * 100).toFixed(1) + '%' : '0%');
 
-                tableBody.innerHTML = res.data.map(w => {
-                    const events = hookEventList(w);
-                    const enabled = hookIsEnabled(w);
-                    const created = w.created_at ? new Date(w.created_at).toLocaleDateString() : '—';
-                    return `
-                    <tr style="border-bottom: 1px solid var(--border-light);">
-                        <td style="padding: 14px; font-weight: 600;"><code>${escapeHtml(w.url)}</code></td>
-                        <td style="padding: 14px;">${events.map(e => `<span class="badge b-gray" style="margin-right: 4px;">${escapeHtml(e)}</span>`).join('')}</td>
-                        <td style="padding: 14px;"><span class="badge ${enabled ? 'b-green' : 'b-gray'}">${enabled ? 'Enabled' : 'Disabled'}</span></td>
-                        <td style="padding: 14px; color: var(--text-muted-dark); font-size: 13px;">${created}</td>
-                        <td style="padding: 14px; text-align: right;">
-                            <button onclick="viewDeliveries('${w.id}')" class="icon-btn" title="View Delivery Logs"><i class='bx bx-history'></i></button>
-                            <button onclick="deleteWebhook('${w.id}')" class="icon-btn" style="color: #ef4444;" title="Delete Webhook"><i class='bx bx-trash'></i></button>
-                        </td>
-                    </tr>
-                `;
-                }).join('');
+                applyWebhookFilters();
+                computeEventsSent();
             } catch (e) {
-                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ef4444; padding: 20px;">${escapeHtml(e && e.message ? e.message : 'Failed to load webhooks.')}</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #ef4444; padding: 20px;">${escapeHtml(e && e.message ? e.message : 'Failed to load webhooks.')}</td></tr>`;
             }
         }
 
@@ -418,7 +552,7 @@
                     const payload = d.payload !== undefined ? d.payload : (d.request_body !== undefined ? d.request_body : null);
                     const when = d.created_at || d.delivered_at || d.timestamp;
                     return `
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <div style="background: var(--surface-inset); border: 1px solid var(--border-light); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
                             <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
                                 <span>Event: <strong>${escapeHtml(eventName)}</strong></span>
                                 <span class="badge ${badgeClass}">HTTP ${escapeHtml(status)}</span>

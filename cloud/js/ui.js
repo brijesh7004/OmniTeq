@@ -531,9 +531,16 @@
         bar.setAttribute('role', 'status');
         bar.textContent = 'You are offline — changes cannot be saved until the connection returns.';
         document.body.appendChild(bar);
-        function sync() { bar.classList.toggle('show', !navigator.onLine); }
+        function sync() {
+            // The global connection-status banner (js/status.js) owns connectivity
+            // messaging when it is present; this bar is only a fallback for pages
+            // where that module could not load.
+            var owned = !!window.omniteqStatus || !!document.getElementById('omniteq-status-banner');
+            bar.classList.toggle('show', !navigator.onLine && !owned);
+        }
         window.addEventListener('online', function () { sync(); window.showToast('Back online', 'success'); });
         window.addEventListener('offline', sync);
+        window.addEventListener('load', sync);
         sync();
     }
 

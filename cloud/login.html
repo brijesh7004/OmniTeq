@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="css/ui.css">
 </head>
-<body class="dark-theme auth-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+<body class="auth-page">
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;var b=document.body;b.classList.toggle('dark-theme',t==='dark');b.style.colorScheme=t;}catch(err){}})();</script>
+
     
     <!-- Background Elements -->
     <div class="glow-bg glow-1"></div>
@@ -39,17 +40,19 @@
                 <li><a href="api-reference.html">API</a></li>
             </ul>
             <div class="nav-actions">
-            <div class="nav-switcher">
-                <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                    <i class="bx bx-cloud"></i>
-                </a>
-                <div class="switcher-dropdown">
-                    <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                    <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                </div>
-            </div>
+                <!-- <div class="nav-switcher">
+                    <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
+                        <i class="bx bx-cloud"></i>
+                    </a>
+                    <div class="switcher-dropdown">
+                        <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
+                        <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
+                    </div>
+                </div> -->
+                <button type="button" class="icon-btn theme-toggle" id="themeToggle" title="Toggle light / dark theme" aria-label="Toggle light or dark theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                 <a href="signup.html" class="btn-primary">Sign Up Free</a>
             </div>
+
         </div>
     </nav>
 
@@ -167,6 +170,7 @@
     </footer>
 
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>

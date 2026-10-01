@@ -1,4 +1,4 @@
-﻿    <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
@@ -23,114 +23,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li>
-                    <a href="cloud_dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link-name">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_projects.html">
-                        <i class='bx bx-folder'></i>
-                        <span class="link-name">Projects</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_devices.html">
-                        <i class='bx bx-devices'></i>
-                        <span class="link-name">Devices</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_sensors.html">
-                        <i class='bx bx-chip'></i>
-                        <span class="link-name">Sensors</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="cloud_commands.html">
-                        <i class='bx bx-terminal'></i>
-                        <span class="link-name">Commands</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_telemetry.html">
-                        <i class='bx bx-line-chart'></i>
-                        <span class="link-name">Telemetry</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_rules.html">
-                        <i class='bx bx-git-repo-forked'></i>
-                        <span class="link-name">Rules</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_webhooks.html">
-                        <i class='bx bx-broadcast'></i>
-                        <span class="link-name">Webhooks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_docs.html">
-                        <i class='bx bx-book-open'></i>
-                        <span class="link-name">Documentation</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="cloud_settings.html">
-                        <i class='bx bx-cog'></i>
-                        <span class="link-name">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="login.html">
-                        <i class='bx bx-log-out'></i>
-                        <span class="link-name">Logout</span>
-                    </a>
-                </li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
+                <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
+                <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
+                <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
+                <li class="nav-section">Monitor</li>
+                <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
+                <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li class="active"><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
+                <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
+                <li class="nav-section">System</li>
+                <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search devices, projects...">
                 </div>
                 <div class="topbar-actions">
-                    
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -144,61 +93,204 @@
             <!-- Dashboard Content -->
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1>Command Dispatch Center</h1>
-                    <div class="panel-actions">
-                        <a href="cloud_command_add.html" class="btn-primary" style="text-decoration: none;"><i class='bx bx-plus'></i> Create Template</a>
+                    <div class="page-header-main"><h1>Commands</h1><p class="page-subtitle">Send commands to your devices and manage command history</p></div>
+                    <button class="btn-primary" onclick="switchCmdTab('send')" style="display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-plus'></i> Send Command</button>
+                </div>
+
+                <!-- KPIs -->
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 8px;">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-blue"><i class='bx bx-send'></i></div>
+                        <div class="stat-details"><h3>Total Commands</h3><h2 id="cmd-total">0</h2><span class="kpi-delta muted">This month</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-green"><i class='bx bx-check-circle'></i></div>
+                        <div class="stat-details"><h3>Successful</h3><h2 id="cmd-success">0</h2><span class="kpi-delta up" id="cmd-success-pct">0%</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-amber"><i class='bx bx-time-five'></i></div>
+                        <div class="stat-details"><h3>Pending</h3><h2 id="cmd-pending">0</h2><span class="kpi-delta warn" id="cmd-pending-pct">0%</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-red"><i class='bx bx-x-circle'></i></div>
+                        <div class="stat-details"><h3>Failed</h3><h2 id="cmd-failed">0</h2><span class="kpi-delta down" id="cmd-failed-pct">0%</span></div>
                     </div>
                 </div>
 
-                <div class="dashboard-grid" style="grid-template-columns: 1fr 2fr;">
-                    <!-- Dispatch Form -->
-                    <div class="glass-panel" style="padding: 24px;">
-                        <h2 style="font-size: 18px; margin-bottom: 20px; font-weight: 600;">Dispatch New Command</h2>
-                        <form style="display: flex; flex-direction: column; gap: 16px;" id="dispatch-form">
-                            <div>
-                                <label style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted-light);">Target Device</label>
-                                <select class="styled-select" id="target-device-select" style="width: 100%;" required>
-                                    <option value="">Select a device...</option>
-                                </select>
+                <!-- Tabs -->
+                <div class="tabs" style="margin-top: 20px;">
+                    <button class="tab active" data-cmd-tab="send" onclick="switchCmdTab('send')">Send Command</button>
+                    <button class="tab" data-cmd-tab="history" onclick="switchCmdTab('history')">Command History</button>
+                    <button class="tab" data-cmd-tab="commands" onclick="switchCmdTab('commands')">Commands</button>
+                    <button class="tab" data-cmd-tab="scheduled" onclick="switchCmdTab('scheduled')">Scheduled Commands</button>
+                </div>
+
+                <!-- ===== Send Command ===== -->
+                <div id="cmd-view-send">
+                    <div class="cmd-send-grid">
+                        <div class="glass-panel" style="padding: 24px;">
+                            <form style="display: flex; flex-direction: column; gap: 16px;" id="dispatch-form">
+                                <div>
+                                    <label class="cmd-label">Project</label>
+                                    <select class="styled-select" id="command-project-select" style="width: 100%;"><option value="all">All Projects</option></select>
+                                </div>
+                                <div>
+                                    <label class="cmd-label">Device</label>
+                                    <select class="styled-select" id="target-device-select" style="width: 100%;" required><option value="">Select a device...</option></select>
+                                </div>
+                                <div>
+                                    <label class="cmd-label">Command</label>
+                                    <select class="styled-select" id="command-template-select" style="width: 100%;" required><option value="">Select command...</option></select>
+                                </div>
+                                <div>
+                                    <label class="cmd-label">Parameters</label>
+                                    <div style="padding: 16px; background: var(--surface-inset); border-radius: var(--radius-sm); border: 1px dashed var(--border); display: none;" id="params-box">
+                                        <div id="parameters-container"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                                    <button type="submit" id="execute-btn" class="btn-primary"><i class='bx bx-send'></i> Send Command</button>
+                                    <a href="cloud_command_add.html" style="font-size: 13px; color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-bookmark-plus'></i> Save as template</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="cmd-side">
+                            <div class="glass-panel" style="padding: 20px;">
+                                <h3 class="cmd-card-title"><i class='bx bx-chip'></i> Selected Device Information</h3>
+                                <div id="device-info-body" style="color: var(--text-secondary); font-size: 13px;">Select a device to see its information.</div>
                             </div>
-                            <div>
-                                <label style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted-light);">Command Template</label>
-                                <select class="styled-select" id="command-template-select" style="width: 100%;" required>
-                                    <option value="">Select command...</option>
-                                </select>
+                            <div class="glass-panel" style="padding: 20px;">
+                                <h3 class="cmd-card-title"><i class='bx bx-list-check'></i> Quick Commands (Templates)</h3>
+                                <div id="quick-templates" style="display: flex; flex-direction: column; gap: 8px;">
+                                    <span style="color: var(--text-secondary); font-size: 13px;">Select a device to list its templates.</span>
+                                </div>
                             </div>
-                            <div style="padding: 16px; background: rgba(0,0,0,0.1); border-radius: var(--radius-sm); border: 1px dashed var(--border-light); display: none;" id="params-box">
-                                <label style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted-light);">Parameters</label>
-                                <div id="parameters-container"></div>
-                            </div>
-                            <button type="submit" id="execute-btn" class="btn-primary" style="justify-content: center; margin-top: 10px; width: 100%;">
-                                <i class='bx bx-send'></i> Execute Command
-                            </button>
-                        </form>
+                        </div>
                     </div>
 
-                    <!-- History Table -->
-                    <div class="table-container glass-panel">
+                    <div class="table-container glass-panel" style="margin-top: 24px;">
                         <div class="panel-header">
-                            <h2>Dispatch History</h2>
+                            <h2>Recent Commands</h2>
+                            <a href="#" onclick="switchCmdTab('history'); return false;" class="view-all">View All</a>
                         </div>
                         <div class="table-responsive">
                             <table class="styled-table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Device</th>
-                                        <th>Command</th>
-                                        <th>Status</th>
-                                        <th>Time</th>
+                                        <th>#</th><th>Time</th><th>Device</th><th>Command</th><th>Parameters</th><th>Status</th><th>Response</th><th class="col-actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-commands-body">
+                                    <tr><td colspan="8" style="text-align: center; padding: 24px; color: var(--text-secondary);">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Command History ===== -->
+                <div id="cmd-view-history" style="display: none;">
+                    <div class="cmd-subhead">
+                        <div><h2 class="cmd-subtitle">Command History</h2><p class="cmd-subdesc">View all executed commands and their status</p></div>
+                        <button class="btn-ghost" id="command-export-btn"><i class='bx bx-download'></i> Export</button>
+                    </div>
+                    <div class="filter-bar" style="margin-bottom: 20px;">
+                        <input type="text" id="command-search" class="styled-select" placeholder="Search commands..." style="height: 38px; min-width: 180px; flex: 1 1 180px;">
+                        <select id="historyProjectFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Projects</option></select>
+                        <select id="historyDeviceFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Devices</option></select>
+                        <select id="historyTypeFilter" class="styled-select" style="width: auto; min-width: 160px; height: 38px;"><option value="all">All Command Types</option></select>
+                        <select id="historyStatusFilter" class="styled-select" style="width: auto; min-width: 130px; height: 38px;"><option value="all">All Status</option><option value="success">Success</option><option value="pending">Pending</option><option value="failed">Failed</option></select>
+                        <button class="icon-btn" id="history-refresh-btn" title="Refresh"><i class='bx bx-refresh'></i></button>
+                    </div>
+                    <div class="table-container glass-panel">
+                        <div class="table-responsive">
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th><th>Time</th><th>Project</th><th>Device</th><th>Command</th><th>Parameters</th><th>Status</th><th>Response</th><th>Executed By</th><th class="col-actions">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dispatch-history-body">
-                                    <tr>
-                                        <td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Loading dispatch history...</td>
-                                    </tr>
+                                    <tr><td colspan="10" style="text-align: center; padding: 24px; color: var(--text-secondary);">Loading history...</td></tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="table-footer">
+                            <span id="command-pagination-info">Showing 0 commands</span>
+                            <div class="pagination" id="command-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Commands ===== -->
+                <div id="cmd-view-commands" style="display: none;">
+                    <div class="cmd-subhead">
+                        <div><h2 class="cmd-subtitle">Commands</h2><p class="cmd-subdesc">Manage your command templates</p></div>
+                        <a href="cloud_command_add.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-plus'></i> Add Command</a>
+                    </div>
+                    <div class="filter-bar" style="margin-bottom: 20px;">
+                        <input type="text" id="tpl-search" class="styled-select" placeholder="Search commands..." style="height: 38px; min-width: 180px; flex: 1 1 180px;">
+                        <select id="tplProjectFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;"><option value="all">All Projects</option></select>
+                        <select id="tplDeviceFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;"><option value="all">All Devices</option></select>
+                        <select id="tplStatusFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="table-container glass-panel">
+                        <div class="table-responsive">
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th><th>Name</th><th>Project</th><th>Device</th><th>Parameters</th><th>Status</th><th class="col-actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="commands-body">
+                                    <tr><td colspan="7" style="text-align: center; padding: 36px; color: var(--text-secondary);">Loading commands...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <span id="commands-pagination-info">Showing 0 commands</span>
+                            <div class="pagination" id="commands-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Scheduled Commands ===== -->
+                <div id="cmd-view-scheduled" style="display: none;">
+                    <div class="cmd-subhead">
+                        <div><h2 class="cmd-subtitle">Scheduled Commands</h2><p class="cmd-subdesc">Manage and view scheduled commands for your devices</p></div>
+                        <button class="btn-primary" onclick="openAddScheduledModal()" style="display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-plus'></i> Add Scheduled Command</button>
+                    </div>
+                    <div class="filter-bar" style="margin-bottom: 20px;">
+                        <input type="text" id="scheduled-search" class="styled-select" placeholder="Search scheduled commands..." style="height: 38px; min-width: 180px; flex: 1 1 180px;">
+                        <select id="scheduledProjectFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;"><option value="all">All Projects</option></select>
+                        <select id="scheduledDeviceFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;"><option value="all">All Devices</option></select>
+                        <select id="scheduledStatusFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="paused">Paused</option>
+                        </select>
+                    </div>
+                    <div class="table-container glass-panel">
+                        <div class="table-responsive">
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th><th>Name</th><th>Project</th><th>Device</th><th>Command</th><th>Parameters</th><th>Schedule</th><th>Next Run</th><th>Status</th><th class="col-actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scheduled-body">
+                                    <tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-secondary);">Loading commands...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <span id="scheduled-pagination-info">Showing 0 scheduled commands</span>
+                            <div class="pagination" id="scheduled-pagination"></div>
                         </div>
                     </div>
                 </div>
@@ -206,7 +298,90 @@
         </main>
     </div>
 
+    <!-- Modal: Edit Command -->
+    <div id="editCommandModal" class="modal-backdrop" style="display: none;">
+        <div class="glass-panel modal-content" style="max-width: 520px; width: 90%; margin: auto; padding: 28px; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                <h3 style="font-size: 20px; font-weight: 700;"><i class='bx bx-edit'></i> Edit Command</h3>
+                <button type="button" onclick="closeModal('editCommandModal')" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            <form id="editCommandForm">
+                <input type="hidden" id="editCommandId">
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Name</label>
+                    <input type="text" id="editCommandName" class="styled-select" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Description</label>
+                    <input type="text" id="editCommandDesc" class="styled-select" placeholder="Optional description">
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('editCommandModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add Scheduled Command -->
+    <div id="addScheduledModal" class="modal-backdrop" style="display: none;">
+        <div class="glass-panel modal-content" style="max-width: 540px; width: 90%; margin: auto; padding: 28px; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                <h3 style="font-size: 20px; font-weight: 700;"><i class='bx bx-calendar-plus'></i> Add Scheduled Command</h3>
+                <button type="button" onclick="closeModal('addScheduledModal')" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            <form id="addScheduledForm">
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Name</label>
+                    <input type="text" id="schedName" class="styled-select" placeholder="e.g. Restart Daily" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Project</label>
+                    <select id="schedProject" class="styled-select" required><option value="">Select a project...</option></select>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Device</label>
+                    <select id="schedDevice" class="styled-select" required><option value="">Select a device...</option></select>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Command</label>
+                    <select id="schedTemplate" class="styled-select" required><option value="">Select command...</option></select>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Parameters (JSON)</label>
+                    <input type="text" id="schedParams" class="styled-select" placeholder='{"led":1}'>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="cmd-label">Schedule</label>
+                    <input type="text" id="schedSchedule" class="styled-select" placeholder="e.g. Every day at 02:00" required>
+                </div>
+                <label class="switch-field" style="margin-bottom: 4px;">
+                    <input type="checkbox" id="schedActive" class="switch-input" checked>
+                    <span class="switch"></span>
+                    <span class="switch-label">Active</span>
+                </label>
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addScheduledModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Scheduled Command</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Command Detail -->
+    <div id="commandDetailModal" class="modal-backdrop" style="display: none;">
+        <div class="glass-panel modal-content" style="max-width: 560px; width: 90%; margin: auto; padding: 28px; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                <h3 style="font-size: 20px; font-weight: 700;"><i class='bx bx-terminal'></i> Command Detail</h3>
+                <button type="button" onclick="closeCommandDetail()" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            <span class="pill" id="cd-status">Pending</span>
+            <dl class="alert-details-list" id="command-detail-list"></dl>
+        </div>
+    </div>
+
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -214,271 +389,937 @@
     
     <!-- Dynamic Dispatch Center Logic -->
     <script>
+        let cmdDevices = [];
+        let cmdProjects = [];
+        let cmdTemplates = [];
+        let cmdHistory = [];
+        let cmdPage = 1;
+        const CMD_PAGE_SIZE = 8;
+        // User-added scheduled commands, persisted locally (the gateway has no
+        // scheduling API, so these are stored in this browser).
+        let scheduledCommands = [];
+        try { scheduledCommands = JSON.parse(localStorage.getItem('omniteq_scheduled_commands') || '[]') || []; } catch (e) { scheduledCommands = []; }
+        // Command templates (real gateway data) for the Commands tab.
+        let allTemplates = [];
+        let tplLoaded = false;
+        let tplPage = 1;
+        const TPL_PAGE_SIZE = 10;
+
+        // Command-history rows from the gateway do not include `parameters` (see
+        // GET /devices/:id/command-history), so the Parameters column rendered as
+        // "{}" even after a value had been set and sent. Values the client
+        // dispatched are remembered here keyed by instance id and merged back into
+        // the history rows; the instance endpoint is a fallback for rows created
+        // elsewhere (e.g. by a rule).
+        const dispatchedParamsById = {};
+        // templateId -> { paramName: type }, filled as templates load, so stored
+        // values can be shown in the type the template declares.
+        const cmdParamTypesByTemplate = {};
+
+        function rememberCommandParamTypes(templates) {
+            (Array.isArray(templates) ? templates : []).forEach(t => {
+                if (!t || !t.id) return;
+                const map = {};
+                templateParameters(t).forEach(p => { map[p.param_name] = normalizeParamType(p.param_type); });
+                cmdParamTypesByTemplate[t.id] = map;
+            });
+        }
+
+        // The gateway stores/returns every command parameter value as a string, so
+        // a boolean arrives as "false". Re-coerce to the type the template
+        // declares so the UI shows the value in its defined format, not a string.
+        function coerceCommandParams(params, templateId) {
+            if (!params || typeof params !== 'object') return {};
+            const types = cmdParamTypesByTemplate[templateId] || {};
+            const out = {};
+            Object.keys(params).forEach(name => {
+                const raw = params[name];
+                const type = types[name];
+                if (type === 'boolean') {
+                    out[name] = (raw === true || String(raw).toLowerCase() === 'true' || String(raw) === '1');
+                } else if (type === 'integer') {
+                    const n = parseInt(raw, 10); out[name] = isNaN(n) ? raw : n;
+                } else if (type === 'float') {
+                    const n = Number(raw); out[name] = isFinite(n) ? n : raw;
+                } else {
+                    out[name] = raw;
+                }
+            });
+            return out;
+        }
+
+        // Prefer the parameters reported by the gateway; fall back to what this
+        // session actually dispatched for that instance.
+        function commandParamsFor(c) {
+            if (!c) return {};
+            if (c.parameters && typeof c.parameters === 'object' && Object.keys(c.parameters).length) return c.parameters;
+            return dispatchedParamsById[c.id] || {};
+        }
+
+        function cmdStatusKey(status) {
+
+            const s = String(status || '').toLowerCase();
+            if (s === 'success' || s === 'succeeded' || s === 'completed' || s === 'acked') return 'success';
+            if (s === 'failed' || s === 'error' || s === 'timeout') return 'failed';
+            return 'pending';
+        }
+        function commandStatusPill(status) {
+            const k = cmdStatusKey(status);
+            const cls = k === 'success' ? 'pill-success' : k === 'failed' ? 'pill-danger' : 'pill-warning';
+            const label = k === 'success' ? 'Success' : k === 'failed' ? 'Failed' : 'Pending';
+            return `<span class="pill ${cls}">${label}</span>`;
+        }
+        function cmdParametersJson(c) {
+            try {
+                return JSON.stringify(coerceCommandParams(commandParamsFor(c), c && c.template_id));
+            } catch (e) { return '{}'; }
+        }
+
+        function cmdResponseText(c) {
+            return c.response || c.result || c.error_message || c.response_message || '—';
+        }
+
+        // The gateway's command parameter types are integer | float | string |
+        // boolean, but tolerate aliases and casing so a boolean never falls
+        // through the text branch and gets dispatched as the string "false".
+        function normalizeParamType(type) {
+            const t = String(type === null || type === undefined ? '' : type).trim().toLowerCase();
+            if (t === 'int' || t === 'integer' || t === 'long' || t === 'short') return 'integer';
+            if (t === 'float' || t === 'double' || t === 'number' || t === 'decimal') return 'float';
+            if (t === 'bool' || t === 'boolean') return 'boolean';
+            return 'string';
+        }
+
+        // A template's parameters are normally an array, but a gateway response
+        // can carry them as a JSON string; parse defensively so the parameter
+        // inputs (and dispatch payload) are never silently dropped.
+        function templateParameters(template) {
+            if (!template) return [];
+            let params = template.parameters;
+            if (params === undefined || params === null) params = template.params || template.command_parameters;
+            if (typeof params === 'string') {
+                try { params = JSON.parse(params); } catch (e) { params = []; }
+            }
+            return Array.isArray(params) ? params : [];
+        }
+
+        function switchCmdTab(view) {
+            ['send', 'history', 'commands', 'scheduled'].forEach(v => {
+                const panel = document.getElementById('cmd-view-' + v);
+                if (panel) panel.style.display = (v === view) ? '' : 'none';
+            });
+            document.querySelectorAll('[data-cmd-tab]').forEach(t => t.classList.toggle('active', t.dataset.cmdTab === view));
+            if (view === 'history') renderCommandHistory();
+            if (view === 'scheduled') renderScheduledList();
+            if (view === 'commands') {
+                if (window.ensureTemplatesLoaded) window.ensureTemplatesLoaded().then(() => { if (window.renderCommandsList) window.renderCommandsList(); });
+                else if (window.renderCommandsList) window.renderCommandsList();
+            }
+        }
+        window.switchCmdTab = switchCmdTab;
+
+        // Row kebab menu.
+        function toggleRowMenu(evt, menuId) {
+            evt.stopPropagation();
+            const menu = document.getElementById(menuId);
+            const isOpen = menu && menu.style.display !== 'none';
+            closeRowMenus();
+            if (menu && !isOpen) {
+                if (window.omniAnchorRowMenu) window.omniAnchorRowMenu(menu, evt.currentTarget);
+                else menu.style.display = 'block';
+            }
+        }
+        function closeRowMenus() {
+            if (window.omniCloseRowMenus) { window.omniCloseRowMenus(); return; }
+            document.querySelectorAll('.row-menu').forEach(m => { m.style.display = 'none'; });
+        }
+        document.addEventListener('click', closeRowMenus);
+
+        // Full-detail dialog for a single command history entry. The history
+        // endpoint omits `parameters`, so the instance endpoint is consulted when
+        // this session has no record of the value that was dispatched.
+        async function viewCommandDetail(id) {
+            const c = cmdHistory.find(x => x.id === id);
+            if (!c) { showToast('Command not found.', 'warning'); return; }
+            const k = cmdStatusKey(c.status);
+            const badge = document.getElementById('cd-status');
+            if (badge) {
+                badge.className = 'pill ' + (k === 'success' ? 'pill-success' : k === 'failed' ? 'pill-danger' : 'pill-warning');
+                badge.textContent = k.charAt(0).toUpperCase() + k.slice(1);
+            }
+
+            const list = document.getElementById('command-detail-list');
+            const render = () => {
+                const rows = [['ID', c.id], ['Time', c.created_at ? new Date(c.created_at).toLocaleString() : '—']];
+                Object.keys(c).forEach(key => {
+                    if (key === 'id' || key === 'created_at' || key === 'parameters') return;
+                    let val = c[key];
+                    if (val && typeof val === 'object') { try { val = JSON.stringify(val, null, 2); } catch (e) { val = String(val); } }
+                    rows.push([key, (val === null || val === undefined || val === '') ? '—' : String(val)]);
+                });
+                // Show the dispatched values in the type the template declares.
+                const params = coerceCommandParams(commandParamsFor(c), c.template_id);
+                rows.push(['parameters', Object.keys(params).length ? JSON.stringify(params) : '{}']);
+                if (list) list.innerHTML = rows.map(([key, val]) => `<div><dt>${escapeHtml(String(key))}</dt><dd>${escapeHtml(String(val))}</dd></div>`).join('');
+            };
+            render();
+            const dlgTitle = document.querySelector('#commandDetailModal h3');
+            if (dlgTitle) dlgTitle.innerHTML = "<i class='bx bx-terminal'></i> Command Detail";
+            openModal('commandDetailModal');
+
+            if (!Object.keys(commandParamsFor(c)).length) {
+                try {
+                    const res = await window.api.dispatch.getInstance(id);
+                    if (res && res.success && res.data && res.data.parameters) {
+                        c.parameters = res.data.parameters;
+                        if (res.data.template_id) c.template_id = res.data.template_id;
+                        render();
+                    }
+                } catch (e) { /* keep what we already show */ }
+            }
+        }
+        function closeCommandDetail() { if (typeof closeModal === 'function') closeModal('commandDetailModal'); }
+        window.viewCommandDetail = viewCommandDetail;
+        window.closeCommandDetail = closeCommandDetail;
+        window.toggleRowMenu = toggleRowMenu;
+        window.closeRowMenus = closeRowMenus;
+
+        // -------- Scheduled Commands (user-added, persisted locally) --------
+        function saveScheduledStorage() {
+            try { localStorage.setItem('omniteq_scheduled_commands', JSON.stringify(scheduledCommands)); } catch (e) { /* ignore */ }
+        }
+        function scheduledStatusKey(s) { return s.active === false ? 'paused' : 'active'; }
+
+        let schedPage = 1;
+        const SCHED_PAGE_SIZE = 10;
+
+        function renderScheduledList() {
+            const body = document.getElementById('scheduled-body');
+            if (!body) return;
+            const q = (document.getElementById('scheduled-search')?.value || '').trim().toLowerCase();
+            const pid = document.getElementById('scheduledProjectFilter')?.value || 'all';
+            const did = document.getElementById('scheduledDeviceFilter')?.value || 'all';
+            const st = (document.getElementById('scheduledStatusFilter')?.value) || 'all';
+
+            let rows = scheduledCommands;
+            if (pid !== 'all') rows = rows.filter(s => s.projectId === pid);
+            if (did !== 'all') rows = rows.filter(s => s.deviceId === did);
+            if (st !== 'all') rows = rows.filter(s => scheduledStatusKey(s) === st);
+            if (q) rows = rows.filter(s => JSON.stringify(s).toLowerCase().includes(q));
+
+            const info = document.getElementById('scheduled-pagination-info');
+            const pager = document.getElementById('scheduled-pagination');
+            const totalPages = Math.max(1, Math.ceil(rows.length / SCHED_PAGE_SIZE));
+            if (schedPage > totalPages) schedPage = totalPages;
+            const start = (schedPage - 1) * SCHED_PAGE_SIZE;
+            const pageRows = rows.slice(start, start + SCHED_PAGE_SIZE);
+
+            if (info) info.textContent = rows.length ? `Showing ${start + 1} to ${Math.min(start + SCHED_PAGE_SIZE, rows.length)} of ${rows.length} scheduled commands` : 'Showing 0 scheduled commands';
+
+            if (!rows.length) {
+                body.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-secondary);">No scheduled commands yet. Click "Add Scheduled Command" to create one.</td></tr>';
+            } else {
+                body.innerHTML = pageRows.map((s, i) => {
+                    const active = scheduledStatusKey(s) === 'active';
+                    return `<tr>
+                        <td>${start + i + 1}</td>
+                        <td><strong>${escapeHtml(s.name || '—')}</strong></td>
+                        <td>${escapeHtml(s.projectName || '—')}</td>
+                        <td>${escapeHtml(s.deviceName || '—')}</td>
+                        <td><code class="cond-code">${escapeHtml(s.command || '—')}</code></td>
+                        <td><code style="font-size: 11.5px; color: var(--text-secondary);">${escapeHtml(s.parameters || '{}')}</code></td>
+                        <td>${escapeHtml(s.schedule || '—')}</td>
+                        <td>—</td>
+                        <td>${active ? '<span class="pill pill-success">Active</span>' : '<span class="pill pill-warning">Paused</span>'}</td>
+                        <td class="col-actions" style="position: relative;"><button class="kebab-btn" onclick="toggleRowMenu(event, 'sched-menu-${escapeHtml(s.id)}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button><div class="row-menu" id="sched-menu-${escapeHtml(s.id)}" style="display: none;"><button onclick="viewScheduledDetail('${escapeHtml(s.id)}'); closeRowMenus();"><i class='bx bx-show'></i> View Detail</button><button onclick="toggleScheduledActive('${escapeHtml(s.id)}'); closeRowMenus();"><i class='bx bx-power-off'></i> ${active ? 'Pause' : 'Activate'}</button><button class="danger" onclick="deleteScheduledCommand('${escapeHtml(s.id)}'); closeRowMenus();"><i class='bx bx-trash'></i> Delete</button></div></td>
+                    </tr>`;
+                }).join('');
+            }
+
+            if (pager) {
+                pager.innerHTML = '';
+                const prev = document.createElement('button');
+                prev.className = 'page-btn'; prev.innerHTML = '<i class="bx bx-chevron-left"></i>'; prev.disabled = schedPage <= 1;
+                prev.onclick = () => { schedPage--; renderScheduledList(); };
+                pager.appendChild(prev);
+                for (let p = 1; p <= totalPages; p++) {
+                    const b = document.createElement('button');
+                    b.className = 'page-btn' + (p === schedPage ? ' active' : '');
+                    b.textContent = p;
+                    b.onclick = () => { schedPage = p; renderScheduledList(); };
+                    pager.appendChild(b);
+                }
+                const next = document.createElement('button');
+                next.className = 'page-btn'; next.innerHTML = '<i class="bx bx-chevron-right"></i>'; next.disabled = schedPage >= totalPages;
+                next.onclick = () => { schedPage++; renderScheduledList(); };
+                pager.appendChild(next);
+            }
+        }
+        window.renderScheduledList = renderScheduledList;
+
+        function openAddScheduledModal() {
+            const form = document.getElementById('addScheduledForm');
+            if (form) form.reset();
+            const active = document.getElementById('schedActive');
+            if (active) active.checked = true;
+            const projSel = document.getElementById('schedProject');
+            if (projSel) projSel.innerHTML = '<option value="">Select a project...</option>' + cmdProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+            fillSchedDevices('all');
+            const tpl = document.getElementById('schedTemplate');
+            if (tpl) tpl.innerHTML = '<option value="">Select command...</option>';
+            openModal('addScheduledModal');
+        }
+        window.openAddScheduledModal = openAddScheduledModal;
+
+        function fillSchedDevices(projectId) {
+            const devSel = document.getElementById('schedDevice');
+            if (!devSel) return;
+            const scoped = cmdDevices.filter(d => projectId === 'all' || d.projectId === projectId);
+            devSel.innerHTML = '<option value="">Select a device...</option>' + scoped.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('');
+        }
+        window.fillSchedDevices = fillSchedDevices;
+
+        async function loadSchedTemplates(deviceId) {
+            const tpl = document.getElementById('schedTemplate');
+            if (!tpl) return;
+            tpl.innerHTML = '<option value="">Select command...</option>';
+            if (!deviceId) return;
+            try {
+                const res = await window.api.commands.list(deviceId);
+                if (res.success) tpl.innerHTML = '<option value="">Select command...</option>' + (res.data || []).map(t => `<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+            } catch (e) { /* ignore */ }
+        }
+
+        function handleAddScheduled(e) {
+            e.preventDefault();
+            const name = (document.getElementById('schedName')?.value || '').trim();
+            const projectId = document.getElementById('schedProject')?.value || '';
+            const deviceId = document.getElementById('schedDevice')?.value || '';
+            const templateId = document.getElementById('schedTemplate')?.value || '';
+            const paramsRaw = (document.getElementById('schedParams')?.value || '').trim();
+            const schedule = (document.getElementById('schedSchedule')?.value || '').trim();
+            const active = document.getElementById('schedActive')?.checked !== false;
+
+            if (!name) { showToast('Enter a name for the scheduled command.', 'error'); return; }
+            if (!deviceId) { showToast('Select a device.', 'error'); return; }
+            if (!templateId) { showToast('Select a command.', 'error'); return; }
+            if (!schedule) { showToast('Enter a schedule.', 'error'); return; }
+
+            const dev = cmdDevices.find(d => d.id === deviceId) || {};
+            const proj = cmdProjects.find(p => p.id === projectId) || {};
+            const tplOpt = document.getElementById('schedTemplate');
+            const commandName = (tplOpt && tplOpt.selectedOptions && tplOpt.selectedOptions[0]) ? tplOpt.selectedOptions[0].textContent : 'Command';
+
+            let parameters = '{}';
+            if (paramsRaw) {
+                try { parameters = JSON.stringify(JSON.parse(paramsRaw)); }
+                catch (err) { showToast('Parameters must be valid JSON.', 'error'); return; }
+            }
+
+            scheduledCommands.push({
+                id: 'sched_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+                name,
+                projectId: dev.projectId || proj.id || '',
+                projectName: dev.projectName || proj.name || '',
+                deviceId,
+                deviceName: dev.name || '',
+                templateId,
+                command: commandName,
+                parameters,
+                schedule,
+                active
+            });
+            saveScheduledStorage();
+            renderScheduledList();
+            closeModal('addScheduledModal');
+            showToast('Scheduled command added.', 'success');
+        }
+        window.handleAddScheduled = handleAddScheduled;
+
+        async function deleteScheduledCommand(id) {
+            if (!await UI.confirmDelete('this scheduled command', { message: 'It will be removed from the list.' })) return;
+            scheduledCommands = scheduledCommands.filter(s => s.id !== id);
+            saveScheduledStorage();
+            renderScheduledList();
+            showToast('Scheduled command deleted.', 'success');
+        }
+        window.deleteScheduledCommand = deleteScheduledCommand;
+
+        function toggleScheduledActive(id) {
+            const s = scheduledCommands.find(x => x.id === id);
+            if (!s) return;
+            s.active = s.active === false ? true : false;
+            saveScheduledStorage();
+            renderScheduledList();
+        }
+        window.toggleScheduledActive = toggleScheduledActive;
+
+        function viewScheduledDetail(id) {
+            const s = scheduledCommands.find(x => x.id === id);
+            if (!s) return;
+            const badge = document.getElementById('cd-status');
+            const active = scheduledStatusKey(s) === 'active';
+            if (badge) { badge.className = 'pill ' + (active ? 'pill-success' : 'pill-warning'); badge.textContent = active ? 'Active' : 'Paused'; }
+            const rows = [
+                ['Name', s.name],
+                ['Project', s.projectName || '—'],
+                ['Device', s.deviceName || '—'],
+                ['Command', s.command || '—'],
+                ['Parameters', s.parameters || '{}'],
+                ['Schedule', s.schedule || '—'],
+                ['Next Run', '—'],
+                ['Status', active ? 'Active' : 'Paused']
+            ];
+            const list = document.getElementById('command-detail-list');
+            if (list) list.innerHTML = rows.map(([k, v]) => `<div><dt>${escapeHtml(String(k))}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join('');
+            const title = document.querySelector('#commandDetailModal h3');
+            if (title) title.innerHTML = "<i class='bx bx-calendar'></i> Scheduled Command Detail";
+            openModal('commandDetailModal');
+        }
+        window.viewScheduledDetail = viewScheduledDetail;
+
+        // -------- Commands tab: command templates (gateway data) --------
+        function tplStatusKey(t) { return t.enabled === false ? 'inactive' : 'active'; }
+        function tplParametersText(t) {
+            const params = templateParameters(t);
+            if (params.length) {
+                return '{' + params.map(p => p.param_name).join(', ') + '}';
+            }
+            return '{}';
+        }
+
+        async function loadAllCommandTemplates() {
+            const api = window.api;
+            allTemplates = [];
+            for (const dev of cmdDevices) {
+                try {
+                    const res = await api.commands.list(dev.id);
+                    if (res && res.success && Array.isArray(res.data)) {
+                        res.data.forEach(t => allTemplates.push({
+                            ...t,
+                            deviceId: dev.id,
+                            deviceName: dev.name,
+                            projectId: dev.projectId,
+                            projectName: dev.projectName
+                        }));
+                    }
+                } catch (e) { /* skip this device */ }
+            }
+            tplLoaded = true;
+            rememberCommandParamTypes(allTemplates);
+            const tp = document.getElementById('tplProjectFilter');
+            if (tp) tp.innerHTML = '<option value="all">All Projects</option>' + cmdProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+            const td = document.getElementById('tplDeviceFilter');
+            if (td) td.innerHTML = '<option value="all">All Devices</option>' + cmdDevices.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('');
+        }
+
+        function renderCommandsList() {
+            const body = document.getElementById('commands-body');
+            if (!body) return;
+            const q = (document.getElementById('tpl-search')?.value || '').trim().toLowerCase();
+            const pid = document.getElementById('tplProjectFilter')?.value || 'all';
+            const did = document.getElementById('tplDeviceFilter')?.value || 'all';
+            const st = document.getElementById('tplStatusFilter')?.value || 'all';
+
+            let rows = allTemplates;
+            if (pid !== 'all') rows = rows.filter(t => t.projectId === pid);
+            if (did !== 'all') rows = rows.filter(t => t.deviceId === did);
+            if (st !== 'all') rows = rows.filter(t => tplStatusKey(t) === st);
+            if (q) rows = rows.filter(t => JSON.stringify(t).toLowerCase().includes(q));
+
+            const info = document.getElementById('commands-pagination-info');
+            const pager = document.getElementById('commands-pagination');
+            const totalPages = Math.max(1, Math.ceil(rows.length / TPL_PAGE_SIZE));
+            if (tplPage > totalPages) tplPage = totalPages;
+            const start = (tplPage - 1) * TPL_PAGE_SIZE;
+            const pageRows = rows.slice(start, start + TPL_PAGE_SIZE);
+
+            if (info) info.textContent = rows.length ? `Showing ${start + 1} to ${Math.min(start + TPL_PAGE_SIZE, rows.length)} of ${rows.length} commands` : 'Showing 0 commands';
+
+            if (!rows.length) {
+                body.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 36px; color: var(--text-secondary);">No commands found. Click "Add Command" to create a command template.</td></tr>';
+            } else {
+                body.innerHTML = pageRows.map((t, i) => {
+                    const active = tplStatusKey(t) === 'active';
+                    return `<tr>
+                        <td>${start + i + 1}</td>
+                        <td><strong>${escapeHtml(t.name || '—')}</strong></td>
+                        <td>${escapeHtml(t.projectName || '—')}</td>
+                        <td>${escapeHtml(t.deviceName || '—')}</td>
+                        <td><code class="cond-code">${escapeHtml(tplParametersText(t))}</code></td>
+                        <td>${active ? '<span class="pill pill-success">Active</span>' : '<span class="pill pill-warning">Inactive</span>'}</td>
+                        <td class="col-actions" style="position: relative;"><button class="kebab-btn" onclick="toggleRowMenu(event, 'tpl-menu-${escapeHtml(t.id)}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button><div class="row-menu" id="tpl-menu-${escapeHtml(t.id)}" style="display: none;"><button onclick="viewTemplateDetail('${escapeHtml(t.id)}'); closeRowMenus();"><i class='bx bx-show'></i> View Detail</button><button onclick="editTemplate('${escapeHtml(t.id)}'); closeRowMenus();"><i class='bx bx-edit'></i> Edit</button><button class="danger" onclick="deleteTemplate('${escapeHtml(t.id)}'); closeRowMenus();"><i class='bx bx-trash'></i> Delete</button></div></td>
+                    </tr>`;
+                }).join('');
+            }
+
+            if (pager) {
+                pager.innerHTML = '';
+                const prev = document.createElement('button');
+                prev.className = 'page-btn'; prev.innerHTML = '<i class="bx bx-chevron-left"></i>'; prev.disabled = tplPage <= 1;
+                prev.onclick = () => { tplPage--; renderCommandsList(); };
+                pager.appendChild(prev);
+                for (let p = 1; p <= totalPages; p++) {
+                    const b = document.createElement('button');
+                    b.className = 'page-btn' + (p === tplPage ? ' active' : '');
+                    b.textContent = p;
+                    b.onclick = () => { tplPage = p; renderCommandsList(); };
+                    pager.appendChild(b);
+                }
+                const next = document.createElement('button');
+                next.className = 'page-btn'; next.innerHTML = '<i class="bx bx-chevron-right"></i>'; next.disabled = tplPage >= totalPages;
+                next.onclick = () => { tplPage++; renderCommandsList(); };
+                pager.appendChild(next);
+            }
+        }
+        window.renderCommandsList = renderCommandsList;
+
+        function viewTemplateDetail(id) {
+            const t = allTemplates.find(x => x.id === id);
+            if (!t) return;
+            const active = tplStatusKey(t) === 'active';
+            const badge = document.getElementById('cd-status');
+            if (badge) { badge.className = 'pill ' + (active ? 'pill-success' : 'pill-warning'); badge.textContent = active ? 'Active' : 'Inactive'; }
+            const params = Array.isArray(t.parameters) && t.parameters.length
+                ? t.parameters.map(p => `${p.param_name} (${p.param_type || 'string'}${p.is_required ? ', required' : ''})`).join(', ')
+                : 'None';
+            const rows = [
+                ['Name', t.name || '—'],
+                ['Description', t.description || '—'],
+                ['Project', t.projectName || '—'],
+                ['Device', t.deviceName || '—'],
+                ['Parameters', params],
+                ['Status', active ? 'Active' : 'Inactive']
+            ];
+            const list = document.getElementById('command-detail-list');
+            if (list) list.innerHTML = rows.map(([k, v]) => `<div><dt>${escapeHtml(String(k))}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join('');
+            const title = document.querySelector('#commandDetailModal h3');
+            if (title) title.innerHTML = "<i class='bx bx-terminal'></i> Command Detail";
+            openModal('commandDetailModal');
+        }
+        window.viewTemplateDetail = viewTemplateDetail;
+
+        function editTemplate(id) {
+            const t = allTemplates.find(x => x.id === id);
+            if (!t) { showToast('Command not found. Refresh and try again.', 'warning'); return; }
+            document.getElementById('editCommandId').value = t.id;
+            document.getElementById('editCommandName').value = t.name || '';
+            document.getElementById('editCommandDesc').value = t.description || '';
+            openModal('editCommandModal');
+        }
+        window.editTemplate = editTemplate;
+
+        async function handleEditCommand(e) {
+            e.preventDefault();
+            const id = document.getElementById('editCommandId').value;
+            const name = (document.getElementById('editCommandName')?.value || '').trim();
+            const description = (document.getElementById('editCommandDesc')?.value || '').trim();
+            if (!name) { showToast('Enter a command name.', 'error'); return; }
+            try {
+                const res = await window.api.commands.update(id, { name, description });
+                if (res && res.success === false) throw new Error((res.error && res.error.message) || 'Update refused by the gateway.');
+                const local = allTemplates.find(x => x.id === id);
+                if (local) { local.name = name; local.description = description; }
+                closeModal('editCommandModal');
+                renderCommandsList();
+                showToast('Command updated.', 'success');
+            } catch (err) {
+                showToast('Failed to update command: ' + ((err && err.error && err.error.message) || (err && err.message) || 'unknown error'), 'error');
+            }
+        }
+        window.handleEditCommand = handleEditCommand;
+
+        async function deleteTemplate(id) {
+            if (!await UI.confirmDelete('this command', { message: 'The command template will be permanently removed.' })) return;
+            try {
+                const res = await window.api.commands.delete(id);
+                if (res && res.success === false) throw new Error((res.error && res.error.message) || 'Delete refused by the gateway.');
+                allTemplates = allTemplates.filter(t => t.id !== id);
+                renderCommandsList();
+                showToast('Command deleted.', 'success');
+            } catch (err) {
+                showToast('Failed to delete command: ' + ((err && err.error && err.error.message) || (err && err.message) || 'unknown error'), 'error');
+            }
+        }
+        window.deleteTemplate = deleteTemplate;
+
         document.addEventListener('DOMContentLoaded', async () => {
             const api = window.api;
-
             const deviceSelect = document.getElementById('target-device-select');
+            const projectSelect = document.getElementById('command-project-select');
             const templateSelect = document.getElementById('command-template-select');
             const paramsBox = document.getElementById('params-box');
             const paramsContainer = document.getElementById('parameters-container');
             const dispatchForm = document.getElementById('dispatch-form');
             const executeBtn = document.getElementById('execute-btn');
-            const historyBody = document.getElementById('dispatch-history-body');
 
-            let currentTemplates = [];
-            let allDevices = [];
-
-            // Initialize Page Data
-            await loadDevices();
+            await loadCommandDevices();
             await loadGlobalCommandHistory();
+            renderDeviceInfo(null);
 
-            // Setup WebSocket Connection
-            api.connectWebSocket((msg) => {
-                if (msg.type === 'command.status') {
-                    // Update global history list when commands cycle state (queued -> sent -> success/failed)
-                    loadGlobalCommandHistory();
-                }
+            deviceSelect.addEventListener('change', onCommandDeviceChange);
+            if (projectSelect) projectSelect.addEventListener('change', () => { rebuildCommandDeviceOptions(); onCommandDeviceChange(); });
+            templateSelect.addEventListener('change', onCommandTemplateChange);
+            dispatchForm.addEventListener('submit', handleDispatch);
+
+            const bindFilter = (id, ev) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, () => { cmdPage = 1; renderCommandHistory(); }); };
+            bindFilter('command-search', 'input');
+            bindFilter('historyProjectFilter', 'change');
+            bindFilter('historyDeviceFilter', 'change');
+            bindFilter('historyTypeFilter', 'change');
+            bindFilter('historyStatusFilter', 'change');
+            ['scheduled-search', 'scheduledProjectFilter', 'scheduledDeviceFilter', 'scheduledStatusFilter'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener(id === 'scheduled-search' ? 'input' : 'change', () => { schedPage = 1; renderScheduledList(); });
             });
 
-            async function loadDevices() {
+            // Add-scheduled-command dialog wiring.
+            const addSchedForm = document.getElementById('addScheduledForm');
+            if (addSchedForm) addSchedForm.addEventListener('submit', handleAddScheduled);
+            const schedProjectSel = document.getElementById('schedProject');
+            if (schedProjectSel) schedProjectSel.addEventListener('change', () => { fillSchedDevices(schedProjectSel.value); loadSchedTemplates(''); });
+            const schedDeviceSel = document.getElementById('schedDevice');
+            if (schedDeviceSel) schedDeviceSel.addEventListener('change', () => loadSchedTemplates(schedDeviceSel.value));
+
+            // Commands (templates) tab wiring.
+            ['tpl-search', 'tplProjectFilter', 'tplDeviceFilter', 'tplStatusFilter'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener(id === 'tpl-search' ? 'input' : 'change', () => { tplPage = 1; renderCommandsList(); });
+            });
+            const editCommandForm = document.getElementById('editCommandForm');
+            if (editCommandForm) editCommandForm.addEventListener('submit', handleEditCommand);
+            window.ensureTemplatesLoaded = async function () { if (!tplLoaded) await loadAllCommandTemplates(); };
+            const refreshBtn = document.getElementById('history-refresh-btn');
+            if (refreshBtn) refreshBtn.addEventListener('click', loadGlobalCommandHistory);
+            const exportBtn = document.getElementById('command-export-btn');
+            if (exportBtn) exportBtn.addEventListener('click', exportCommandHistory);
+
+            api.connectWebSocket((msg) => {
+                if (msg.type === 'command.status') loadGlobalCommandHistory();
+            });
+
+            async function loadCommandDevices() {
                 try {
                     const projRes = await api.projects.list();
-                    if (projRes.success) {
-                        const projects = projRes.data;
-                        allDevices = [];
-                        
-                        let deviceOptions = '<option value="">Select a device...</option>';
-                        
-                        for (let proj of projects) {
-                            const devRes = await api.devices.list(proj.id);
-                            if (devRes.success) {
-                                devRes.data.forEach(dev => {
-                                    allDevices.push(dev);
-                                    deviceOptions += `<option value="${dev.id}">${dev.name} (${proj.name})</option>`;
-                                });
-                            }
-                        }
-                        
-                        if (allDevices.length === 0) {
-                            deviceSelect.innerHTML = '<option value="">No devices found - add a device first</option>';
-                            executeBtn.disabled = true;
-                        } else {
-                            deviceSelect.innerHTML = deviceOptions;
-                            executeBtn.disabled = false;
+                    if (!projRes.success) return;
+                    cmdProjects = projRes.data || [];
+                    cmdDevices = [];
+                    for (const proj of cmdProjects) {
+                        const devRes = await api.devices.list(proj.id);
+                        if (devRes.success) {
+                            devRes.data.forEach(dev => cmdDevices.push({ ...dev, projectId: proj.id, projectName: proj.name }));
                         }
                     }
-                } catch (e) {
-                    console.error("Failed to load devices:", e);
-                }
+                    if (projectSelect) {
+                        projectSelect.innerHTML = '<option value="all">All Projects</option>' +
+                            cmdProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                    }
+                    rebuildCommandDeviceOptions();
+                    rebuildHistoryFilters();
+                } catch (e) { console.error('Failed to load devices:', e); }
             }
 
-            // Target Device Selection triggers Command Template Loading
-            deviceSelect.addEventListener('change', async () => {
+            function rebuildCommandDeviceOptions() {
+                const pid = projectSelect ? projectSelect.value : 'all';
+                const scoped = cmdDevices.filter(d => pid === 'all' || d.projectId === pid);
+                deviceSelect.innerHTML = scoped.length
+                    ? '<option value="">Select a device...</option>' + scoped.map(d => `<option value="${d.id}">${escapeHtml(d.name)} (${escapeHtml(d.projectName)})</option>`).join('')
+                    : '<option value="">No devices found - add a device first</option>';
+                if (executeBtn) executeBtn.disabled = scoped.length === 0;
+            }
+
+            function rebuildHistoryFilters() {
+                const hp = document.getElementById('historyProjectFilter');
+                if (hp) hp.innerHTML = '<option value="all">All Projects</option>' + cmdProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                const hd = document.getElementById('historyDeviceFilter');
+                if (hd) hd.innerHTML = '<option value="all">All Devices</option>' + cmdDevices.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('');
+                const sp = document.getElementById('scheduledProjectFilter');
+                if (sp) sp.innerHTML = '<option value="all">All Projects</option>' + cmdProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                const sd = document.getElementById('scheduledDeviceFilter');
+                if (sd) sd.innerHTML = '<option value="all">All Devices</option>' + cmdDevices.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('');
+            }
+
+            async function onCommandDeviceChange() {
                 const deviceId = deviceSelect.value;
                 paramsBox.style.display = 'none';
+                paramsContainer.innerHTML = '';
                 templateSelect.innerHTML = '<option value="">Select command...</option>';
-                
+                cmdTemplates = [];
+                renderQuickTemplates([]);
+                renderDeviceInfo(cmdDevices.find(d => d.id === deviceId) || null);
                 if (!deviceId) return;
-
                 try {
-                    const templatesRes = await api.commands.list(deviceId);
-                    if (templatesRes.success) {
-                        currentTemplates = templatesRes.data;
+                    const res = await api.commands.list(deviceId);
+                    if (res.success) {
+                        cmdTemplates = res.data || [];
+                        rememberCommandParamTypes(cmdTemplates);
                         templateSelect.innerHTML = '<option value="">Select command...</option>' +
-                            currentTemplates.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+                            cmdTemplates.map(t => `<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+                        renderQuickTemplates(cmdTemplates);
                     }
-                } catch (e) {
-                    console.error("Failed to fetch templates:", e);
-                }
-            });
 
-            // Template Selection triggers Parameter rendering
-            templateSelect.addEventListener('change', () => {
+                } catch (e) { console.error('Failed to fetch templates:', e); }
+            }
+
+            function renderDeviceInfo(dev) {
+                const el = document.getElementById('device-info-body');
+                if (!el) return;
+                if (!dev) { el.innerHTML = 'Select a device to see its information.'; return; }
+                const online = dev.status === 'online';
+                const rows = [
+                    ['Project', dev.projectName || '—'],
+                    ['Device ID', dev.id],
+                    ['Type', dev.device_type || dev.type || 'ESP32'],
+                    ['Last Seen', dev.last_seen_at ? new Date(dev.last_seen_at).toLocaleString() : '—']
+                ];
+                el.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <i class='bx bx-chip' style="font-size: 26px; color: var(--primary);"></i>
+                        <strong style="font-size: 15px; color: var(--text);">${escapeHtml(dev.name)}</strong>
+                        <span class="pill ${online ? 'pill-success' : 'pill-danger'}" style="margin-left: auto;">${online ? 'Online' : 'Offline'}</span>
+                    </div>
+                    <div class="kv-list">${rows.map(r => `<div><span>${escapeHtml(r[0])}</span><b>${escapeHtml(String(r[1]))}</b></div>`).join('')}</div>`;
+            }
+
+            function renderQuickTemplates(templates) {
+                const el = document.getElementById('quick-templates');
+                if (!el) return;
+                if (!templates.length) { el.innerHTML = '<span style="color: var(--text-secondary); font-size: 13px;">Select a device to list its templates.</span>'; return; }
+                el.innerHTML = templates.map(t => `
+                    <button type="button" class="quick-cmd-btn" onclick="quickDispatch('${t.id}')">
+                        <span><i class='bx bx-terminal'></i> ${escapeHtml(t.name)}</span>
+                        <i class='bx bx-send'></i>
+                    </button>`).join('');
+            }
+
+            window.quickDispatch = function (templateId) {
+                templateSelect.value = templateId;
+                onCommandTemplateChange();
+                templateSelect.focus();
+            };
+
+            async function onCommandTemplateChange() {
                 const tplId = templateSelect.value;
                 paramsBox.style.display = 'none';
                 paramsContainer.innerHTML = '';
-
                 if (!tplId) return;
-
-                const template = currentTemplates.find(t => t.id === tplId);
-                if (!template || !template.parameters || template.parameters.length === 0) return;
-
+                let template = cmdTemplates.find(t => t.id === tplId);
+                let params = templateParameters(template);
+                if (params.length === 0) {
+                    // The list endpoint sometimes omits a template's parameters;
+                    // fetch the detail so the value fields are not silently blank.
+                    try {
+                        const detail = await api.commands.get(tplId);
+                        if (detail && detail.success && detail.data) {
+                            template = { ...(template || {}), ...detail.data };
+                            params = templateParameters(template);
+                        }
+                    } catch (e) { /* fall through to no params */ }
+                }
+                if (template) rememberCommandParamTypes([template]);
+                if (templateSelect.value !== tplId) return; // selection changed while loading
+                if (!template || params.length === 0) return;
                 paramsBox.style.display = 'block';
-                paramsContainer.innerHTML = template.parameters.map(p => {
+                paramsContainer.innerHTML = params.map(p => {
                     const requiredStar = p.is_required ? '*' : '';
-                    let inputType = 'text';
-                    if (p.param_type === 'integer' || p.param_type === 'float') {
-                        inputType = 'number';
+                    const type = normalizeParamType(p.param_type);
+                    if (type === 'boolean') {
+                        const defFalse = p.default_value === false || String(p.default_value).toLowerCase() === 'false' || String(p.default_value) === '0';
+                        return `<div style="margin-bottom: 12px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text); font-weight: 500;">${escapeHtml(p.param_name)} ${requiredStar} (boolean)</label>
+                            <select class="styled-select param-input" data-name="${escapeHtml(p.param_name)}" data-type="boolean" data-required="${p.is_required ? '1' : '0'}" style="width: 100%; height: 38px;"><option value="true"${defFalse ? '' : ' selected'}>true</option><option value="false"${defFalse ? ' selected' : ''}>false</option></select>
+                        </div>`;
                     }
-                    if (p.param_type === 'boolean') {
-                        return `
-                            <div style="margin-bottom: 12px;">
-                                <label style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-light); font-weight: 500;">
-                                    ${escapeHtml(p.param_name)} ${requiredStar} (boolean)
-                                </label>
-                                <select class="styled-select param-input" data-name="${escapeHtml(p.param_name)}" data-type="boolean" data-required="${p.is_required ? '1' : '0'}" style="width: 100%; height: 38px;">
-                                    <option value="true">true</option>
-                                    <option value="false">false</option>
-                                </select>
-                            </div>
-                        `;
-                    }
-
-                    // A default value of 0 (or false) is falsy, so it must be
-                    // rendered explicitly rather than through a || fallback.
+                    const inputType = (type === 'integer' || type === 'float') ? 'number' : 'text';
+                    // type="number" defaults to step=1, so the browser's native
+                    // validation rejects decimals on a float param before submit.
+                    // step="any" lets floats accept 25.4; integers stay whole.
+                    const stepAttr = inputType === 'number' ? (type === 'integer' ? ' step="1"' : ' step="any"') : '';
                     const hasDefault = p.default_value !== null && p.default_value !== undefined && p.default_value !== '';
-                    return `
-                        <div style="margin-bottom: 12px;">
-                            <label style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-light); font-weight: 500;">
-                                ${escapeHtml(p.param_name)} ${requiredStar} (${escapeHtml(p.param_type)})
-                            </label>
-                            <input type="${inputType}" class="styled-select param-input" data-name="${escapeHtml(p.param_name)}" data-type="${escapeHtml(p.param_type)}" data-required="${p.is_required ? '1' : '0'}" style="width: 100%; background: transparent; height: 38px;" placeholder="${hasDefault ? '' : (p.is_required ? 'Required' : 'Optional')}" value="${hasDefault ? escapeHtml(p.default_value) : ''}">
-                        </div>
-                    `;
+                    return `<div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text); font-weight: 500;">${escapeHtml(p.param_name)} ${requiredStar} (${escapeHtml(p.param_type || type)})</label>
+                        <input type="${inputType}"${stepAttr} class="styled-select param-input" data-name="${escapeHtml(p.param_name)}" data-type="${type}" data-required="${p.is_required ? '1' : '0'}" style="width: 100%; height: 38px;" placeholder="${hasDefault ? '' : (p.is_required ? 'Required' : 'Optional')}" value="${hasDefault ? escapeHtml(p.default_value) : ''}">
+                    </div>`;
                 }).join('');
-            });
+            }
 
-            // Form Submit Dispatch Handler
-            dispatchForm.addEventListener('submit', async (e) => {
+            async function handleDispatch(e) {
                 e.preventDefault();
-
                 const tplId = templateSelect.value;
-                if (!tplId) return;
-
-                const template = currentTemplates.find(t => t.id === tplId);
+                if (!tplId) { showToast('Select a command template first.', 'warning'); return; }
                 const paramInputs = document.querySelectorAll('.param-input');
                 const parameters = {};
-
-                // The gateway does NOT enforce required command parameters: it
-                // substitutes an empty string and still queues the command. Every
-                // parameter is therefore validated here before dispatch.
-                for (let input of paramInputs) {
+                for (const input of paramInputs) {
                     const name = input.getAttribute('data-name');
-                    const type = input.getAttribute('data-type');
+                    const type = normalizeParamType(input.getAttribute('data-type'));
                     const isRequired = input.getAttribute('data-required') === '1';
-                    const raw = String(input.value).trim();
-
-                    if (!raw) {
-                        if (isRequired) {
-                            showToast(`Parameter "${name}" is required.`, 'error');
-                            input.focus();
-                            return;
-                        }
-                        continue;
-                    }
-
+                    const raw = input.value === null || input.value === undefined ? '' : String(input.value).trim();
+                    if (!raw) { if (isRequired) { showToast(`Parameter "${name}" is required.`, 'error'); input.focus(); return; } continue; }
                     if (type === 'integer') {
-                        if (!/^-?\d+$/.test(raw)) {
-                            showToast(`Parameter "${name}" must be a whole number.`, 'error');
-                            input.focus();
-                            return;
-                        }
+                        if (!/^-?\d+$/.test(raw)) { showToast(`Parameter "${name}" must be a whole number.`, 'error'); input.focus(); return; }
                         parameters[name] = parseInt(raw, 10);
                     } else if (type === 'float') {
                         const num = Number(raw);
-                        if (!isFinite(num)) {
-                            showToast(`Parameter "${name}" must be a number.`, 'error');
-                            input.focus();
-                            return;
-                        }
+                        if (!isFinite(num)) { showToast(`Parameter "${name}" must be a number.`, 'error'); input.focus(); return; }
                         parameters[name] = num;
                     } else if (type === 'boolean') {
-                        parameters[name] = raw === 'true' || raw === '1';
+                        // Send a real JSON boolean, never the string "false"/"true".
+                        parameters[name] = raw.toLowerCase() === 'true' || raw === '1' || raw.toLowerCase() === 'on';
                     } else {
                         parameters[name] = raw;
                     }
                 }
-
                 executeBtn.disabled = true;
+                const originalHtml = executeBtn.innerHTML;
                 executeBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Executing...';
-
                 try {
                     const res = await api.dispatch.send(tplId, { parameters });
                     if (res.success) {
+                        // Remember what was sent so the history row shows the value
+                        // instead of the gateway's parameter-less "{}" entry.
+                        const instanceId = res.data && (res.data.id || res.data.instance_id);
+                        if (instanceId) dispatchedParamsById[instanceId] = parameters;
                         showToast('Command queued for dispatch!', 'success');
-                        dispatchForm.reset();
+
                         paramsBox.style.display = 'none';
+                        paramsContainer.innerHTML = '';
                         await loadGlobalCommandHistory();
                     } else {
                         showToast('Failed to dispatch command: ' + (res.error?.message || 'Unknown error'), 'error');
                     }
                 } catch (err) {
-                    console.error("Command execution error:", err);
                     showToast('Error executing command: ' + ((err && err.error && err.error.message) || err.message || 'Unknown error'), 'error');
                 } finally {
                     executeBtn.disabled = false;
-                    executeBtn.innerHTML = "<i class='bx bx-send'></i> Execute Command";
+                    executeBtn.innerHTML = originalHtml;
                 }
-            });
+            }
 
-            // Load all chronological command dispatch history logs
             async function loadGlobalCommandHistory() {
                 try {
                     let globalHistory = [];
-
-                    for (let dev of allDevices) {
+                    for (const dev of cmdDevices) {
                         const historyRes = await api.dispatch.getHistory(dev.id);
                         if (historyRes.success) {
-                            historyRes.data.forEach(item => {
-                                globalHistory.push({
-                                    ...item,
-                                    deviceName: dev.name
-                                });
-                            });
+                            historyRes.data.forEach(item => globalHistory.push({ ...item, deviceName: dev.name, projectName: dev.projectName, deviceId: dev.id }));
                         }
                     }
-
-                    // Sort descending by created time
                     globalHistory.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    cmdHistory = globalHistory;
+                    updateCommandKpis(globalHistory);
+                    renderRecentCommands(globalHistory);
+                    renderCommandHistory();
+                    renderScheduledList();
+                } catch (e) { console.error('Failed to load command history:', e); }
+            }
 
-                    if (allDevices.length === 0) {
-                        historyBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
-                            <i class='bx bx-terminal' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
-                            No devices found.<br>
-                            <a href="cloud_device_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Add your first device</a> to start dispatching commands.
-                        </td></tr>`;
-                        return;
-                    }
+            function updateCommandKpis(list) {
+                const total = list.length;
+                const success = list.filter(c => cmdStatusKey(c.status) === 'success').length;
+                const failed = list.filter(c => cmdStatusKey(c.status) === 'failed').length;
+                const pending = total - success - failed;
+                const setKpi = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+                setKpi('cmd-total', total);
+                setKpi('cmd-success', success);
+                setKpi('cmd-pending', pending);
+                setKpi('cmd-failed', failed);
+                setKpi('cmd-success-pct', total ? Math.round(success / total * 100).toFixed(1) + '%' : '0%');
+                setKpi('cmd-pending-pct', total ? Math.round(pending / total * 100).toFixed(1) + '%' : '0%');
+                setKpi('cmd-failed-pct', total ? Math.round(failed / total * 100).toFixed(1) + '%' : '0%');
+            }
 
-                    if (globalHistory.length === 0) {
-                        historyBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 36px 20px; color: var(--text-muted-dark);">
-                            <i class='bx bx-history' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
-                            No commands dispatched yet. Select a device and template above to send your first command.
-                        </td></tr>`;
-                        return;
-                    }
+            function commandRow(c, i) {
+                const time = c.created_at ? new Date(c.created_at).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+                return `<tr>
+                    <td>${i + 1}</td>
+                    <td>${escapeHtml(time)}</td>
+                    <td>${escapeHtml(c.projectName || '—')}</td>
+                    <td>${escapeHtml(c.deviceName || '—')}</td>
+                    <td><code class="cond-code">${escapeHtml(c.command_name || c.template_name || 'command')}</code></td>
+                    <td><code style="font-size: 11.5px; color: var(--text-secondary);">${escapeHtml(cmdParametersJson(c))}</code></td>
+                    <td>${commandStatusPill(c.status)}</td>
+                    <td>${escapeHtml(String(cmdResponseText(c)))}</td>
+                    <td>${escapeHtml(String(c.executed_by || c.triggered_by || 'System'))}</td>
+                    <td class="col-actions" style="position: relative;"><button class="kebab-btn" onclick="toggleRowMenu(event, 'cmd-menu-${escapeHtml(c.id)}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button><div class="row-menu" id="cmd-menu-${escapeHtml(c.id)}" style="display: none;"><button onclick="viewCommandDetail('${escapeHtml(c.id)}'); closeRowMenus();"><i class='bx bx-show'></i> View Detail</button></div></td>
+                </tr>`;
+            }
 
-                    historyBody.innerHTML = globalHistory.map(c => {
-                        let statusColor = 'queued';
-                        if (c.status === 'success') statusColor = 'success';
-                        else if (c.status === 'failed') statusColor = 'failed';
-                        else if (c.status === 'sent') statusColor = 'sent';
+            function renderRecentCommands(list) {
+                const body = document.getElementById('recent-commands-body');
+                if (!body) return;
+                if (!list.length) { body.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 24px; color: var(--text-secondary);">No commands dispatched yet.</td></tr>'; return; }
+                body.innerHTML = list.slice(0, 8).map((c, i) => {
+                    const time = c.created_at ? new Date(c.created_at).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+                    return `<tr>
+                        <td>${i + 1}</td>
+                        <td>${escapeHtml(time)}</td>
+                        <td>${escapeHtml(c.deviceName || '—')}</td>
+                        <td><code class="cond-code">${escapeHtml(c.command_name || c.template_name || 'command')}</code></td>
+                        <td><code style="font-size: 11.5px; color: var(--text-secondary);">${escapeHtml(cmdParametersJson(c))}</code></td>
+                        <td>${commandStatusPill(c.status)}</td>
+                        <td>${escapeHtml(String(cmdResponseText(c)))}</td>
+                        <td class="col-actions" style="position: relative;"><button class="kebab-btn" onclick="toggleRowMenu(event, 'cmd-menu-${escapeHtml(c.id)}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button><div class="row-menu" id="cmd-menu-${escapeHtml(c.id)}" style="display: none;"><button onclick="viewCommandDetail('${escapeHtml(c.id)}'); closeRowMenus();"><i class='bx bx-show'></i> View Detail</button></div></td>
+                    </tr>`;
+                }).join('');
+            }
 
-                        let timeStr = 'Unknown';
-                        const diffMs = Date.now() - new Date(c.created_at).getTime();
-                        const diffMins = Math.floor(diffMs / 60000);
-                        if (diffMins < 1) timeStr = 'Just now';
-                        else if (diffMins < 60) timeStr = `${diffMins}m ago`;
-                        else timeStr = `${Math.floor(diffMins/60)}h ago`;
+            function filteredHistory() {
+                const q = (document.getElementById('command-search')?.value || '').trim().toLowerCase();
+                const pid = document.getElementById('historyProjectFilter')?.value || 'all';
+                const did = document.getElementById('historyDeviceFilter')?.value || 'all';
+                const st = document.getElementById('historyStatusFilter')?.value || 'all';
+                let rows = cmdHistory;
+                if (pid !== 'all') rows = rows.filter(c => c.deviceId && (cmdDevices.find(d => d.id === c.deviceId) || {}).projectId === pid);
+                if (did !== 'all') rows = rows.filter(c => c.deviceId === did);
+                if (st !== 'all') rows = rows.filter(c => cmdStatusKey(c.status) === st);
+                if (q) rows = rows.filter(c => JSON.stringify(c).toLowerCase().includes(q));
+                return rows;
+            }
 
-                        const paramValues = Object.entries(c.parameters || {}).map(([k, v]) => `${k}:${v}`).join(', ');
-                        const cmdSig = `<code>${c.command_name || c.template_name}(${paramValues})</code>`;
+            function renderCommandHistory() {
+                const body = document.getElementById('dispatch-history-body');
+                const info = document.getElementById('command-pagination-info');
+                const pager = document.getElementById('command-pagination');
+                if (!body) return;
+                const rows = filteredHistory();
+                const totalPages = Math.max(1, Math.ceil(rows.length / CMD_PAGE_SIZE));
+                if (cmdPage > totalPages) cmdPage = totalPages;
+                const start = (cmdPage - 1) * CMD_PAGE_SIZE;
+                const pageRows = rows.slice(start, start + CMD_PAGE_SIZE);
 
-                        return `
-                            <tr>
-                                <td class="id-col" title="${c.id}">${c.id.substring(0, 10)}...</td>
-                                <td>${c.deviceName}</td>
-                                <td>${cmdSig}</td>
-                                <td><span class="status-badge ${statusColor}">${c.status.charAt(0).toUpperCase() + c.status.slice(1)}</span></td>
-                                <td>${timeStr}</td>
-                            </tr>
-                        `;
-                    }).join('');
-
-                } catch (e) {
-                    console.error("Error loading command history:", e);
-                    historyBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--text-muted-dark);">Error loading history.</td></tr>';
+                if (!rows.length) {
+                    body.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 36px; color: var(--text-secondary);">No commands match the filters.</td></tr>';
+                } else {
+                    body.innerHTML = pageRows.map((c, i) => commandRow(c, start + i)).join('');
                 }
+                if (info) info.textContent = rows.length ? `Showing ${start + 1} to ${Math.min(start + CMD_PAGE_SIZE, rows.length)} of ${rows.length} commands` : 'Showing 0 commands';
+                if (pager) {
+                    pager.innerHTML = '';
+                    const prev = document.createElement('button'); prev.className = 'page-btn'; prev.innerHTML = '<i class="bx bx-chevron-left"></i>'; prev.disabled = cmdPage <= 1; prev.onclick = () => { cmdPage--; renderCommandHistory(); }; pager.appendChild(prev);
+                    for (let p = 1; p <= totalPages; p++) { const b = document.createElement('button'); b.className = 'page-btn' + (p === cmdPage ? ' active' : ''); b.textContent = p; b.onclick = () => { cmdPage = p; renderCommandHistory(); }; pager.appendChild(b); }
+                    const next = document.createElement('button'); next.className = 'page-btn'; next.innerHTML = '<i class="bx bx-chevron-right"></i>'; next.disabled = cmdPage >= totalPages; next.onclick = () => { cmdPage++; renderCommandHistory(); }; pager.appendChild(next);
+                }
+            }
+
+            function exportCommandHistory() {
+                const rows = filteredHistory();
+                if (!rows.length) { showToast('No commands to export.', 'warning'); return; }
+                const headers = ['Time', 'Project', 'Device', 'Command', 'Parameters', 'Status', 'Response', 'Executed By'];
+                const lines = rows.map(c => [
+                    `"${new Date(c.created_at).toISOString()}"`,
+                    `"${c.projectName || ''}"`,
+                    `"${c.deviceName || ''}"`,
+                    `"${c.command_name || c.template_name || ''}"`,
+                    `"${cmdParametersJson(c).replace(/"/g, "'")}"`,
+                    `"${cmdStatusKey(c.status)}"`,
+                    `"${String(cmdResponseText(c)).replace(/"/g, "'")}"`,
+                    `"${c.executed_by || c.triggered_by || 'System'}"`
+                ]);
+                const csv = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...lines.map(l => l.join(','))].join('\n');
+                const link = document.createElement('a');
+                link.setAttribute('href', encodeURI(csv));
+                link.setAttribute('download', 'command_history.csv');
+                document.body.appendChild(link); link.click(); document.body.removeChild(link);
             }
         });
     </script>

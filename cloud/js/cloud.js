@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Theme setup and toggle handling
     const initTheme = () => {
         const themeToggles = document.querySelectorAll('.theme-toggle, #themeToggle');
@@ -19,16 +19,21 @@
             });
         };
 
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            document.documentElement.classList.add('dark-theme');
-            updateLogo('dark');
-        } else {
-            document.body.classList.remove('dark-theme');
-            document.documentElement.classList.remove('dark-theme');
-            updateLogo('light');
-        }
+        const applyTheme = (theme) => {
+            const isDark = theme === 'dark';
+            const root = document.documentElement;
+            // `data-theme` on <html> is the single source the CSS token layer
+            // reads; the `dark-theme` class is kept for the older component
+            // rules that still key off it.
+            root.setAttribute('data-theme', theme);
+            root.style.colorScheme = theme;
+            root.classList.toggle('dark-theme', isDark);
+            if (document.body) document.body.classList.toggle('dark-theme', isDark);
+            updateLogo(theme);
+        };
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(currentTheme);
 
         themeToggles.forEach(btn => {
             btn.style.display = 'inline-flex';
@@ -41,12 +46,10 @@
 
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const isDark = document.body.classList.toggle('dark-theme');
-                document.documentElement.classList.toggle('dark-theme', isDark);
-                const theme = isDark ? 'dark' : 'light';
+                const theme = (localStorage.getItem('theme') || 'light') === 'dark' ? 'light' : 'dark';
+                applyTheme(theme);
                 localStorage.setItem('theme', theme);
-                updateLogo(theme);
-                
+
                 themeToggles.forEach(b => {
                     const sun = b.querySelector('.bx-sun');
                     const moon = b.querySelector('.bx-moon');
@@ -115,6 +118,27 @@
         });
     }
 
+    // Topbar project context selector
+    const projectSelect = document.getElementById('topbarProjectSelect');
+    if (projectSelect && window.api && window.api.projects) {
+        (async () => {
+            try {
+                const res = await window.api.projects.list();
+                if (res && res.success && Array.isArray(res.data)) {
+                    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    projectSelect.innerHTML = '<option value="all">All Projects</option>' +
+                        res.data.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('');
+                    let saved = 'all';
+                    try { saved = localStorage.getItem('omniteq_active_project') || 'all'; } catch (e) { /* private mode */ }
+                    if (saved === 'all' || res.data.some(p => p.id === saved)) projectSelect.value = saved;
+                    projectSelect.addEventListener('change', () => {
+                        try { localStorage.setItem('omniteq_active_project', projectSelect.value); } catch (e) { /* ignore */ }
+                    });
+                }
+            } catch (e) { /* keep the default option */ }
+        })();
+    }
+
     // Mobile Hamburger
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -135,10 +159,58 @@
         });
     }
 
+    /**
+     * Public pages that still render the console shell (currently cloud_docs.html)
+     * would otherwise show "Loading..." forever and a dead project selector.
+     * Neutralise the account chrome and offer sign-in instead.
+     * A no-op on pages without a console shell, such as the landing page.
+     */
+    function renderSignedOutShell() {
+        document.querySelectorAll('.user-name, #user-display-name, .sidebar-profile-name, #sidebar-display-name')
+            .forEach(el => { el.textContent = 'Guest'; });
+        document.querySelectorAll('.user-role, #user-display-role, .sidebar-profile-role, #sidebar-display-role')
+            .forEach(el => { el.textContent = 'Signed out'; });
+        document.querySelectorAll('.user-profile img, #user-avatar-img, .sidebar-profile img, #sidebar-avatar-img')
+            .forEach(img => { img.src = 'https://ui-avatars.com/api/?name=Guest&background=64748B&color=fff'; });
+
+        // The shell logo normally points at the dashboard, which would bounce
+        // an anonymous visitor straight back to login.
+        const shellLogo = document.querySelector('.sidebar-header .logo a[href="cloud_dashboard.html"]');
+        if (shellLogo) shellLogo.setAttribute('href', 'cloud_landing.html');
+
+        // "Sign out" becomes "Sign in" (the href is already login.html).
+        const logoutBtn = document.querySelector('.sidebar-logout');
+        if (logoutBtn) {
+            logoutBtn.setAttribute('title', 'Sign in');
+            logoutBtn.setAttribute('aria-label', 'Sign in');
+            const icon = logoutBtn.querySelector('i');
+            if (icon) icon.className = 'bx bx-log-in';
+        }
+
+        // Controls that need a session are meaningless here.
+        document.querySelectorAll('.project-context, #realtimeStatusBtn, .notification-btn')
+            .forEach(el => { el.style.display = 'none'; });
+
+        // Give anonymous readers a way into the product.
+        const actions = document.querySelector('.topbar-actions');
+        if (actions && !document.getElementById('guestAuthActions')) {
+            const wrap = document.createElement('div');
+            wrap.id = 'guestAuthActions';
+            wrap.className = 'guest-auth-actions';
+            wrap.innerHTML =
+                '<a href="login.html" class="btn-ghost">Log In</a>' +
+                '<a href="signup.html" class="btn-primary">Sign Up Free</a>';
+            actions.insertBefore(wrap, actions.firstChild);
+        }
+    }
+
     // User profile and session management
     const loadUserProfile = async () => {
         const currentPath = window.location.pathname.split('/').pop() || 'cloud_dashboard.html';
-        const publicPages = ['login.html', 'signup.html', 'cloud_landing.html', 'about.html', 'api-reference.html', ''];
+        // Pages reachable without a session. `cloud_docs.html` is public like
+        // api-reference.html, but it still renders the console shell, so the
+        // signed-out branch below has to neutralise the account chrome.
+        const publicPages = ['login.html', 'signup.html', 'cloud_landing.html', 'about.html', 'api-reference.html', 'cloud_docs.html', ''];
         const isProtected = currentPath.startsWith('cloud_') && !publicPages.includes(currentPath);
 
         const token = localStorage.getItem('access_token');
@@ -147,6 +219,7 @@
                 window.location.href = 'login.html';
                 return;
             }
+            renderSignedOutShell();
             return;
         }
 
@@ -158,9 +231,9 @@
                     const email = res.data.email || "";
                     const role = res.data.role || (res.data.id === 'usr_01HXKJ2P3M4N5Q6R7S8T9V0W' ? "Administrator" : "Developer");
                     
-                    document.querySelectorAll('.user-name, #user-display-name').forEach(el => { el.textContent = displayName; });
-                    document.querySelectorAll('.user-role, #user-display-role').forEach(el => { el.textContent = role; });
-                    document.querySelectorAll('.user-profile img, #user-avatar-img').forEach(img => {
+                    document.querySelectorAll('.user-name, #user-display-name, .sidebar-profile-name, #sidebar-display-name').forEach(el => { el.textContent = displayName; });
+                    document.querySelectorAll('.user-role, #user-display-role, .sidebar-profile-role, #sidebar-display-role').forEach(el => { el.textContent = role; });
+                    document.querySelectorAll('.user-profile img, #user-avatar-img, .sidebar-profile img, #sidebar-avatar-img').forEach(img => {
                         img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=185FA5&color=fff`;
                     });
 
@@ -252,6 +325,37 @@
         setInterval(updateBadgeContent, 15000); // Poll health status every 15s
     };
     initServerVitalsHeaderBadge();
+
+    /**
+     * Topbar real-time indicator (#realtimeStatusBtn). Shows whether the live
+     * transport (WebSocket or the v3.0 SSE fallback) is connected: green when it
+     * is, gray when it is not. The broadcast glyph is deliberately different
+     * from the device online badge so the two cannot be confused. Kept here so
+     * every page gets the same behaviour without a per-page script.
+     */
+    const initRealtimeStatusIndicator = () => {
+        const btn = document.getElementById('realtimeStatusBtn');
+        const icon = document.getElementById('realtimeStatusIcon');
+        if (!btn || !icon) return;
+
+        const paint = () => {
+            const api = window.api;
+            const live = !!(api && (api.realtimeAvailable || (api.realtime && api.realtime.connected)));
+            icon.style.color = live ? '#10b981' : 'var(--text-muted-dark, #94a3b8)';
+            btn.classList.toggle('is-live', live);
+            const label = live ? 'Real-time updates connected' : 'Real-time updates disconnected';
+            btn.title = label;
+            btn.setAttribute('aria-label', label);
+        };
+
+        window.omniteqUpdateRealtimeStatus = paint;
+        paint();
+        setInterval(() => { if (!document.hidden) paint(); }, 3000);
+        window.addEventListener('online', paint);
+        window.addEventListener('offline', paint);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) paint(); });
+    };
+    initRealtimeStatusIndicator();
 
     // Scroll Animation Revealer for .animate-on-scroll elements
     const initScrollAnimations = () => {
@@ -371,6 +475,24 @@ window.copyText = function(value, label) {
 // dashboards were calling telemetryChart.update() on an object that did not
 // exist and the canvas stayed empty. Every page that needs a chart now calls
 // this once and keeps using window.telemetryChart afterwards.
+// Theme-aware colours for Chart.js. Reads the live CSS tokens so the plot
+// follows the active light/dark theme instead of shipping dark-only colours.
+window.omniteqChartThemeColors = function() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    const css = getComputedStyle(document.documentElement);
+    const read = (name, fallback) => (css.getPropertyValue(name) || '').trim() || fallback;
+    return {
+        isDark,
+        primary: read('--primary-color', read('--primary', '#3b82f6')),
+        muted: read('--text-secondary', isDark ? '#94a3b8' : '#64748B'),
+        grid: isDark ? 'rgba(148, 163, 184, 0.15)' : 'rgba(100, 116, 139, 0.18)',
+        tooltipBg: isDark ? 'rgba(17, 24, 39, 0.96)' : 'rgba(255, 255, 255, 0.98)',
+        tooltipBorder: isDark ? 'rgba(148, 163, 184, 0.25)' : 'rgba(148, 163, 184, 0.4)',
+        tooltipTitle: isDark ? '#f8fafc' : '#111827',
+        tooltipBody: isDark ? '#e2e8f0' : '#374151'
+    };
+};
+
 window.omniteqInitTelemetryChart = function(canvasId, options) {
     const canvas = document.getElementById(canvasId || 'telemetryChart');
     if (!canvas) return null;
@@ -389,10 +511,10 @@ window.omniteqInitTelemetryChart = function(canvasId, options) {
         try { window.telemetryChart.destroy(); } catch (e) { /* already gone */ }
     }
 
-    const css = getComputedStyle(document.body);
-    const primary = (css.getPropertyValue('--primary-color') || css.getPropertyValue('--primary') || '#3b82f6').trim() || '#3b82f6';
-    const muted = (css.getPropertyValue('--text-muted-dark') || '#94a3b8').trim() || '#94a3b8';
-    const grid = 'rgba(148, 163, 184, 0.15)';
+    const chartColors = window.omniteqChartThemeColors();
+    const primary = chartColors.primary;
+    const muted = chartColors.muted;
+    const grid = chartColors.grid;
 
     window.telemetryChart = new Chart(canvas.getContext('2d'), {
         type: 'line',
@@ -420,11 +542,11 @@ window.omniteqInitTelemetryChart = function(canvasId, options) {
             plugins: {
                 legend: { display: opts.showLegend === true, labels: { color: muted, boxWidth: 12 } },
                 tooltip: {
-                    backgroundColor: 'rgba(13, 18, 34, 0.95)',
-                    borderColor: 'rgba(148, 163, 184, 0.25)',
+                    backgroundColor: chartColors.tooltipBg,
+                    borderColor: chartColors.tooltipBorder,
                     borderWidth: 1,
-                    titleColor: '#f8fafc',
-                    bodyColor: '#e2e8f0',
+                    titleColor: chartColors.tooltipTitle,
+                    bodyColor: chartColors.tooltipBody,
                     padding: 10,
                     displayColors: false
                 }
@@ -449,16 +571,29 @@ window.omniteqInitTelemetryChart = function(canvasId, options) {
      */
     window.updateChartTheme = function() {
         if (!window.telemetryChart) return;
-        const c = getComputedStyle(document.body);
-        const p = (c.getPropertyValue('--primary-color') || c.getPropertyValue('--primary') || '#3b82f6').trim() || '#3b82f6';
-        const m = (c.getPropertyValue('--text-muted-dark') || '#94a3b8').trim() || '#94a3b8';
+        const colors = window.omniteqChartThemeColors();
         const ch = window.telemetryChart;
-        ch.data.datasets[0].borderColor = p;
-        ch.data.datasets[0].pointBorderColor = p;
-        ch.data.datasets[0].pointBackgroundColor = p;
-        if (ch.options.scales && ch.options.scales.x) {
-            ch.options.scales.x.ticks.color = m;
-            ch.options.scales.y.ticks.color = m;
+        ch.data.datasets[0].borderColor = colors.primary;
+        ch.data.datasets[0].pointBorderColor = colors.primary;
+        ch.data.datasets[0].pointBackgroundColor = colors.primary;
+        if (ch.options.plugins && ch.options.plugins.legend && ch.options.plugins.legend.labels) {
+            ch.options.plugins.legend.labels.color = colors.muted;
+        }
+        if (ch.options.plugins && ch.options.plugins.tooltip) {
+            ch.options.plugins.tooltip.backgroundColor = colors.tooltipBg;
+            ch.options.plugins.tooltip.borderColor = colors.tooltipBorder;
+            ch.options.plugins.tooltip.titleColor = colors.tooltipTitle;
+            ch.options.plugins.tooltip.bodyColor = colors.tooltipBody;
+        }
+        if (ch.options.scales) {
+            if (ch.options.scales.x) {
+                ch.options.scales.x.ticks.color = colors.muted;
+                if (ch.options.scales.x.grid) ch.options.scales.x.grid.color = colors.grid;
+            }
+            if (ch.options.scales.y) {
+                ch.options.scales.y.ticks.color = colors.muted;
+                if (ch.options.scales.y.grid) ch.options.scales.y.grid.color = colors.grid;
+            }
         }
         ch.update('none');
     };
@@ -482,6 +617,39 @@ window.closeModal = function(id) {
         setTimeout(() => { modal.style.display = 'none'; }, 200);
     }
 };
+
+// Row action ("kebab") menu helpers.
+//
+// The menus live inside a table cell, and `.table-responsive` establishes a
+// scroll container (`overflow-x: auto` also clips the y axis), so an absolutely
+// positioned menu would be cut off at the table boundary. While a menu is open
+// `.menu-open` is added to that container (and the table card) so the CSS can
+// lift the clip. `.styled-table tbody tr:hover` applies a transform, which would
+// break a viewport-fixed menu, so this keeps the menu absolute and only widens
+// the clipping box.
+window.omniAnchorRowMenu = function(menu, trigger) {
+    if (!menu) return;
+    const scroller = menu.closest('.table-responsive');
+    if (scroller) scroller.classList.add('menu-open');
+    const card = menu.closest('.table-container');
+    if (card) card.classList.add('menu-open');
+    menu.style.display = 'flex';
+    menu.style.visibility = '';
+};
+
+window.omniCloseRowMenus = function() {
+    document.querySelectorAll('.row-menu').forEach(m => {
+        m.style.display = 'none';
+        m.style.visibility = '';
+    });
+    document.querySelectorAll('.table-responsive.menu-open, .table-container.menu-open').forEach(el => {
+        el.classList.remove('menu-open');
+    });
+};
+
+// A menu would otherwise stay open (and the clip stay lifted) on scroll / resize.
+window.addEventListener('scroll', () => window.omniCloseRowMenus(), true);
+window.addEventListener('resize', () => window.omniCloseRowMenus());
 
 // Device credential helpers.
 //

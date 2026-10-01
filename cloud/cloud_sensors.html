@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
@@ -23,114 +23,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li>
-                    <a href="cloud_dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link-name">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_projects.html">
-                        <i class='bx bx-folder'></i>
-                        <span class="link-name">Projects</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_devices.html">
-                        <i class='bx bx-devices'></i>
-                        <span class="link-name">Devices</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="cloud_sensors.html">
-                        <i class='bx bx-chip'></i>
-                        <span class="link-name">Sensors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_commands.html">
-                        <i class='bx bx-terminal'></i>
-                        <span class="link-name">Commands</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_telemetry.html">
-                        <i class='bx bx-line-chart'></i>
-                        <span class="link-name">Telemetry</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_rules.html">
-                        <i class='bx bx-git-repo-forked'></i>
-                        <span class="link-name">Rules</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_webhooks.html">
-                        <i class='bx bx-broadcast'></i>
-                        <span class="link-name">Webhooks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_docs.html">
-                        <i class='bx bx-book-open'></i>
-                        <span class="link-name">Documentation</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="cloud_settings.html">
-                        <i class='bx bx-cog'></i>
-                        <span class="link-name">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_landing.html">
-                        <i class='bx bx-log-out'></i>
-                        <span class="link-name">Logout</span>
-                    </a>
-                </li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
+                <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
+                <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
+                <li class="active"><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
+                <li class="nav-section">Monitor</li>
+                <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
+                <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
+                <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
+                <li class="nav-section">System</li>
+                <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search devices, projects...">
                 </div>
                 <div class="topbar-actions">
-                    
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -143,49 +92,55 @@
 
             <!-- Dashboard Content -->
             <div class="content-wrapper">
-                <div class="page-header" style="display: block; margin-bottom: 0;">
-                    <h1 style="margin-bottom: 18px;">Sensor Data</h1>
-
-                    <!-- Row 1: Project / Device / Metric filters, horizontally in
-                         line beneath the page title. -->
-                    <div class="filter-bar" style="margin-bottom: 16px;">
-                        <div>
-                            <label for="sensor-filter-project">Project</label>
-                            <select class="styled-select" id="sensor-filter-project">
-                                <option value="all">All Projects</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="sensor-filter-device">Device</label>
-                            <select class="styled-select" id="sensor-filter-device">
-                                <option value="all">All Devices</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="sensor-filter-type">Metric</label>
-                            <select class="styled-select" id="sensor-filter-type">
-                                <option value="all">All Metrics</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Row 2: actions. The spacer pushes Add Sensor to the far right. -->
-                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                        <button class="btn-ghost" onclick="openTestIngestModal()" style="display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-weight: 500;">
-                            <i class='bx bx-broadcast'></i> Connect / Ingest Data
-                        </button>
-                        <a href="cloud_telemetry.html" class="btn-ghost" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                            <i class='bx bx-line-chart'></i> View Full Telemetry History
-                        </a>
-                        <span class="flex-spacer"></span>
-                        <a href="cloud_sensor_add.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class='bx bx-plus'></i> Add Sensor</a>
+                <div class="page-header">
+                    <div class="page-header-main"><h1>Sensors</h1><p class="page-subtitle">Manage sensors and view latest readings from your devices</p></div>
+                    <div class="page-header-actions">
+                        <button class="btn-ghost" onclick="openTestIngestModal()" style="display: inline-flex; align-items: center; gap: 6px;"><i class='bx bx-broadcast'></i> Ingest</button>
+                        <a href="cloud_sensor_add.html" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-plus'></i> Add Sensor</a>
                     </div>
                 </div>
 
-                <div id="sensors-summary" class="filter-bar" style="margin: 18px 0 16px; font-size: 12.5px; color: var(--text-muted-dark);"></div>
+                <!-- KPI row -->
+                <div class="stats-grid" id="sensors-kpis" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom: 24px;">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-blue"><i class='bx bx-chip'></i></div>
+                        <div class="stat-details"><h3>Total Sensors</h3><h2 id="kpi-total-sensors">0</h2><span class="kpi-delta muted" id="kpi-across-devices">Across 0 devices</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-green"><i class='bx bx-check-circle'></i></div>
+                        <div class="stat-details"><h3>Active</h3><h2 id="kpi-active-sensors">0</h2><span class="kpi-delta up" id="kpi-active-pct">0%</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-red"><i class='bx bx-x-circle'></i></div>
+                        <div class="stat-details"><h3>Inactive</h3><h2 id="kpi-inactive-sensors">0</h2><span class="kpi-delta down" id="kpi-inactive-pct">0%</span></div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon b-purple"><i class='bx bx-category'></i></div>
+                        <div class="stat-details"><h3>Sensor Types</h3><h2 id="kpi-sensor-types">0</h2><span class="kpi-delta muted" id="kpi-types-list">—</span></div>
+                    </div>
+                </div>
 
-                <div class="sensors-grid" id="sensors-grid-container">
-                    <div class="glass-panel" style="padding: 24px; grid-column: 1/-1; text-align: center; color: var(--text-muted-dark);">Loading sensor cards...</div>
+                <!-- Filter bar -->
+                <div class="filter-bar" style="margin-bottom: 20px;">
+                    <input type="text" id="sensor-search" class="styled-select" placeholder="Search sensors..." style="height: 38px; min-width: 200px; flex: 1 1 200px;">
+                    <select class="styled-select" id="sensor-filter-project" style="width: auto; min-width: 150px; height: 38px;">
+                        <option value="all">All Projects</option>
+                    </select>
+                    <select class="styled-select" id="sensor-filter-device" style="width: auto; min-width: 150px; height: 38px;">
+                        <option value="all">All Devices</option>
+                    </select>
+                    <select class="styled-select" id="sensor-filter-type" style="width: auto; min-width: 140px; height: 38px;">
+                        <option value="all">All Types</option>
+                    </select>
+                    <select class="styled-select" id="sensor-filter-status" style="width: auto; min-width: 130px; height: 38px;">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <div class="sensor-list" id="sensors-grid-container">
+                    <div class="glass-panel" style="padding: 24px; text-align: center; color: var(--text-muted-dark);">Loading sensors...</div>
                 </div>
             </div>
         </main>
@@ -200,7 +155,7 @@
             </div>
 
             <!-- Device Connection Status Card -->
-            <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+            <div style="background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                     <div>
                         <div style="font-size: 12px; color: var(--text-muted-light);">Device Connection State</div>
@@ -258,6 +213,7 @@
     </div>
 
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -269,13 +225,9 @@
         let allDevices = [];
         let allProjects = [];
 
-        // How many recent readings each card shows (the latest plus the ones
-        // before it). Cards are populated lazily so only the variables actually
-        // visible after filtering are ever queried.
-        const CARD_HISTORY_COUNT = 3;
-        const HISTORY_TTL_MS = 15000;
-        // variableId -> { fetchedAt: ms, points: [{ value, recorded_at }] } newest-first
-        const cardHistory = new Map();
+        // Expanded-row Chart.js instances, keyed by variable id, so re-rendering
+        // the list never leaks a chart on the same canvas.
+        const sensorCharts = new Map();
 
         function timeAgo(iso) {
             if (!iso) return '—';
@@ -287,56 +239,95 @@
             return `${Math.floor(diffMins / 1440)}d ago`;
         }
 
-        // Renders the last-N strip for one variable from cache (no network).
-        function renderCardHistory(variableId, unit) {
-            const host = document.getElementById(`sensor-history-${variableId}`);
-            if (!host) return;
-
-            const entry = cardHistory.get(variableId);
-            if (!entry || !entry.points || entry.points.length === 0) {
-                host.innerHTML = `<div class="sensor-history-label">Last ${CARD_HISTORY_COUNT} readings</div>
-                    <div class="sensor-history-empty">No readings recorded yet.</div>`;
-                return;
-            }
-
-            const rows = entry.points.slice(0, CARD_HISTORY_COUNT).map((p, i) => {
-                const cls = i === 0 ? 'is-latest' : (i === 1 ? 'is-prev' : 'is-older');
-                return `<div class="sensor-history-row ${cls}">
-                        <span class="sensor-history-value">${escapeHtml(p.value)}${unit ? ' ' + escapeHtml(unit) : ''}</span>
-                        <span class="sensor-history-time">${escapeHtml(timeAgo(p.recorded_at))}</span>
-                    </div>`;
-            }).join('');
-
-            host.innerHTML = `<div class="sensor-history-label">Last ${CARD_HISTORY_COUNT} readings</div>${rows}`;
+        // Type metadata (icon, chip colour, tag colour) for a sensor variable.
+        function sensorType(v) {
+            const l = (v.label || '').toLowerCase();
+            if (l.includes('temp')) return { icon: 'bx bxs-thermometer', bg: 'b-red', name: 'Temperature', color: '#EF4444' };
+            if (l.includes('humid')) return { icon: 'bx bxs-droplet', bg: 'b-blue', name: 'Humidity', color: '#2563EB' };
+            if (l.includes('volt')) return { icon: 'bx bxs-bolt', bg: 'b-amber', name: 'Voltage', color: '#D97706' };
+            if (l.includes('current') || l.includes('amp')) return { icon: 'bx bx-line-chart', bg: 'b-purple', name: 'Current', color: '#8B5CF6' };
+            if (l.includes('press')) return { icon: 'bx bxs-bell', bg: 'b-pink', name: 'Pressure', color: '#EC4899' };
+            if (l.includes('light') || l.includes('lux')) return { icon: 'bx bxs-sun', bg: 'b-amber', name: 'Light', color: '#F59E0B' };
+            if (l.includes('air') || l.includes('ppm') || l.includes('gas') || l.includes('co2')) return { icon: 'bx bx-wind', bg: 'b-blue', name: 'Air Quality', color: '#0EA5E9' };
+            if (l.includes('vibe') || l.includes('accel')) return { icon: 'bx bx-pulse', bg: 'b-purple', name: 'Vibration', color: '#8B5CF6' };
+            return { icon: 'bx bx-chip', bg: 'b-gray', name: v.label || 'Metric', color: '#64748B' };
         }
 
-        /**
-         * Fetches the last CARD_HISTORY_COUNT readings for the given variables and
-         * fills in their cards. Only variables whose cache is missing or stale are
-         * queried, so switching filters or the periodic refresh does not re-request
-         * everything. getRecent() is used because a plain `limit` on the telemetry
-         * endpoint returns the OLDEST rows of the window, not the newest.
-         */
-        async function refreshCardHistories(variables) {
-            const stale = variables.filter(v => {
-                const e = cardHistory.get(v.id);
-                return !e || (Date.now() - e.fetchedAt) > HISTORY_TTL_MS;
-            });
+        function sensorHexToRgba(hex, a) {
+            const h = hex.replace('#', '');
+            const n = parseInt(h, 16);
+            return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+        }
 
-            await Promise.all(stale.map(async (v) => {
-                try {
-                    const points = await api.telemetry.getRecent(v.id, CARD_HISTORY_COUNT);
-                    cardHistory.set(v.id, {
-                        fetchedAt: Date.now(),
-                        points: (points || []).map(p => ({ value: p.value, recorded_at: p.recorded_at })).reverse()
-                    });
-                } catch (e) {
-                    // Leave any previously cached points in place on failure.
-                    console.warn(`History unavailable for ${v.label}:`, e && (e.message || e));
-                    if (!cardHistory.has(v.id)) cardHistory.set(v.id, { fetchedAt: Date.now(), points: [] });
+        // Builds the expanded detail for one row: a 24h trend chart + the last
+        // three readings. Runs once per row on first expand, so charts are never
+        // created for rows the user does not open.
+        async function buildSensorDetail(variableId) {
+            const v = allSensorVariables.find(x => x.id === variableId);
+            if (!v) return;
+            const tbody = document.getElementById(`sensor-readings-${variableId}`);
+            const canvas = document.getElementById(`sensor-chart-${variableId}`);
+
+            let points = [];
+            try {
+                const recent = await api.telemetry.getRecent(variableId, 24);
+                points = Array.isArray(recent) ? recent : [];
+            } catch (e) {
+                points = [];
+            }
+
+            const asc = points.slice().sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at));
+            const newest = asc.slice().reverse().slice(0, 3);
+
+            if (tbody) {
+                tbody.innerHTML = newest.length
+                    ? newest.map((p, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(new Date(p.recorded_at).toLocaleString())}</td><td>${escapeHtml(window.formatSensorReading(p.value, v.unit, v.label))}</td></tr>`).join('')
+                    : '<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">No readings recorded yet.</td></tr>';
+            }
+
+            if (!canvas || typeof Chart === 'undefined') return;
+            const t = sensorType(v);
+            const colors = window.omniteqChartThemeColors ? window.omniteqChartThemeColors() : {};
+            if (sensorCharts.has(variableId)) { try { sensorCharts.get(variableId).destroy(); } catch (e) { /* ignore */ } }
+            const labels = asc.map(p => {
+                const d = new Date(p.recorded_at);
+                return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+            });
+            const chart = new Chart(canvas.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: v.label,
+                        data: asc.map(p => p.value),
+                        borderColor: t.color,
+                        backgroundColor: sensorHexToRgba(t.color, 0.12),
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: colors.tooltipBg,
+                            titleColor: colors.tooltipTitle,
+                            bodyColor: colors.tooltipBody,
+                            borderColor: colors.tooltipBorder,
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: colors.grid, drawBorder: false }, ticks: { color: colors.muted, maxTicksLimit: 6 } },
+                        y: { grid: { color: colors.grid, drawBorder: false }, ticks: { color: colors.muted } }
+                    }
                 }
-                renderCardHistory(v.id, v.unit);
-            }));
+            });
+            sensorCharts.set(variableId, chart);
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -355,8 +346,10 @@
             // after an ingest made from this page.
             setInterval(() => {
                 if (document.hidden) return;
-                // Age out the cached histories so the next render refetches them.
-                cardHistory.forEach((entry) => { entry.fetchedAt = 0; });
+                // Do not rebuild the list while a row is expanded: re-rendering
+                // would tear down its trend chart mid-view. Values refresh as soon
+                // as the row is collapsed.
+                if (gridContainer.querySelector('.sensor-row.is-expanded')) return;
                 renderSensorGrid();
             }, 15000);
 
@@ -372,22 +365,16 @@
                         targetVar.latest_at = recorded_at;
                         targetVar.deviceStatus = 'online';
                     }
-
-                    // Push the live point onto the card strip so it updates without
-                    // waiting for the next poll.
-                    const cached = cardHistory.get(variable_id);
-                    if (cached && Array.isArray(cached.points)) {
-                        cached.points.unshift({ value, recorded_at });
-                        cached.points = cached.points.slice(0, CARD_HISTORY_COUNT);
-                        cached.fetchedAt = Date.now();
-                    }
+                    // A new live point makes the cached "previous value" stale.
+                    rowPrevCache.delete(variable_id);
 
                     // Update device in list if matched
                     const targetDev = allDevices.find(d => d.id === device_id);
                     if (targetDev) targetDev.status = 'online';
 
-                    // Re-render components with latest real data
-                    renderSensorGrid();
+                    // Skip the full re-render while a row is expanded so its chart
+                    // is not destroyed mid-view; otherwise refresh the list.
+                    if (!gridContainer.querySelector('.sensor-row.is-expanded')) renderSensorGrid();
                 } else if (msg.type === 'device.status') {
                     const { device_id, status } = msg;
                     allSensorVariables.forEach(v => {
@@ -501,173 +488,221 @@
                 return { status: 'Live / Normal', color: 'text-green' };
             }
 
+            // Previous (second-latest) reading per variable, shown under the
+            // latest value in each collapsed row. Cached briefly so the 15s poll
+            // does not re-request every row on each render.
+            const rowPrevCache = new Map();
+            const PREV_TTL_MS = 15000;
+
+            async function refreshRowPrevValues(variables) {
+                const stale = variables.filter(v => {
+                    const e = rowPrevCache.get(v.id);
+                    return !e || (Date.now() - e.fetchedAt) > PREV_TTL_MS;
+                });
+                await Promise.all(stale.map(async (v) => {
+                    try {
+                        const points = await api.telemetry.getRecent(v.id, 3);
+                        const arr = Array.isArray(points)
+                            ? points.slice().sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at))
+                            : [];
+                        const newest = arr.length ? arr[arr.length - 1] : null;
+                        const prev = arr.length >= 2 ? arr[arr.length - 2] : null;
+                        rowPrevCache.set(v.id, { fetchedAt: Date.now(), newest, prev });
+                    } catch (e) {
+                        if (!rowPrevCache.has(v.id)) rowPrevCache.set(v.id, { fetchedAt: Date.now(), newest: null, prev: null });
+                    }
+
+                    const entry = rowPrevCache.get(v.id) || {};
+                    const unit = window.formatSensorUnit(v.unit, v.label);
+
+                    // When there is no live latest_value, the row would otherwise
+                    // show a bare blue dash. Fall back to the last stored reading so
+                    // the value area always shows a real number (same font/style).
+                    const valueEl = document.getElementById('sensor-value-' + v.id);
+                    if (valueEl && (v.latest_value === null || v.latest_value === undefined) && entry.newest) {
+                        valueEl.innerHTML = escapeHtml(window.formatSensorValue(entry.newest.value, v.unit, v.label)) +
+                            (unit ? ` <small>${escapeHtml(unit)}</small>` : '');
+                        const timeEl = document.getElementById('sensor-time-' + v.id);
+                        if (timeEl) timeEl.textContent = timeAgo(entry.newest.recorded_at);
+                    }
+
+                    const prevEl = document.getElementById('sensor-prev-' + v.id);
+                    if (prevEl) {
+                        prevEl.textContent = entry.prev
+                            ? ('Prev ' + window.formatSensorReading(entry.prev.value, v.unit, v.label))
+                            : '';
+                    }
+                }));
+            }
+
+            // One full-width expandable sensor row (new_design Sensor layout).
+            function rowHtml(v) {
+                const t = sensorType(v);
+                const isOnline = v.deviceStatus === 'online';
+                const unit = window.formatSensorUnit(v.unit, v.label);
+                // Show the stored reading even for inactive devices (the design
+                // keeps a value on inactive rows); only a truly unknown value is a dash.
+                const hasValue = v.latest_value !== null && v.latest_value !== undefined;
+                const valueText = hasValue ? window.formatSensorValue(v.latest_value, v.unit, v.label) : '—';
+                const path = `${v.deviceName || 'Device'}${v.projectName ? ' · ' + v.projectName : ''}`;
+                const when = v.latest_at ? timeAgo(v.latest_at) : 'No data yet';
+                const dotColor = t.color;
+                return `
+                    <div class="sensor-row ${isOnline ? '' : 'is-offline'}" id="sensor-row-${v.id}" data-var="${v.id}">
+                        <div class="sensor-row-head">
+                            <div class="sensor-row-icon ${t.bg}"><i class='${t.icon}'></i></div>
+                            <div class="sensor-row-main">
+                                <div class="sensor-row-name">${escapeHtml(v.label)}</div>
+                                <div class="sensor-row-path">${escapeHtml(path)}</div>
+                                <span class="sensor-type-tag"><span class="type-dot" style="background:${dotColor}"></span>${escapeHtml(t.name)}</span>
+                            </div>
+                            <div class="sensor-row-reading">
+                                <span class="reading-label">Latest Reading</span>
+                                <div class="reading-value" id="sensor-value-${v.id}">${escapeHtml(String(valueText))}${(unit && hasValue) ? ` <small>${escapeHtml(unit)}</small>` : ''}</div>
+                                <span class="reading-time" id="sensor-time-${v.id}">${escapeHtml(when)}</span>
+                                <span class="reading-prev" id="sensor-prev-${v.id}"></span>
+                            </div>
+                            <div class="sensor-row-status"><span class="pill ${isOnline ? 'pill-success' : 'pill-danger'}">${isOnline ? 'Active' : 'Inactive'}</span></div>
+                            <button type="button" class="sensor-row-expand" data-var="${v.id}" aria-expanded="false" aria-label="Toggle details"><i class='bx bx-chevron-down'></i></button>
+                        </div>
+                        <div class="sensor-row-detail">
+                            <div class="sensor-detail-grid">
+                                <div class="sensor-detail-chart">
+                                    <h4>Last 24 Hours Trend</h4>
+                                    <div class="sensor-detail-canvas"><canvas id="sensor-chart-${v.id}"></canvas></div>
+                                    <div class="chart-legend"><span class="legend-item"><span class="legend-dot" style="background:${dotColor}"></span>${escapeHtml(v.label)}${unit ? ` (${escapeHtml(unit)})` : ''}</span></div>
+                                </div>
+                                <div class="sensor-detail-table">
+                                    <h4>Last 3 Readings</h4>
+                                    <table class="mini-table">
+                                        <thead><tr><th>#</th><th>Time</th><th>Value</th></tr></thead>
+                                        <tbody id="sensor-readings-${v.id}"><tr><td colspan="3" style="text-align:center; color: var(--text-secondary);">Loading…</td></tr></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
             function renderSensorGrid() {
-                const summaryEl = document.getElementById('sensors-summary');
+                // KPIs are computed from the full dataset, independent of filters.
+                const sensorMap = new Map();
+                allSensorVariables.forEach(v => {
+                    if (!sensorMap.has(v.sensorId)) sensorMap.set(v.sensorId, { online: v.deviceStatus === 'online' });
+                });
+                const totalSensors = sensorMap.size;
+                const activeSensors = [...sensorMap.values()].filter(s => s.online).length;
+                const inactiveSensors = Math.max(0, totalSensors - activeSensors);
+                const deviceCount = new Set(allSensorVariables.map(v => v.deviceId)).size;
+                const typeNames = [...new Set(allSensorVariables.map(v => sensorType(v).name))];
+                const setK = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+                setK('kpi-total-sensors', totalSensors);
+                setK('kpi-across-devices', `Across ${deviceCount} device${deviceCount === 1 ? '' : 's'}`);
+                setK('kpi-active-sensors', activeSensors);
+                setK('kpi-inactive-sensors', inactiveSensors);
+                setK('kpi-active-pct', totalSensors ? Math.round(activeSensors / totalSensors * 100) + '%' : '0%');
+                setK('kpi-inactive-pct', totalSensors ? Math.round(inactiveSensors / totalSensors * 100) + '%' : '0%');
+                setK('kpi-sensor-types', typeNames.length);
+                setK('kpi-types-list', typeNames.slice(0, 3).join(', ') + (typeNames.length > 3 ? '…' : ''));
+
                 if (allSensorVariables.length === 0) {
-                    if (summaryEl) summaryEl.innerHTML = '';
                     gridContainer.innerHTML = `
-                        <div class="glass-panel" style="grid-column: 1/-1; padding: 48px 24px; text-align: center;">
-                            <div style="width: 64px; height: 64px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                        <div class="glass-panel" style="padding: 48px 24px; text-align: center;">
+                            <div style="width: 64px; height: 64px; background: var(--primary-glow); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                                 <i class='bx bx-chip' style="font-size: 32px; color: var(--primary);"></i>
                             </div>
                             <h3 style="font-size: 18px; margin-bottom: 8px;">No Sensors Configured</h3>
-                            <p style="color: var(--text-muted-dark); max-width: 440px; margin: 0 auto 20px; font-size: 14px;">
+                            <p style="color: var(--text-secondary); max-width: 440px; margin: 0 auto 20px; font-size: 14px;">
                                 Devices start with no sensors. Add a sensor and a telemetry variable to begin streaming temperature, humidity, vibration and other metrics.
                             </p>
                             <a href="cloud_sensor_add.html" class="btn-primary" style="display: inline-flex; text-decoration: none; align-items: center; gap: 8px;">
                                 <i class='bx bx-plus'></i> Add Sensor
                             </a>
-                        </div>
-                    `;
+                        </div>`;
                     return;
                 }
 
-                const activeProject = document.getElementById('sensor-filter-project').value;
-                const activeDevice = document.getElementById('sensor-filter-device').value;
+                const activeProject = projectFilter.value;
+                const activeDevice = deviceFilter.value;
                 const activeMetric = filterSelect.value;
+                const statusEl = document.getElementById('sensor-filter-status');
+                const activeStatus = statusEl ? statusEl.value : 'all';
+                const searchEl = document.getElementById('sensor-search');
+                const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
 
-                // Cascading filters: project -> device -> metric.
                 let filtered = allSensorVariables;
                 if (activeProject !== 'all') filtered = filtered.filter(v => v.projectId === activeProject);
                 if (activeDevice !== 'all') filtered = filtered.filter(v => v.deviceId === activeDevice);
                 if (activeMetric !== 'all') filtered = filtered.filter(v => v.label === activeMetric);
-
-                const onlineCount = filtered.filter(v => v.deviceStatus === 'online').length;
-
-                if (summaryEl) {
-                    const scope = [];
-                    if (activeProject !== 'all') {
-                        const p = allProjects.find(x => x.id === activeProject);
-                        if (p) scope.push(escapeHtml(p.name));
-                    }
-                    if (activeDevice !== 'all') {
-                        const d = allDevices.find(x => x.id === activeDevice);
-                        if (d) scope.push(escapeHtml(d.name));
-                    }
-                    if (activeMetric !== 'all') scope.push(escapeHtml(activeMetric));
-                    const scopeText = scope.length > 0 ? ` · ${scope.join(' › ')}` : '';
-                    summaryEl.innerHTML = `
-                        <span><strong>${filtered.length}</strong> of ${allSensorVariables.length} metrics${scopeText}</span>
-                        <span style="color: #10b981;"><i class='bx bx-broadcast'></i> ${onlineCount} streaming</span>
-                        <span style="color: #ef4444;"><i class='bx bx-wifi-off'></i> ${filtered.length - onlineCount} offline</span>
-                        ${(activeProject !== 'all' || activeDevice !== 'all' || activeMetric !== 'all')
-                            ? `<button type="button" class="btn-ghost" style="padding: 2px 10px; font-size: 11.5px;" onclick="resetSensorFilters()"><i class='bx bx-x'></i> Clear filters</button>`
-                            : ''}
-                    `;
-                }
+                if (activeStatus !== 'all') filtered = filtered.filter(v => (v.deviceStatus === 'online') === (activeStatus === 'active'));
+                if (q) filtered = filtered.filter(v =>
+                    (v.label || '').toLowerCase().includes(q) ||
+                    (v.sensorName || '').toLowerCase().includes(q) ||
+                    (v.deviceName || '').toLowerCase().includes(q) ||
+                    (v.projectName || '').toLowerCase().includes(q));
 
                 if (filtered.length === 0) {
-                    gridContainer.innerHTML = '<div class="glass-panel" style="padding: 30px; grid-column: 1/-1; text-align: center; color: var(--text-muted-dark);">No metrics match the selected filters.<br><button type="button" class="btn-ghost" style="margin-top: 12px;" onclick="resetSensorFilters()"><i class=\'bx bx-reset\'></i> Clear filters</button></div>';
+                    gridContainer.innerHTML = `<div class="glass-panel" style="padding: 30px; text-align: center; color: var(--text-secondary);">No sensors match the selected filters.<br><button type="button" class="btn-ghost" style="margin-top: 12px;" onclick="resetSensorFilters()"><i class='bx bx-reset'></i> Clear filters</button></div>`;
                     return;
                 }
 
-                gridContainer.innerHTML = filtered.map(v => {
-                    let iconClass = 'bx bx-chip';
-                    let iconBg = 'b-blue';
-                    const cleanLabel = v.label.toLowerCase();
+                // Preserve which rows were expanded across a re-render.
+                const expanded = new Set([...gridContainer.querySelectorAll('.sensor-row.is-expanded')].map(r => r.dataset.var));
 
-                    if (cleanLabel.includes('temp')) {
-                        iconClass = 'bx bxs-thermometer';
-                        iconBg = 'b-red';
-                    } else if (cleanLabel.includes('humid')) {
-                        iconClass = 'bx bx-water';
-                        iconBg = 'b-blue';
-                    } else if (cleanLabel.includes('vibe')) {
-                        iconClass = 'bx bx-pulse';
-                        iconBg = 'b-purple';
-                    } else if (cleanLabel.includes('light')) {
-                        iconClass = 'bx bx-sun';
-                        iconBg = 'b-green';
-                    }
+                gridContainer.innerHTML = filtered.map(rowHtml).join('');
 
-                    const isOnline = v.deviceStatus === 'online';
-                    const hasRealData = isOnline && v.latest_value !== null && v.latest_value !== undefined;
+                gridContainer.querySelectorAll('.sensor-row-expand').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const row = btn.closest('.sensor-row');
+                        const isOpen = row.classList.toggle('is-expanded');
+                        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                        if (isOpen && row.dataset.built !== '1') {
+                            row.dataset.built = '1';
+                            buildSensorDetail(btn.dataset.var);
+                        }
+                    });
+                });
 
-                    let valueHtml = '';
-                    let statusHtml = '';
-                    let badgeHtml = '';
+                // Restore previously expanded rows (and their charts).
+                expanded.forEach(id => {
+                    const row = document.getElementById(`sensor-row-${id}`);
+                    if (!row) return;
+                    row.classList.add('is-expanded');
+                    const btn = row.querySelector('.sensor-row-expand');
+                    if (btn) btn.setAttribute('aria-expanded', 'true');
+                    if (row.dataset.built !== '1') { row.dataset.built = '1'; buildSensorDetail(id); }
+                });
 
-                    if (!isOnline) {
-                        valueHtml = `<span class="sensor-card-value" style="color: #ef4444;">—</span>`;
-                        statusHtml = `<span class="sensor-card-status text-red"><i class='bx bx-wifi-off'></i> Device offline — no live data</span>`;
-                        badgeHtml = `<span class="sensor-card-badge b-red"><i class='bx bx-radio-circle'></i> Offline</span>`;
-                    } else if (hasRealData) {
-                        const bounds = calculateBounds(v.label, v.latest_value);
-                        valueHtml = `<span class="sensor-card-value" style="color: #10b981;">${escapeHtml(v.latest_value)}</span>` +
-                            (v.unit ? `<span class="sensor-card-unit">${escapeHtml(v.unit)}</span>` : '');
-                        statusHtml = `<span class="sensor-card-status ${bounds.color}"><i class='bx bx-check-circle'></i> ${escapeHtml(bounds.status)}</span>`;
-                        badgeHtml = `<span class="sensor-card-badge b-green"><i class='bx bx-broadcast'></i> Live</span>`;
-                    } else {
-                        valueHtml = `<span class="sensor-card-value" style="color: var(--text-muted);">—</span>`;
-                        statusHtml = `<span class="sensor-card-status text-muted"><i class='bx bx-time'></i> Waiting for first reading</span>`;
-                        badgeHtml = `<span class="sensor-card-badge b-blue"><i class='bx bx-wifi'></i> Idle</span>`;
-                    }
-
-                    const lastSeen = v.latest_at
-                        ? new Date(v.latest_at).toLocaleTimeString()
-                        : 'No data yet';
-
-                    return `
-                        <div class="sensor-card glass-panel ${isOnline ? 'is-online' : 'is-offline'}" id="sensor-card-${v.id}">
-                            <div class="sensor-card-head">
-                                <div class="sensor-card-title">
-                                    <div class="sensor-card-glyph ${isOnline ? iconBg : 'b-gray'}"><i class='${iconClass}'></i></div>
-                                    <div style="min-width: 0;">
-                                        <div class="sensor-card-name">${escapeHtml(v.label)}</div>
-                                        <div style="font-size: 10.5px; color: var(--text-muted-dark);">${escapeHtml(v.sensorName || 'Sensor')}</div>
-                                    </div>
-                                </div>
-                                ${badgeHtml}
-                            </div>
-
-                            <div class="sensor-card-reading">${valueHtml}</div>
-                            ${statusHtml}
-
-                            <div class="sensor-card-history" id="sensor-history-${v.id}">
-                                <div class="sensor-history-label">Last ${CARD_HISTORY_COUNT} readings</div>
-                                <div class="sensor-history-empty">Loading…</div>
-                            </div>
-
-                            <div class="sensor-card-foot">
-                                <span class="sensor-card-device" title="${escapeHtml(v.deviceName)}">
-                                    <i class='bx bx-chip'></i> <span>${escapeHtml(v.deviceName)}</span>
-                                </span>
-                                <span style="white-space: nowrap;">${escapeHtml(lastSeen)}</span>
-                            </div>
-
-                            <div style="display: flex; gap: 6px; margin-top: 10px;">
-                                <button type="button" class="btn-ghost" style="flex: 1; justify-content: center; padding: 5px 8px; font-size: 11.5px; color: var(--primary);" onclick="openIngestForVar('${v.deviceId}', '${v.id}')" title="Transmit a test reading">
-                                    <i class='bx bx-send'></i> Ingest
-                                </button>
-                                <button type="button" class="btn-ghost" style="flex: 1; justify-content: center; padding: 5px 8px; font-size: 11.5px;" onclick="copyText('${v.id}', 'Variable ID')" title="Copy the variable UUID">
-                                    <i class='bx bx-copy'></i> Variable ID
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                // Cards are painted first, then only the visible ones have their
-                // last-N history fetched, so a large fleet filtered to a few cards
-                // does not trigger a request per variable in the account.
-                refreshCardHistories(filtered).catch(err => console.warn('Card history refresh failed:', err));
+                // Fill each row's previous-value line (cached, TTL-limited).
+                refreshRowPrevValues(filtered).catch(err => console.warn('Prev reading fetch failed:', err));
             }
 
             function resetSensorFilters() {
                 document.getElementById('sensor-filter-project').value = 'all';
                 document.getElementById('sensor-filter-device').value = 'all';
                 document.getElementById('sensor-filter-type').value = 'all';
+                const statusEl = document.getElementById('sensor-filter-status');
+                if (statusEl) statusEl.value = 'all';
+                const searchEl = document.getElementById('sensor-search');
+                if (searchEl) searchEl.value = '';
                 rebuildFilterOptions();
                 renderSensorGrid();
             }
 
             window.resetSensorFilters = resetSensorFilters;
 
-            // Cascading filters: changing the project rebuilds the device + metric
-            // options, and changing the device rebuilds the metric options.
+            // Cascading filters: changing the project rebuilds the device + type
+            // options, and changing the device rebuilds the type options. Search
+            // and status filter the rendered list without a refetch.
             filterSelect.addEventListener('change', renderSensorGrid);
             projectFilter.addEventListener('change', () => { rebuildFilterOptions(); renderSensorGrid(); });
             deviceFilter.addEventListener('change', () => { rebuildFilterOptions(); renderSensorGrid(); });
+            const statusFilterEl = document.getElementById('sensor-filter-status');
+            if (statusFilterEl) statusFilterEl.addEventListener('change', renderSensorGrid);
+            const searchEl = document.getElementById('sensor-search');
+            if (searchEl) searchEl.addEventListener('input', renderSensorGrid);
 
             // Ingest Form Submit
             const ingestForm = document.getElementById('sensorIngestForm');
@@ -713,9 +748,15 @@
                         if (res.success || inserted > 0) {
                             showToast(`Telemetry reading (${numVal}) received by cloud!`, 'success');
                             closeModal('testIngestModal');
-                            // Drop the cached strip for this variable so the new
-                            // reading is fetched rather than served from cache.
-                            cardHistory.delete(varId);
+                            // Force the expanded detail (if any) to rebuild on the
+                            // next expand so the new reading is fetched, not cached.
+                            const ingestedRow = document.getElementById('sensor-row-' + varId);
+                            if (ingestedRow) {
+                                ingestedRow.dataset.built = '';
+                                const existing = sensorCharts.get(varId);
+                                if (existing) { try { existing.destroy(); } catch (e) { /* ignore */ } sensorCharts.delete(varId); }
+                            }
+                            rowPrevCache.delete(varId);
                             // Load and refresh
                             await loadSensorsData();
                         } else {
@@ -828,16 +869,19 @@
             }
 
             varSelect.innerHTML = '<option value="">Select sensor variable...</option>' + 
-                devVars.map(v => `<option value="${v.id}">${v.label} (${v.sensorName}) [${v.unit || 'unit'}]</option>`).join('');
+                devVars.map(v => {
+                    const u = window.formatSensorUnit(v.unit, v.label);
+                    return `<option value="${v.id}">${escapeHtml(v.label)} (${escapeHtml(v.sensorName)})${u ? ' [' + escapeHtml(u) + ']' : ''}</option>`;
+                }).join('');
             
             varSelect.value = devVars[0].id;
 
             const unitSpan = document.getElementById('modal-value-unit');
-            if (unitSpan) unitSpan.textContent = devVars[0].unit || '';
+            if (unitSpan) unitSpan.textContent = window.formatSensorUnit(devVars[0].unit, devVars[0].label);
 
             varSelect.onchange = () => {
                 const selected = devVars.find(v => v.id === varSelect.value);
-                if (unitSpan) unitSpan.textContent = selected?.unit || '';
+                if (unitSpan) unitSpan.textContent = selected ? window.formatSensorUnit(selected.unit, selected.label) : '';
             };
         }
 

@@ -283,7 +283,7 @@ class OmniTeqAPI {
     }
 
     // ==========================================
-    // API NAMESPACES (All 60 Endpoints)
+    // API NAMESPACES (v3.0 - REST + Ingest + Live SSE)
     // ==========================================
 
     // 1. Health
@@ -473,11 +473,21 @@ class OmniTeqAPI {
     devices = {
         list: (projectId) => this._fetch(`/projects/${projectId}/devices`),
         /**
-         * The gateway exposes devices only per project (there is no GET /devices),
-         * so aggregate across the account's projects and keep the project name
-         * on each row for the cross-project device table.
+         * v3.0 adds an account-wide device list at GET /devices, which already
+         * returns project_id/project_name, status and sensor_count. Prefer that
+         * single request, and fall back to aggregating across projects on older
+         * gateways that do not expose it yet.
          */
         listAll: async () => {
+            try {
+                const res = await this._fetch('/devices');
+                if (res && res.success && Array.isArray(res.data)) return res;
+            } catch (err) {
+                // Only fall through when the route itself is missing; surface
+                // real auth/server errors.
+                if (!err || (err.status !== 404 && err.status !== 405)) throw err;
+            }
+
             const projectsRes = await this.projects.list();
             if (!projectsRes || !projectsRes.success || !Array.isArray(projectsRes.data)) {
                 return projectsRes;
@@ -738,55 +748,354 @@ class OmniTeqAPI {
         heartbeat: (data) => this._fetch('/ingest/heartbeat', { method: 'POST', body: data, noAuth: true })
     };
 
-    // WebSocket Client
-    // Client frames: { type: 'subscribe', device_ids: [...] }
-    // Server frames: { type: 'telemetry.update' | 'device.status' | 'command.status' | 'alert.created', ... }
-    //
-    // NOTE: the gateway does not currently expose a WebSocket endpoint. This
-    // connects honestly to the configured URL and reports failure via
-    // `realtimeAvailable = false`; pages fall back to loading data on demand.
-    connectWebSocket(onMessage, onConnect, onDisconnect, deviceIds = null) {
-        const wsUrlWithAuth = `${this.wsUrl}?token=${this.token || ''}`;
+    // 15. Live Dashboard (v3.0 Server-Sent Events)
+    // Real-time push is delivered over SSE, not WebSocket. The JWT is first
+    // exchanged for a short-lived (~60 s) stream ticket, which is passed in the
+    // query string because EventSource cannot send an Authorization header.
+    // Events: `snapshot` (current values), `status` (device online/offline),
+    // `reading` (each new value). At most 10 streams may be open per user.
+    live = {
+        ticket: () => this._fetch('/live/ticket', { method: 'POST' }),
 
-        try {
-            this.ws = new WebSocket(wsUrlWithAuth);
+        // Absolute URL of the ready-made dashboard page served by the gateway.
+        dashboardUrl: () => `${this.baseUrl.replace(/\/api\/v1\/?$/, '')}/dashboard`,
 
-            this.ws.onopen = () => {
-                this.realtimeAvailable = true;
-                console.log(`[OmniTeq API] Realtime connected: ${this.wsUrl}`);
-                if (deviceIds && deviceIds.length > 0) {
-                    this.ws.send(JSON.stringify({ type: 'subscribe', device_ids: deviceIds }));
-                }
-                if (onConnect) onConnect();
-            };
+        streamSensor: (sensorId, handlers = {}) =>
+            this._openLiveStream(`/live/sensors/${encodeURIComponent(sensorId)}/stream`, handlers),
 
-            this.ws.onmessage = (event) => {
+        streamDevice: (deviceId, handlers = {}) =>
+            this._openLiveStream(`/live/devices/${encodeURIComponent(deviceId)}/stream`, handlers),
+
+        /**
+         * Opens an EventSource against a live stream, fetching a fresh ticket
+         * first. Returns { close() }.
+         *
+         * handlers: { onOpen, onSnapshot, onStatus, onReading, onMessage, onError }
+         *
+         * Because the ticket expires long before the stream ends, an error
+         * (server close or dropped connection) tears the source down and
+         * reconnects with a brand-new ticket rather than reusing the stale one.
+         */
+        _openLiveStream: (path, handlers = {}) => {
+            let source = null;
+            let closed = false;
+            let reconnectTimer = null;
+
+            const parse = (raw) => { try { return JSON.parse(raw); } catch (e) { return raw; } };
+
+            const connect = async () => {
+                if (closed) return;
+
+                let ticket = null;
                 try {
-                    const data = JSON.parse(event.data);
-                    if (onMessage) onMessage(data);
-                } catch (e) {
-                    console.error("Invalid WS message:", event.data);
+                    const res = await this._fetch('/live/ticket', { method: 'POST' });
+                    if (res && res.success && res.data) ticket = res.data.ticket;
+                } catch (err) {
+                    if (handlers.onError) handlers.onError(err);
+                }
+                if (closed) return;
+                if (!ticket) {
+                    if (handlers.onError) handlers.onError({ error: { code: 'NO_STREAM_TICKET', message: 'Could not obtain a live stream ticket.' } });
+                    return;
+                }
+
+                try {
+                    source = new EventSource(`${this.baseUrl}${path}?ticket=${encodeURIComponent(ticket)}`);
+                } catch (err) {
+                    if (handlers.onError) handlers.onError(err);
+                    return;
+                }
+
+                source.addEventListener('snapshot', e => handlers.onSnapshot && handlers.onSnapshot(parse(e.data)));
+                source.addEventListener('status', e => handlers.onStatus && handlers.onStatus(parse(e.data)));
+                source.addEventListener('reading', e => handlers.onReading && handlers.onReading(parse(e.data)));
+                source.onmessage = e => handlers.onMessage && handlers.onMessage(parse(e.data));
+                source.onopen = () => handlers.onOpen && handlers.onOpen();
+                source.onerror = (err) => {
+                    if (handlers.onError) handlers.onError(err);
+                    if (closed) return;
+                    if (source) { source.close(); source = null; }
+                    clearTimeout(reconnectTimer);
+                    reconnectTimer = setTimeout(connect, 2000);
+                };
+            };
+
+            connect();
+            return {
+                close() {
+                    closed = true;
+                    clearTimeout(reconnectTimer);
+                    if (source) { source.close(); source = null; }
+                }
+            };
+        }
+    };
+
+    // ==========================================
+    // Real-time updates (WebSocket, v3.0 SSE fallback, auto-reload)
+    // ==========================================
+    //
+    // Contract: a WebSocket at <wsUrl> pushes frames shaped as
+    // `telemetry.update` / `device.status` / `command.status` / `alert.created`,
+    // and every page registers one handler through connectWebSocket().
+    //
+    // The reference v3.0 gateway serves no /ws route; it delivers real-time
+    // push through Server-Sent Events instead (POST /live/ticket, then
+    // GET /live/devices/:id/stream). This connector therefore tries the socket
+    // first and, when it cannot open, transparently falls back to those SSE
+    // streams, normalising `snapshot` / `status` / `reading` events into the
+    // exact same message shapes the existing page handlers already consume.
+    //
+    // If no live transport can be established at all, the page is reloaded once
+    // (subject to a cooldown and an attempt cap) so it re-bootstraps its data
+    // instead of silently showing stale values.
+    connectWebSocket(onMessage, onConnect, onDisconnect, deviceIds = null) {
+        // A page may register a listener more than once; never stack transports.
+        this.disconnectRealtime();
+
+        this._realtimeReloadScheduled = false;
+        this.realtime = {
+            onMessage: typeof onMessage === 'function' ? onMessage : null,
+            onConnect: typeof onConnect === 'function' ? onConnect : null,
+            onDisconnect: typeof onDisconnect === 'function' ? onDisconnect : null,
+            deviceIds: Array.isArray(deviceIds) ? deviceIds.slice() : null,
+            labels: {},          // variable_id -> { label, unit }, seeded from the SSE snapshot
+            streams: [],
+            ws: null,
+            stopped: false,
+            connected: false,
+            sseStarted: false,
+            sseOpened: false,
+            wsTimer: null,
+            sseTimer: null
+        };
+
+        this._connectWs();
+        return this.realtime;
+    }
+
+    /** Tear down any active WebSocket and SSE live streams. */
+    disconnectRealtime() {
+        const rt = this.realtime;
+        if (!rt) return;
+        rt.stopped = true;
+        if (rt.wsTimer) clearTimeout(rt.wsTimer);
+        if (rt.sseTimer) clearTimeout(rt.sseTimer);
+        if (rt.ws) {
+            try {
+                rt.ws.onopen = rt.ws.onmessage = rt.ws.onclose = rt.ws.onerror = null;
+                rt.ws.close();
+            } catch (e) { /* already closed */ }
+        }
+        (rt.streams || []).forEach(s => { try { s.close(); } catch (e) { /* already closed */ } });
+        rt.streams = [];
+        this.realtime = null;
+        this.ws = null;
+    }
+
+    _connectWs() {
+        const rt = this.realtime;
+        if (!rt || rt.stopped) return;
+
+        let opened = false;
+        try {
+            const ws = new WebSocket(`${this.wsUrl}?token=${this.token || ''}`);
+            rt.ws = ws;
+            this.ws = ws;
+
+            // If the socket neither opens nor errors promptly, fall back.
+            rt.wsTimer = setTimeout(() => {
+                if (!opened && !rt.sseStarted) this._startSseFallback('ws-timeout');
+            }, 4000);
+
+            ws.onopen = () => {
+                opened = true;
+                rt.connected = true;
+                this.realtimeAvailable = true;
+                if (rt.wsTimer) clearTimeout(rt.wsTimer);
+                this._clearReloadState();
+                console.log(`[OmniTeq API] Realtime connected over WebSocket: ${this.wsUrl}`);
+                if (rt.deviceIds && rt.deviceIds.length && ws.readyState === 1) {
+                    ws.send(JSON.stringify({ type: 'subscribe', device_ids: rt.deviceIds }));
+                }
+                if (rt.onConnect) rt.onConnect({ transport: 'websocket' });
+            };
+
+            ws.onmessage = (event) => {
+                let data;
+                try { data = JSON.parse(event.data); } catch (e) { return; }
+                if (rt.onMessage) rt.onMessage(data);
+            };
+
+            ws.onclose = () => {
+                if (rt.stopped) return;
+                this.realtimeAvailable = false;
+                if (!opened) {
+                    // Never opened: the gateway likely has no /ws route.
+                    this._startSseFallback('ws-close');
+                } else {
+                    // Had been working, now dropped: recover over SSE if possible.
+                    rt.connected = false;
+                    if (rt.onDisconnect) rt.onDisconnect({ transport: 'websocket', reason: 'closed' });
+                    this._startSseFallback('ws-dropped');
                 }
             };
 
-            this.ws.onclose = () => {
+            ws.onerror = () => {
+                if (rt.stopped) return;
                 this.realtimeAvailable = false;
-                if (onDisconnect) onDisconnect();
-            };
-
-            this.ws.onerror = () => {
-                // Expected while the gateway has no /ws route: keep the console
-                // note factual instead of implying a local fallback is running.
-                this.realtimeAvailable = false;
-                if (!this._wsWarned) {
-                    this._wsWarned = true;
-                    console.warn(`[OmniTeq API] Realtime unavailable at ${this.wsUrl} - pages will load data on demand.`);
-                }
+                if (!opened) this._startSseFallback('ws-error');
             };
         } catch (e) {
-            this.realtimeAvailable = false;
-            console.warn(`[OmniTeq API] Realtime unavailable: ${e && e.message}`);
+            this._startSseFallback('ws-exception');
         }
+    }
+
+    /**
+     * Fall back to the v3.0 Server-Sent Events live streams. Resolves the device
+     * set (caller-provided, otherwise the account-wide GET /devices list), then
+     * opens one stream per device - the gateway allows at most 10 per user.
+     */
+    async _startSseFallback(reason) {
+        const rt = this.realtime;
+        if (!rt || rt.stopped || rt.sseStarted) return;
+        rt.sseStarted = true;
+
+        if (rt.wsTimer) clearTimeout(rt.wsTimer);
+        if (rt.ws) {
+            try {
+                rt.ws.onopen = rt.ws.onmessage = rt.ws.onclose = rt.ws.onerror = null;
+                rt.ws.close();
+            } catch (e) { /* already closed */ }
+            rt.ws = null;
+        }
+
+        console.warn(`[OmniTeq API] WebSocket unavailable (${reason}); falling back to v3.0 SSE live streams.`);
+
+        let ids = rt.deviceIds;
+        if (!ids || !ids.length) {
+            try {
+                const res = await this.devices.listAll();
+                ids = (res && res.success && Array.isArray(res.data))
+                    ? res.data.map(d => d && d.id).filter(Boolean)
+                    : [];
+            } catch (e) {
+                // Could not even enumerate devices: treat as a live-layer failure
+                // so the page reloads and re-bootstraps instead of going stale.
+                if (rt.stopped) return;
+                this._scheduleAutoReload('device-list-failed');
+                return;
+            }
+        }
+        if (rt.stopped) return;
+
+        if (!ids.length) {
+            // Nothing to stream (e.g. an account with no devices): stop quietly.
+            this.realtimeAvailable = false;
+            if (rt.onDisconnect) rt.onDisconnect({ transport: 'none', reason: 'no-devices' });
+            return;
+        }
+
+        ids.slice(0, 10).forEach((id) => {
+            if (rt.stopped) return;
+            const stream = this.live.streamDevice(id, {
+                onOpen: () => {
+                    if (rt.stopped) return;
+                    rt.connected = true;
+                    rt.sseOpened = true;
+                    this.realtimeAvailable = true;
+                    if (rt.sseTimer) clearTimeout(rt.sseTimer);
+                    this._clearReloadState();
+                    if (rt.onConnect) rt.onConnect({ transport: 'sse', deviceId: id });
+                },
+                onSnapshot: (snap) => {
+                    if (!snap || !snap.device) return;
+                    if (Array.isArray(snap.variables)) {
+                        snap.variables.forEach(v => {
+                            if (v && v.variable_id) rt.labels[v.variable_id] = { label: v.label, unit: v.unit };
+                        });
+                    }
+                    if (rt.onMessage) {
+                        rt.onMessage({
+                            type: 'device.status',
+                            device_id: snap.device.id,
+                            status: snap.device.status,
+                            last_seen_at: snap.device.last_seen_at
+                        });
+                    }
+                },
+                onStatus: (msg) => {
+                    if (!msg || !rt.onMessage) return;
+                    rt.onMessage({ type: 'device.status', device_id: msg.device_id, status: msg.status, last_seen_at: msg.at });
+                },
+                onReading: (msg) => {
+                    if (!msg || !rt.onMessage) return;
+                    const meta = rt.labels[msg.variable_id] || {};
+                    rt.onMessage({
+                        type: 'telemetry.update',
+                        device_id: msg.device_id,
+                        sensor_id: msg.sensor_id,
+                        variable_id: msg.variable_id,
+                        data_type: msg.data_type,
+                        value: msg.value,
+                        recorded_at: msg.recorded_at,
+                        label: meta.label,
+                        unit: meta.unit
+                    });
+                }
+            });
+            rt.streams.push(stream);
+        });
+
+        // If no stream ever opens, the live layer is unusable: reload to retry.
+        if (rt.sseTimer) clearTimeout(rt.sseTimer);
+        rt.sseTimer = setTimeout(() => {
+            if (!rt.stopped && !rt.sseOpened) {
+                if (rt.onDisconnect) rt.onDisconnect({ transport: 'none', reason: 'sse-timeout' });
+                this._scheduleAutoReload('sse-timeout');
+            }
+        }, 8000);
+    }
+
+    /** Forget the auto-reload counter once a live transport actually works. */
+    _clearReloadState() {
+        try { sessionStorage.removeItem('omniteq_realtime_reload'); } catch (e) { /* ignore */ }
+    }
+
+    /**
+     * Reloads the page when live updates cannot connect, so it re-bootstraps.
+     * Guarded by a 60s cooldown and a 3-attempt cap (tracked in sessionStorage)
+     * so a gateway without realtime support cannot trap the console in a loop.
+     */
+    _scheduleAutoReload(reason) {
+        // Only meaningful on authenticated console pages.
+        if (!this.token) return;
+        if (this._realtimeReloadScheduled) return;
+        if (typeof window === 'undefined' || !window.location || typeof window.location.reload !== 'function') return;
+        this._realtimeReloadScheduled = true;
+
+        const KEY = 'omniteq_realtime_reload';
+        let state = { at: 0, count: 0 };
+        try { state = JSON.parse(sessionStorage.getItem(KEY) || 'null') || state; } catch (e) { /* ignore */ }
+
+        const now = Date.now();
+        if (now - (Number(state.at) || 0) < 60000) {
+            console.warn('[OmniTeq API] Live updates still unavailable; auto-reload on cooldown.');
+            return;
+        }
+        if ((Number(state.count) || 0) >= 3) {
+            console.warn('[OmniTeq API] Live updates unavailable; auto-reload stopped after 3 attempts.');
+            return;
+        }
+        state.count = (Number(state.count) || 0) + 1;
+        state.at = now;
+        try { sessionStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+
+        console.warn(`[OmniTeq API] Live updates could not connect (${reason}); reloading to retry (attempt ${state.count}/3).`);
+        if (typeof window.showToast === 'function') {
+            try { window.showToast('Live updates unavailable - reloading...', 'warning'); } catch (e) { /* ignore */ }
+        }
+        setTimeout(() => { try { window.location.reload(); } catch (e) { /* ignore */ } }, 1500);
     }
 }
 

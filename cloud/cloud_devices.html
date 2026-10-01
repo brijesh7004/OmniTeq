@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
@@ -21,113 +21,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li>
-                    <a href="cloud_dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link-name">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_projects.html">
-                        <i class='bx bx-folder'></i>
-                        <span class="link-name">Projects</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="cloud_devices.html">
-                        <i class='bx bx-devices'></i>
-                        <span class="link-name">Devices</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_sensors.html">
-                        <i class='bx bx-chip'></i>
-                        <span class="link-name">Sensors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_commands.html">
-                        <i class='bx bx-terminal'></i>
-                        <span class="link-name">Commands</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_telemetry.html">
-                        <i class='bx bx-line-chart'></i>
-                        <span class="link-name">Telemetry</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_rules.html">
-                        <i class='bx bx-git-repo-forked'></i>
-                        <span class="link-name">Rules</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_webhooks.html">
-                        <i class='bx bx-broadcast'></i>
-                        <span class="link-name">Webhooks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_docs.html">
-                        <i class='bx bx-book-open'></i>
-                        <span class="link-name">Documentation</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="cloud_settings.html">
-                        <i class='bx bx-cog'></i>
-                        <span class="link-name">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="login.html">
-                        <i class='bx bx-log-out'></i>
-                        <span class="link-name">Logout</span>
-                    </a>
-                </li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
+                <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
+                <li class="active"><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
+                <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
+                <li class="nav-section">Monitor</li>
+                <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
+                <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
+                <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
+                <li class="nav-section">System</li>
+                <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
-                    <input type="text" id="device-search" placeholder="Search devices by name...">
+                    <input type="text" placeholder="Search devices by name...">
                 </div>
                 <div class="topbar-actions">
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -141,30 +91,25 @@
             <!-- Dashboard Content -->
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1>Devices Fleet</h1>
-                    <div style="display: flex; gap: 12px; align-items: center;">
+                    <div class="page-header-main"><h1>Devices</h1><p class="page-subtitle">Manage your IoT devices</p></div>
+                    <div class="page-header-actions">
                         <button class="btn-primary" onclick="openCreateDeviceModal()" style="display: inline-flex; align-items: center; gap: 8px;">
-                            <i class='bx bx-plus'></i> Quick Add Device
+                            <i class='bx bx-plus'></i> Add Device
                         </button>
-                        <a href="cloud_device_add.html" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                            <i class='bx bx-slider-alt'></i> Full Provisioning Form
-                        </a>
                     </div>
                 </div>
 
                 <!-- Filters Toolbar -->
-                <div class="glass-panel" style="padding: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                    <div style="display: flex; gap: 12px; align-items: center;">
-                        <span style="font-size: 13px; color: var(--text-muted-dark); font-weight: 600;">Filter:</span>
-                        <select id="project-filter" class="styled-select" style="width: auto; min-width: 160px; height: 38px;">
-                            <option value="all">All Projects</option>
-                        </select>
-                        <select id="status-filter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;">
-                            <option value="all">All Statuses</option>
-                            <option value="online">Online</option>
-                            <option value="offline">Offline</option>
-                        </select>
-                    </div>
+                <div class="glass-panel filter-bar" style="margin-bottom: 24px;">
+                    <input type="text" id="device-search" class="styled-select" placeholder="Search devices..." style="height: 38px; min-width: 220px; flex: 1 1 220px;">
+                    <select id="project-filter" class="styled-select" style="width: auto; min-width: 160px; height: 38px;">
+                        <option value="all">All Projects</option>
+                    </select>
+                    <select id="status-filter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;">
+                        <option value="all">All Status</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
                 </div>
 
                 <!-- Table -->
@@ -173,18 +118,19 @@
                         <table class="styled-table" style="width: 100%; margin: 0;">
                             <thead>
                                 <tr>
-                                    <th style="width: 60px;">Status</th>
-                                    <th>Device Name</th>
+                                    <th class="col-check"><input type="checkbox" class="table-check" id="deviceSelectAll" aria-label="Select all devices"></th>
+                                    <th>Device</th>
                                     <th>Project</th>
+                                    <th>Status</th>
                                     <th>Firmware</th>
                                     <th>IP Address</th>
                                     <th>Last Seen</th>
-                                    <th style="text-align: right;">Actions</th>
+                                    <th class="col-actions">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="device-fleet-table-body">
                                 <tr>
-                                    <td colspan="7"><div class="ui-loading" role="status"><i class='bx bx-loader-alt bx-spin ui-loading-icon'></i><span>Loading devices fleet…</span></div></td>
+                                    <td colspan="8"><div class="ui-loading" role="status"><i class='bx bx-loader-alt bx-spin ui-loading-icon'></i><span>Loading devices fleet…</span></div></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -260,7 +206,7 @@
                                     <i class='bx bx-copy'></i> Copy
                                 </button>
                             </div>
-                            <input type="text" id="deviceModalIdVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.3); cursor: pointer;" onclick="this.select()">
+                            <input type="text" id="deviceModalIdVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: var(--surface); cursor: pointer;" onclick="this.select()">
                         </div>
 
                         <!-- SECRET_KEY -->
@@ -271,7 +217,7 @@
                                     <i class='bx bx-copy'></i> Copy
                                 </button>
                             </div>
-                            <input type="text" id="deviceModalSecretVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.3); border-color: rgba(16, 185, 129, 0.4); color: #10b981; cursor: pointer;" onclick="this.select()">
+                            <input type="text" id="deviceModalSecretVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: var(--surface); border-color: rgba(16, 185, 129, 0.4); color: #10b981; cursor: pointer;" onclick="this.select()">
                         </div>
 
                         <!-- VAR_TEMP_ID -->
@@ -282,7 +228,7 @@
                                     <i class='bx bx-copy'></i> Copy
                                 </button>
                             </div>
-                            <input type="text" id="deviceModalVarVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: rgba(0,0,0,0.3); cursor: pointer;" onclick="this.select()">
+                            <input type="text" id="deviceModalVarVal" readonly class="styled-select" style="width: 100%; height: 38px; font-family: monospace; font-size: 12.5px; background: var(--surface); cursor: pointer;" onclick="this.select()">
                         </div>
                     </div>
 
@@ -294,7 +240,7 @@
                                 <i class='bx bx-copy'></i> Copy Snippet
                             </button>
                         </div>
-                        <pre id="deviceArduinoSnippet" style="background: rgba(0,0,0,0.5); padding: 12px; border-radius: 8px; border: 1px solid var(--border-light); font-family: monospace; font-size: 12px; color: #38bdf8; overflow-x: auto; white-space: pre-wrap; margin: 0;"></pre>
+                        <pre id="deviceArduinoSnippet" style="background: var(--surface); padding: 12px; border-radius: 8px; border: 1px solid var(--border-light); font-family: monospace; font-size: 12px; color: #38bdf8; overflow-x: auto; white-space: pre-wrap; margin: 0;"></pre>
                     </div>
 
                     <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="closeModal('deviceSecretModal')">
@@ -308,6 +254,7 @@
 
     <!-- Scripts -->
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -361,6 +308,11 @@
                 const searchInput = document.getElementById('device-search');
                 if (searchInput) searchInput.addEventListener('input', filterAndRender);
 
+                const selectAll = document.getElementById('deviceSelectAll');
+                if (selectAll) selectAll.addEventListener('change', () => {
+                    document.querySelectorAll('.device-row-check').forEach(c => { c.checked = selectAll.checked; });
+                });
+
             } catch (e) {
                 console.warn("Failed to load live devices fleet:", e);
                 renderDevices([]);
@@ -380,6 +332,23 @@
             renderDevices(filtered);
         }
 
+        // Row kebab menu (design actions column).
+        function toggleRowMenu(evt, menuId) {
+            evt.stopPropagation();
+            const menu = document.getElementById(menuId);
+            const isOpen = menu && menu.style.display !== 'none';
+            closeRowMenus();
+            if (menu && !isOpen) {
+                if (window.omniAnchorRowMenu) window.omniAnchorRowMenu(menu, evt.currentTarget);
+                else menu.style.display = 'block';
+            }
+        }
+        function closeRowMenus() {
+            if (window.omniCloseRowMenus) { window.omniCloseRowMenus(); return; }
+            document.querySelectorAll('.row-menu').forEach(m => { m.style.display = 'none'; });
+        }
+        document.addEventListener('click', closeRowMenus);
+
         function renderDevices(devices) {
             const bodyEl = document.getElementById('device-fleet-table-body');
             if (!bodyEl) return;
@@ -387,7 +356,7 @@
             if (devices.length === 0) {
                 bodyEl.innerHTML = `
                     <tr>
-                        <td colspan="7" style="text-align: center; padding: 48px 20px;">
+                        <td colspan="8" style="text-align: center; padding: 48px 20px;">
                             <div style="max-width: 340px; margin: 0 auto;">
                                 <i class='bx bx-chip' style="font-size: 42px; color: var(--text-muted-dark); margin-bottom: 12px; display: block;"></i>
                                 <h4 style="font-size: 16px; margin-bottom: 6px; color: var(--text-light);">No Devices In Fleet</h4>
@@ -416,21 +385,19 @@
 
                 return `
                     <tr>
-                        <td style="padding: 14px;">
-                            <span class="status-pill ${isOnline ? 'is-online' : 'is-offline'}">${isOnline ? 'Online' : 'Offline'}</span>
-                        </td>
+                        <td class="col-check"><input type="checkbox" class="table-check device-row-check" value="${d.id}"></td>
                         <td style="padding: 14px;"><strong>${escapeHtml(d.name)}</strong></td>
                         <td style="padding: 14px;">${escapeHtml(d.projectName || '—')}</td>
+                        <td style="padding: 14px;"><span class="pill ${isOnline ? 'pill-success' : 'pill-danger'}">${isOnline ? 'Online' : 'Offline'}</span></td>
                         <td style="padding: 14px;">${firmwareBadge}</td>
                         <td style="padding: 14px;" class="id-col">${ipStr}</td>
                         <td style="padding: 14px;">${timeStr}</td>
-                        <td style="padding: 14px; text-align: right;">
-                            <div class="action-group">
-                                <button onclick="toggleDeviceFleetConnection('${d.id}', ${!isOnline})" class="btn-icon" style="color: ${isOnline ? '#ef4444' : '#10b981'};" title="${isOnline ? 'Disconnect Device' : 'Connect Device'}">
-                                    <i class='${isOnline ? 'bx bx-power-off' : 'bx bx-wifi'}'></i>
-                                </button>
-                                <a href="cloud_device_view.html?id=${d.id}" class="btn-icon" title="Manage Device"><i class='bx bx-show'></i></a>
-                                <button onclick="deleteDevice('${d.id}')" class="btn-icon" style="color: #ef4444;" title="Delete Device"><i class='bx bx-trash'></i></button>
+                        <td class="col-actions" style="position: relative;">
+                            <button class="kebab-btn" onclick="toggleRowMenu(event, 'device-menu-${d.id}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button>
+                            <div class="row-menu" id="device-menu-${d.id}" style="display:none;">
+                                <button onclick="toggleDeviceFleetConnection('${d.id}', ${!isOnline}); closeRowMenus();"><i class='${isOnline ? 'bx bx-power-off' : 'bx bx-wifi'}'></i> ${isOnline ? 'Disconnect' : 'Connect'}</button>
+                                <a href="cloud_device_view.html?id=${d.id}"><i class='bx bx-show'></i> Manage Device</a>
+                                <button class="danger" onclick="deleteDevice('${d.id}'); closeRowMenus();"><i class='bx bx-trash'></i> Delete</button>
                             </div>
                         </td>
                     </tr>

@@ -1,9 +1,20 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OmniTeq Cloud - The Ultimate IoT Command Center</title>
+    <meta name="description" content="OmniTeq Cloud is an IoT platform for provisioning devices, streaming telemetry, dispatching acknowledged commands and automating alerts. REST + WebSocket APIs, TimescaleDB aggregation, ready firmware for ESP32, ESP8266 and Arduino.">
+    <meta name="theme-color" content="#2563EB">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="OmniTeq Cloud">
+    <meta property="og:title" content="OmniTeq Cloud - The Ultimate IoT Command Center">
+    <meta property="og:description" content="Provision, monitor and command your IoT fleet in real time. REST + WebSocket APIs, time-series aggregation and ready-to-flash firmware.">
+    <meta property="og:image" content="images/logo/logo.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OmniTeq Cloud - The Ultimate IoT Command Center">
+    <meta name="twitter:description" content="Provision, monitor and command your IoT fleet in real time.">
+    <link rel="icon" href="images/logo/logo.svg" type="image/svg+xml">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Boxicons -->
@@ -11,15 +22,18 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/cloud.css">
     <link rel="stylesheet" href="css/ui.css">
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
 </head>
-<body class="dark-theme landing-page">
-    
+
+<body class="landing-page">
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var b=document.body;b.classList.toggle('dark-theme',t==='dark');b.style.colorScheme=t;}catch(err){}})();</script>
+
     <!-- Background Elements -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
 
     <!-- Navigation -->
-    <nav class="landing-nav glass-panel">
+    <nav class="landing-nav glass-panel" id="landingNav">
         <div class="nav-container">
             <div class="logo">
                 <a href="cloud_landing.html" style="display: flex; align-items: center; text-decoration: none;">
@@ -27,60 +41,160 @@
                 </a>
             </div>
             <ul class="nav-links-desktop">
-                <li><a href="cloud_landing.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#integration">API Integration</a></li>
+                <li><a href="#how">How It Works</a></li>
                 <li><a href="#developers">Developers</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
             <div class="nav-actions">
+                <button type="button" class="icon-btn theme-toggle" id="themeToggle" title="Toggle light / dark theme" aria-label="Toggle light or dark theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                 <a href="login.html" class="btn-ghost">Log In</a>
                 <a href="signup.html" class="btn-primary">Sign Up Free</a>
+                <button type="button" class="hamburger-btn" id="hamburger" data-no-autoload aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile navigation (driven by js/cloud.js) -->
+        <div class="mobile-nav-menu" id="mobileMenu">
+            <ul class="mobile-nav-links">
+                <li><a href="#features" class="mobile-nav-link">Features</a></li>
+                <li><a href="#how" class="mobile-nav-link">How It Works</a></li>
+                <li><a href="#developers" class="mobile-nav-link">Developers</a></li>
+                <li><a href="#pricing" class="mobile-nav-link">Pricing</a></li>
+                <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
+                <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+                <li><a href="api-reference.html" class="mobile-nav-link">API Reference</a></li>
+            </ul>
+            <div class="mobile-nav-actions">
+                <a href="login.html" class="mobile-auth-link">Log In</a>
+                <a href="signup.html" class="mobile-auth-btn">Sign Up Free</a>
             </div>
         </div>
     </nav>
 
+    <main class="landing-main" id="main">
+
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content animate-on-scroll">
-            <div class="badge-pill">Introducing OmniTeq Cloud v1.0</div>
+            <div class="badge-pill"><span class="badge-dot"></span> OmniTeq Cloud v1.0 is live</div>
             <h1 class="hero-title">The Ultimate IoT <br><span class="text-gradient">Command Center</span></h1>
-            <p class="hero-subtitle">Deploy, monitor, and command your global fleet of IoT devices in real-time. Secure, scalable, and built for modern engineering teams.</p>
+            <p class="hero-subtitle">Provision devices, stream sensor telemetry, dispatch acknowledged commands and automate alerts &mdash; from one secure platform built for engineering teams.</p>
             <div class="hero-cta">
-                <a href="cloud_dashboard.html" class="btn-primary btn-lg">View Live Demo</a>
-                <a href="api-reference.html" class="btn-secondary btn-lg"><i class='bx bx-book-open'></i> Read Documentation</a>
+                <a href="signup.html?plan=free" class="btn-primary btn-lg">Start Free &mdash; No Card</a>
+                <a href="cloud_dashboard.html" class="btn-secondary btn-lg"><i class='bx bx-play-circle'></i> View Live Demo</a>
             </div>
+            <ul class="hero-trust">
+                <li><i class='bx bx-check-circle'></i> Free Developer Sandbox</li>
+                <li><i class='bx bx-check-circle'></i> REST + WebSocket APIs</li>
+                <li><i class='bx bx-check-circle'></i> ESP32 &amp; Arduino firmware included</li>
+            </ul>
         </div>
-        
+
         <div class="hero-visual animate-on-scroll delay-1">
             <div class="dashboard-mockup glass-panel">
                 <div class="mockup-header">
                     <div class="mockup-dots">
                         <span></span><span></span><span></span>
                     </div>
+                    <span class="mk-title">Factory Monitoring &mdash; Overview</span>
+                    <span class="mk-live"><span class="mk-live-dot"></span> Live</span>
                 </div>
                 <div class="mockup-body">
                     <!-- Abstract representation of the dashboard -->
-                    <div class="mockup-sidebar"></div>
+                    <div class="mockup-sidebar">
+                        <span class="mk-nav is-active"></span>
+                        <span class="mk-nav"></span>
+                        <span class="mk-nav"></span>
+                        <span class="mk-nav"></span>
+                        <span class="mk-nav"></span>
+                    </div>
                     <div class="mockup-content">
                         <div class="mockup-cards">
-                            <div class="m-card"></div>
-                            <div class="m-card"></div>
-                            <div class="m-card"></div>
+                            <div class="m-card">
+                                <span class="mk-label">Devices Online</span>
+                                <strong class="mk-value">24<small>/26</small></strong>
+                            </div>
+                            <div class="m-card">
+                                <span class="mk-label">Readings Today</span>
+                                <strong class="mk-value">184<small>K</small></strong>
+                            </div>
+                            <div class="m-card">
+                                <span class="mk-label">Open Alerts</span>
+                                <strong class="mk-value mk-warn">3</strong>
+                            </div>
                         </div>
                         <div class="m-chart">
-                            <div class="m-line"></div>
+                            <span class="mk-chart-label">Temperature &mdash; last 6 h</span>
+                            <svg class="mk-spark" viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <linearGradient id="mkFill" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" class="mk-stop-a"></stop>
+                                        <stop offset="100%" class="mk-stop-b"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path class="mk-area" d="M0,66 L26,58 L52,62 L78,44 L104,50 L130,33 L156,39 L182,24 L208,31 L234,18 L260,26 L286,14 L320,20 L320,90 L0,90 Z" fill="url(#mkFill)"></path>
+                                <path class="mk-line-path" d="M0,66 L26,58 L52,62 L78,44 L104,50 L130,33 L156,39 L182,24 L208,31 L234,18 L260,26 L286,14 L320,20"></path>
+                            </svg>
+                        </div>
+                        <div class="mk-rows">
+                            <div class="mk-row">
+                                <span class="mk-dot ok"></span>
+                                <span class="mk-row-name">ESP32-001</span>
+                                <span class="mk-row-meta">Temperature</span>
+                                <span class="mk-row-val">31.4 &deg;C</span>
+                            </div>
+                            <div class="mk-row">
+                                <span class="mk-dot ok"></span>
+                                <span class="mk-row-name">ESP32-002</span>
+                                <span class="mk-row-meta">Humidity</span>
+                                <span class="mk-row-val">58 %RH</span>
+                            </div>
+                            <div class="mk-row">
+                                <span class="mk-dot warn"></span>
+                                <span class="mk-row-name">ESP8266-010</span>
+                                <span class="mk-row-meta">Pressure</span>
+                                <span class="mk-row-val">1013 hPa</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Floating Elements -->
             <div class="floating-element f-1 glass-panel">
                 <i class='bx bxs-check-circle text-green'></i> Device Connected
             </div>
             <div class="floating-element f-2 glass-panel">
-                <i class='bx bx-terminal text-purple'></i> changeLevel(75) Executed
+                <i class='bx bx-terminal text-purple'></i> setLevel(75) &rarr; success
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Specs Strip -->
+    <section class="metrics-section">
+        <div class="metrics-strip glass-panel animate-on-scroll">
+            <div class="metric-item">
+                <strong class="metric-value" data-count-to="500">500</strong>
+                <span class="metric-label">Readings per batch ingest call</span>
+            </div>
+            <div class="metric-item">
+                <strong class="metric-value" data-count-to="5000" data-separator="1">5,000</strong>
+                <span class="metric-label">Rows per telemetry query</span>
+            </div>
+            <div class="metric-item">
+                <strong class="metric-value" data-count-to="7">7</strong>
+                <span class="metric-label">Aggregation intervals, 1m &rarr; 1d</span>
+            </div>
+            <div class="metric-item">
+                <strong class="metric-value" data-count-to="99.99" data-decimals="2" data-suffix="%">99.99%</strong>
+                <span class="metric-label">Gateway uptime SLA, Enterprise tier</span>
             </div>
         </div>
     </section>
@@ -88,6 +202,7 @@
     <!-- Features Section -->
     <section id="features" class="features-section">
         <div class="section-header text-center animate-on-scroll">
+            <span class="eyebrow">Platform</span>
             <h2 class="section-title">Everything you need to <span class="text-gradient">scale</span></h2>
             <p class="section-subtitle">A complete suite of tools to manage your IoT infrastructure from prototype to production.</p>
         </div>
@@ -97,48 +212,125 @@
             <div class="feature-card glass-panel animate-on-scroll">
                 <div class="f-icon b-blue"><i class='bx bx-pulse'></i></div>
                 <h3>Real-Time Telemetry</h3>
-                <p>Stream massive volumes of sensor data with ultra-low latency over WebSockets. Visualize trends instantly on your dashboard.</p>
+                <p>Batch up to 500 readings per ingest call and stream them to your dashboard over WebSockets. Float, integer, boolean and string variables are all first class.</p>
             </div>
             <!-- Feature 2 -->
             <div class="feature-card glass-panel animate-on-scroll delay-1">
                 <div class="f-icon b-purple"><i class='bx bx-terminal'></i></div>
-                <h3>Instant Commands</h3>
-                <p>Dispatch complex commands to remote devices. Track delivery status, execution success, and handle failures automatically.</p>
+                <h3>Acknowledged Commands</h3>
+                <p>Dispatch typed, validated parameters to any device and follow the full lifecycle &mdash; queued, sent, executed, success or failed &mdash; with a TTL so stale commands expire safely.</p>
             </div>
             <!-- Feature 3 -->
             <div class="feature-card glass-panel animate-on-scroll delay-2">
                 <div class="f-icon b-green"><i class='bx bx-lock-alt'></i></div>
                 <h3>Secure Provisioning</h3>
-                <p>Generate one-time secret keys for physical devices. End-to-end encryption ensures your infrastructure remains impenetrable.</p>
+                <p>Every device gets a secret key issued once at creation and stored only as a hash. Users authenticate separately with short-lived JWTs and rotating refresh tokens.</p>
             </div>
             <!-- Feature 4 -->
             <div class="feature-card glass-panel animate-on-scroll">
                 <div class="f-icon b-red"><i class='bx bx-sitemap'></i></div>
                 <h3>Project Hierarchy</h3>
-                <p>Organize thousands of devices into logical projects. Manage permissions, status, and aggregation seamlessly.</p>
+                <p>Organise your fleet as Project &rarr; Device &rarr; Sensor &rarr; Variable, so thousands of readings stay queryable, attributable and scoped to the right team.</p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card glass-panel animate-on-scroll">
+                <div class="f-icon b-blue"><i class='bx bx-line-chart'></i></div>
+                <h3>Time-Series Aggregation</h3>
+                <p>TimescaleDB <code>time_bucket()</code> returns min, max, avg and count across seven intervals from one minute to one day &mdash; fast, even over months of history.</p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card glass-panel animate-on-scroll delay-1">
+                <div class="f-icon b-red"><i class='bx bx-bell-ring'></i></div>
+                <h3>Rules &amp; Alerts</h3>
+                <p>Define thresholds on any variable and let the rule engine watch them around the clock. Alert history is grouped per project so nothing gets lost in a flat list.</p>
+            </div>
+            <!-- Feature 7 -->
+            <div class="feature-card glass-panel animate-on-scroll delay-2">
+                <div class="f-icon b-purple"><i class='bx bx-broadcast'></i></div>
+                <h3>Outbound Webhooks</h3>
+                <p>Forward telemetry, command results, rule triggers and device events straight into your own systems &mdash; ERP, MES, Slack or a custom endpoint.</p>
+            </div>
+            <!-- Feature 8 -->
+            <div class="feature-card glass-panel animate-on-scroll">
+                <div class="f-icon b-green"><i class='bx bx-code-block'></i></div>
+                <h3>Cloud Studio</h3>
+                <p>Model controllers, sensors, variables, actuators and rules visually, generate matching firmware, then export the whole project as JSON for backup or review.</p>
             </div>
         </div>
     </section>
 
+    <!-- How It Works -->
+    <section id="how" class="how-section">
+        <div class="section-header text-center animate-on-scroll">
+            <span class="eyebrow">How it works</span>
+            <h2 class="section-title">From bare board to <span class="text-gradient">live fleet</span></h2>
+            <p class="section-subtitle">Three steps, one afternoon. No brokers to run, no time-series database to operate.</p>
+        </div>
+
+        <div class="steps-grid container">
+            <div class="step-card glass-panel animate-on-scroll">
+                <div class="step-num">01</div>
+                <h3><i class='bx bx-key'></i> Provision</h3>
+                <p>Create a project and register a device. The platform returns a <code>device_id</code> and a one-time <code>secret_key</code> &mdash; the only credentials your firmware needs.</p>
+            </div>
+            <div class="step-connector animate-on-scroll delay-1" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></div>
+            <div class="step-card glass-panel animate-on-scroll delay-1">
+                <div class="step-num">02</div>
+                <h3><i class='bx bx-wifi'></i> Connect</h3>
+                <p>Flash the reference firmware for your board, or POST to <code>/ingest/telemetry</code> from anything that speaks HTTPS. Heartbeats report firmware version and IP.</p>
+            </div>
+            <div class="step-connector animate-on-scroll delay-2" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></div>
+            <div class="step-card glass-panel animate-on-scroll delay-2">
+                <div class="step-num">03</div>
+                <h3><i class='bx bx-joystick'></i> Control</h3>
+                <p>Chart live values, set rules, and dispatch commands back down. Devices poll for pending work and acknowledge every execution with success or failure.</p>
+            </div>
+        </div>
+
+        <div class="boards-strip animate-on-scroll delay-1">
+            <span class="boards-label">Reference firmware ships for</span>
+            <ul class="boards-list">
+                <li><i class='bx bx-chip'></i> ESP32</li>
+                <li><i class='bx bx-chip'></i> ESP32-S3</li>
+                <li><i class='bx bx-chip'></i> ESP8266</li>
+                <li><i class='bx bx-chip'></i> Arduino Nano 33 IoT</li>
+                <li><i class='bx bx-cube'></i> Any HTTPS client</li>
+            </ul>
+        </div>
+    </section>
+
     <!-- API / Developer Section -->
-    <section id="integration" class="api-section">
+    <section id="developers" class="api-section">
         <div class="container api-container">
             <div class="api-content animate-on-scroll">
+                <span class="eyebrow">Developers</span>
                 <h2 class="section-title">Built for <span class="text-gradient">Developers</span></h2>
-                <p class="section-subtitle">Integrate your hardware in minutes using our comprehensive RESTful APIs and WebSocket streams. Native support for Node.js, Python, and C++.</p>
+                <p class="section-subtitle">Integrate your hardware in minutes using documented RESTful APIs and WebSocket streams. Every response uses the same predictable envelope.</p>
                 <ul class="api-list">
-                    <li><i class='bx bx-check'></i> <strong>UUID Based:</strong> Collision-free architecture.</li>
-                    <li><i class='bx bx-check'></i> <strong>Pagination & Filtering:</strong> Fast historical queries.</li>
-                    <li><i class='bx bx-check'></i> <strong>Bi-directional:</strong> Pub/Sub via WebSockets.</li>
+                    <li><i class='bx bx-check'></i> <strong>UUID based:</strong> Collision-free resource identifiers.</li>
+                    <li><i class='bx bx-check'></i> <strong>Consistent envelope:</strong> <code>{ success, data, error }</code> on every call.</li>
+                    <li><i class='bx bx-check'></i> <strong>Pagination &amp; filtering:</strong> Fast historical queries.</li>
+                    <li><i class='bx bx-check'></i> <strong>Typed errors:</strong> Named codes, not opaque 500s.</li>
+                    <li><i class='bx bx-check'></i> <strong>Bi-directional:</strong> Pub/sub over WebSockets.</li>
                 </ul>
-                <br>
-                <a href="api-reference.html" class="btn-ghost">Explore API Reference <i class='bx bx-right-arrow-alt'></i></a>
+                <div class="api-actions">
+                    <a href="api-reference.html" class="btn-primary">Explore API Reference <i class='bx bx-right-arrow-alt'></i></a>
+                    <a href="cloud_docs.html" class="btn-ghost"><i class='bx bx-book-open'></i> Read the Docs</a>
+                </div>
             </div>
+
             <div class="api-code-block glass-panel animate-on-scroll delay-1">
                 <div class="code-header">
-                    <span>dispatch_command.js</span>
+                    <div class="code-tabs" role="tablist" aria-label="Code examples">
+                        <button type="button" class="code-tab is-active" role="tab" aria-selected="true" aria-controls="snippet-node" id="tab-node" data-no-autoload>Node.js</button>
+                        <button type="button" class="code-tab" role="tab" aria-selected="false" aria-controls="snippet-python" id="tab-python" data-no-autoload>Python</button>
+                        <button type="button" class="code-tab" role="tab" aria-selected="false" aria-controls="snippet-arduino" id="tab-arduino" data-no-autoload>ESP32</button>
+                        <button type="button" class="code-tab" role="tab" aria-selected="false" aria-controls="snippet-curl" id="tab-curl" data-no-autoload>cURL</button>
+                    </div>
+                    <button type="button" class="code-copy" id="codeCopy" data-no-autoload aria-label="Copy code example"><i class='bx bx-copy'></i><span>Copy</span></button>
                 </div>
-                <pre><code><span class="comment">// Requires a user access token (JWT), not a device secret key</span>
+
+                <div class="code-pane is-active" id="snippet-node" role="tabpanel" aria-labelledby="tab-node"><pre><code><span class="comment">// Dispatch a command — needs a user access token (JWT)</span>
 <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'<span data-endpoint="api"></span>/command-templates/&lt;templateId&gt;/dispatch'</span>, {
   method: <span class="string">'POST'</span>,
   headers: {
@@ -151,8 +343,219 @@
     },
     ttl_seconds: <span class="number">3600</span>
   })
-});</code></pre>
+});
+
+<span class="comment">// 202 Accepted — the command is queued, not yet executed</span>
+<span class="keyword">const</span> { data } = <span class="keyword">await</span> response.json();
+console.log(data.status); <span class="comment">// "queued"</span></code></pre></div>
+
+                <div class="code-pane" id="snippet-python" role="tabpanel" aria-labelledby="tab-python" hidden><pre><code><span class="comment"># Query aggregated history for one variable</span>
+<span class="keyword">import</span> requests
+
+base = <span class="string">'<span data-endpoint="api"></span>'</span>
+headers = {<span class="string">'Authorization'</span>: <span class="string">f'Bearer {access_token}'</span>}
+
+r = requests.get(
+    <span class="string">f'{base}/variables/{variable_id}/telemetry/aggregate'</span>,
+    headers=headers,
+    params={
+        <span class="string">'from'</span>: <span class="string">'2026-10-01T00:00:00Z'</span>,
+        <span class="string">'to'</span>:   <span class="string">'2026-10-02T00:00:00Z'</span>,
+        <span class="string">'interval'</span>: <span class="string">'15m'</span>,
+    },
+)
+
+<span class="keyword">for</span> bucket <span class="keyword">in</span> r.json()[<span class="string">'data'</span>][<span class="string">'buckets'</span>]:
+    <span class="keyword">print</span>(bucket[<span class="string">'time'</span>], bucket[<span class="string">'avg'</span>], bucket[<span class="string">'count'</span>])</code></pre></div>
+
+                <div class="code-pane" id="snippet-arduino" role="tabpanel" aria-labelledby="tab-arduino" hidden><pre><code><span class="comment">// ESP32 — push a batch of readings with the device secret</span>
+<span class="keyword">#include</span> <span class="string">&lt;HTTPClient.h&gt;</span>
+
+HTTPClient http;
+http.begin(<span class="string">"<span data-endpoint="api"></span>/ingest/telemetry"</span>);
+http.addHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>);
+
+String body = <span class="string">"{"</span>
+  <span class="string">"\"device_id\":\""</span> + deviceId   + <span class="string">"\","</span>
+  <span class="string">"\"secret_key\":\""</span> + secretKey + <span class="string">"\","</span>
+  <span class="string">"\"readings\":[{"</span>
+    <span class="string">"\"variable_id\":\""</span> + varId + <span class="string">"\","</span>
+    <span class="string">"\"value\":"</span> + String(temperature, <span class="number">2</span>) +
+  <span class="string">"}]}"</span>;
+
+<span class="keyword">int</span> status = http.POST(body);   <span class="comment">// 200 OK, 207 partial</span>
+http.end();</code></pre></div>
+
+                <div class="code-pane" id="snippet-curl" role="tabpanel" aria-labelledby="tab-curl" hidden><pre><code><span class="comment"># Send a heartbeat from any shell</span>
+curl -X POST <span class="string">'<span data-endpoint="api"></span>/ingest/heartbeat'</span> \
+  -H <span class="string">'Content-Type: application/json'</span> \
+  -d <span class="string">'{
+    "device_id": "&lt;deviceId&gt;",
+    "secret_key": "&lt;secretKey&gt;",
+    "status": "online",
+    "firmware_version": "1.4.2"
+  }'</span>
+
+<span class="comment"># { "success": true, "data": { "status": "online" } }</span></code></pre></div>
             </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="usecases" class="usecases-section">
+        <div class="section-header text-center animate-on-scroll">
+            <span class="eyebrow">Use cases</span>
+            <h2 class="section-title">Deployed where <span class="text-gradient">uptime matters</span></h2>
+            <p class="section-subtitle">The same primitives &mdash; devices, sensors, variables, rules and commands &mdash; model very different plants.</p>
+        </div>
+        <div class="usecase-grid container">
+            <article class="usecase-card glass-panel animate-on-scroll">
+                <i class='bx bx-factory'></i>
+                <h3>Industrial Automation</h3>
+                <p>Bridge PLCs and embedded controllers to the cloud. Watch line temperature, current draw and pressure, and push setpoints back to the floor.</p>
+            </article>
+            <article class="usecase-card glass-panel animate-on-scroll delay-1">
+                <i class='bx bx-leaf'></i>
+                <h3>Smart Agriculture</h3>
+                <p>Soil moisture, humidity and light across remote plots. Rules trigger irrigation commands; low-bandwidth batching keeps cellular costs down.</p>
+            </article>
+            <article class="usecase-card glass-panel animate-on-scroll delay-2">
+                <i class='bx bx-bolt-circle'></i>
+                <h3>Energy &amp; Utilities</h3>
+                <p>Meter voltage, current and power factor at one-minute resolution. Aggregate to daily buckets for billing and anomaly detection.</p>
+            </article>
+            <article class="usecase-card glass-panel animate-on-scroll">
+                <i class='bx bx-package'></i>
+                <h3>Cold Chain &amp; Logistics</h3>
+                <p>Track temperature excursions end to end. Every breach becomes an alert with full history, so compliance audits take minutes, not days.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing-section">
+        <div class="section-header text-center animate-on-scroll">
+            <span class="eyebrow">Pricing</span>
+            <h2 class="section-title">Start free, pay as you <span class="text-gradient">grow</span></h2>
+            <p class="section-subtitle">Flat prepaid tiers for predictable fleets, metered tiers for fleets that scale. All prices in INR.</p>
+        </div>
+
+        <div class="pricing-grid container">
+            <div class="price-card glass-panel animate-on-scroll">
+                <h3>Developer Sandbox</h3>
+                <div class="price-amount">&#8377;0<span>/ free forever</span></div>
+                <p class="price-note">Prototypes, student labs and evaluation.</p>
+                <ul class="price-features">
+                    <li><i class='bx bx-check'></i> 2 active devices</li>
+                    <li><i class='bx bx-check'></i> 100k readings / month</li>
+                    <li><i class='bx bx-check'></i> 7 days retention</li>
+                    <li><i class='bx bx-check'></i> 1 seat, email alerts</li>
+                </ul>
+                <a href="signup.html?plan=free" class="btn-ghost">Start free</a>
+            </div>
+
+            <div class="price-card glass-panel animate-on-scroll delay-1">
+                <h3>Basic Prepaid</h3>
+                <div class="price-amount">&#8377;499<span>/ month</span></div>
+                <p class="price-note">Small production fleets needing retention.</p>
+                <ul class="price-features">
+                    <li><i class='bx bx-check'></i> 10 active devices</li>
+                    <li><i class='bx bx-check'></i> 1.0M readings / month</li>
+                    <li><i class='bx bx-check'></i> 30 days retention</li>
+                    <li><i class='bx bx-check'></i> CSV export, 24-hr support</li>
+                </ul>
+                <a href="signup.html?plan=basic" class="btn-ghost">Choose Basic</a>
+            </div>
+
+            <div class="price-card glass-panel is-featured animate-on-scroll delay-2">
+                <span class="price-badge">Most popular</span>
+                <h3>Moderate Prepaid</h3>
+                <div class="price-amount">&#8377;1,999<span>/ month</span></div>
+                <p class="price-note">Hardware startups and MSMEs in production.</p>
+                <ul class="price-features">
+                    <li><i class='bx bx-check'></i> 50 active devices</li>
+                    <li><i class='bx bx-check'></i> 15M readings / month</li>
+                    <li><i class='bx bx-check'></i> 90 days retention</li>
+                    <li><i class='bx bx-check'></i> Rule engine, 3 seats</li>
+                    <li><i class='bx bx-check'></i> 99.50% uptime SLA</li>
+                </ul>
+                <a href="signup.html?plan=moderate" class="btn-primary">Choose Moderate</a>
+            </div>
+
+            <div class="price-card glass-panel animate-on-scroll">
+                <h3>Standard PAYG</h3>
+                <div class="price-amount price-amount-sm">Metered<span>/ no fixed fee</span></div>
+                <p class="price-note">Zero commitment, billed on consumption.</p>
+                <ul class="price-features">
+                    <li><i class='bx bx-check'></i> First 25 devices free</li>
+                    <li><i class='bx bx-check'></i> &#8377;3.90 / million readings</li>
+                    <li><i class='bx bx-check'></i> Unlimited retention</li>
+                    <li><i class='bx bx-check'></i> Webhooks, 99.9% SLA</li>
+                    <li><i class='bx bx-check'></i> &#8377;500 startup credit</li>
+                </ul>
+                <a href="signup.html?plan=payg-standard" class="btn-ghost">Go metered</a>
+            </div>
+
+            <div class="price-card glass-panel animate-on-scroll delay-1">
+                <h3>Enterprise PAYG</h3>
+                <div class="price-amount price-amount-sm">Bulk metered<span>/ &#8377;9,999 commit</span></div>
+                <p class="price-note">High-frequency industrial time-series.</p>
+                <ul class="price-features">
+                    <li><i class='bx bx-check'></i> First 100 devices free</li>
+                    <li><i class='bx bx-check'></i> &#8377;1.90 / million readings</li>
+                    <li><i class='bx bx-check'></i> Unlimited seats</li>
+                    <li><i class='bx bx-check'></i> 99.99% SLA, 24/7 manager</li>
+                    <li><i class='bx bx-check'></i> Custom domain white-label</li>
+                </ul>
+                <a href="https://omniteq.in/contact.html" class="btn-ghost">Talk to sales</a>
+            </div>
+        </div>
+        <p class="pricing-foot text-center animate-on-scroll">Full entitlement tables and metered rate sheets are shown at checkout before you confirm.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+        <div class="section-header text-center animate-on-scroll">
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section-title">Questions, <span class="text-gradient">answered</span></h2>
+        </div>
+        <div class="faq-list container animate-on-scroll delay-1">
+            <details class="faq-item">
+                <summary>How does a device authenticate?</summary>
+                <div class="faq-body">
+                    <p>Devices never hold a user token. On creation each device receives a <code>device_id</code> and a <code>secret_key</code> that is shown exactly once and stored server-side only as a hash. Firmware sends that pair with every ingest, command-poll and heartbeat call. People and dashboards authenticate separately with a JWT access token plus a rotating refresh token.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>Which protocols and boards are supported?</summary>
+                <div class="faq-body">
+                    <p>Ingest, command polling and acknowledgements run over HTTPS REST; the dashboard receives live updates over WebSockets. Ready-to-flash reference firmware is included for ESP32, ESP32-S3, ESP8266 and Arduino Nano 33 IoT &mdash; but any device, gateway or script that can make an HTTPS request will work.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>How is historical telemetry stored and queried?</summary>
+                <div class="faq-body">
+                    <p>Readings land in a TimescaleDB hypertable. Raw range queries return up to 5,000 rows per call, and aggregate queries use <code>time_bucket()</code> to return min, max, avg and count at 1m, 5m, 15m, 30m, 1h, 6h or 1d resolution. Only numeric variables can be aggregated; string variables are returned raw.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>How do commands actually reach a device?</summary>
+                <div class="faq-body">
+                    <p>You dispatch against a command template, and the API validates that every required parameter is present and correctly typed before returning <code>202 Accepted</code>. The command is queued; the device picks it up by polling <code>/ingest/commands/pending</code>, then acknowledges with <code>success</code> or <code>failed</code>. Anything not collected within its TTL &mdash; one hour by default &mdash; expires instead of firing late.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>Can I export my configuration and data?</summary>
+                <div class="faq-body">
+                    <p>Yes. Cloud Studio exports a complete project &mdash; controller, sensors, variables, actuators, commands and rules &mdash; as JSON, and imports the same schema back. Telemetry export to CSV is available from the Basic tier, and JSON export from Moderate upward.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary>What happens when I hit a plan limit?</summary>
+                <div class="faq-body">
+                    <p>The gateway returns an explicit <code>PLAN_LIMIT_EXCEEDED</code> error rather than silently dropping readings, so your firmware can retry or back off deliberately. You can review live quota usage at any time under Settings, and change tier without re-provisioning devices.</p>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -160,66 +563,79 @@
     <section class="cta-section text-center">
         <div class="cta-box glass-panel animate-on-scroll">
             <h2>Ready to connect the unconnected?</h2>
-            <p>Join thousands of engineers building the future of IoT with OmniTeq Cloud.</p>
+            <p>Spin up a free Developer Sandbox, flash a board, and watch your first reading land in the dashboard.</p>
             <div class="hero-cta">
-                <a href="signup.html" class="btn-primary btn-lg">Start Free Trial</a>
-                <a href="contact.html" class="btn-ghost btn-lg">Contact Sales</a>
+                <a href="signup.html?plan=free" class="btn-primary btn-lg">Start Free Trial</a>
+                <a href="https://omniteq.in/contact.html" class="btn-ghost btn-lg">Contact Sales</a>
             </div>
+            <p class="cta-fine">No credit card required &middot; Free tier never auto-upgrades</p>
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer class="landing-footer">
-        <div class="container footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; max-width: 1200px; margin: 0 auto 40px;">
-            <div class="footer-brand" style="flex: 1; min-width: 250px;">
+        <div class="container footer-content">
+            <div class="footer-brand">
                 <div class="logo">
                     <a href="cloud_landing.html" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 36px;">
                     </a>
                 </div>
-                <p style="color: var(--text-muted-dark); margin-top: 12px; line-height: 1.6;">Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
-                <div class="social-icons" style="display: flex; gap: 15px; margin-top: 20px;">
-                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-linkedin'></i></a>
-                    <a href="https://x.com/omniteq_info" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-twitter'></i></a>
-                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-instagram'></i></a>
-                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" style="color: var(--text-muted-dark); font-size: 24px; transition: color 0.3s;"><i class='bx bxl-youtube'></i></a>
+                <p>Transforming industries through innovative IoT and automation solutions that drive efficiency and growth.</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/company/omniteq-solutions/" target="_blank" rel="noopener" aria-label="OmniTeq on LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://x.com/omniteq_info" target="_blank" rel="noopener" aria-label="OmniTeq on X"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/omniteq_solutions" target="_blank" rel="noopener" aria-label="OmniTeq on Instagram"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.youtube.com/@Omniteq_solutions" target="_blank" rel="noopener" aria-label="OmniTeq on YouTube"><i class='bx bxl-youtube'></i></a>
                 </div>
             </div>
-            <div class="footer-links" style="flex: 2; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;">
-                <div style="min-width: 150px;">
-                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Quick Links</h4>
-                    <a href="cloud_landing.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Home</a>
-                    <a href="about.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">About Us</a>
-                    <a href="https://omniteq.in/products.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Products</a>
-                    <a href="https://omniteq.in/services.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Services</a>
-                    <a href="https://omniteq.in/resources.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Resources</a>
-                    <a href="https://omniteq.in/contact.html" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Contact</a>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="cloud_dashboard.html">Live Demo</a>
+                    <a href="cloud_studio/cloud_studio.html">Cloud Studio</a>
                 </div>
-                <div style="min-width: 150px;">
-                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Our Services</h4>
-                    <a href="https://omniteq.in/services.html#iot" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">IoT Solutions</a>
-                    <a href="https://omniteq.in/services.html#plc" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">PLC Programming</a>
-                    <a href="https://omniteq.in/services.html#embedded" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Embedded Systems</a>
-                    <a href="https://omniteq.in/services.html#ai-ml" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">AI & ML Integration</a>
-                    <a href="https://omniteq.in/services.html#outsourcing" style="display: block; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;">Resource Outsourcing</a>
+                <div class="footer-col">
+                    <h4>Developers</h4>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="cloud_docs.html">Documentation</a>
+                    <a href="#developers">Code Examples</a>
+                    <a href="#faq">FAQ</a>
                 </div>
-                <div style="min-width: 200px;">
-                    <h4 style="font-size: 16px; margin-bottom: 20px; color: #fff;">Contact Us</h4>
-                    <a href="mailto:info@omniteq.in" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;"><i class='bx bx-envelope'></i> info@omniteq.in</a>
-                    <a href="tel:+919825246857" style="display: flex; align-items: center; gap: 8px; color: var(--text-muted-dark); text-decoration: none; margin-bottom: 12px; transition: color 0.3s;"><i class='bx bx-phone'></i> +91 98252 46857</a>
-                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.5;"><i class='bx bx-map' style="font-size: 16px; margin-top: 2px;"></i> Aditya House, Iscon Mega City, Bhavnagar</div>
-                    <div style="color: var(--text-muted-dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.5;"><i class='bx bx-time' style="font-size: 16px; margin-top: 2px;"></i> Mon-Fri: 9:00 AM - 6:00 PM</div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="about.html">About Us</a>
+                    <a href="https://omniteq.in/products.html">Products</a>
+                    <a href="https://omniteq.in/services.html">Services</a>
+                    <a href="https://omniteq.in/resources.html">Resources</a>
+                    <a href="https://omniteq.in/contact.html">Contact</a>
+                </div>
+                <div class="footer-col footer-col-contact">
+                    <h4>Contact Us</h4>
+                    <a href="mailto:info@omniteq.in"><i class='bx bx-envelope'></i> info@omniteq.in</a>
+                    <a href="tel:+919825246857"><i class='bx bx-phone'></i> +91 98252 46857</a>
+                    <span><i class='bx bx-map'></i> Aditya House, Iscon Mega City, Bhavnagar</span>
+                    <span><i class='bx bx-time'></i> Mon-Fri: 9:00 AM - 6:00 PM</span>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom text-center" style="border-top: 1px solid var(--border-dark); padding-top: 20px; color: var(--text-muted-dark); font-size: 14px;">
+        <div class="footer-bottom text-center">
             <p>&copy; 2026 OmniTeq. All rights reserved.</p>
         </div>
     </footer>
 
+    <button type="button" class="back-to-top" id="backToTop" data-no-autoload aria-label="Back to top"><i class='bx bx-chevron-up'></i></button>
+
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/landing.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
     <div class="glow-bg glow-2"></div>
@@ -23,102 +23,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li>
-                    <a href="cloud_dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link-name">Dashboard</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="cloud_projects.html">
-                        <i class='bx bx-folder'></i>
-                        <span class="link-name">Projects</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_devices.html">
-                        <i class='bx bx-devices'></i>
-                        <span class="link-name">Devices</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_sensors.html">
-                        <i class='bx bx-chip'></i>
-                        <span class="link-name">Sensors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_commands.html">
-                        <i class='bx bx-terminal'></i>
-                        <span class="link-name">Commands</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_telemetry.html">
-                        <i class='bx bx-line-chart'></i>
-                        <span class="link-name">Telemetry</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_docs.html">
-                        <i class='bx bx-book-open'></i>
-                        <span class="link-name">Documentation</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="cloud_settings.html">
-                        <i class='bx bx-cog'></i>
-                        <span class="link-name">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="cloud_landing.html">
-                        <i class='bx bx-log-out'></i>
-                        <span class="link-name">Logout</span>
-                    </a>
-                </li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
+                <li class="active"><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
+                <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
+                <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
+                <li class="nav-section">Monitor</li>
+                <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
+                <li><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
+                <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
+                <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
+                <li class="nav-section">System</li>
+                <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search devices, projects...">
                 </div>
                 <div class="topbar-actions">
-                    
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -187,6 +148,25 @@
                     </div>
                 </div>
 
+                <!-- Project Backup (Bug 3): inform users the project can be exported as JSON -->
+                <div class="project-backup-card glass-panel" style="margin-top: 24px; display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; padding: 16px 10px;">
+                    <div style="display: flex; gap: 14px; align-items: flex-start; min-width: 240px;">
+                        <div class="stat-icon b-blue" style="flex-shrink: 0;"><i class='bx bx-data'></i></div>
+                        <div>
+                            <h3 style="margin: 0 0 4px; font-size: 15px;">Project Backup</h3>
+                            <p style="margin: 0; font-size: 13px; color: var(--text-muted-light); max-width: 560px;">
+                                Download this project's configuration as a JSON file if you want to keep a backup or
+                                continue editing it later in Cloud Studio.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button type="button" class="btn-primary" id="btnDownloadProjectJson"><i class='bx bx-download'></i> Download Project JSON</button>
+                        <button type="button" class="btn-ghost" id="btnImportProjectJson"><i class='bx bx-upload'></i> Import Project JSON</button>
+                        <input type="file" id="project-json-input" accept=".json,application/json" style="display: none;">
+                    </div>
+                </div>
+
                 <div class="dashboard-grid" style="grid-template-columns: 1fr;">
                     
                     <div class="table-container glass-panel mt-4">
@@ -248,6 +228,7 @@
     </div>
 
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
@@ -255,6 +236,7 @@
     <script>
         let currentProject = null;
         let currentProjectId = null;
+        const api = window.api;
 
         document.addEventListener('DOMContentLoaded', async () => {
             const api = window.api;
@@ -304,6 +286,21 @@
             }
 
             await loadProjectData();
+
+            // Bug 3 — Project JSON backup controls (bound regardless of load outcome;
+            // each handler guards for a missing currentProjectId itself).
+            const dlBtn = document.getElementById('btnDownloadProjectJson');
+            if (dlBtn) dlBtn.addEventListener('click', downloadProjectJson);
+            const impBtn = document.getElementById('btnImportProjectJson');
+            const impInput = document.getElementById('project-json-input');
+            if (impBtn && impInput) {
+                impBtn.addEventListener('click', () => impInput.click());
+                impInput.addEventListener('change', (e) => {
+                    const f = e.target.files && e.target.files[0];
+                    importProjectJson(f);
+                    e.target.value = '';
+                });
+            }
         });
 
         async function loadProjectData() {
@@ -435,11 +432,130 @@
             });
         }
 
+        /**
+         * Bug 3 — Project JSON backup export.
+         * Serialises the project configuration using the SAME field names the
+         * gateway already returns (project, devices, each device's sensors and
+         * each sensor's cloud variables), so the file is a faithful backup of
+         * the server objects rather than a competing schema.
+         */
+        async function downloadProjectJson() {
+            if (!currentProjectId) { showToast('No project is loaded to export.', 'warning'); return; }
+            try {
+                const projRes = await api.projects.get(currentProjectId);
+                if (!projRes.success || !projRes.data) { showToast('Could not load the project to export.', 'error'); return; }
+                const project = projRes.data;
+
+                const devRes = await api.devices.list(currentProjectId);
+                const devices = (devRes.success && Array.isArray(devRes.data)) ? devRes.data : [];
+
+                const exportDevices = [];
+                for (const dev of devices) {
+                    const senRes = await api.sensors.list(dev.id);
+                    const sensors = (senRes.success && Array.isArray(senRes.data)) ? senRes.data : [];
+                    const exportSensors = [];
+                    for (const sen of sensors) {
+                        const varRes = await api.variables.list(sen.id);
+                        const variables = (varRes.success && Array.isArray(varRes.data)) ? varRes.data : [];
+                        exportSensors.push({
+                            name: sen.name,
+                            unit: sen.unit || '',
+                            description: sen.description || '',
+                            variables: variables.map(v => ({ label: v.label, data_type: v.data_type }))
+                        });
+                    }
+                    exportDevices.push({
+                        name: dev.name,
+                        description: dev.description || '',
+                        sensors: exportSensors
+                    });
+                }
+
+                const backup = {
+                    format: 'omniteq.project',
+                    version: 1,
+                    exportedAt: new Date().toISOString(),
+                    project: { name: project.name || '', description: project.description || '' },
+                    devices: exportDevices
+                };
+
+                const safeName = (project.name || 'project').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') || 'project';
+                const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${safeName}_project.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Project JSON downloaded.', 'success');
+            } catch (e) {
+                console.error('Project export failed:', e);
+                showToast('Failed to export the project: ' + (e && e.message ? e.message : 'unknown error'), 'error');
+            }
+        }
+
+        /**
+         * Bug 3 — Project JSON import.
+         * Recreates a project (and its devices, sensors and variables) from a
+         * backup produced by downloadProjectJson(), through the existing API.
+         * Reports the failing step instead of pretending the import succeeded.
+         */
+        async function importProjectJson(file) {
+            if (!file) return;
+            let backup;
+            try {
+                backup = JSON.parse(await file.text());
+            } catch (e) {
+                showToast('That file is not valid JSON.', 'error');
+                return;
+            }
+            const project = backup && backup.project;
+            if (!project || !project.name) {
+                showToast('Invalid project backup: missing project name.', 'error');
+                return;
+            }
+
+            const ok = await UI.confirm({
+                title: 'Import project',
+                message: `Create a new project "${project.name}" with ${(backup.devices || []).length} device(s) from this backup?`,
+                confirmText: 'Import'
+            });
+            if (!ok) return;
+
+            try {
+                const projRes = await api.projects.create({ name: project.name, description: project.description || '' });
+                if (!projRes.success || !projRes.data) throw new Error('project creation failed');
+                const newProjectId = projRes.data.id;
+
+                for (const dev of (backup.devices || [])) {
+                    const devRes = await api.devices.create(newProjectId, { name: dev.name, description: dev.description || '' });
+                    if (!devRes.success || !devRes.data) throw new Error(`device "${dev.name}" could not be created`);
+                    const newDeviceId = devRes.data.id;
+                    for (const sen of (dev.sensors || [])) {
+                        const senRes = await api.sensors.create(newDeviceId, { name: sen.name, unit: sen.unit || '', description: sen.description || '' });
+                        if (!senRes.success || !senRes.data) throw new Error(`sensor "${sen.name}" could not be created`);
+                        const newSensorId = senRes.data.id;
+                        for (const variable of (sen.variables || [])) {
+                            await api.variables.create(newSensorId, { label: variable.label, data_type: variable.data_type || 'float' });
+                        }
+                    }
+                }
+
+                showToast('Project imported successfully.', 'success');
+                setTimeout(() => { window.location.href = 'cloud_project_view.html?id=' + encodeURIComponent(newProjectId); }, 1200);
+            } catch (e) {
+                console.error('Project import failed:', e);
+                showToast('Import failed: ' + (e && e.message ? e.message : 'unknown error'), 'error');
+            }
+        }
+
         function openEditModal() {
             if (!currentProject) return;
             document.getElementById('editProjectName').value = currentProject.name || '';
             document.getElementById('editProjectDesc').value = currentProject.description || '';
-            
+
             const modal = document.getElementById('editProjectModal');
             if (modal) modal.classList.add('active');
         }

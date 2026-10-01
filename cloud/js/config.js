@@ -178,4 +178,23 @@
     }
 
     window.OMNITEQ_CONFIG.injectEndpoints = injectEndpoints;
+
+    /**
+     * Global connection-status banner (js/status.js). Injected here because
+     * config.js is the one script every page loads, so the banner is project-wide
+     * without editing each HTML document. The URL is derived from this script's
+     * own location so it also works when config.js is referenced from a
+     * subdirectory (e.g. ../js/config.js).
+     */
+    (function injectStatusScript() {
+        if (document.getElementById('omniteq-status-script')) return;
+        var selfUrl = (document.currentScript && document.currentScript.src) || 'js/config.js';
+        var src = selfUrl.replace(/config\.js(\?.*)?$/, 'status.js');
+        if (src === selfUrl) src = 'js/status.js';
+        var s = document.createElement('script');
+        s.id = 'omniteq-status-script';
+        s.src = src;
+        s.async = true;
+        (document.head || document.documentElement).appendChild(s);
+    })();
 })();

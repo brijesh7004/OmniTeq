@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/ui.css">
 </head>
 <body class="dark-theme dashboard-page">
-    <script>if(localStorage.getItem('theme') === 'light') { document.body.classList.remove('dark-theme'); }</script>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
     
     <!-- Ambient Glow Backgrounds -->
     <div class="glow-bg glow-1"></div>
@@ -22,58 +22,63 @@
     
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar glass-panel-sidebar">
+                <aside class="sidebar glass-panel-sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="images/logo/logo-white.svg" alt="OmniTeq Logo" style="height: 32px;">
+                    <a href="cloud_dashboard.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                        <img src="images/logo/logo-white.svg" alt="OmniTeq Cloud" style="height: 30px;">
                     </a>
                 </div>
-                <button class="toggle-btn" id="sidebarToggle"><i class='bx bx-menu-alt-right'></i></button>
             </div>
-            
             <ul class="nav-links">
-                <li><a href="cloud_dashboard.html"><i class='bx bx-grid-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Overview</li>
+                <li><a href="cloud_dashboard.html"><i class='bx bx-home-alt'></i><span class="link-name">Dashboard</span></a></li>
+                <li class="nav-section">Develop</li>
                 <li><a href="cloud_projects.html"><i class='bx bx-folder'></i><span class="link-name">Projects</span></a></li>
                 <li><a href="cloud_devices.html"><i class='bx bx-devices'></i><span class="link-name">Devices</span></a></li>
                 <li><a href="cloud_sensors.html"><i class='bx bx-chip'></i><span class="link-name">Sensors</span></a></li>
-                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Monitor</li>
                 <li><a href="cloud_telemetry.html"><i class='bx bx-line-chart'></i><span class="link-name">Telemetry</span></a></li>
-                <li class="active"><a href="cloud_rules.html"><i class='bx bx-git-repo-forked'></i><span class="link-name">Rules</span></a></li>
+                <li class="active"><a href="cloud_rules.html"><i class='bx bx-bell'></i><span class="link-name">Alerts &amp; Rules</span></a></li>
                 <li><a href="cloud_webhooks.html"><i class='bx bx-broadcast'></i><span class="link-name">Webhooks</span></a></li>
+                <li class="nav-section">Control</li>
+                <li><a href="cloud_commands.html"><i class='bx bx-terminal'></i><span class="link-name">Commands</span></a></li>
+                <li class="nav-section">Developer</li>
+                <li><a href="api-reference.html"><i class='bx bx-code-alt'></i><span class="link-name">API Reference</span></a></li>
                 <li><a href="cloud_docs.html"><i class='bx bx-book-open'></i><span class="link-name">Documentation</span></a></li>
-                <li class="divider"></li>
+                <li class="nav-section">System</li>
                 <li><a href="cloud_settings.html"><i class='bx bx-cog'></i><span class="link-name">Settings</span></a></li>
-                <li><a href="login.html"><i class='bx bx-log-out'></i><span class="link-name">Logout</span></a></li>
             </ul>
+            <div class="sidebar-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" id="sidebar-avatar-img">
+                <div class="sidebar-profile-info">
+                    <span class="sidebar-profile-name" id="sidebar-display-name">User</span>
+                    <span class="sidebar-profile-role" id="sidebar-display-role">Member</span>
+                </div>
+                <a href="login.html" class="sidebar-logout" title="Sign out"><i class='bx bx-log-out'></i></a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Topbar -->
-            <header class="topbar">
+                        <header class="topbar">
+                <button class="icon-btn topbar-menu" id="sidebarToggle" aria-label="Toggle sidebar"><i class='bx bx-menu'></i></button>
+                <div class="project-context">
+                    <i class='bx bx-folder'></i>
+                    <span class="project-context-label">Project:</span>
+                    <select id="topbarProjectSelect" class="project-context-select" aria-label="Active project">
+                        <option value="all">All Projects</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
                     <input type="text" placeholder="Search rules, devices...">
                 </div>
                 <div class="topbar-actions">
-                    <div class="nav-switcher" style="margin-right: 15px;">
-                        <a href="#" class="switcher-toggle" id="navSwitcherToggle" aria-label="Switch Platform">
-                            <i class="bx bx-cloud"></i>
-                        </a>
-                        <div class="switcher-dropdown">
-                            <a href="../index.html" class="switcher-item"><i class="bx bx-globe"></i> OmniTeq Website</a>
-                            <a href="cloud_landing.html" class="switcher-item active"><i class="bx bx-cloud"></i> OmniTeq Cloud</a>
-                        </div>
-                    </div>
-                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="bx bx-sun"></i>
-                        <i class="bx bx-moon"></i>
-                    </button>
-                    <button class="icon-btn notification-btn">
-                        <i class='bx bx-bell'></i>
-                        <span class="badge">3</span>
-                    </button>
+                    <button class="icon-btn" id="realtimeStatusBtn" type="button" title="Real-time connection status" aria-label="Real-time connection status"><i class='bx bx-broadcast' id="realtimeStatusIcon"></i></button>
+                    <button class="icon-btn notification-btn" title="Notifications"><i class='bx bx-bell'></i><span class="badge">3</span></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme"><i class="bx bx-sun"></i><i class="bx bx-moon"></i></button>
                     <div class="user-profile">
                         <img src="https://ui-avatars.com/api/?name=User&background=185FA5&color=fff" alt="Profile" id="user-avatar-img">
                         <div class="user-info">
@@ -81,7 +86,7 @@
                             <span class="user-role" id="user-display-role">Member</span>
                         </div>
                     </div>
-                </div>                
+                </div>
             </header>
 
             <!-- Dashboard Content -->
@@ -89,33 +94,110 @@
                 
                 <!-- Page Header -->
                 <div class="page-header">
-                    <div>
-                        <h1>Rules &amp; Automation Engine</h1>
-                        <p style="color: var(--text-muted-dark); font-size: 14px; margin: 6px 0 0;">Define real-time thresholds, alerts, and automatic command execution upon telemetry ingestion.</p>
-                    </div>
+                    <div class="page-header-main"><h1>Alerts &amp; Rules</h1><p class="page-subtitle">Create rules to monitor device data and get notified</p></div>
                     <button class="btn-primary" id="createRuleBtn" onclick="openCreateRuleModal()" style="display: inline-flex; align-items: center; gap: 8px;"><i class='bx bx-plus'></i> Create Rule</button>
                 </div>
 
-                <!-- Plan entitlement notice (shown only when the plan excludes rules) -->
-                <div id="ruleEngineNotice" class="glass-panel" style="display: none; padding: 14px 18px; margin-bottom: 24px; border-left: 3px solid #eab308; font-size: 14px; color: var(--text-dark);"></div>
-
-                <!-- Device Filter Bar -->
-                <div class="glass-panel" style="padding: 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                    <label for="deviceSelectFilter" style="font-weight: 600; font-size: 13px; color: var(--text-muted-dark); display: inline-flex; align-items: center; gap: 6px;">
-                        <i class='bx bx-filter-alt'></i> Filter by Device
-                    </label>
-                    <select id="deviceSelectFilter" class="styled-select" style="width: auto; min-width: 220px; max-width: 320px; height: 38px;" onchange="loadRules()">
-                        <option value="">Loading devices...</option>
-                    </select>
-                </div>
-
-                <!-- Rules Grid -->
-                <div id="rules-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;">
-                    <div class="glass-panel" style="padding: 40px; text-align: center; color: var(--text-muted-dark); grid-column: 1/-1;">
-                        Loading rules engine...
+                <!-- Tabs + right-side actions -->
+                <div class="tabs-row">
+                    <div class="tabs">
+                        <button class="tab active" data-rule-tab="rules">Rules</button>
+                        <button class="tab" data-rule-tab="history">Alert History</button>
                     </div>
+                    <button class="btn-ghost" id="alertExportBtn" style="display: none;"><i class='bx bx-download'></i> Export</button>
                 </div>
-            </div>  
+
+                <div id="rules-view">
+                    <div id="ruleEngineNotice" class="glass-panel" style="display: none; padding: 14px 18px; margin-bottom: 24px; border-left: 3px solid #eab308; font-size: 14px; color: var(--text-dark);"></div>
+
+                    <!-- Rule KPIs -->
+                    <div id="rules-kpis" class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-bottom: 24px;">
+                        <div class="stat-card glass-panel"><div class="stat-icon b-blue"><i class='bx bx-list-ul'></i></div><div class="stat-details"><h3>Total Rules</h3><h2 id="rules-total-count">0</h2><span class="kpi-delta muted">All monitoring rules</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-icon b-green"><i class='bx bx-play-circle'></i></div><div class="stat-details"><h3>Active Rules</h3><h2 id="rules-active-count">0</h2><span class="kpi-delta up" id="rules-active-pct">0%</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-icon b-red"><i class='bx bx-bell'></i></div><div class="stat-details"><h3>Triggered (24h)</h3><h2 id="rules-triggered-count">0</h2><span class="kpi-delta down">Need attention</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-icon b-blue"><i class='bx bx-check-shield'></i></div><div class="stat-details"><h3>Acknowledged</h3><h2 id="rules-ack-count">0</h2><span class="kpi-delta muted">This month</span></div></div>
+                    </div>
+
+                    <!-- Rule filters -->
+                    <div class="filter-bar" style="margin-bottom: 20px;">
+                        <input type="text" id="rule-search" class="styled-select" placeholder="Search rules..." style="height: 38px; min-width: 200px; flex: 1 1 200px;">
+                        <select id="ruleProjectFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;"><option value="all">All Projects</option></select>
+                        <select id="deviceSelectFilter" class="styled-select" style="width: auto; min-width: 150px; height: 38px;"><option value="all">All Devices</option></select>
+                        <select id="ruleStatusFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Status</option><option value="active">Active</option><option value="inactive">Inactive</option></select>
+                    </div>
+
+                    <!-- Rules table -->
+                    <div class="table-container glass-panel">
+                        <div class="table-responsive">
+                            <table class="styled-table" id="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-check"><input type="checkbox" class="table-check" id="ruleSelectAll" aria-label="Select all rules"></th>
+                                        <th>Name</th>
+                                        <th>Device / Sensor</th>
+                                        <th>Condition</th>
+                                        <th>Actions</th>
+                                        <th>Status</th>
+                                        <th>Last Triggered</th>
+                                        <th class="col-actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rules-table-body">
+                                    <tr><td colspan="8" style="text-align: center; padding: 30px; color: var(--text-secondary);">Loading rules engine...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /#rules-view -->
+
+                <!-- Alert History (tab) -->
+                <div id="history-view" style="display: none;">
+                    <!-- Alert KPIs -->
+                    <div id="alerts-kpis" class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-bottom: 24px;">
+                        <div class="stat-card glass-panel"><div class="stat-icon b-blue"><i class='bx bx-bell'></i></div><div class="stat-details"><h3>Total Alerts</h3><h2 id="alerts-total-count">0</h2><span class="kpi-delta muted">Last 24 hours</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-icon b-red"><i class='bx bxs-error-circle'></i></div><div class="stat-details"><h3>Critical Alerts</h3><h2 id="alerts-critical-count">0</h2><span class="kpi-delta down">High priority</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-icon b-amber"><i class='bx bxs-error'></i></div><div class="stat-details"><h3>Warning Alerts</h3><h2 id="alerts-warning-count">0</h2><span class="kpi-delta warn">Monitor</span></div></div>
+                        <div class="stat-card glass-panel"><div class="stat-icon b-blue"><i class='bx bx-info-circle'></i></div><div class="stat-details"><h3>Info Alerts</h3><h2 id="alerts-info-count">0</h2><span class="kpi-delta muted">Informational</span></div></div>
+                    </div>
+
+                    <!-- Alert filters -->
+                    <div class="filter-bar" style="margin-bottom: 20px;">
+                        <input type="text" id="alert-search" class="styled-select" placeholder="Search alerts..." style="height: 38px; min-width: 180px; flex: 1 1 180px;">
+                        <select id="alertSeverityFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Severity</option><option value="critical">Critical</option><option value="warning">Warning</option><option value="info">Info</option></select>
+                        <select id="alertProjectFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Projects</option></select>
+                        <select id="alertDeviceFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Devices</option></select>
+                        <select id="alertRuleFilter" class="styled-select" style="width: auto; min-width: 140px; height: 38px;"><option value="all">All Rules</option></select>
+                    </div>
+
+                    <div class="alert-history-layout">
+                        <div class="table-container glass-panel">
+                            <div class="table-responsive">
+                                <table class="styled-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 48px;">#</th>
+                                            <th>Time</th>
+                                            <th>Severity</th>
+                                            <th>Device / Sensor</th>
+                                            <th>Message</th>
+                                            <th>Rule</th>
+                                            <th>Status</th>
+                                            <th class="col-actions">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="alert-history-body">
+                                        <tr><td colspan="8" style="text-align: center; padding: 30px; color: var(--text-secondary);">Loading alert history...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-footer">
+                                <span id="alert-pagination-info">Showing 0 alerts</span>
+                                <div class="pagination" id="alert-pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /#history-view -->
+            </div>
 
             <!-- Modal: Create Rule -->
             <div id="createRuleModal" class="modal-backdrop" style="display: none;">
@@ -179,17 +261,124 @@
                         </div>
 
                         <div id="commandFields" class="form-group" style="display: none; margin-bottom: 16px;">
-                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Command Template</label>
-                            <select id="ruleCommandTemplate" class="styled-select">
-                                <option value="">Select command template...</option>
-                            </select>
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Command Template</label>
+                                <select id="ruleCommandTemplate" class="styled-select" onchange="renderRuleCommandParamFields('ruleCommandTemplate','ruleCommandParamFields','rule')">
+                                    <option value="">Select command template...</option>
+                                </select>
+                            </div>
+                            <div id="ruleCommandParamFields" style="margin-bottom: 12px;"></div>
+                            <div id="ruleCommandParamsJsonWrap">
+                                <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Command Value (JSON)</label>
+                                <input type="text" id="ruleCommandParams" class="styled-select" placeholder='e.g. {"pumpState": false}'>
+                                <small style="display: block; margin-top: 4px; font-size: 12px; color: var(--text-muted-dark);">Key/value pairs matching the template's parameters. Values keep their JSON type. Hidden once the template's parameter fields are shown above.</small>
+                            </div>
                         </div>
+
 
                         <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
                             <button type="button" class="btn-secondary" onclick="closeModal('createRuleModal')">Cancel</button>
                             <button type="submit" class="btn-primary">Save Rule</button>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- Modal: Edit Rule -->
+            <div id="editRuleModal" class="modal-backdrop" style="display: none;">
+                <div class="glass-panel modal-content" style="max-width: 540px; width: 90%; margin: auto; padding: 28px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                        <h3 style="font-size: 20px; font-weight: 700;"><i class='bx bx-edit'></i> Edit Automation Rule</h3>
+                        <button type="button" onclick="closeModal('editRuleModal')" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+                    </div>
+                    <form id="editRuleForm">
+                        <input type="hidden" id="editRuleId">
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Target Device</label>
+                            <select id="editRuleTargetDevice" class="styled-select" onchange="loadDeviceVariablesForModal(this.value, 'editRuleTargetVariable', 'editRuleCommandTemplate')">
+                                <option value="">Select a device...</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Rule Name</label>
+                            <input type="text" id="editRuleName" class="styled-select" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Target Variable</label>
+                            <select id="editRuleTargetVariable" class="styled-select" required>
+                                <option value="">Select a variable...</option>
+                            </select>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Operator</label>
+                                <select id="editRuleOperator" class="styled-select" required>
+                                    <option value=">">Greater than (&gt;)</option>
+                                    <option value="<">Less than (&lt;)</option>
+                                    <option value=">=">Greater or Equal (&gt;=)</option>
+                                    <option value="<=">Less or Equal (&lt;=)</option>
+                                    <option value="==">Equal (==)</option>
+                                    <option value="!=">Not Equal (!=)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Threshold Value</label>
+                                <input type="number" step="any" id="editRuleThreshold" class="styled-select" required>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Action Type</label>
+                            <select id="editRuleActionType" class="styled-select" required onchange="toggleEditActionFields(this.value)">
+                                <option value="send_alert">Send Alert Notification</option>
+                                <option value="dispatch_command">Dispatch Command Template</option>
+                                <option value="reject_fake_data">Reject Outlier & Fake Data</option>
+                                <option value="log_anomaly">Log Data Anomaly Warning</option>
+                            </select>
+                        </div>
+                        <div id="editAlertFields" class="form-group" style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Alert Message / Action Note</label>
+                            <input type="text" id="editRuleAlertMessage" class="styled-select" placeholder="e.g. Outlier reading rejected automatically!">
+                        </div>
+                        <div id="editCommandFields" class="form-group" style="display: none; margin-bottom: 16px;">
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Command Template</label>
+                                <select id="editRuleCommandTemplate" class="styled-select" onchange="renderRuleCommandParamFields('editRuleCommandTemplate','editRuleCommandParamFields','editRule')">
+                                    <option value="">Select command template...</option>
+                                </select>
+                            </div>
+                            <div id="editRuleCommandParamFields" style="margin-bottom: 12px;"></div>
+                            <div id="editRuleCommandParamsJsonWrap">
+                                <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Command Value (JSON)</label>
+                                <input type="text" id="editRuleCommandParams" class="styled-select" placeholder='e.g. {"pumpState": false}'>
+                                <small style="display: block; margin-top: 4px; font-size: 12px; color: var(--text-muted-dark);">Key/value pairs matching the template's parameters. Values keep their JSON type. Hidden once the template's parameter fields are shown above.</small>
+                            </div>
+                        </div>
+                        <label class="switch-field" style="margin-bottom: 4px;">
+                            <input type="checkbox" id="editRuleEnabled" class="switch-input">
+                            <span class="switch"></span>
+                            <span class="switch-label">Rule enabled</span>
+                        </label>
+                        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                            <button type="button" class="btn-secondary" onclick="closeModal('editRuleModal')">Cancel</button>
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal: Alert Details -->
+            <div id="alertDetailsModal" class="modal-backdrop" style="display: none;">
+                <div class="glass-panel modal-content" style="max-width: 560px; width: 90%; margin: auto; padding: 28px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">
+                        <h3 style="font-size: 20px; font-weight: 700;"><i class='bx bx-bell'></i> Alert Details</h3>
+                        <button type="button" onclick="closeAlertDetails()" style="background: none; border: none; color: var(--text-muted-dark); font-size: 24px; cursor: pointer;">&times;</button>
+                    </div>
+                    <span class="pill pill-danger" id="ad-severity">Critical</span>
+                    <dl class="alert-details-list" id="alert-details-list"></dl>
+                    <div style="display: flex; gap: 12px; margin-top: 20px;">
+                        <a class="btn-ghost" id="ad-telemetry-link" href="cloud_telemetry.html" style="flex: 1; justify-content: center;"><i class='bx bx-line-chart'></i> View Telemetry</a>
+                        <a class="btn-primary" id="ad-rule-link" href="cloud_rules.html" style="flex: 1; justify-content: center;"><i class='bx bx-git-branch'></i> Go to Rule</a>
+                    </div>
                 </div>
             </div>
 
@@ -211,12 +400,15 @@
 
     <!-- Scripts -->
     <script src="js/validation.js"></script>
+    <script src="js/format.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/cloud.js"></script>
     <script src="js/ui.js"></script>
     <script>
         let allDevices = [];
+        let allProjects = [];
+        let loadedRules = [];
         // Set false when the account's plan excludes the rule engine.
         let ruleEngineAllowed = true;
 
@@ -224,10 +416,75 @@
             await checkRuleEngineEntitlement();
             await initDeviceFilter();
             await loadRules();
-            
+
+            // Bug 7 — the project filter cascades the device options; both filters
+            // re-fetch and re-group the rule list (and the KPI counts) on change.
+            const projFilter = document.getElementById('ruleProjectFilter');
+            if (projFilter) projFilter.addEventListener('change', () => { rebuildRuleDeviceOptions(); loadRules(); });
+            const devFilter = document.getElementById('deviceSelectFilter');
+            if (devFilter) devFilter.addEventListener('change', () => loadRules());
+
+            // Rule-list filters.
+            const ruleSearch = document.getElementById('rule-search');
+            if (ruleSearch) ruleSearch.addEventListener('input', loadRules);
+            const ruleStatus = document.getElementById('ruleStatusFilter');
+            if (ruleStatus) ruleStatus.addEventListener('change', loadRules);
+
+            // Alert History filters.
+            const alertSearch = document.getElementById('alert-search');
+            if (alertSearch) alertSearch.addEventListener('input', () => { alertPage = 1; applyAlertFilters(); });
+            ['alertSeverityFilter', 'alertRuleFilter'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('change', () => { alertPage = 1; applyAlertFilters(); });
+            });
+            const alertExport = document.getElementById('alertExportBtn');
+            if (alertExport) {
+                alertExport.addEventListener('click', () => {
+                    if (!alertRows.length) { showToast('No alerts to export.', 'warning'); return; }
+                    const headers = ['Time', 'Severity', 'Device', 'Sensor', 'Message', 'Rule', 'Status'];
+                    const rows = alertRows.map(a => [
+                        `"${new Date(a.triggered_at || a.created_at || a.recorded_at || Date.now()).toISOString()}"`,
+                        `"${alertSeverity(a)}"`,
+                        `"${a.device_name || a.deviceName || a.device_id || ''}"`,
+                        `"${a.sensor_name || a.sensor || ''}"`,
+                        `"${(a.message || a.detail || a.alert_message || '').toString().replace(/"/g, "'")}"`,
+                        `"${a.rule_name || a.ruleName || ''}"`,
+                        `"${a.status || ''}"`
+                    ]);
+                    const csv = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+                    const link = document.createElement('a');
+                    link.setAttribute('href', encodeURI(csv));
+                    link.setAttribute('download', 'alert_history.csv');
+                    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+                });
+            }
+
+            // Tabs: Rules view vs Alert History view.
+            const ruleTabs = document.querySelectorAll('[data-rule-tab]');
+            ruleTabs.forEach(tab => tab.addEventListener('click', () => {
+                ruleTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const showRules = tab.dataset.ruleTab === 'rules';
+                document.getElementById('rules-view').style.display = showRules ? '' : 'none';
+                document.getElementById('history-view').style.display = showRules ? 'none' : '';
+                const exp = document.getElementById('alertExportBtn');
+                if (exp) exp.style.display = showRules ? 'none' : 'inline-flex';
+                if (!showRules) loadAlertHistory();
+            }));
+
+            // Prime the alert-centric KPIs (Triggered / Acknowledged) without
+            // switching tabs.
+            loadAlertHistory();
+
             const form = document.getElementById('createRuleForm');
             OmniTeqValidator.bindLiveValidation(form);
             form.addEventListener('submit', handleCreateRule);
+
+            const editForm = document.getElementById('editRuleForm');
+            if (editForm) {
+                OmniTeqValidator.bindLiveValidation(editForm);
+                editForm.addEventListener('submit', handleEditRule);
+            }
         });
 
         // The rule engine is a paid entitlement. Without this check a plan that
@@ -239,6 +496,7 @@
                 if (!res || !res.success || !res.data) return;
                 if (res.data.rule_engine_enabled === false) {
                     ruleEngineAllowed = false;
+                    setEngineStatus('locked');
                     const btn = document.getElementById('createRuleBtn');
                     if (btn) {
                         btn.disabled = true;
@@ -258,30 +516,50 @@
             }
         }
 
+        // Bug 6 — reflect the automation engine status in the page header pill.
+        function setEngineStatus(mode) {
+            const pill = document.getElementById('rulesEngineStatus');
+            if (!pill) return;
+            if (mode === 'locked') {
+                pill.className = 'status-pill is-locked';
+                pill.title = 'The rule engine is not included in your current plan';
+                pill.innerHTML = '<span class="status-dot"></span> <span class="status-text">Locked</span>';
+            } else {
+                pill.className = 'status-pill is-active';
+                pill.title = 'Automation engine status';
+                pill.innerHTML = '<span class="status-dot"></span> <span class="status-text">Active</span>';
+            }
+        }
+
         async function initDeviceFilter() {
             try {
                 const projs = await api.projects.list();
+                allProjects = (projs.success && Array.isArray(projs.data)) ? projs.data : [];
                 allDevices = [];
-                const selectEl = document.getElementById('deviceSelectFilter');
-                const targetDevEl = document.getElementById('ruleTargetDevice');
 
-                if (projs.success) {
-                    for (let p of projs.data) {
-                        const devs = await api.devices.list(p.id);
-                        if (devs.success) {
-                            devs.data.forEach(d => allDevices.push({ ...d, project_name: p.name }));
-                        }
+                for (let p of allProjects) {
+                    const devs = await api.devices.list(p.id);
+                    if (devs.success) {
+                        devs.data.forEach(d => allDevices.push({ ...d, project_id: p.id, project_name: p.name }));
                     }
                 }
 
-                if (allDevices.length === 0) {
-                    selectEl.innerHTML = '<option value="">No devices found</option>';
-                    targetDevEl.innerHTML = '<option value="">No devices found</option>';
-                    return;
+                const projectSelect = document.getElementById('ruleProjectFilter');
+                const targetDevEl = document.getElementById('ruleTargetDevice');
+
+                // The Create-Rule modal always offers every device.
+                if (targetDevEl) {
+                    targetDevEl.innerHTML = allDevices.length
+                        ? allDevices.map(d => `<option value="${d.id}">${escapeHtml(d.name)} (${escapeHtml(d.project_name)})</option>`).join('')
+                        : '<option value="">No devices found</option>';
                 }
 
-                selectEl.innerHTML = allDevices.map((d, idx) => `<option value="${d.id}" ${idx===0?'selected':''}>${d.name} (${d.project_name})</option>`).join('');
-                targetDevEl.innerHTML = allDevices.map(d => `<option value="${d.id}">${d.name} (${d.project_name})</option>`).join('');
+                if (projectSelect) {
+                    projectSelect.innerHTML = '<option value="all">All Projects</option>' +
+                        allProjects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                }
+
+                rebuildRuleDeviceOptions();
 
                 if (allDevices.length > 0) {
                     loadDeviceVariablesForModal(allDevices[0].id);
@@ -291,10 +569,129 @@
             }
         }
 
-        async function loadDeviceVariablesForModal(deviceId) {
-            const varSelect = document.getElementById('ruleTargetVariable');
-            const cmdSelect = document.getElementById('ruleCommandTemplate');
-            varSelect.innerHTML = '<option value="">Loading variables...</option>';
+        // Device options cascade from the selected project.
+        function rebuildRuleDeviceOptions() {
+            const projectSelect = document.getElementById('ruleProjectFilter');
+            const deviceSelect = document.getElementById('deviceSelectFilter');
+            if (!deviceSelect) return;
+            const pid = projectSelect ? projectSelect.value : 'all';
+            const keep = deviceSelect.value || 'all';
+            const scoped = allDevices.filter(d => pid === 'all' || d.project_id === pid);
+            deviceSelect.innerHTML = '<option value="all">All Devices</option>' +
+                scoped.map(d => `<option value="${d.id}">${escapeHtml(d.name)} (${escapeHtml(d.project_name)})</option>`).join('');
+            deviceSelect.value = (keep !== 'all' && scoped.some(d => d.id === keep)) ? keep : 'all';
+        }
+
+        // Command templates keyed by id, so a rule dialog can render one typed
+        // value field per parameter of the selected template.
+        const ruleTemplateCache = {};
+
+        function ruleNormalizeParamType(type) {
+            const t = String(type === null || type === undefined ? '' : type).trim().toLowerCase();
+            if (t === 'int' || t === 'integer' || t === 'long' || t === 'short') return 'integer';
+            if (t === 'float' || t === 'double' || t === 'number' || t === 'decimal') return 'float';
+            if (t === 'bool' || t === 'boolean') return 'boolean';
+            return 'string';
+        }
+
+        function ruleTemplateParams(tplId) {
+            const tpl = ruleTemplateCache[tplId];
+            if (!tpl) return [];
+            let params = tpl.parameters;
+            if (params === undefined || params === null) params = tpl.params || tpl.command_parameters;
+            if (typeof params === 'string') {
+                try { params = JSON.parse(params); } catch (e) { params = []; }
+            }
+            return Array.isArray(params) ? params : [];
+        }
+
+        // Render typed inputs for a rule dialog's selected command template.
+        // `prefix` is 'rule' (Create) or 'editRule' (Edit) and names the field ids.
+        function renderRuleCommandParamFields(templateSelectId, containerId, prefix) {
+            const sel = document.getElementById(templateSelectId);
+            const container = document.getElementById(containerId);
+            const jsonWrap = document.getElementById(prefix + 'CommandParamsJsonWrap');
+            if (!sel || !container) return;
+
+            const params = ruleTemplateParams(sel.value);
+            if (!params.length) {
+                container.innerHTML = '';
+                if (jsonWrap) jsonWrap.style.display = '';
+                return;
+            }
+
+            container.innerHTML = params.map(p => {
+                const type = ruleNormalizeParamType(p.param_type);
+                const requiredStar = p.is_required ? '*' : '';
+                const label = `${escapeHtml(p.param_name)} ${requiredStar} (${escapeHtml(p.param_type || type)})`;
+                const reqAttr = p.is_required ? 'data-required="1"' : 'data-required="0"';
+                const labelStyle = 'display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;';
+                if (type === 'boolean') {
+                    const defFalse = p.default_value === false || String(p.default_value).toLowerCase() === 'false' || String(p.default_value) === '0';
+                    return `<div style="margin-bottom: 10px;">
+                        <label style="${labelStyle}">${label}</label>
+                        <select class="styled-select rule-cmd-param" data-name="${escapeHtml(p.param_name)}" data-type="boolean" ${reqAttr}>
+                            <option value="true"${defFalse ? '' : ' selected'}>true</option>
+                            <option value="false"${defFalse ? ' selected' : ''}>false</option>
+                        </select>
+                    </div>`;
+                }
+                const inputType = (type === 'integer' || type === 'float') ? 'number' : 'text';
+                // step="any" so float params accept decimals (number inputs default
+                // to step=1, whose native validation rejects values like 25.4).
+                const stepAttr = inputType === 'number' ? (type === 'integer' ? ' step="1"' : ' step="any"') : '';
+                const hasDefault = p.default_value !== null && p.default_value !== undefined && p.default_value !== '';
+                return `<div style="margin-bottom: 10px;">
+                    <label style="${labelStyle}">${label}</label>
+                    <input type="${inputType}"${stepAttr} class="styled-select rule-cmd-param" data-name="${escapeHtml(p.param_name)}" data-type="${type}" ${reqAttr} placeholder="${hasDefault ? '' : (p.is_required ? 'Required' : 'Optional')}" value="${hasDefault ? escapeHtml(String(p.default_value)) : ''}">
+                </div>`;
+            }).join('');
+            // The typed fields replace the raw JSON box while they are shown.
+            if (jsonWrap) jsonWrap.style.display = 'none';
+        }
+        window.renderRuleCommandParamFields = renderRuleCommandParamFields;
+
+        // Read the typed rule parameter fields. Returns:
+        //   undefined -> no typed fields rendered (caller should fall back to JSON)
+        //   null      -> validation failed (caller should abort)
+        //   object    -> the parameters, coerced to their declared JSON types
+        function collectRuleCommandParams(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return undefined;
+            const inputs = container.querySelectorAll('.rule-cmd-param');
+            if (!inputs.length) return undefined;
+            const parameters = {};
+            for (const input of inputs) {
+                const name = input.getAttribute('data-name');
+                const type = ruleNormalizeParamType(input.getAttribute('data-type'));
+                const isRequired = input.getAttribute('data-required') === '1';
+                const raw = String(input.value === null || input.value === undefined ? '' : input.value).trim();
+                if (!raw) {
+                    if (isRequired) { showToast(`Command value "${name}" is required.`, 'error'); input.focus(); return null; }
+                    continue;
+                }
+                if (type === 'integer') {
+                    if (!/^-?\d+$/.test(raw)) { showToast(`Command value "${name}" must be a whole number.`, 'error'); input.focus(); return null; }
+                    parameters[name] = parseInt(raw, 10);
+                } else if (type === 'float') {
+                    const num = Number(raw);
+                    if (!isFinite(num)) { showToast(`Command value "${name}" must be a number.`, 'error'); input.focus(); return null; }
+                    parameters[name] = num;
+                } else if (type === 'boolean') {
+                    parameters[name] = raw.toLowerCase() === 'true' || raw === '1' || raw.toLowerCase() === 'on';
+                } else {
+                    parameters[name] = raw;
+                }
+            }
+            return parameters;
+        }
+
+        async function loadDeviceVariablesForModal(deviceId, varSelectId, cmdSelectId) {
+            // Defaults target the Create-Rule dialog; the Edit-Rule dialog passes
+            // its own element ids so both dialogs can share one loader.
+            const varSelect = document.getElementById(varSelectId || 'ruleTargetVariable');
+            const cmdSelect = document.getElementById(cmdSelectId || 'ruleCommandTemplate');
+            if (varSelect) varSelect.innerHTML = '<option value="">Loading variables...</option>';
 
             try {
                 const sensors = await api.sensors.list(deviceId);
@@ -308,74 +705,476 @@
                     }
                 }
 
-                if (varsList.length === 0) {
-                    varSelect.innerHTML = '<option value="">No variables found for this device</option>';
-                } else {
-                    varSelect.innerHTML = varsList.map(v => `<option value="${v.id}">${v.label} [Sensor: ${v.sensor_name}]</option>`).join('');
+                if (varSelect) {
+                    if (varsList.length === 0) {
+                        varSelect.innerHTML = '<option value="">No variables found for this device</option>';
+                    } else {
+                        varSelect.innerHTML = varsList.map(v => `<option value="${v.id}">${escapeHtml(v.label)} [Sensor: ${escapeHtml(v.sensor_name)}]</option>`).join('');
+                    }
                 }
 
                 // Load commands
                 const cmds = await api.commands.list(deviceId);
-                if (cmds.success && cmds.data.length > 0) {
-                    cmdSelect.innerHTML = cmds.data.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-                } else {
-                    cmdSelect.innerHTML = '<option value="">No command templates found</option>';
+                if (cmdSelect) {
+                    if (cmds.success && cmds.data.length > 0) {
+                        cmds.data.forEach(c => { if (c && c.id) ruleTemplateCache[c.id] = c; });
+                        cmdSelect.innerHTML = '<option value="">Select command template...</option>' +
+                            cmds.data.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+                    } else {
+                        cmdSelect.innerHTML = '<option value="">No command templates found</option>';
+                    }
+                    // Rebuild the typed parameter fields for whichever dialog owns
+                    // this select, so switching device/template refreshes them.
+                    if (cmdSelectId === 'editRuleCommandTemplate') {
+                        renderRuleCommandParamFields('editRuleCommandTemplate', 'editRuleCommandParamFields', 'editRule');
+                    } else {
+                        renderRuleCommandParamFields('ruleCommandTemplate', 'ruleCommandParamFields', 'rule');
+                    }
                 }
             } catch (e) {
-                varSelect.innerHTML = '<option value="">Error loading variables</option>';
+                if (varSelect) varSelect.innerHTML = '<option value="">Error loading variables</option>';
             }
         }
 
-        async function loadRules() {
-            const deviceId = document.getElementById('deviceSelectFilter').value;
-            const grid = document.getElementById('rules-grid');
+        // Bug 6 — one consistent status pill for both the card and the header.
+        // Row kebab menu (design actions column).
+        function toggleRowMenu(evt, menuId) {
+            evt.stopPropagation();
+            const menu = document.getElementById(menuId);
+            const isOpen = menu && menu.style.display !== 'none';
+            closeRowMenus();
+            if (menu && !isOpen) {
+                if (window.omniAnchorRowMenu) window.omniAnchorRowMenu(menu, evt.currentTarget);
+                else menu.style.display = 'block';
+            }
+        }
+        function closeRowMenus() {
+            if (window.omniCloseRowMenus) { window.omniCloseRowMenus(); return; }
+            document.querySelectorAll('.row-menu').forEach(m => { m.style.display = 'none'; });
+        }
+        document.addEventListener('click', closeRowMenus);
 
-            if (!deviceId || allDevices.length === 0) {
-                grid.innerHTML = `
-                    <div class="glass-panel" style="padding: 40px; text-align: center; color: var(--text-muted-dark); grid-column: 1/-1;">
-                        <i class='bx bx-git-branch' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
-                        No devices found in your account.<br>
-                        <a href="cloud_device_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Register a device</a> to configure automation rules.
-                    </div>
-                `;
+        function ruleStatusPill(enabled) {
+            return `<span class="pill ${enabled ? 'pill-success' : 'pill-danger'}">${enabled ? 'Active' : 'Inactive'}</span>`;
+        }
+
+        // Small icon chip per rule, chosen from the rule name / sensor.
+        function ruleIcon(r) {
+            const s = ((r.name || '') + ' ' + (r._sensorName || '')).toLowerCase();
+            if (s.includes('temp')) return { icon: 'bxs-thermometer', bg: 'b-red' };
+            if (s.includes('batt')) return { icon: 'bxs-battery', bg: 'b-amber' };
+            if (s.includes('humid')) return { icon: 'bxs-droplet', bg: 'b-blue' };
+            if (s.includes('offline')) return { icon: 'bx-wifi-off', bg: 'b-gray' };
+            if (s.includes('current')) return { icon: 'bx-line-chart', bg: 'b-purple' };
+            if (s.includes('air')) return { icon: 'bx-wind', bg: 'b-blue' };
+            if (s.includes('motion')) return { icon: 'bx-run', bg: 'b-amber' };
+            if (s.includes('signal')) return { icon: 'bx-signal-5', bg: 'b-gray' };
+            return { icon: 'bx-git-branch', bg: 'b-blue' };
+        }
+
+        function conditionText(r) {
+            const op = r.operator || '';
+            const th = (r.threshold !== undefined && r.threshold !== null) ? r.threshold : '';
+            return `${op} ${th} ${r._unit || ''}`.replace(/\s+/g, ' ').trim() || '—';
+        }
+
+        function actionsText(r) {
+            const map = {
+                send_alert: 'Email, Webhook',
+                reject_fake_data: 'Reject Data',
+                log_anomaly: 'Log Warning',
+                dispatch_command: 'Dispatch Command',
+                alert: 'Email, Webhook'
+            };
+            return map[r.action_type] || (r.action_type || 'Email, Webhook');
+        }
+
+        function ruleTableRow(r) {
+            const ic = ruleIcon(r);
+            const last = r.last_triggered_at || r.last_triggered || r.lastTriggered;
+            const lastStr = last ? new Date(last).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+            const sensor = r._sensorName || r._variableLabel || '';
+            return `
+                <tr>
+                    <td class="col-check"><input type="checkbox" class="table-check rule-row-check" value="${r.id}"></td>
+                    <td><div class="rule-name-cell"><span class="rule-icon ${ic.bg}"><i class='bx ${ic.icon}'></i></span><strong>${escapeHtml(r.name || 'Rule')}</strong></div></td>
+                    <td><div class="cell-strong">${escapeHtml(r._deviceName || '—')}${sensor ? `<span class="cell-sub">/ ${escapeHtml(sensor)}</span>` : ''}</div></td>
+                    <td><code class="cond-code">${escapeHtml(conditionText(r))}</code></td>
+                    <td>${escapeHtml(actionsText(r))}</td>
+                    <td>${ruleStatusPill(!!r.enabled)}</td>
+                    <td>${escapeHtml(lastStr)}</td>
+                    <td class="col-actions" style="position: relative;">
+                        <button class="kebab-btn" onclick="toggleRowMenu(event, 'rule-menu-${r.id}')" title="Actions"><i class='bx bx-dots-vertical-rounded'></i></button>
+                        <div class="row-menu" id="rule-menu-${r.id}" style="display:none;">
+                            <button onclick="editRule('${r.id}'); closeRowMenus();"><i class='bx bx-edit'></i> Edit Rule</button>
+                            <button onclick="viewRuleLogs('${r.id}'); closeRowMenus();"><i class='bx bx-history'></i> View Logs</button>
+                            <button class="danger" onclick="deleteRule('${r.id}'); closeRowMenus();"><i class='bx bx-trash'></i> Delete Rule</button>
+                        </div>
+                    </td>
+                </tr>`;
+        }
+
+        function updateRuleKpis(rules) {
+            const total = rules.length;
+            const active = rules.filter(r => r.enabled).length;
+            const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+            set('rules-total-count', total);
+            set('rules-active-count', active);
+            set('rules-active-pct', total ? Math.round(active / total * 100).toFixed(1) + '%' : '0%');
+        }
+
+        async function loadRules() {
+            const body = document.getElementById('rules-table-body');
+            const projectSelect = document.getElementById('ruleProjectFilter');
+            const deviceSelect = document.getElementById('deviceSelectFilter');
+            const pid = projectSelect ? projectSelect.value : 'all';
+            const did = deviceSelect ? deviceSelect.value : 'all';
+            const statusEl = document.getElementById('ruleStatusFilter');
+            const status = statusEl ? statusEl.value : 'all';
+            const searchEl = document.getElementById('rule-search');
+            const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+
+            if (allDevices.length === 0) {
+                updateRuleKpis([]);
+                body.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    No devices found in your account.<br>
+                    <a href="cloud_device_add.html" style="color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 8px; display: inline-block;">Register a device</a> to configure automation rules.
+                </td></tr>`;
+                return;
+            }
+
+            const targets = allDevices.filter(d =>
+                (pid === 'all' || d.project_id === pid) &&
+                (did === 'all' || d.id === did));
+
+            try {
+                const aggregated = [];
+                for (const dev of targets) {
+                    const res = await api.rules.list(dev.id);
+                    if (res && res.success && Array.isArray(res.data)) {
+                        res.data.forEach(r => aggregated.push({
+                            ...r,
+                            _deviceId: dev.id,
+                            _deviceName: dev.name,
+                            _projectId: dev.project_id,
+                            _projectName: dev.project_name
+                        }));
+                    }
+                }
+                updateRuleKpis(aggregated);
+                loadedRules = aggregated;
+
+                let rows = aggregated;
+                if (status !== 'all') rows = rows.filter(r => (!!r.enabled) === (status === 'active'));
+                if (q) rows = rows.filter(r =>
+                    (r.name || '').toLowerCase().includes(q) ||
+                    (r._deviceName || '').toLowerCase().includes(q));
+
+                if (rows.length === 0) {
+                    body.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                        No rules match the selected filters. Click "Create Rule" to define alert thresholds and automated actions.
+                    </td></tr>`;
+                    return;
+                }
+
+                body.innerHTML = rows.map(ruleTableRow).join('');
+                const selectAll = document.getElementById('ruleSelectAll');
+                if (selectAll) {
+                    selectAll.checked = false;
+                    selectAll.onchange = () => document.querySelectorAll('.rule-row-check').forEach(c => { c.checked = selectAll.checked; });
+                }
+            } catch (e) {
+                console.error("Failed to load rules:", e);
+                showToast("Failed to load rules. " + (e.message || ''), 'error');
+            }
+        }
+
+        // -------- Alert History tab --------
+        const ALERTS_PAGE_SIZE = 10;
+        let alertRows = [];
+        let alertPage = 1;
+
+        function alertSeverity(a) {
+            const s = String(a.severity || a.level || '').toLowerCase();
+            if (s.includes('crit')) return 'critical';
+            if (s.includes('warn')) return 'warning';
+            if (s.includes('info')) return 'info';
+            const st = String(a.status || '').toLowerCase();
+            if (st.includes('active')) return 'critical';
+            return 'info';
+        }
+
+        function severityPill(sev) {
+            const map = { critical: ['pill-danger', 'Critical'], warning: ['pill-warning', 'Warning'], info: ['pill-info', 'Info'] };
+            const m = map[sev] || map.info;
+            return `<span class="pill ${m[0]}">${m[1]}</span>`;
+        }
+
+        async function loadAlertHistory() {
+            const body = document.getElementById('alert-history-body');
+            if (!body) return;
+            try {
+                const res = await api.alerts.history(1, 100);
+                alertRows = (res && res.success && Array.isArray(res.data)) ? res.data : [];
+
+                const counts = { critical: 0, warning: 0, info: 0 };
+                alertRows.forEach(a => { counts[alertSeverity(a)]++; });
+                const setK = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+                setK('alerts-total-count', alertRows.length);
+                setK('alerts-critical-count', counts.critical);
+                setK('alerts-warning-count', counts.warning);
+                setK('alerts-info-count', counts.info);
+                // Rule-list KPIs that are alert-centric.
+                setK('rules-triggered-count', alertRows.filter(a => String(a.status || '').toLowerCase().includes('active')).length);
+                setK('rules-ack-count', alertRows.filter(a => String(a.status || '').toLowerCase().includes('resolv') || String(a.status || '').toLowerCase().includes('ack')).length);
+
+                const ruleFilter = document.getElementById('alertRuleFilter');
+                if (ruleFilter) {
+                    const rules = [...new Set(alertRows.map(a => a.rule_name || a.ruleName).filter(Boolean))];
+                    ruleFilter.innerHTML = '<option value="all">All Rules</option>' + rules.map(r => `<option>${escapeHtml(String(r))}</option>`).join('');
+                }
+                alertPage = 1;
+                applyAlertFilters();
+            } catch (e) {
+                body.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 30px; color: var(--text-secondary);">Alert history is unavailable right now.</td></tr>`;
+            }
+        }
+
+        function applyAlertFilters() {
+            // Row indices change with the filter, so close any open details panel.
+            closeAlertDetails();
+            const q = (document.getElementById('alert-search')?.value || '').trim().toLowerCase();
+            const sev = document.getElementById('alertSeverityFilter')?.value || 'all';
+            const rule = document.getElementById('alertRuleFilter')?.value || 'all';
+            let rows = alertRows;
+            if (sev !== 'all') rows = rows.filter(a => alertSeverity(a) === sev);
+            if (rule !== 'all') rows = rows.filter(a => String(a.rule_name || a.ruleName || '') === rule);
+            if (q) rows = rows.filter(a => JSON.stringify(a).toLowerCase().includes(q));
+            renderAlertTable(rows);
+        }
+
+        function renderAlertTable(rows) {
+            const body = document.getElementById('alert-history-body');
+            const info = document.getElementById('alert-pagination-info');
+            const pager = document.getElementById('alert-pagination');
+            const totalPages = Math.max(1, Math.ceil(rows.length / ALERTS_PAGE_SIZE));
+            if (alertPage > totalPages) alertPage = totalPages;
+            const start = (alertPage - 1) * ALERTS_PAGE_SIZE;
+            const pageRows = rows.slice(start, start + ALERTS_PAGE_SIZE);
+
+            if (rows.length === 0) {
+                body.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 30px; color: var(--text-secondary);">No alerts match the filters.</td></tr>`;
+            } else {
+                body.innerHTML = pageRows.map((a, i) => {
+                    const sev = alertSeverity(a);
+                    const when = a.triggered_at || a.created_at || a.recorded_at;
+                    const time = when ? new Date(when).toLocaleString() : '—';
+                    const device = a.device_name || a.deviceName || a.device_id || 'Device';
+                    const sensor = a.sensor_name || a.sensor || a.variable_label || '';
+                    const msg = a.message || a.detail || a.alert_message || '—';
+                    const rname = a.rule_name || a.ruleName || '—';
+                    const st = String(a.status || '').toLowerCase();
+                    const pill = (st.includes('resolv') || st.includes('ack')) ? '<span class="pill pill-success">Resolved</span>' : '<span class="pill pill-danger">Active</span>';
+                    const idx = start + i;
+                    return `<tr class="alert-row" data-idx="${idx}" style="cursor: pointer;">
+                        <td>${idx + 1}</td>
+                        <td>${escapeHtml(time)}</td>
+                        <td>${severityPill(sev)}</td>
+                        <td><div class="cell-strong">${escapeHtml(String(device))}${sensor ? `<span class="cell-sub">/ ${escapeHtml(String(sensor))}</span>` : ''}</div></td>
+                        <td>${escapeHtml(String(msg))}</td>
+                        <td>${escapeHtml(String(rname))}</td>
+                        <td>${pill}</td>
+                        <td class="col-actions"><button class="kebab-btn" onclick="event.stopPropagation(); openAlertDetails(${idx})" title="View details"><i class='bx bx-dots-vertical-rounded'></i></button></td>
+                    </tr>`;
+                }).join('');
+                body.querySelectorAll('.alert-row').forEach(tr => tr.addEventListener('click', () => openAlertDetails(Number(tr.dataset.idx))));
+            }
+
+            if (info) info.textContent = rows.length ? `Showing ${start + 1} to ${Math.min(start + ALERTS_PAGE_SIZE, rows.length)} of ${rows.length} alerts` : 'Showing 0 alerts';
+            if (pager) {
+                pager.innerHTML = '';
+                const prev = document.createElement('button');
+                prev.className = 'page-btn'; prev.innerHTML = '<i class="bx bx-chevron-left"></i>'; prev.disabled = alertPage <= 1;
+                prev.onclick = () => { alertPage--; renderAlertTable(rows); };
+                pager.appendChild(prev);
+                for (let p = 1; p <= totalPages; p++) {
+                    const b = document.createElement('button');
+                    b.className = 'page-btn' + (p === alertPage ? ' active' : '');
+                    b.textContent = p;
+                    b.onclick = () => { alertPage = p; renderAlertTable(rows); };
+                    pager.appendChild(b);
+                }
+                const next = document.createElement('button');
+                next.className = 'page-btn'; next.innerHTML = '<i class="bx bx-chevron-right"></i>'; next.disabled = alertPage >= totalPages;
+                next.onclick = () => { alertPage++; renderAlertTable(rows); };
+                pager.appendChild(next);
+            }
+        }
+
+        function openAlertDetails(idx) {
+            const a = alertRows[idx];
+            if (!a) return;
+            const list = document.getElementById('alert-details-list');
+            const sev = alertSeverity(a);
+            const sevEl = document.getElementById('ad-severity');
+            if (sevEl) {
+                sevEl.className = `pill ${sev === 'critical' ? 'pill-danger' : sev === 'warning' ? 'pill-warning' : 'pill-info'}`;
+                sevEl.textContent = sev.charAt(0).toUpperCase() + sev.slice(1);
+            }
+            const when = a.triggered_at || a.created_at || a.recorded_at;
+            const rows = [
+                ['Time', when ? new Date(when).toLocaleString() : '—'],
+                ['Message', a.message || a.detail || a.alert_message || '—'],
+                ['Device', a.device_name || a.deviceName || a.device_id || '—'],
+                ['Sensor', a.sensor_name || a.sensor || '—'],
+                ['Project', a.project_name || a.projectName || '—'],
+                ['Rule', a.rule_name || a.ruleName || '—'],
+                ['Threshold', a.threshold !== undefined && a.threshold !== null ? a.threshold : '—'],
+                ['Actual Value', a.value !== undefined && a.value !== null ? a.value : (a.actual_value !== undefined ? a.actual_value : '—')],
+                ['Status', a.status || '—'],
+                ['Notification', a.action_type || a.notification || 'Email, Webhook'],
+                ['Description', a.description || a.alert_message || '—']
+            ];
+            list.innerHTML = rows.map(([k, v]) => `<div><dt>${escapeHtml(String(k))}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join('');
+            openModal('alertDetailsModal');
+        }
+
+        function closeAlertDetails() {
+            if (typeof closeModal === 'function') closeModal('alertDetailsModal');
+        }
+        window.closeAlertDetails = closeAlertDetails;
+
+        // Open the edit dialog prefilled from the loaded rule. The dialog mirrors
+        // Create Rule (device, variable, action-type fields), so the device and
+        // variable options are (re)loaded for the rule's own device before the
+        // current values are selected.
+        async function editRule(ruleId) {
+            const r = loadedRules.find(x => x.id === ruleId);
+            if (!r) { showToast('Rule not found. Refresh and try again.', 'warning'); return; }
+
+            document.getElementById('editRuleId').value = r.id;
+            document.getElementById('editRuleName').value = r.name || '';
+            document.getElementById('editRuleOperator').value = r.operator || '>';
+            document.getElementById('editRuleThreshold').value = (r.threshold !== undefined && r.threshold !== null) ? r.threshold : '';
+            document.getElementById('editRuleActionType').value = r.action_type || 'send_alert';
+            document.getElementById('editRuleAlertMessage').value = r.alert_message || '';
+            document.getElementById('editRuleEnabled').checked = !!r.enabled;
+
+            const devSel = document.getElementById('editRuleTargetDevice');
+            if (devSel) {
+                devSel.innerHTML = '<option value="">Select a device...</option>' +
+                    allDevices.map(d => `<option value="${d.id}">${escapeHtml(d.name)} (${escapeHtml(d.project_name)})</option>`).join('');
+                devSel.value = r._deviceId || '';
+            }
+
+            const paramsInput = document.getElementById('editRuleCommandParams');
+            if (paramsInput) {
+                const p = r.parameters || r.action_parameters || r.command_parameters;
+                paramsInput.value = (p && typeof p === 'object') ? JSON.stringify(p) : (typeof p === 'string' ? p : '');
+            }
+
+            toggleEditActionFields(r.action_type || 'send_alert');
+            openModal('editRuleModal');
+
+            if (r._deviceId) {
+                await loadDeviceVariablesForModal(r._deviceId, 'editRuleTargetVariable', 'editRuleCommandTemplate');
+                const varSel = document.getElementById('editRuleTargetVariable');
+                if (varSel && r.variable_id) varSel.value = r.variable_id;
+                const cmdSel = document.getElementById('editRuleCommandTemplate');
+                const tpl = r.template_id || r.command_template_id;
+                if (cmdSel && tpl) cmdSel.value = tpl;
+                // Rebuild the typed parameter fields for the rule's own template
+                // and prefill them from the stored parameters.
+                renderRuleCommandParamFields('editRuleCommandTemplate', 'editRuleCommandParamFields', 'editRule');
+                const storedParams = r.parameters || r.action_parameters || r.command_parameters;
+                if (storedParams && typeof storedParams === 'object') {
+                    document.querySelectorAll('#editRuleCommandParamFields .rule-cmd-param').forEach(input => {
+                        const name = input.getAttribute('data-name');
+                        if (!Object.prototype.hasOwnProperty.call(storedParams, name)) return;
+                        const val = storedParams[name];
+                        if (input.getAttribute('data-type') === 'boolean') {
+                            input.value = (val === true || String(val).toLowerCase() === 'true' || String(val) === '1') ? 'true' : 'false';
+                        } else {
+                            input.value = String(val);
+                        }
+                    });
+                }
+            }
+        }
+        window.editRule = editRule;
+
+        async function handleEditRule(e) {
+            e.preventDefault();
+            const ruleId = document.getElementById('editRuleId').value;
+            const nameInput = document.getElementById('editRuleName');
+            const deviceId = (document.getElementById('editRuleTargetDevice') || {}).value || '';
+            const variable_id = (document.getElementById('editRuleTargetVariable') || {}).value || '';
+            const operator = document.getElementById('editRuleOperator').value;
+            const threshInput = document.getElementById('editRuleThreshold');
+            const action_type = document.getElementById('editRuleActionType').value;
+            const alert_message = document.getElementById('editRuleAlertMessage').value;
+            const template_id = (document.getElementById('editRuleCommandTemplate') || {}).value || '';
+            const paramsRaw = (document.getElementById('editRuleCommandParams') || {}).value || '';
+            const enabled = document.getElementById('editRuleEnabled').checked;
+
+            const nameVal = OmniTeqValidator.validateText(nameInput.value, 'Rule Name', 3);
+            if (!nameVal.valid) { OmniTeqValidator.markFieldError(nameInput, nameVal.error); showToast(nameVal.error, 'error'); return; }
+            const threshold = parseFloat(threshInput.value);
+            if (isNaN(threshold) || !isFinite(threshold)) { OmniTeqValidator.markFieldError(threshInput, 'Threshold must be a valid number.'); showToast('Threshold must be a valid number.', 'error'); return; }
+            if (!variable_id) { showToast('Please select a target variable.', 'error'); return; }
+
+            let parameters;
+            if (action_type === 'dispatch_command') {
+                if (!template_id) { showToast('Please select a command template to dispatch.', 'error'); return; }
+                const typed = collectRuleCommandParams('editRuleCommandParamFields');
+                if (typed === null) return;                 // validation failed
+                if (typed !== undefined) {
+                    parameters = typed;
+                } else {
+                    try { parameters = parseCommandParams(paramsRaw); }
+                    catch (err) { showToast(err.message, 'error'); return; }
+                }
+            }
+
+            // PUT /rules/:ruleId takes a partial update ("send only what changes").
+            // Build a diff against the loaded rule so unchanged fields are never
+            // re-sent, and use `action_parameters` (not `parameters`) for commands.
+            const original = loadedRules.find(x => x.id === ruleId) || {};
+            const payload = {};
+            const nextVariable = variable_id || original.variable_id;
+
+            if (nameVal.value !== original.name) payload.name = nameVal.value;
+            if (nextVariable && nextVariable !== original.variable_id) payload.variable_id = nextVariable;
+            if (operator !== original.operator) payload.operator = operator;
+            if (threshold !== original.threshold) payload.threshold = threshold;
+            if (action_type !== original.action_type) payload.action_type = action_type;
+            if (enabled !== original.enabled) payload.enabled = enabled;
+
+            if (action_type === 'dispatch_command') {
+                if (template_id && template_id !== original.template_id) payload.template_id = template_id;
+                const nextParams = (parameters && Object.keys(parameters).length) ? parameters : null;
+                const prevParams = (original.action_parameters && Object.keys(original.action_parameters).length) ? original.action_parameters : null;
+                if (nextParams && JSON.stringify(nextParams) !== JSON.stringify(prevParams)) {
+                    payload.action_parameters = nextParams;
+                }
+            } else if (alert_message && alert_message !== original.alert_message) {
+                payload.alert_message = alert_message;
+            }
+
+            if (!Object.keys(payload).length) {
+                showToast('No changes to save.', 'info');
                 return;
             }
 
             try {
-                const res = await api.rules.list(deviceId);
-                if (!res.success || res.data.length === 0) {
-                    grid.innerHTML = `
-                        <div class="glass-panel" style="padding: 40px; text-align: center; color: var(--text-muted-dark); grid-column: 1/-1;">
-                            <i class='bx bx-cog' style="font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.5;"></i>
-                            No automation rules configured for this device yet.<br>
-                            Click "Create Rule" above to define alert thresholds and automated actions.
-                        </div>
-                    `;
-                    return;
-                }
-
-                grid.innerHTML = res.data.map(r => `
-                    <div class="stat-card glass-panel" style="flex-direction: column; gap: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                            <span class="badge ${r.enabled ? 'b-green' : 'b-gray'}">${r.enabled ? 'Active' : 'Disabled'}</span>
-                            <div style="display: flex; gap: 8px;">
-                                <button onclick="viewRuleLogs('${r.id}')" class="icon-btn" title="View Logs"><i class='bx bx-history'></i></button>
-                                <button onclick="deleteRule('${r.id}')" class="icon-btn" style="color: #ef4444;" title="Delete Rule"><i class='bx bx-trash'></i></button>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">${r.name}</h3>
-                            <p style="font-size: 13px; color: var(--text-muted-light); margin-bottom: 12px;">Condition: <code>Value ${r.operator} ${r.threshold}</code></p>
-                            <div style="font-size: 12px; color: var(--text-muted-dark); background: rgba(255,255,255,0.04); padding: 10px; border-radius: 8px;">
-                                <strong>Action:</strong> ${r.action_type === 'send_alert' ? 'Send Alert Notification' : r.action_type === 'reject_fake_data' ? 'Reject Outlier & Fake Data' : r.action_type === 'log_anomaly' ? 'Log Data Anomaly Warning' : 'Dispatch Command'}<br>
-                                ${r.alert_message ? `<em>"${r.alert_message}"</em>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) {
-                console.error("Failed to load rules:", e);
-                showToast("Failed to load rules. " + (e.message || ''), 'error');
+                const res = await api.rules.update(ruleId, payload);
+                if (res && res.success === false) throw new Error((res.error && res.error.message) || 'Update refused by the gateway.');
+                showToast('Rule updated.', 'success');
+                closeModal('editRuleModal');
+                await loadRules();
+            } catch (err) {
+                console.error('Rule update failed:', err);
+                showToast('Failed to update rule: ' + ((err && err.error && err.error.message) || (err && err.message) || 'unknown error'), 'error');
             }
         }
 
@@ -384,12 +1183,42 @@
                 showToast('The rule engine is not included in your current plan. Upgrade in Settings to create rules.', 'warning');
                 return;
             }
+            // Reset the action-type-dependent fields to the current selection so
+            // the dialog reopens in a consistent state.
+            const typeSel = document.getElementById('ruleActionType');
+            if (typeSel) toggleActionFields(typeSel.value);
             openModal('createRuleModal');
         }
 
         function toggleActionFields(type) {
             document.getElementById('alertFields').style.display = (type === 'send_alert' || type === 'reject_fake_data' || type === 'log_anomaly') ? 'block' : 'none';
             document.getElementById('commandFields').style.display = type === 'dispatch_command' ? 'block' : 'none';
+            // Refresh the parameter fields when the template step becomes visible.
+            if (type === 'dispatch_command') renderRuleCommandParamFields('ruleCommandTemplate', 'ruleCommandParamFields', 'rule');
+        }
+
+        // Same field switching for the Edit-Rule dialog.
+        function toggleEditActionFields(type) {
+            const alert = document.getElementById('editAlertFields');
+            const cmd = document.getElementById('editCommandFields');
+            if (alert) alert.style.display = (type === 'send_alert' || type === 'reject_fake_data' || type === 'log_anomaly') ? 'block' : 'none';
+            if (cmd) cmd.style.display = type === 'dispatch_command' ? 'block' : 'none';
+            if (type === 'dispatch_command') renderRuleCommandParamFields('editRuleCommandTemplate', 'editRuleCommandParamFields', 'editRule');
+        }
+
+        // Parse the "Command Value (JSON)" field. Returns {} for an empty field.
+        // Throws on invalid JSON or a non-object so callers can surface a clear
+        // error instead of sending a malformed payload.
+        function parseCommandParams(raw) {
+            const text = (raw || '').trim();
+            if (!text) return {};
+            let parsed;
+            try { parsed = JSON.parse(text); }
+            catch (e) { throw new Error('Command Value must be valid JSON, e.g. {"pumpState": false}'); }
+            if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
+                throw new Error('Command Value must be a JSON object, e.g. {"pumpState": false}');
+            }
+            return parsed;
         }
 
         async function handleCreateRule(e) {
@@ -402,6 +1231,7 @@
             const action_type = document.getElementById('ruleActionType').value;
             const alert_message = document.getElementById('ruleAlertMessage').value;
             const template_id = document.getElementById('ruleCommandTemplate').value;
+            const paramsRaw = (document.getElementById('ruleCommandParams') || {}).value || '';
 
             const nameVal = OmniTeqValidator.validateText(nameInput.value, 'Rule Name', 3);
             if (!nameVal.valid) {
@@ -427,18 +1257,43 @@
                 return;
             }
 
+            let commandParameters;
+            if (action_type === 'dispatch_command') {
+                if (!template_id) { showToast('Please select a command template to dispatch.', 'error'); return; }
+                const typed = collectRuleCommandParams('ruleCommandParamFields');
+                if (typed === null) return;                 // validation failed
+                if (typed !== undefined) {
+                    commandParameters = typed;
+                } else {
+                    try { commandParameters = parseCommandParams(paramsRaw); }
+                    catch (err) { showToast(err.message, 'error'); return; }
+                }
+            }
+
+            // Payload matches the documented POST /devices/:deviceId/rules schema:
+            //   dispatch_command -> template_id + action_parameters
+            //   alert actions    -> alert_channels (required) + optional alert_message
+            // `enabled` is not accepted on create (the gateway defaults it to true),
+            // and the command-values field is `action_parameters`, not `parameters`.
+            const payload = {
+                name: nameVal.value,
+                variable_id,
+                operator,
+                threshold,
+                action_type
+            };
+            if (action_type === 'dispatch_command') {
+                payload.template_id = template_id;
+                if (commandParameters && Object.keys(commandParameters).length) {
+                    payload.action_parameters = commandParameters;
+                }
+            } else {
+                payload.alert_channels = ['email'];
+                if (alert_message) payload.alert_message = alert_message;
+            }
+
             try {
-                const res = await api.rules.create(deviceId, {
-                    name: nameVal.value,
-                    variable_id,
-                    operator,
-                    threshold,
-                    action_type,
-                    alert_message,
-                    template_id: action_type === 'dispatch_command' ? template_id : undefined,
-                    alert_channels: ['email'],
-                    enabled: true
-                });
+                const res = await api.rules.create(deviceId, payload);
 
                 if (res.success) {
                     showToast('Rule created successfully!', 'success');
@@ -478,10 +1333,10 @@
                 const res = await api.rules.logs(ruleId);
                 if (res.success && res.data.length > 0) {
                     listEl.innerHTML = res.data.map(l => `
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <div style="background: var(--surface-inset); border: 1px solid var(--border-light); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
                             <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted-dark); margin-bottom: 4px;">
                                 <span>${new Date(l.triggered_at).toLocaleString()}</span>
-                                <span class="badge b-green">${l.action_result}</span>
+                                <span class="status-pill ${String(l.action_result || '').toLowerCase().includes('success') || String(l.action_result || '').toLowerCase().includes('ok') ? 'is-active' : 'is-disabled'}"><span class="status-dot"></span> ${escapeHtml(l.action_result)}</span>
                             </div>
                             <div style="font-size: 14px; font-weight: 600;">Triggered Value: ${l.variable_value}</div>
                             <div style="font-size: 12px; color: var(--text-muted-light);">${l.detail}</div>

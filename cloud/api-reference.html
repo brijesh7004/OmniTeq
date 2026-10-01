@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -23,6 +23,24 @@
     --font: system-ui, -apple-system, sans-serif;
     --mono: 'Menlo', 'Consolas', monospace;
   }
+  /* Dark theme — aligned with the OmniTeq Cloud palette. */
+  html[data-theme="dark"] {
+    --bg: #0B1120;
+    --surface: #111827;
+    --border: #263244;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+    --accent: #0EA5E9;
+    --code-bg: #0E1626;
+    --get: #34D399; --get-bg: rgba(52, 211, 153, 0.12);
+    --post: #38BDF8; --post-bg: rgba(56, 189, 248, 0.12);
+    --put: #FBBF24; --put-bg: rgba(251, 191, 36, 0.14);
+    --del: #F87171; --del-bg: rgba(248, 113, 113, 0.12);
+    --patch: #F472B6; --patch-bg: rgba(244, 114, 182, 0.14);
+  }
+  html[data-theme="dark"] .b-ws { background: rgba(139, 92, 246, 0.16); color: #A78BFA; }
+  html[data-theme="dark"] .tag-auth { background: rgba(139, 92, 246, 0.16); color: #A78BFA; }
+  html[data-theme="dark"] .tag-no-auth { background: rgba(148, 163, 184, 0.14); color: #94A3B8; }
   body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; display: flex; min-height: 100vh; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
@@ -132,8 +150,10 @@
 </style>
 <!-- Gateway endpoints come from js/config.js so this page can never drift from
      the rest of the console. Edit the host there, not here. -->
+<script src="js/format.js"></script>
 <script src="js/config.js"></script>
-</head>
+    <script>(function(){try{var t=localStorage.getItem('theme')||'light';var e=document.documentElement;e.setAttribute('data-theme',t);e.classList.toggle('dark-theme',t==='dark');e.style.colorScheme=t;}catch(err){}})();</script>
+
 <body>
 
 <nav>
@@ -843,7 +863,7 @@
       <span class="json-key">"device_id"</span>: <span class="json-str">"dev_01HXKN6D5E7F8G9H0J1K2L3M"</span>,
       <span class="json-key">"name"</span>: <span class="json-str">"DS18B20"</span>,
       <span class="json-key">"description"</span>: <span class="json-str">"Waterproof digital temperature sensor"</span>,
-      <span class="json-key">"unit"</span>: <span class="json-str">"Â°C"</span>,
+      <span class="json-key">"unit"</span>: <span class="json-str">"°C"</span>,
       <span class="json-key">"variable_count"</span>: <span class="json-num">1</span>,
       <span class="json-key">"created_at"</span>: <span class="json-str">"2025-01-23T11:00:00Z"</span>
     },
@@ -883,7 +903,7 @@
           <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
           <tr><td class="param-name">name</td><td class="param-type">string</td><td><span class="required">required</span></td><td>Sensor model or identifier name</td></tr>
           <tr><td class="param-name">description</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Human-readable description</td></tr>
-          <tr><td class="param-name">unit</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Physical unit e.g. <code>Â°C</code>, <code>hPa</code>, <code>%</code></td></tr>
+          <tr><td class="param-name">unit</td><td class="param-type">string</td><td><span class="optional">optional</span></td><td>Physical unit e.g. <code>°C</code>, <code>hPa</code>, <code>%</code></td></tr>
         </table>
       </div>
       <div class="tab-panel" data-tab="response">
@@ -1365,7 +1385,7 @@
     <span class="json-key">"variable_id"</span>: <span class="json-str">"var_01HXKT1J0K2L3M4N5P6Q7R8S"</span>,
     <span class="json-key">"label"</span>: <span class="json-str">"temperature"</span>,
     <span class="json-key">"data_type"</span>: <span class="json-str">"float"</span>,
-    <span class="json-key">"unit"</span>: <span class="json-str">"Â°C"</span>,
+    <span class="json-key">"unit"</span>: <span class="json-str">"°C"</span>,
     <span class="json-key">"readings"</span>: [
       { <span class="json-key">"value"</span>: <span class="json-num">24.3</span>, <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:00:00Z"</span> },
       { <span class="json-key">"value"</span>: <span class="json-num">24.5</span>, <span class="json-key">"recorded_at"</span>: <span class="json-str">"2025-04-30T18:05:00Z"</span> },
@@ -1476,7 +1496,7 @@
   <div class="section-title" id="ws">Real-time WebSocket Events</div>
   <div class="info-box">
     Connect to <code><span data-endpoint="ws"></span>?token=&lt;access_token&gt;</code>. After connecting, subscribe to a device's feed. All messages are JSON with a <code>type</code> field.
-    <br><br><strong>Deployment note:</strong> the reference gateway currently does not expose a <code>/ws</code> route, so real-time push is unavailable and the console loads data on demand. These frames describe the intended contract.
+    <br><br><strong>Deployment note:</strong> the reference gateway does not expose a <code>/ws</code> route. The console therefore falls back automatically to the v3.0 Server-Sent Events live streams (<code>POST /live/ticket</code>, then <code>GET /live/devices/:deviceId/stream?ticket=…</code>) and normalises their <code>snapshot</code> / <code>status</code> / <code>reading</code> events into the frames described below. When no live transport can connect, the page reloads once (with a cooldown) to retry.
   </div>
 
   <div class="ws-card">

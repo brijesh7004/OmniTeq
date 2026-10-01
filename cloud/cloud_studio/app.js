@@ -1,4 +1,4 @@
-﻿/**
+/**
  * IoT Cloud Studio - Main Application Engine v2.4
  * Handles state management, dynamic UI rendering, multi-step page wizard,
  * dedicated modal catalogs for adding sensors/actuators/rules, GPIO conflict checking,
@@ -14,8 +14,8 @@
 //     pin: 4,
 //     varTemp: "temperature",
 //     varHum: "humidity",
-//     unitTemp: "Â°C",
-//     unitHum: "%",
+//     unitTemp: "°C",
+//     unitHum: "%RH",
 //     readInterval: 2000
 //   },
 //   {
@@ -848,7 +848,7 @@ const SENSOR_CATALOG = [
     type: "mpu6050",
     name: "Acceleration sensors",
     defaultPin: 21,
-    unit: "m/sÂ²",
+    unit: "m/s²",
     defaultVar: "accelMagnitude",
     interval: 250,
     desc: "MPU6050 6-Axis motion tracking sensor with 3-axis accelerometer and 3-axis gyroscope over I2C.",
@@ -897,10 +897,10 @@ const SENSOR_CATALOG = [
     type: "dht22",
     name: "DHT22 Climate Sensor",
     defaultPin: 4,
-    unit: "Â°C / %",
+    unit: "°C / %RH",
     defaultVar: "temperature",
     interval: 2000,
-    desc: "Digital temperature (-40~80Â°C) & relative humidity (0~100%). Single-bus digital protocol.",
+    desc: "Digital temperature (-40~80°C) & relative humidity (0~100%). Single-bus digital protocol.",
     interface: "1-Wire Digital",
     signalType: "digital_input",
     isAnalog: false,
@@ -912,10 +912,10 @@ const SENSOR_CATALOG = [
     type: "dht11",
     name: "DHT11 Basic Sensor",
     defaultPin: 4,
-    unit: "Â°C / %",
+    unit: "°C / %RH",
     defaultVar: "roomTemp",
     interval: 2000,
-    desc: "Entry-level ambient temperature (0~50Â°C) and humidity (20~80%) monitor.",
+    desc: "Entry-level ambient temperature (0~50°C) and humidity (20~80%) monitor.",
     interface: "1-Wire Digital",
     signalType: "digital_input",
     isAnalog: false,
@@ -1167,7 +1167,7 @@ const ACTUATOR_CATALOG = [
     id: "servo",
     category: "motors",
     type: "servo",
-    name: "SG90 Micro Servo (0-180Â°)",
+    name: "SG90 Micro Servo (0-180°)",
     defaultPin: 14,
     defaultState: "0",
     defaultVar: "servoAngle",
@@ -1228,6 +1228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // "New Setup" rebuilds from this snapshot.
   captureStudioDefaults();
 
+  initStudioTheme();
   initProjectInputs();
   initControllerSelector();
   initDeviceIdentity();
@@ -1239,6 +1240,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   initRuleHandlers();
   initTabs();
   initTopActions();
+  initBackButton();
+  initJsonHint();
   initViewModeSwitcher();
   initModalCatalogs();
 
@@ -1465,7 +1468,7 @@ function getSensorConditionModel(sensor) {
     return {
       isDigital: false,
       variables: [
-        { id: "temperature", name: "Temperature", varName: sensor.varTemp || "temperature", unit: sensor.unitTemp || "Â°C", defaultThresh: 30.0, step: 0.5 },
+        { id: "temperature", name: "Temperature", varName: sensor.varTemp || "temperature", unit: sensor.unitTemp || "°C", defaultThresh: 30.0, step: 0.5 },
         { id: "humidity", name: "Humidity", varName: sensor.varHum || "humidity", unit: sensor.unitHum || "%", defaultThresh: 60.0, step: 1 }
       ]
     };
@@ -1475,7 +1478,7 @@ function getSensorConditionModel(sensor) {
       isDigital: false,
       variables: [
         { id: "baroPressure", name: "Barometric Pressure", varName: sensor.varPress || "baroPress", unit: "hPa", defaultThresh: 1013.2, step: 1 },
-        { id: "baroTemp", name: "Temperature", varName: sensor.varTemp || "baroTemp", unit: "Â°C", defaultThresh: 28.0, step: 0.5 }
+        { id: "baroTemp", name: "Temperature", varName: sensor.varTemp || "baroTemp", unit: "°C", defaultThresh: 28.0, step: 0.5 }
       ]
     };
   }
@@ -1529,7 +1532,7 @@ function getSensorConditionModel(sensor) {
       isDigital: false,
       defaultOp: ">",
       variables: [
-        { id: "accelMagnitude", name: "Acceleration Magnitude", varName: sensor.varVal || "accelMagnitude", unit: "m/sÂ²", defaultThresh: 12.0, step: 0.5 }
+        { id: "accelMagnitude", name: "Acceleration Magnitude", varName: sensor.varVal || "accelMagnitude", unit: "m/s²", defaultThresh: 12.0, step: 0.5 }
       ]
     };
   }
@@ -1609,14 +1612,14 @@ function getActuatorActionModel(actuator) {
   if (t === "servo") {
     return {
       category: "servo",
-      unit: "Â°",
+      unit: "°",
       options: [
-        { value: "0", label: "Position 0Â° (Closed / Minimum)" },
-        { value: "45", label: "Position 45Â°" },
-        { value: "90", label: "Position 90Â° (Half-Open / Neutral)" },
-        { value: "135", label: "Position 135Â°" },
-        { value: "180", label: "Position 180Â° (Fully Open)" },
-        { value: "custom", label: "Custom Position (0-180Â°)..." }
+        { value: "0", label: "Position 0° (Closed / Minimum)" },
+        { value: "45", label: "Position 45°" },
+        { value: "90", label: "Position 90° (Half-Open / Neutral)" },
+        { value: "135", label: "Position 135°" },
+        { value: "180", label: "Position 180° (Fully Open)" },
+        { value: "custom", label: "Custom Position (0-180°)..." }
       ],
       defaultCustomVal: 90
     };
@@ -1628,8 +1631,8 @@ function getActuatorActionModel(actuator) {
       options: [
         { value: "1000", label: "Rotate Forward (+1000 steps)" },
         { value: "-1000", label: "Rotate Reverse (-1000 steps)" },
-        { value: "2048", label: "Full 360Â° Revolution (+2048 steps)" },
-        { value: "1024", label: "Half 180Â° Turn (+1024 steps)" },
+        { value: "2048", label: "Full 360° Revolution (+2048 steps)" },
+        { value: "1024", label: "Half 180° Turn (+1024 steps)" },
         { value: "0", label: "Stop / Hold Position (0 steps)" },
         { value: "custom", label: "Custom Step Count..." }
       ],
@@ -1668,10 +1671,15 @@ function getActuatorActionModel(actuator) {
  */
 function initModalCatalogs() {
   // Modal Open Buttons
-  document.getElementById("btn-open-add-sensor-page").addEventListener("click", () => {
+  const openSensorCatalog = () => {
     populateSensorCatalogGrid("all");
     populateSensorPinSelect();
     openModal("modal-add-sensor");
+  };
+  // The header button and the Bug 9 guidance button both open the catalog.
+  ["btn-open-add-sensor-page", "btn-open-add-sensor-page-guide"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", openSensorCatalog);
   });
 
   document.getElementById("btn-open-add-actuator-page").addEventListener("click", () => {
@@ -2096,13 +2104,13 @@ function getSensorCloudVariables(item) {
   const t = item ? item.type : "";
   if (t === "dht22" || t === "dht11") {
     return [
-      { role: "Temperature", label: "temperature", dataType: "float", unit: "Â°C" },
+      { role: "Temperature", label: "temperature", dataType: "float", unit: "°C" },
       { role: "Humidity", label: "humidity", dataType: "float", unit: "%" }
     ];
   }
   if (t === "bmp280") {
     return [
-      { role: "Temperature", label: "baroTemp", dataType: "float", unit: "Â°C" },
+      { role: "Temperature", label: "baroTemp", dataType: "float", unit: "°C" },
       { role: "Pressure", label: "baroPress", dataType: "float", unit: "hPa" }
     ];
   }
@@ -2394,7 +2402,7 @@ function updateModalRuleActionFields() {
         </select>
       </div>
       <div class="form-group" id="modal-rule-custom-servo-group" style="display: none;">
-        <label for="modal-rule-custom-act-val">Custom Position Angle (0-180Â°)</label>
+        <label for="modal-rule-custom-act-val">Custom Position Angle (0-180°)</label>
         <input type="number" min="0" max="180" id="modal-rule-custom-act-val" class="form-control" value="${actModel.defaultCustomVal || 90}">
       </div>
     `;
@@ -2793,37 +2801,92 @@ function collectUrlContext(search) {
   return overrides;
 }
 
+/**
+ * Fetch a project's authoritative identity from the gateway using the stored
+ * JWT. Kept as a plain fetch (not js/api.js) so a 401 here cannot trigger the API
+ * client's refresh-and-redirect flow from inside the studio. Resolves to null
+ * when config, token, connectivity or the response shape is unavailable.
+ */
+async function fetchProjectFromGateway(projectId) {
+  if (!projectId) return null;
+  const cfg = window.OMNITEQ_CONFIG;
+  if (!cfg || typeof cfg.resolve !== "function") return null;
+  let token = null;
+  try { token = localStorage.getItem("access_token"); } catch (e) { /* private mode */ }
+  if (!token) return null;
+  try {
+    const res = await fetch(`${cfg.resolve().apiBaseUrl}/projects/${encodeURIComponent(projectId)}`,
+      { headers: { Authorization: `Bearer ${token}` } });
+    if (!res.ok) return null;
+    const body = await res.json().catch(() => null);
+    return body && body.success && body.data ? body.data : null;
+  } catch (e) {
+    console.warn("[Studio] Project lookup skipped:", e && e.message);
+    return null;
+  }
+}
+
+async function fetchProjectDevicesFromGateway(projectId) {
+  if (!projectId) return [];
+  const cfg = window.OMNITEQ_CONFIG;
+  if (!cfg || typeof cfg.resolve !== "function") return [];
+  let token = null;
+  try { token = localStorage.getItem("access_token"); } catch (e) { /* private mode */ }
+  if (!token) return [];
+  try {
+    const res = await fetch(`${cfg.resolve().apiBaseUrl}/projects/${encodeURIComponent(projectId)}/devices`,
+      { headers: { Authorization: `Bearer ${token}` } });
+    if (!res.ok) return [];
+    const body = await res.json().catch(() => null);
+    return body && body.success && Array.isArray(body.data) ? body.data : [];
+  } catch (e) {
+    return [];
+  }
+}
+
 async function prefillProjectFromContext() {
   const params = new URLSearchParams(window.location.search);
 
   // Values supplied by the calling page must win over a locally restored
   // session, so they are collected first and re-applied after the merge.
   const urlOverrides = collectUrlContext(params);
+  const wantedProjectId = urlOverrides.projectId || "";
+  const wantedDeviceId = urlOverrides.deviceId || "";
 
   Object.assign(state.project, urlOverrides);
 
-  // Restore the last studio session for this browser. Peripheral assignments are
-  // only reused when the same device is being edited, because a different node
-  // has different pins, variables and command templates.
+  // Restore the last studio session for this browser. A session that belongs to
+  // a *different* project is never merged: the calling page asked for this
+  // project, and reusing another project's node identity (plus its sensors and
+  // rules) was the source of the "opens the wrong / blank project" defect.
+  // Peripheral assignments are only reused when the same device is being edited.
   try {
     const saved = localStorage.getItem("omniteq_studio_state");
     if (saved && !params.get("fresh")) {
       const parsed = JSON.parse(saved);
-      if (parsed && parsed.project) state.project = { ...state.project, ...parsed.project };
+      const savedProjectId = parsed && parsed.project ? (parsed.project.projectId || "") : "";
+      const projectMismatch = !!(wantedProjectId && savedProjectId && wantedProjectId !== savedProjectId);
 
-      const savedDeviceId = parsed && parsed.project ? parsed.project.deviceId : null;
-      const sameDevice = !urlOverrides.deviceId || !savedDeviceId || urlOverrides.deviceId === savedDeviceId;
-
-      if (sameDevice) {
-        if (Array.isArray(parsed.sensors)) state.sensors = parsed.sensors;
-        if (Array.isArray(parsed.actuators)) state.actuators = parsed.actuators;
-        if (Array.isArray(parsed.commands)) state.commands = parsed.commands;
-        if (Array.isArray(parsed.cloudRules)) state.cloudRules = parsed.cloudRules;
-        if (Array.isArray(parsed.rules)) state.rules = parsed.rules;
-        if (parsed.controller) state.controller = parsed.controller;
-        if (parsed.failsafePolicy) state.failsafePolicy = parsed.failsafePolicy;
+      if (projectMismatch) {
+        console.info("[Studio] Requested project differs from the cached session; starting from the requested project.");
+        clearSavedSession();
       } else {
-        console.info("[Studio] Loaded a different device from the URL; peripheral assignments were not reused.");
+        if (parsed && parsed.project) state.project = { ...state.project, ...parsed.project };
+
+        const savedDeviceId = parsed && parsed.project ? parsed.project.deviceId : null;
+        const sameDevice = !wantedDeviceId || !savedDeviceId || wantedDeviceId === savedDeviceId;
+
+        if (sameDevice) {
+          if (Array.isArray(parsed.sensors)) state.sensors = parsed.sensors;
+          if (Array.isArray(parsed.actuators)) state.actuators = parsed.actuators;
+          if (Array.isArray(parsed.commands)) state.commands = parsed.commands;
+          if (Array.isArray(parsed.cloudRules)) state.cloudRules = parsed.cloudRules;
+          if (Array.isArray(parsed.rules)) state.rules = parsed.rules;
+          if (parsed.controller) state.controller = parsed.controller;
+          if (parsed.failsafePolicy) state.failsafePolicy = parsed.failsafePolicy;
+        } else {
+          console.info("[Studio] Loaded a different device from the URL; peripheral assignments were not reused.");
+        }
       }
     }
   } catch (e) {
@@ -2832,6 +2895,31 @@ async function prefillProjectFromContext() {
 
   // Device identity from the URL always wins, whatever the saved session held.
   Object.assign(state.project, urlOverrides);
+
+  // Load the authoritative project identity from the gateway when the calling
+  // page passed a project id. Without this the studio only had whatever the
+  // query string happened to carry, so a project-level deep link could render
+  // blank or stale details.
+  if (wantedProjectId) {
+    const project = await fetchProjectFromGateway(wantedProjectId);
+    if (project) {
+      if (!state.project.name) state.project.name = project.name || "";
+      if (!state.project.location) state.project.location = project.location || "";
+      state.project.projectName = project.name || state.project.projectName || "";
+
+      // When the calling page did not name a device, adopt the project's sole
+      // device so the generated firmware targets a real node immediately.
+      if (!state.project.deviceId) {
+        const devices = await fetchProjectDevicesFromGateway(wantedProjectId);
+        if (devices.length === 1) {
+          state.project.deviceId = devices[0].id || "";
+          if (!state.project.name) state.project.name = devices[0].name || "";
+        } else if (devices.length > 1) {
+          console.info(`[Studio] Project has ${devices.length} devices; open a device to bind node identity.`);
+        }
+      }
+    }
+  }
 
   // Board-derived identity: fills the detected board, build settings and (when
   // still empty or auto-generated) the MAC for the current controller.
@@ -2883,21 +2971,24 @@ function clearSavedSession() {
  */
 function hasRestorableSession(saved, urlOverrides) {
   if (!saved) return false;
+
+  const savedProjectId = (saved.project && saved.project.projectId) || "";
+  const wantedProjectId = (urlOverrides && urlOverrides.projectId) || "";
+
+  // A different project was requested: the cached session is unrelated, so it
+  // must not be offered (that prompt led into another project's data). The
+  // requested project is loaded directly instead.
+  if (savedProjectId && wantedProjectId && savedProjectId !== wantedProjectId) return false;
+
   const hasPeripherals = ["sensors", "actuators", "commands", "cloudRules", "rules"]
     .some((key) => Array.isArray(saved[key]) && saved[key].length > 0);
   if (hasPeripherals) return true;
 
   const savedDevice = (saved.project && saved.project.deviceId) || "";
   const wantedDevice = (urlOverrides && urlOverrides.deviceId) || "";
-  const savedProjectId = (saved.project && saved.project.projectId) || "";
-  const wantedProjectId = (urlOverrides && urlOverrides.projectId) || "";
 
   // Same project, different node: the cached setup belongs to another device.
   if (savedDevice && !/^YOUR_/i.test(savedDevice) && wantedDevice && wantedDevice !== savedDevice) return true;
-
-  // Different project entirely: the cached node is not part of the project the
-  // calling page opened, so the user should decide.
-  if (savedProjectId && wantedProjectId && savedProjectId !== wantedProjectId) return true;
 
   return false;
 }
@@ -3065,6 +3156,30 @@ function syncProjectInputsToState() {
   }
 
   updateDeviceIdentityUI();
+  updateStudioProjectChip();
+}
+
+/**
+ * PHASE 4 — show the active project/device context in the studio header so the
+ * user can tell at a glance which project they are generating firmware for.
+ */
+function updateStudioProjectChip() {
+  const chip = document.getElementById("studio-project-chip");
+  if (!chip) return;
+  const p = state.project || {};
+  const projectLabel = p.projectName || "";
+  const deviceLabel = (p.name && p.name !== p.projectName) ? p.name : "";
+  const primary = projectLabel || deviceLabel || p.name || "";
+  if (!primary) { chip.style.display = "none"; return; }
+  const nameEl = chip.querySelector(".spc-name");
+  const metaEl = chip.querySelector(".spc-meta");
+  if (nameEl) nameEl.textContent = primary;
+  if (metaEl) {
+    if (projectLabel && deviceLabel) metaEl.textContent = `· ${deviceLabel}`;
+    else if (p.deviceId && !/^YOUR_/i.test(p.deviceId)) metaEl.textContent = `· device ${String(p.deviceId).slice(0, 8)}…`;
+    else metaEl.textContent = "";
+  }
+  chip.style.display = "inline-flex";
 }
 
 /**
@@ -3218,7 +3333,7 @@ function addSensorFromPreset(presetKey) {
     newSensor.dataTypeHum = "float";
     newSensor.uuidTemp = "YOUR_TEMPERATURE_VARIABLE_UUID";
     newSensor.uuidHum = "YOUR_HUMIDITY_VARIABLE_UUID";
-    newSensor.unitTemp = "Â°C";
+    newSensor.unitTemp = "°C";
     newSensor.unitHum = "%";
   } else if (preset.type === "bmp280") {
     newSensor.varTemp = `baroTemp_${state.sensors.length + 1}`;
@@ -3227,7 +3342,7 @@ function addSensorFromPreset(presetKey) {
     newSensor.dataTypePress = "float";
     newSensor.uuidTemp = "YOUR_TEMPERATURE_VARIABLE_UUID";
     newSensor.uuidPress = "YOUR_PRESSURE_VARIABLE_UUID";
-    newSensor.unitTemp = "Â°C";
+    newSensor.unitTemp = "°C";
     newSensor.unitPress = "hPa";
   } else {
     newSensor.varVal = `${preset.defaultVar || "val"}_${state.sensors.length + 1}`;
@@ -3326,7 +3441,7 @@ function sensorIsProvisioned(sensor) {
  * exercised end to end before sensors are wired.
  */
 const RANDOM_MODE_LABELS = {
-  uniform: "Uniform random (min â†’ max)",
+  uniform: "Uniform random (min → max)",
   walk: "Random walk (drift from last value)",
   sine: "Sine wave (smooth oscillation)",
   ramp: "Ramp / counter (step each cycle)",
@@ -3384,10 +3499,10 @@ function describeRandomConfig(sensor) {
   if (!rc.enabled) return "";
   if (rc.mode === "boolean") return `Random boolean every ${Math.round(rc.intervalMs / 1000)}s`;
   if (rc.mode === "string") return `Random entry from ${rc.values.split(",").length} value(s)`;
-  if (rc.mode === "walk") return `Random walk ${rc.min}â€¦${rc.max} (Â±${rc.step}/cycle)`;
-  if (rc.mode === "sine") return `Sine ${rc.min}â€¦${rc.max} over ${rc.periodSec}s`;
-  if (rc.mode === "ramp") return `Ramp ${rc.min}â†’${rc.max} step ${rc.step}`;
-  return `Uniform ${rc.min}â€¦${rc.max} (${rc.precision} dp)`;
+  if (rc.mode === "walk") return `Random walk ${rc.min}…${rc.max} (±${rc.step}/cycle)`;
+  if (rc.mode === "sine") return `Sine ${rc.min}…${rc.max} over ${rc.periodSec}s`;
+  if (rc.mode === "ramp") return `Ramp ${rc.min}→${rc.max} step ${rc.step}`;
+  return `Uniform ${rc.min}…${rc.max} (${rc.precision} dp)`;
 }
 
 /**
@@ -3408,9 +3523,9 @@ function sensorSlotRowHtml(sensor, slot, index) {
         <input type="text" class="item-var-input" value="${escapeHtmlText(key)}" data-action="${keyAction}" data-id="${sensor.id}" title="${escapeHtmlText(slot.role)} telemetry key (${escapeHtmlText(slot.dataType)})">
       </div>
       <div class="field-row">
-        <span class="field-label" title="Server-issued cloud variable UUID â€” read only">ID</span>
+        <span class="field-label" title="Server-issued cloud variable UUID — read only">ID</span>
         <input type="text" class="item-uuid-input" readonly value="${escapeHtmlText(entry.value || "")}" placeholder="server-issued on push" data-action="noop" data-id="${sensor.id}" title="variable_id issued by POST /sensors/:sensorId/variables">
-        <button type="button" class="btn-copy-mini ${isProvisioned ? "" : "is-empty"}" data-action="copy-variable-id" data-id="${sensor.id}" data-slot="${index}" title="${isProvisioned ? "Copy variable_id" : "Not issued yet â€” push this sensor to the cloud"}">ðŸ“‹</button>
+        <button type="button" class="btn-copy-mini ${isProvisioned ? "" : "is-empty"}" data-action="copy-variable-id" data-id="${sensor.id}" data-slot="${index}" title="${isProvisioned ? "Copy variable_id" : "Not issued yet — push this sensor to the cloud"}">📋</button>
       </div>
     </div>
   `;
@@ -3514,21 +3629,21 @@ function pinControlHtmlForSensor(sensor, catalogItem) {
   if (catalogItem.bus === "i2c" || sensor.signalType === "i2c") {
     return `
       <div class="fixed-bus-badge badge-i2c" title="Hardware I2C Bus: SDA ${busConfig.i2c.sda}, SCL ${busConfig.i2c.scl}">
-        <span>âš¡</span> I2C (SDA:${busConfig.i2c.sda}, SCL:${busConfig.i2c.scl})
+        <span>⚡</span> I2C (SDA:${busConfig.i2c.sda}, SCL:${busConfig.i2c.scl})
       </div>
     `;
   }
   if (catalogItem.bus === "uart" || sensor.signalType === "uart") {
     return `
       <div class="fixed-bus-badge badge-uart" title="Hardware UART: RX ${busConfig.uart.rx}, TX ${busConfig.uart.tx}">
-        <span>âš¡</span> UART (RX:${busConfig.uart.rx}, TX:${busConfig.uart.tx})
+        <span>⚡</span> UART (RX:${busConfig.uart.rx}, TX:${busConfig.uart.tx})
       </div>
     `;
   }
   if (catalogItem.type === "ultrasonic") {
     return `
       <div class="fixed-bus-badge badge-ultrasonic" title="HC-SR04 Trig/Echo">
-        <span>âš¡</span> Trig:${busConfig.ultrasonic.trig} Echo:${busConfig.ultrasonic.echo}
+        <span>⚡</span> Trig:${busConfig.ultrasonic.trig} Echo:${busConfig.ultrasonic.echo}
       </div>
     `;
   }
@@ -3590,16 +3705,16 @@ function renderSensorsList() {
           ${catalogItem.icon}
         </div>
         <div class="item-details">
-          <input type="text" class="item-name-input" value="${escapeHtmlText(sensor.name)}" data-action="update-sensor-name" data-id="${sensor.id}" placeholder="Display Name" title="Display Name â€” shown on the dashboard and used to derive the telemetry key">
+          <input type="text" class="item-name-input" value="${escapeHtmlText(sensor.name)}" data-action="update-sensor-name" data-id="${sensor.id}" placeholder="Display Name" title="Display Name — shown on the dashboard and used to derive the telemetry key">
           <div class="item-meta">
             <span>Type: <strong>${escapeHtmlText(sensor.type.toUpperCase())}</strong></span>
-            <span>â€¢</span>
+            <span>•</span>
             <span>Cloud: <strong>${escapeHtmlText(dataType)}</strong></span>
-            <span>â€¢</span>
+            <span>•</span>
             <span>Interval: <strong>${Math.round((sensor.readInterval || 2000) / 1000)}s</strong></span>
-            <span>â€¢</span>
+            <span>•</span>
             <span class="sync-chip ${provisioned ? "is-synced" : "is-unsynced"}">${provisioned ? "variable_id issued" : "awaiting push"}</span>
-            ${rc.enabled ? `<span>â€¢</span><span class="sim-chip">SIMULATED</span>` : ""}
+            ${rc.enabled ? `<span>•</span><span class="sim-chip">SIMULATED</span>` : ""}
           </div>
           ${rc.enabled ? `<div class="item-subnote">${escapeHtmlText(describeRandomConfig(sensor))}</div>` : ""}
         </div>
@@ -3609,7 +3724,7 @@ function renderSensorsList() {
             ${pinControlHtmlForSensor(sensor, catalogItem)}
 
             <div class="random-toggle-row">
-              <label class="inline-toggle" title="Generate synthetic readings instead of reading hardware â€” useful before the sensor is wired">
+              <label class="inline-toggle" title="Generate synthetic readings instead of reading hardware — useful before the sensor is wired">
                 <input type="checkbox" data-action="toggle-sensor-random" data-id="${sensor.id}" ${rc.enabled ? "checked" : ""}>
                 <span>Random Value Generator</span>
               </label>
@@ -3662,7 +3777,7 @@ function bindSensorCardEvents(container) {
     });
   });
 
-  // Telemetry Key â€” manual edit wins over the derived value from then on.
+  // Telemetry Key — manual edit wins over the derived value from then on.
   const keyBindings = [
     ["update-sensor-var", "single"],
     ["update-sensor-vartemp", "temp"],
@@ -3700,7 +3815,7 @@ function bindSensorCardEvents(container) {
       const ids = getSensorVariableIds(s);
       const entry = ids[index];
       if (!entry || !entry.value || /^YOUR_/i.test(entry.value)) {
-        showToast("No variable_id yet â€” push this sensor to the cloud first");
+        showToast("No variable_id yet — push this sensor to the cloud first");
         return;
       }
       copyTextToClipboard(entry.value, "variable_id copied");
@@ -3714,7 +3829,7 @@ function bindSensorCardEvents(container) {
       patchRandomConfig(s, { enabled: e.target.checked });
       renderSensorsList();
       updateStudio();
-      showToast(s.random.enabled ? "Random Value Generator enabled â€” firmware will emit synthetic readings" : "Random Value Generator disabled");
+      showToast(s.random.enabled ? "Random Value Generator enabled — firmware will emit synthetic readings" : "Random Value Generator disabled");
     });
   });
 
@@ -3773,18 +3888,44 @@ function bindSensorCardEvents(container) {
   container.querySelectorAll('[data-action="remove-sensor"]').forEach((el) => {
     el.addEventListener("click", async (e) => {
       const id = e.currentTarget.dataset.id;
+      const sensor = state.sensors.find((x) => x.id === id) || {};
       const linked = state.rules.filter((r) => r.sensorId === id).length;
-      const sName = (state.sensors.find((x) => x.id === id) || {}).name;
+      const sName = sensor.name;
       if (!(await StudioUI.confirm({
         title: `Remove ${sName ? "“" + sName + "”" : "this sensor"}?`,
         message: linked ? `${linked} rule(s) that use it will be removed too.` : "It will be removed from the generated firmware.",
         confirmText: "Remove", danger: true
       }))) return;
+
+      // Bug 11 — deletion must be server-authoritative. A pushed sensor has a
+      // real sensorId; delete it on the gateway first and abort the local
+      // removal if the server refuses, so it cannot "reappear" on refresh.
+      if (sensor.sensorId) {
+        el.disabled = true;
+        try {
+          await deleteSensorOnCloud(sensor.sensorId);
+        } catch (err) {
+          el.disabled = false;
+          showToast(`Cloud delete failed: ${err.message}${err.code ? ` [${err.code}]` : ""}`, "error");
+          return;
+        }
+      }
+
       state.sensors = state.sensors.filter((x) => x.id !== id);
       state.rules = state.rules.filter((r) => r.sensorId !== id);
+      // Drop any cloud-rule blueprints bound to the removed sensor as well.
+      if (Array.isArray(state.cloudRules)) {
+        state.cloudRules = state.cloudRules.filter((r) => r.sensorId !== id && r.sensor_id !== id);
+      }
+
       renderSensorsList();
       renderRulesList();
+      if (typeof renderCloudRulesList === "function") renderCloudRulesList();
+      persistStudioState();
       updateStudio();
+      // Resync the hydrated variable list so the studio does not keep variables
+      // that belonged to the deleted sensor.
+      try { await hydrateCloudVariableIds(); } catch (err) { /* best effort */ }
       showToast("Sensor removed");
     });
   });
@@ -3941,14 +4082,14 @@ function renderActuatorsList() {
     if (act.bus === "i2c" || catalogItem.bus === "i2c") {
       pinControlHtml = `
         <div class="fixed-bus-badge badge-i2c" title="Hardware I2C Bus: SDA ${busConfig.i2c.sda}, SCL ${busConfig.i2c.scl}">
-          <span>âš¡</span> I2C (SDA:${busConfig.i2c.sda}, SCL:${busConfig.i2c.scl})
+          <span>⚡</span> I2C (SDA:${busConfig.i2c.sda}, SCL:${busConfig.i2c.scl})
         </div>
       `;
     } else if (act.type === "stepper_motor") {
       const sPins = act.pins || busConfig.stepper.pins;
       pinControlHtml = `
         <div class="fixed-bus-badge badge-stepper" title="4-Wire Stepper Driver Pins: IN1:${sPins[0]}, IN2:${sPins[1]}, IN3:${sPins[2]}, IN4:${sPins[3]}">
-          <span>âš¡</span> 4-Wire (${sPins.join(", ")})
+          <span>⚡</span> 4-Wire (${sPins.join(", ")})
         </div>
       `;
     } else {
@@ -3977,11 +4118,11 @@ function renderActuatorsList() {
           <input type="text" class="item-name-input" value="${act.name}" data-action="update-actuator-name" data-id="${act.id}">
           <div class="item-meta">
             <span>Type: <strong>${act.type.toUpperCase()}</strong></span>
-            <span>â€¢</span>
+            <span>•</span>
             <span>Default: <strong>${act.defaultState}</strong></span>
-            <span>â€¢</span>
+            <span>•</span>
             <span>Param: <strong>${act.paramType || inferActuatorParamType(catalogItem)}</strong></span>
-            ${act.type === "relay" ? `<span>â€¢ Logic: <strong>${act.activeLow ? 'Active LOW' : 'Active HIGH'}</strong></span>` : ''}
+            ${act.type === "relay" ? `<span>• Logic: <strong>${act.activeLow ? 'Active LOW' : 'Active HIGH'}</strong></span>` : ''}
           </div>
         </div>
         <div class="item-controls">
@@ -4334,7 +4475,7 @@ function renderRulesList() {
         <div class="rule-header">
           <div class="rule-title-group">
             <span class="rule-tag">RULE #0${idx + 1}</span>
-            <span class="rule-name-preview">${sensorName} âž” ${actuatorName}</span>
+            <span class="rule-name-preview">${sensorName} ➔ ${actuatorName}</span>
           </div>
           <button class="btn-remove-item" data-action="remove-rule" data-id="${rule.id}" title="Remove Rule">
             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -4592,6 +4733,53 @@ async function cloudRequest(method, path, body, opts) {
   }
 
   return payload.data;
+}
+
+/**
+ * Bug 11 — delete a sensor on the gateway. Server state is authoritative, so a
+ * sensor removed in the studio must first be removed there; otherwise the next
+ * hydrate/refresh re-links it and it "reappears". A 204 or empty body counts as
+ * success; anything else throws a descriptive error. Kept as a plain fetch (like
+ * hydrateCloudVariableIds) so a 401 cannot trigger js/api.js's redirect flow.
+ */
+async function deleteSensorOnCloud(sensorId) {
+  if (!sensorId) return true;
+  const cfg = window.OMNITEQ_CONFIG;
+  if (!cfg || typeof cfg.resolve !== "function") {
+    throw new Error("Gateway configuration (js/config.js) is unavailable.");
+  }
+  let token = null;
+  try { token = localStorage.getItem("access_token"); } catch (e) { /* private mode */ }
+  if (!token) {
+    const err = new Error("Sign in to OmniTeq Cloud to delete cloud resources.");
+    err.code = "NO_SESSION";
+    throw err;
+  }
+
+  let res;
+  try {
+    res = await fetch(`${cfg.resolve().apiBaseUrl.replace(/\/+$/, "")}/sensors/${encodeURIComponent(sensorId)}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  } catch (e) {
+    const err = new Error("Cannot reach the OmniTeq gateway. Check the Cloud API Base URL and that the server is running.");
+    err.code = "NETWORK";
+    throw err;
+  }
+
+  if (res.status === 204) return true;
+  const payload = await res.json().catch(() => null);
+  if (!res.ok || (payload && payload.success === false)) {
+    const message = payload && payload.error && payload.error.message
+      ? payload.error.message
+      : `Request failed (HTTP_${res.status}).`;
+    const err = new Error(message);
+    err.code = (payload && payload.error && payload.error.code) || `HTTP_${res.status}`;
+    err.status = res.status;
+    throw err;
+  }
+  return true;
 }
 
 /** Write a section-level status line, e.g. "#sensors-push-status". */
@@ -5781,6 +5969,91 @@ function initCloudRuleHandlers() {
   renderCloudRulesList();
 }
 
+/**
+ * Resolve where the header "Back" control should send the user: the same-origin
+ * console page that opened the studio when there is one, otherwise the project
+ * view for the active project, otherwise the dashboard. history.back() is not
+ * used because a deep link opened in a new tab has no in-app history.
+ */
+function resolveConsoleReturnUrl() {
+  const fallback = (state.project && state.project.projectId)
+    ? `../cloud_project_view.html?id=${encodeURIComponent(state.project.projectId)}`
+    : "../cloud_dashboard.html";
+  try {
+    const ref = document.referrer;
+    if (ref) {
+      const u = new URL(ref);
+      if (u.origin === window.location.origin && /\/(cloud_[a-z_]+\.html)$/i.test(u.pathname)) {
+        return ref;
+      }
+    }
+  } catch (e) { /* ignore malformed referrer */ }
+  return fallback;
+}
+
+function initBackButton() {
+  const btn = document.getElementById("btn-back-console");
+  if (!btn) return;
+  const refresh = () => { btn.href = resolveConsoleReturnUrl(); };
+  refresh();
+  btn.addEventListener("click", (e) => {
+    // Modified clicks (new tab / middle click) keep native link behaviour.
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    window.location.href = resolveConsoleReturnUrl();
+  });
+  // Re-resolve once the project context has been loaded from the gateway.
+  window.addEventListener("load", refresh);
+}
+
+/**
+ * Bug 8 — dismissible JSON-backup guidance strip. The preference is stored in
+ * localStorage so the hint does not reappear on every visit.
+ */
+function initJsonHint() {
+  const hint = document.getElementById("studio-json-hint");
+  if (!hint) return;
+  const DISMISS_KEY = "omniteq_studio_json_hint_dismissed";
+  try {
+    if (localStorage.getItem(DISMISS_KEY) === "1") { hint.classList.add("is-hidden"); return; }
+  } catch (e) { /* private mode: show it */ }
+  const closeBtn = document.getElementById("studio-json-hint-close");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      hint.classList.add("is-hidden");
+      try { localStorage.setItem(DISMISS_KEY, "1"); } catch (e) { /* ignore */ }
+    });
+  }
+}
+
+/**
+ * PHASE 4 — shared light/dark theme for the studio. Uses the same
+ * localStorage key as the console so the preference is consistent across the
+ * whole product.
+ */
+function initStudioTheme() {
+  const btn = document.getElementById("btn-studio-theme");
+  const root = document.documentElement;
+  const apply = (theme) => {
+    const isDark = theme === "dark";
+    root.setAttribute("data-theme", theme);
+    root.classList.toggle("theme-dark", isDark);
+    root.classList.toggle("theme-light", !isDark);
+    root.style.colorScheme = theme;
+    if (btn) btn.title = isDark ? "Switch to light theme" : "Switch to dark theme";
+  };
+  let saved = "light";
+  try { saved = localStorage.getItem("theme") || "light"; } catch (e) { /* private mode */ }
+  apply(saved);
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const next = (root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark";
+      apply(next);
+      try { localStorage.setItem("theme", next); } catch (e) { /* private mode */ }
+    });
+  }
+}
+
 function initTopActions() {
   const pushAllBtn = document.getElementById("btn-push-all");
   if (pushAllBtn) {
@@ -5889,7 +6162,7 @@ function initTopActions() {
     const rawCode = generateArduinoCode();
     navigator.clipboard.writeText(rawCode).then(() => {
       const copyLabel = document.getElementById("copy-label");
-      copyLabel.textContent = "Copied! âœ“";
+      copyLabel.textContent = "Copied! ✓";
       setTimeout(() => { copyLabel.textContent = "Copy Code"; }, 2000);
       showToast("Arduino C++ code copied to clipboard!");
     });
@@ -5948,8 +6221,8 @@ function loadGreenhouseDemo() {
       dataTypeHum: "float",
       uuidTemp: "YOUR_TEMPERATURE_VARIABLE_UUID",
       uuidHum: "YOUR_HUMIDITY_VARIABLE_UUID",
-      unitTemp: "Â°C",
-      unitHum: "%",
+      unitTemp: "°C",
+      unitHum: "%RH",
       readInterval: 2000
     },
     {
@@ -6358,7 +6631,7 @@ function updateStudio() {
     state.controller === "esp32_s3" ? "ESP32-S3" :
       state.controller === "esp8266" ? "ESP8266 NodeMCU" : "Arduino Nano 33 IoT";
 
-  document.getElementById("code-target-badge").textContent = `${controllerLabel} â€¢ OmniTeq Cloud`;
+  document.getElementById("code-target-badge").textContent = `${controllerLabel} • OmniTeq Cloud`;
 }
 
 function escapeHtmlText(str) {
@@ -6450,7 +6723,7 @@ function renderCloudSchemaTable() {
         <td><code>${escapeHtmlText(a.varState || "actState")}</code></td>
         <td>${escapeHtmlText(a.name)} <span style="color: var(--text-dim);">(Command)</span></td>
         <td>${a.paramType || "boolean"}</td>
-        <td><code>GET /ingest/commands/pending</code> â†’ <code>POST /ingest/commands/:instanceId/ack</code></td>
+        <td><code>GET /ingest/commands/pending</code> → <code>POST /ingest/commands/:instanceId/ack</code></td>
         <td><span class="tag" style="color: #FCD34D">SUBSCRIBE / ACK</span></td>
       </tr>
     `);
@@ -6518,7 +6791,7 @@ function renderCloudApiTable() {
     {
       endpoint: "POST /ingest/telemetry",
       trigger: "Every " + Math.round((p.telemetryInterval || 10000) / 1000) + "s",
-      payload: `${telemetryCount} reading(s): [{ variable_id, value }] â€” max 500 per call, HTTP 207 on partial failure`,
+      payload: `${telemetryCount} reading(s): [{ variable_id, value }] — max 500 per call, HTTP 207 on partial failure`,
       purpose: "Batch telemetry upload for every bound cloud variable."
     },
     {
@@ -6531,7 +6804,7 @@ function renderCloudApiTable() {
       endpoint: "POST /ingest/commands/:instanceId/ack",
       trigger: "After each command executes",
       payload: `device_id=${deviceId}, secret_key=***, status=success|failed, failure_reason?`,
-      purpose: "Closes the command lifecycle: received â†’ queued â†’ sent â†’ executed â†’ success|failed."
+      purpose: "Closes the command lifecycle: received → queued → sent → executed → success|failed."
     }
   ];
 
@@ -6578,7 +6851,7 @@ function renderPinMapTable() {
   }
 
   if (spiDevices.length > 0) {
-    const csMappingStr = spiDevices.map(d => `${d.name} (CS: GPIO ${d.pin})`).join(" â€¢ ");
+    const csMappingStr = spiDevices.map(d => `${d.name} (CS: GPIO ${d.pin})`).join(" • ");
     rows.push(`
       <tr style="background: rgba(245, 158, 11, 0.12); border-left: 4px solid #F59E0B;">
         <td><code>SPI BUS (SCK ${busConfig.spi.sck}, MISO ${busConfig.spi.miso}, MOSI ${busConfig.spi.mosi})</code></td>
@@ -6649,7 +6922,7 @@ function renderPinMapTable() {
       rows.push(`
         <tr style="background: rgba(99, 102, 241, 0.08); border-left: 3px solid #818CF8;">
           <td><code style="color: #818CF8; font-weight: 700;">GPIO ${p.pin}</code></td>
-          <td><strong>Shared I2C Bus [${lineName}]</strong> â€¢ Connected (${i2cDevices.length}): <span style="color: var(--text-main);">${i2cDevices.map(d => d.name).join(", ")}</span></td>
+          <td><strong>Shared I2C Bus [${lineName}]</strong> • Connected (${i2cDevices.length}): <span style="color: var(--text-main);">${i2cDevices.map(d => d.name).join(", ")}</span></td>
           <td>I2C Bus (${isSDA ? 'SDA' : 'SCL'})</td>
           <td><span class="tag tag-bus-i2c">Active (${i2cDevices.length} Devices)</span></td>
         </tr>
@@ -6666,7 +6939,7 @@ function renderPinMapTable() {
       rows.push(`
         <tr style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #F59E0B;">
           <td><code style="color: #F59E0B; font-weight: 700;">GPIO ${p.pin}</code></td>
-          <td><strong>Shared SPI Bus [${spiLine}]</strong> â€¢ Connected (${spiDevices.length}): <span style="color: var(--text-main);">${spiDevices.map(d => d.name).join(", ")}</span></td>
+          <td><strong>Shared SPI Bus [${spiLine}]</strong> • Connected (${spiDevices.length}): <span style="color: var(--text-main);">${spiDevices.map(d => d.name).join(", ")}</span></td>
           <td>SPI Bus (${p.pin === busConfig.spi.sck ? 'SCK' : (p.pin === busConfig.spi.miso ? 'MISO' : 'MOSI')})</td>
           <td><span class="tag tag-bus-spi">Active (${spiDevices.length} Devices)</span></td>
         </tr>
@@ -6951,10 +7224,10 @@ function generateArduinoCode() {
     };
 
     if (t === "dht22" || t === "dht11") {
-      pushSlot("Temperature", sensor.varTemp || "temperature", sensor.dataTypeTemp || "float", sensor.varTemp || "temperature", "float", sensor.unitTemp || "Â°C");
+      pushSlot("Temperature", sensor.varTemp || "temperature", sensor.dataTypeTemp || "float", sensor.varTemp || "temperature", "float", sensor.unitTemp || "°C");
       pushSlot("Humidity", sensor.varHum || "humidity", sensor.dataTypeHum || "float", sensor.varHum || "humidity", "float", sensor.unitHum || "%");
     } else if (t === "bmp280") {
-      pushSlot("Temperature", sensor.varTemp || "baroTemp", sensor.dataTypeTemp || "float", sensor.varTemp || "baroTemp", "float", sensor.unitTemp || "Â°C");
+      pushSlot("Temperature", sensor.varTemp || "baroTemp", sensor.dataTypeTemp || "float", sensor.varTemp || "baroTemp", "float", sensor.unitTemp || "°C");
       pushSlot("Pressure", sensor.varPress || "baroPress", sensor.dataTypePress || "float", sensor.varPress || "baroPress", "float", sensor.unitPress || "hPa");
     } else if (["pushbutton", "toggle_switch", "ir_sensor", "pir", "sd_card"].includes(t)) {
       pushSlot("State", sensor.varVal || "sensorState", sensor.dataType || "boolean", sensor.varVal || "sensorState", "bool", sensor.unit === "bool" ? "" : (sensor.unit || ""));
