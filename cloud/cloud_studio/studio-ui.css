@@ -113,7 +113,7 @@ body.sui-modal-open { overflow: hidden; }
 .sui-dialog-icon svg { width: 24px; height: 24px; }
 .sui-dialog.danger .sui-dialog-icon { background: rgba(var(--crimson-rgb), 0.14); color: var(--crimson); }
 .sui-dialog.warning .sui-dialog-icon { background: rgba(var(--amber-rgb), 0.14); color: var(--amber); }
-.sui-dialog h2 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 600; color: #fff; }
+.sui-dialog h2 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 600; color: var(--text-main); }
 .sui-dialog p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); white-space: pre-line; }
 .sui-dialog-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem; }
 .sui-dialog-actions .btn { min-width: 100px; justify-content: center; }
@@ -131,7 +131,7 @@ body.sui-modal-open { overflow: hidden; }
 .sui-toast {
   display: flex; align-items: flex-start; gap: 10px; pointer-events: auto;
   padding: 0.75rem 0.9rem 0.75rem 1rem; border-radius: var(--radius-md, 12px);
-  background: var(--bg-surface); color: #fff; font-size: 0.88rem; font-weight: 500; line-height: 1.45;
+  background: var(--bg-surface); color: var(--text-main); font-size: 0.88rem; font-weight: 500; line-height: 1.45;
   border: 1px solid var(--neon-cyan, var(--neon-cyan)); border-left-width: 4px;
   box-shadow: 0 10px 30px rgba(var(--neon-cyan-rgb), 0.22); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   opacity: 0; transform: translateX(24px); transition: opacity 0.28s ease, transform 0.28s var(--sui-ease);

@@ -7058,18 +7058,21 @@ function buildCommandTranslation(ap) {
   if (range.kind === "display") return "";
 
   const boolParam = a.paramType === "boolean";
+  const floatParam = a.paramType === "float";
   const digitalOut = range.kind === "digital";
   const lines = [];
 
   // 1. Read the payload value in the shape the template actually sends.
   if (boolParam) {
     lines.push(`bool rawValue = extractBoolParam(parameters, "${key}", ${digitalOut ? stateVar : "false"});`);
+  } else if (floatParam) {
+    lines.push(`float rawValue = extractFloatParam(parameters, "${key}", ${stateVar});`);
   } else {
     lines.push(`long rawValue = extractIntParam(parameters, "${key}", ${stateVar});`);
   }
   // Numeric view of the payload (a boolean command is a plain OFF/ON level) and
   // boolean view, used by the two output kinds below.
-  const rawNumeric = boolParam ? "(rawValue ? 1 : 0)" : "rawValue";
+  const rawNumeric = boolParam ? "(rawValue ? 1 : 0)" : "(long)rawValue";
   const rawBool = boolParam ? "rawValue" : "(rawValue != 0)";
 
   if (digitalOut) {
@@ -8255,10 +8258,20 @@ function generateArduinoCode() {
     code += `  if (colonIndex < 0) { return fallback; }\n`;
     code += `  return json.substring(colonIndex + 1).toInt();\n`;
     code += `}\n\n`;
+    code += `float extractFloatParam(const String& json, const char* key, float fallback)\n{\n`;
+    code += `  int keyIndex = json.indexOf(key);\n`;
+    code += `  if (keyIndex < 0) { return fallback; }\n`;
+    code += `  int colonIndex = json.indexOf(':', keyIndex);\n`;
+    code += `  if (colonIndex < 0) { return fallback; }\n`;
+    code += `  return json.substring(colonIndex + 1).toFloat();\n`;
+    code += `}\n\n`;
     code += `bool extractBoolParam(const String& json, const char* key, bool fallback)\n{\n`;
     code += `  int keyIndex = json.indexOf(key);\n`;
     code += `  if (keyIndex < 0) { return fallback; }\n`;
-    code += `  String value = json.substring(keyIndex);\n`;
+    code += `  int colonIndex = json.indexOf(':', keyIndex + strlen(key));\n`;
+    code += `  if (colonIndex < 0) return fallback;\n`;
+    code += `  String value = json.substring(colonIndex + 1);\n`;
+    code += `  value.trim();\n`;
     code += `  if (value.indexOf("true") >= 0 || value.indexOf("1") >= 0) { return true; }\n`;
     code += `  if (value.indexOf("false") >= 0 || value.indexOf("0") >= 0) { return false; }\n`;
     code += `  return fallback;\n`;
@@ -8270,7 +8283,7 @@ function generateArduinoCode() {
     code += `  if (colonIndex < 0) { return String(fallback); }\n`;
     code += `  String value = json.substring(colonIndex + 1);\n`;
     code += `  value.trim();\n`;
-    code += `  int endIndex = value.indexOf(',');\n`;
+    code += `  int endIndex = value.indexOf('}');\n`;
     code += `  if (endIndex > 0) { value = value.substring(0, endIndex); }\n`;
     code += `  value.replace("\\"", "");\n`;
     code += `  value.trim();\n`;

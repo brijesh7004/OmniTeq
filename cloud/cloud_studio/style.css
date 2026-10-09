@@ -206,7 +206,7 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(90deg, #FFFFFF 30%, var(--neon-cyan) 100%);
+  background: linear-gradient(90deg, var(--text-main) 30%, var(--neon-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: flex;
@@ -311,7 +311,7 @@ body {
 .btn-secondary:hover {
   background: var(--bg-surface);
   border-color: var(--border-glass);
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .btn-danger-outline {
@@ -645,7 +645,7 @@ label {
 .cloud-title {
   font-size: 0.92rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .cloud-sub {
@@ -744,7 +744,7 @@ label {
 .controller-name {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .controller-specs {
@@ -790,7 +790,7 @@ label {
 .pin-status-banner.danger {
   background: rgba(var(--crimson-rgb), 0.15);
   border: 1px solid rgba(var(--crimson-rgb), 0.4);
-  color: #FECACA;
+  color: var(--crimson);
 }
 
 .banner-icon {
@@ -886,7 +886,7 @@ label {
 .badge-add-btn:hover {
   background: rgba(var(--neon-cyan-rgb), 0.15);
   border-color: var(--neon-cyan);
-  color: #FFFFFF;
+  color: var(--text-main);
   transform: translateY(-1px);
 }
 
@@ -953,7 +953,7 @@ label {
 .item-name-input {
   background: transparent;
   border: 1px solid transparent;
-  color: #FFFFFF;
+  color: var(--text-main);
   font-weight: 700;
   font-size: 0.95rem;
   border-radius: 4px;
@@ -1128,7 +1128,7 @@ body.mode-wizard .fixed-bus-badge {
 
 .pin-select option {
   background: var(--bg-input);
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .btn-remove-item {
@@ -1168,7 +1168,7 @@ body.mode-wizard .fixed-bus-badge {
 .failsafe-title {
   font-size: 0.88rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .failsafe-desc {
@@ -1354,7 +1354,7 @@ body.mode-wizard .fixed-bus-badge {
 .dep-step-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .dep-step-desc {
@@ -1506,7 +1506,7 @@ body.mode-wizard .fixed-bus-badge {
 
 .schema-header h3 {
   font-size: 1rem;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .schema-header p {
@@ -1620,7 +1620,7 @@ body.mode-wizard .fixed-bus-badge {
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .modal-close-btn {
@@ -1678,7 +1678,7 @@ body.mode-wizard .fixed-bus-badge {
 .config-pane-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .config-pane-sub {
@@ -1736,7 +1736,7 @@ body.mode-wizard .fixed-bus-badge {
 .cat-btn.active, .cat-btn:hover {
   background: rgba(var(--neon-cyan-rgb), 0.15);
   border-color: rgba(var(--neon-cyan-rgb), 0.4);
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 /* Catalog Grid Cards */
@@ -1791,7 +1791,7 @@ body.mode-wizard .fixed-bus-badge {
 .cat-item-name {
   font-size: 0.86rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .cat-item-desc {
@@ -1845,7 +1845,7 @@ body.mode-wizard .fixed-bus-badge {
   background: var(--bg-surface);
   border: 1px solid var(--neon-cyan);
   box-shadow: 0 10px 30px rgba(var(--neon-cyan-rgb), 0.25);
-  color: #FFFFFF;
+  color: var(--text-main);
   padding: 0.75rem 1.4rem;
   border-radius: var(--radius-md);
   font-size: 0.88rem;
@@ -1920,7 +1920,7 @@ body.mode-wizard .fixed-bus-badge {
 .item-var-input {
   background: transparent;
   border: none;
-  color: #FFFFFF;
+  color: var(--text-main);
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 600;
@@ -2139,7 +2139,7 @@ body.mode-wizard .fixed-bus-badge {
 .item-uuid-input {
   background: transparent;
   border: none;
-  color: #FFFFFF;
+  color: var(--text-main);
   font-size: 0.72rem;
   font-weight: 500;
   outline: none;
@@ -2258,7 +2258,7 @@ body.mode-wizard .fixed-bus-badge {
 .device-identity-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
   margin-bottom: 0.25rem;
 }
 
@@ -2361,7 +2361,7 @@ body.mode-wizard .fixed-bus-badge {
 .subsection-title {
   font-size: 0.98rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
   margin-bottom: 0.2rem;
 }
 
@@ -2642,7 +2642,7 @@ input[readonly].form-control.is-auto {
   background: var(--bg-surface);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
-  color: #FFFFFF;
+  color: var(--text-main);
   font-family: var(--font-mono);
   font-size: 0.74rem;
   padding: 0.3rem 0.45rem;
@@ -2684,7 +2684,7 @@ input[readonly].form-control.is-auto {
   outline: none;
 }
 
-.item-sub-input:focus { border-color: var(--neon-cyan); color: #FFFFFF; }
+.item-sub-input:focus { border-color: var(--neon-cyan); color: var(--text-main); }
 
 .param-list {
   display: flex;
@@ -2707,7 +2707,7 @@ input[readonly].form-control.is-auto {
   background: var(--bg-surface);
   border: 1px solid var(--border-glass);
   border-radius: 4px;
-  color: #FFFFFF;
+  color: var(--text-main);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   padding: 0.24rem 0.4rem;
@@ -2762,7 +2762,7 @@ input[readonly].form-control.is-auto {
   background: var(--bg-surface);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
-  color: #FFFFFF;
+  color: var(--text-main);
   font-family: var(--font-mono);
   font-size: 0.74rem;
   padding: 0.3rem 0.45rem;
@@ -2923,7 +2923,7 @@ input[readonly].form-control.is-auto {
   background: var(--bg-surface);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
-  color: #FFFFFF;
+  color: var(--text-main);
   font-family: var(--font-mono);
   font-size: 0.73rem;
   padding: 0.28rem 0.42rem;
@@ -3041,7 +3041,7 @@ input[readonly].form-control.is-auto {
 .session-option-title {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-main);
 }
 
 .session-option-desc {
@@ -3290,6 +3290,10 @@ html[data-theme="light"], html.theme-light {
 /* Keep the main app's button metrics from leaking into the studio design. */
 .btn-primary,
 .btn-secondary { min-height: 0; }
+/* The shared app forces white text on `.btn-secondary:hover` with !important,
+   which becomes invisible on the light theme's white surfaces. Keep the studio's
+   secondary-button hover label theme-aware in both light and dark mode. */
+#app-body .btn-secondary:hover { color: var(--text-main) !important; }
 /* Preserve the studio's rem scale: the main app sets `body { font-size: 14px }`,
    which would shrink every rem-based studio size to 0.875x. */
 body { font-size: 16px; }
